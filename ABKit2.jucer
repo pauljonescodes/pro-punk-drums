@@ -1,0 +1,873 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="Q0tYTq" name="ABKit2" projectType="audioplug" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+  <MAINGROUP id="eIDGb1" name="ABKit2">
+    <GROUP id="{95755CA2-B0D0-D393-296E-7490F1BAFDDB}" name="Assets">
+      <GROUP id="{2D2A1D1F-BFA4-1CD6-6C1D-1C874C545E54}" name="Acoustic Bass Drum">
+        <GROUP id="{4FB9F389-EE27-FCCF-FDBC-AF0BB8579CEF}" name="Hard">
+          <FILE id="hzkXVg" name="acoustic_bass_drum_hard_1_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Hard/acoustic_bass_drum_hard_1_in.wav"/>
+          <FILE id="Hqz7vI" name="acoustic_bass_drum_hard_1_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Hard/acoustic_bass_drum_hard_1_out.wav"/>
+          <FILE id="TgaPdt" name="acoustic_bass_drum_hard_2_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Hard/acoustic_bass_drum_hard_2_in.wav"/>
+          <FILE id="CWXFPm" name="acoustic_bass_drum_hard_2_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Hard/acoustic_bass_drum_hard_2_out.wav"/>
+          <FILE id="W72XNG" name="acoustic_bass_drum_hard_3_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Hard/acoustic_bass_drum_hard_3_in.wav"/>
+          <FILE id="nrVVGF" name="acoustic_bass_drum_hard_3_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Hard/acoustic_bass_drum_hard_3_out.wav"/>
+          <FILE id="dtUaZV" name="acoustic_bass_drum_hard_4_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Hard/acoustic_bass_drum_hard_4_in.wav"/>
+          <FILE id="QGMIZA" name="acoustic_bass_drum_hard_4_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Hard/acoustic_bass_drum_hard_4_out.wav"/>
+          <FILE id="GAjn8Y" name="acoustic_bass_drum_hard_5_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Hard/acoustic_bass_drum_hard_5_in.wav"/>
+          <FILE id="qcATGh" name="acoustic_bass_drum_hard_5_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Hard/acoustic_bass_drum_hard_5_out.wav"/>
+        </GROUP>
+        <GROUP id="{ED5660F2-D31B-C3F3-4013-BCF868C9D1B2}" name="Medium">
+          <FILE id="hk4HW1" name="acoustic_bass_drum_medium_1_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Medium/acoustic_bass_drum_medium_1_in.wav"/>
+          <FILE id="jyYxWH" name="acoustic_bass_drum_medium_1_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Medium/acoustic_bass_drum_medium_1_out.wav"/>
+          <FILE id="q6JdSV" name="acoustic_bass_drum_medium_2_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Medium/acoustic_bass_drum_medium_2_in.wav"/>
+          <FILE id="pS9Oiw" name="acoustic_bass_drum_medium_2_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Medium/acoustic_bass_drum_medium_2_out.wav"/>
+          <FILE id="oh1NUr" name="acoustic_bass_drum_medium_3_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Medium/acoustic_bass_drum_medium_3_in.wav"/>
+          <FILE id="opvF7U" name="acoustic_bass_drum_medium_3_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Medium/acoustic_bass_drum_medium_3_out.wav"/>
+          <FILE id="VcIa8Q" name="acoustic_bass_drum_medium_4_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Medium/acoustic_bass_drum_medium_4_in.wav"/>
+          <FILE id="cmveZE" name="acoustic_bass_drum_medium_4_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Medium/acoustic_bass_drum_medium_4_out.wav"/>
+          <FILE id="cAoybr" name="acoustic_bass_drum_medium_5_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Medium/acoustic_bass_drum_medium_5_in.wav"/>
+          <FILE id="wmcvKO" name="acoustic_bass_drum_medium_5_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Medium/acoustic_bass_drum_medium_5_out.wav"/>
+        </GROUP>
+        <GROUP id="{6FEEFA5B-19B9-C8A1-EA26-C8553C804288}" name="Soft">
+          <FILE id="R3kXCe" name="acoustic_bass_drum_soft_1_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Soft/acoustic_bass_drum_soft_1_in.wav"/>
+          <FILE id="dJXJcC" name="acoustic_bass_drum_soft_1_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Soft/acoustic_bass_drum_soft_1_out.wav"/>
+          <FILE id="ZnvC1D" name="acoustic_bass_drum_soft_2_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Soft/acoustic_bass_drum_soft_2_in.wav"/>
+          <FILE id="CGQ1I3" name="acoustic_bass_drum_soft_2_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Soft/acoustic_bass_drum_soft_2_out.wav"/>
+          <FILE id="j3iQvj" name="acoustic_bass_drum_soft_3_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Soft/acoustic_bass_drum_soft_3_in.wav"/>
+          <FILE id="pUrbz2" name="acoustic_bass_drum_soft_3_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Soft/acoustic_bass_drum_soft_3_out.wav"/>
+          <FILE id="TzuHnY" name="acoustic_bass_drum_soft_4_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Soft/acoustic_bass_drum_soft_4_in.wav"/>
+          <FILE id="Ui7bcR" name="acoustic_bass_drum_soft_4_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Soft/acoustic_bass_drum_soft_4_out.wav"/>
+          <FILE id="PvRxXh" name="acoustic_bass_drum_soft_5_in.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Soft/acoustic_bass_drum_soft_5_in.wav"/>
+          <FILE id="hI5td6" name="acoustic_bass_drum_soft_5_out.wav" compile="0"
+                resource="1" file="Assets/Acoustic Bass Drum/Soft/acoustic_bass_drum_soft_5_out.wav"/>
+        </GROUP>
+      </GROUP>
+      <GROUP id="{4E6AF8A1-A905-A004-7A60-B7C9F326C3F5}" name="Acoustic Snare">
+        <GROUP id="{5C1B2591-A3FF-F1A0-7FF2-7A0D30CF5EF5}" name="Hard">
+          <FILE id="cw5IOk" name="acoustic_snare_hard_1_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Hard/acoustic_snare_hard_1_bottom.wav"/>
+          <FILE id="R0Jo65" name="acoustic_snare_hard_1_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Hard/acoustic_snare_hard_1_top.wav"/>
+          <FILE id="CXTdcL" name="acoustic_snare_hard_2_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Hard/acoustic_snare_hard_2_bottom.wav"/>
+          <FILE id="U4gkKZ" name="acoustic_snare_hard_2_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Hard/acoustic_snare_hard_2_top.wav"/>
+          <FILE id="guIcAj" name="acoustic_snare_hard_3_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Hard/acoustic_snare_hard_3_bottom.wav"/>
+          <FILE id="fTGpL0" name="acoustic_snare_hard_3_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Hard/acoustic_snare_hard_3_top.wav"/>
+          <FILE id="V2anZU" name="acoustic_snare_hard_4_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Hard/acoustic_snare_hard_4_bottom.wav"/>
+          <FILE id="Rwhxna" name="acoustic_snare_hard_4_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Hard/acoustic_snare_hard_4_top.wav"/>
+          <FILE id="i3TZ9a" name="acoustic_snare_hard_5_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Hard/acoustic_snare_hard_5_bottom.wav"/>
+          <FILE id="ydKuP2" name="acoustic_snare_hard_5_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Hard/acoustic_snare_hard_5_top.wav"/>
+        </GROUP>
+        <GROUP id="{6AD6F97B-1357-5E4D-ADDE-C2A73EABB841}" name="Medium">
+          <FILE id="cSL8YD" name="acoustic_snare_medium_1_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Medium/acoustic_snare_medium_1_bottom.wav"/>
+          <FILE id="mZxbPz" name="acoustic_snare_medium_1_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Medium/acoustic_snare_medium_1_top.wav"/>
+          <FILE id="Hs1ehl" name="acoustic_snare_medium_2_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Medium/acoustic_snare_medium_2_bottom.wav"/>
+          <FILE id="d3Ny5A" name="acoustic_snare_medium_2_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Medium/acoustic_snare_medium_2_top.wav"/>
+          <FILE id="vFgH4w" name="acoustic_snare_medium_3_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Medium/acoustic_snare_medium_3_bottom.wav"/>
+          <FILE id="T81FKw" name="acoustic_snare_medium_3_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Medium/acoustic_snare_medium_3_top.wav"/>
+          <FILE id="QfhKRl" name="acoustic_snare_medium_4_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Medium/acoustic_snare_medium_4_bottom.wav"/>
+          <FILE id="c9PYkI" name="acoustic_snare_medium_4_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Medium/acoustic_snare_medium_4_top.wav"/>
+          <FILE id="LZilqv" name="acoustic_snare_medium_5_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Medium/acoustic_snare_medium_5_bottom.wav"/>
+          <FILE id="KFD2ZP" name="acoustic_snare_medium_5_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Medium/acoustic_snare_medium_5_top.wav"/>
+        </GROUP>
+        <GROUP id="{0E097EB8-853F-6075-F84E-2E490CEB8F25}" name="Soft">
+          <FILE id="uAxADo" name="acoustic_snare_soft_1_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Soft/acoustic_snare_soft_1_bottom.wav"/>
+          <FILE id="Z5OlIl" name="acoustic_snare_soft_1_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Soft/acoustic_snare_soft_1_top.wav"/>
+          <FILE id="LKEzjr" name="acoustic_snare_soft_2_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Soft/acoustic_snare_soft_2_bottom.wav"/>
+          <FILE id="VkYX3f" name="acoustic_snare_soft_2_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Soft/acoustic_snare_soft_2_top.wav"/>
+          <FILE id="nJjA75" name="acoustic_snare_soft_3_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Soft/acoustic_snare_soft_3_bottom.wav"/>
+          <FILE id="REZns9" name="acoustic_snare_soft_3_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Soft/acoustic_snare_soft_3_top.wav"/>
+          <FILE id="M3gjVR" name="acoustic_snare_soft_4_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Soft/acoustic_snare_soft_4_bottom.wav"/>
+          <FILE id="N690Jp" name="acoustic_snare_soft_4_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Soft/acoustic_snare_soft_4_top.wav"/>
+          <FILE id="iF9U7c" name="acoustic_snare_soft_5_bottom.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Soft/acoustic_snare_soft_5_bottom.wav"/>
+          <FILE id="IQmjZn" name="acoustic_snare_soft_5_top.wav" compile="0"
+                resource="1" file="Assets/Acoustic Snare/Soft/acoustic_snare_soft_5_top.wav"/>
+        </GROUP>
+      </GROUP>
+      <GROUP id="{0C866FF2-8899-A664-C678-92E2B98862A3}" name="Bass Drum 1">
+        <FILE id="aRjS0G" name="bass_drum1.wav" compile="0" resource="1" file="Assets/Bass Drum 1/bass_drum1.wav"/>
+      </GROUP>
+      <GROUP id="{717CA5EA-A077-E6A0-6F41-C2E0EC355545}" name="Chinese Cymbal">
+        <FILE id="PFmjJL" name="chinese_cymbal_1_ohl.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_1_ohl.wav"/>
+        <FILE id="OzP5jk" name="chinese_cymbal_1_ohr.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_1_ohr.wav"/>
+        <FILE id="xbS2vA" name="chinese_cymbal_1_on.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_1_on.wav"/>
+        <FILE id="HWGGbn" name="chinese_cymbal_2_ohl.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_2_ohl.wav"/>
+        <FILE id="fqs2j0" name="chinese_cymbal_2_ohr.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_2_ohr.wav"/>
+        <FILE id="OURIiD" name="chinese_cymbal_2_on.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_2_on.wav"/>
+        <FILE id="UPjKve" name="chinese_cymbal_3_ohl.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_3_ohl.wav"/>
+        <FILE id="f36T0P" name="chinese_cymbal_3_ohr.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_3_ohr.wav"/>
+        <FILE id="Cokvon" name="chinese_cymbal_3_on.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_3_on.wav"/>
+        <FILE id="VZkYRX" name="chinese_cymbal_4_ohl.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_4_ohl.wav"/>
+        <FILE id="uPWSx9" name="chinese_cymbal_4_ohr.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_4_ohr.wav"/>
+        <FILE id="z6Y3aw" name="chinese_cymbal_4_on.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_4_on.wav"/>
+        <FILE id="MrA39S" name="chinese_cymbal_5_ohl.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_5_ohl.wav"/>
+        <FILE id="eUiw6U" name="chinese_cymbal_5_ohr.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_5_ohr.wav"/>
+        <FILE id="iXoSTG" name="chinese_cymbal_5_on.wav" compile="0" resource="1"
+              file="Assets/Chinese Cymbal/chinese_cymbal_5_on.wav"/>
+      </GROUP>
+      <GROUP id="{79316355-FC5C-0811-15FF-A02DE85CD425}" name="Cowbell">
+        <FILE id="KtkVEW" name="cowbell_1.wav" compile="0" resource="1" file="Assets/Cowbell/cowbell_1.wav"/>
+        <FILE id="NcsTzw" name="cowbell_2.wav" compile="0" resource="1" file="Assets/Cowbell/cowbell_2.wav"/>
+        <FILE id="gCkzLD" name="cowbell_3.wav" compile="0" resource="1" file="Assets/Cowbell/cowbell_3.wav"/>
+        <FILE id="HH4X94" name="cowbell_4.wav" compile="0" resource="1" file="Assets/Cowbell/cowbell_4.wav"/>
+        <FILE id="Dw2n85" name="cowbell_5.wav" compile="0" resource="1" file="Assets/Cowbell/cowbell_5.wav"/>
+      </GROUP>
+      <GROUP id="{AF93C5C8-0397-9034-75FB-9F89C0353A79}" name="Crash Cymbal 1">
+        <FILE id="cO17hg" name="crash_cymbal1_1_ohl.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_1_ohl.wav"/>
+        <FILE id="yy9zS5" name="crash_cymbal1_1_ohr.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_1_ohr.wav"/>
+        <FILE id="fXrbV1" name="crash_cymbal1_1_on.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_1_on.wav"/>
+        <FILE id="o3aQZ0" name="crash_cymbal1_2_ohl.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_2_ohl.wav"/>
+        <FILE id="vO9w8d" name="crash_cymbal1_2_ohr.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_2_ohr.wav"/>
+        <FILE id="UWIt3J" name="crash_cymbal1_2_on.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_2_on.wav"/>
+        <FILE id="eZRFvZ" name="crash_cymbal1_3_ohl.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_3_ohl.wav"/>
+        <FILE id="BTUdh7" name="crash_cymbal1_3_ohr.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_3_ohr.wav"/>
+        <FILE id="oouXYK" name="crash_cymbal1_3_on.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_3_on.wav"/>
+        <FILE id="SFIydw" name="crash_cymbal1_4_ohl.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_4_ohl.wav"/>
+        <FILE id="g31zIW" name="crash_cymbal1_4_ohr.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_4_ohr.wav"/>
+        <FILE id="KDwR4X" name="crash_cymbal1_4_on.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_4_on.wav"/>
+        <FILE id="Om2wOG" name="crash_cymbal1_5_ohl.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_5_ohl.wav"/>
+        <FILE id="Z3AoRl" name="crash_cymbal1_5_ohr.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_5_ohr.wav"/>
+        <FILE id="Wtmpym" name="crash_cymbal1_5_on.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 1/crash_cymbal1_5_on.wav"/>
+      </GROUP>
+      <GROUP id="{EED880D6-7355-E8DC-3AD8-58E8488FF553}" name="Crash Cymbal 2">
+        <FILE id="YZYVnL" name="crash_cymbal2_1_ohl.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_1_ohl.wav"/>
+        <FILE id="pBuefp" name="crash_cymbal2_1_ohr.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_1_ohr.wav"/>
+        <FILE id="VU1JnQ" name="crash_cymbal2_1_on.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_1_on.wav"/>
+        <FILE id="TeQN0T" name="crash_cymbal2_2_ohl.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_2_ohl.wav"/>
+        <FILE id="hKFYdK" name="crash_cymbal2_2_ohr.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_2_ohr.wav"/>
+        <FILE id="t9lPcZ" name="crash_cymbal2_2_on.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_2_on.wav"/>
+        <FILE id="hddCBr" name="crash_cymbal2_3_ohl.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_3_ohl.wav"/>
+        <FILE id="IRJXlA" name="crash_cymbal2_3_ohr.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_3_ohr.wav"/>
+        <FILE id="iyi16p" name="crash_cymbal2_3_on.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_3_on.wav"/>
+        <FILE id="L0o8Vg" name="crash_cymbal2_4_ohl.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_4_ohl.wav"/>
+        <FILE id="JmS2mz" name="crash_cymbal2_4_ohr.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_4_ohr.wav"/>
+        <FILE id="tkqPp4" name="crash_cymbal2_4_on.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_4_on.wav"/>
+        <FILE id="MTwzsE" name="crash_cymbal2_5_ohl.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_5_ohl.wav"/>
+        <FILE id="WjCdOa" name="crash_cymbal2_5_ohr.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_5_ohr.wav"/>
+        <FILE id="MNrtFy" name="crash_cymbal2_5_on.wav" compile="0" resource="1"
+              file="Assets/Crash Cymbal 2/crash_cymbal2_5_on.wav"/>
+      </GROUP>
+      <GROUP id="{4A1EA7DC-071F-DEC6-C347-44C5496D5058}" name="Electric Snare">
+        <FILE id="mBEExP" name="electric_snare.wav" compile="0" resource="1"
+              file="Assets/Electric Snare/electric_snare.wav"/>
+      </GROUP>
+      <GROUP id="{07CB6051-26BB-D468-DCE4-BD30355107B4}" name="Floor Tom High">
+        <GROUP id="{699F6291-5448-35C0-48DD-5EBFC46DABB7}" name="Hard">
+          <FILE id="EjlvZE" name="tom_floor_high_hard_1.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Hard/tom_floor_high_hard_1.wav"/>
+          <FILE id="oZe8Ku" name="tom_floor_high_hard_2.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Hard/tom_floor_high_hard_2.wav"/>
+          <FILE id="qBvAIy" name="tom_floor_high_hard_3.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Hard/tom_floor_high_hard_3.wav"/>
+          <FILE id="Qfkswp" name="tom_floor_high_hard_4.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Hard/tom_floor_high_hard_4.wav"/>
+          <FILE id="BtBNcq" name="tom_floor_high_hard_5.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Hard/tom_floor_high_hard_5.wav"/>
+        </GROUP>
+        <GROUP id="{20D73400-9E73-454F-834D-AF621E9E6FE4}" name="Medium">
+          <FILE id="UEW6lo" name="tom_floor_high_medium_1.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Medium/tom_floor_high_medium_1.wav"/>
+          <FILE id="r8U5DN" name="tom_floor_high_medium_2.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Medium/tom_floor_high_medium_2.wav"/>
+          <FILE id="pYbYBe" name="tom_floor_high_medium_3.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Medium/tom_floor_high_medium_3.wav"/>
+          <FILE id="Lh7dD2" name="tom_floor_high_medium_4.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Medium/tom_floor_high_medium_4.wav"/>
+          <FILE id="XlNBmj" name="tom_floor_high_medium_5.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Medium/tom_floor_high_medium_5.wav"/>
+        </GROUP>
+        <GROUP id="{599FD950-17D2-03BA-18B8-A9DB35D7FA9B}" name="Soft">
+          <FILE id="Z4cWfQ" name="tom_floor_high_soft_1.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Soft/tom_floor_high_soft_1.wav"/>
+          <FILE id="y5x38Y" name="tom_floor_high_soft_2.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Soft/tom_floor_high_soft_2.wav"/>
+          <FILE id="KTyknM" name="tom_floor_high_soft_3.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Soft/tom_floor_high_soft_3.wav"/>
+          <FILE id="flVxYU" name="tom_floor_high_soft_4.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Soft/tom_floor_high_soft_4.wav"/>
+          <FILE id="k26GZT" name="tom_floor_high_soft_5.wav" compile="0" resource="1"
+                file="Assets/Floor Tom High/Soft/tom_floor_high_soft_5.wav"/>
+        </GROUP>
+      </GROUP>
+      <GROUP id="{B5A4023B-DFE1-9120-E730-8A905F549968}" name="Hand Clap">
+        <FILE id="hm1tj9" name="hand_clap_1.wav" compile="0" resource="1" file="Assets/Hand Clap/hand_clap_1.wav"/>
+        <FILE id="az9k7n" name="hand_clap_2.wav" compile="0" resource="1" file="Assets/Hand Clap/hand_clap_2.wav"/>
+        <FILE id="QS9POw" name="hand_clap_3.wav" compile="0" resource="1" file="Assets/Hand Clap/hand_clap_3.wav"/>
+        <FILE id="pWmvT5" name="hand_clap_4.wav" compile="0" resource="1" file="Assets/Hand Clap/hand_clap_4.wav"/>
+        <FILE id="kbcM9m" name="hand_clap_5.wav" compile="0" resource="1" file="Assets/Hand Clap/hand_clap_5.wav"/>
+      </GROUP>
+      <GROUP id="{74C4B35F-9855-AF02-AAA1-0D418CBAE866}" name="Hi-Hat">
+        <GROUP id="{E389170C-F8DB-17BE-3C16-0CFEC7F20386}" name="Closed Edge">
+          <FILE id="K0D0E3" name="hi_hat_edge_closed_1_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_1_ohl.wav"/>
+          <FILE id="EZio4S" name="hi_hat_edge_closed_1_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_1_ohr.wav"/>
+          <FILE id="tqsFg8" name="hi_hat_edge_closed_1_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_1_on.wav"/>
+          <FILE id="opuLpG" name="hi_hat_edge_closed_2_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_2_ohl.wav"/>
+          <FILE id="TPXWJo" name="hi_hat_edge_closed_2_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_2_ohr.wav"/>
+          <FILE id="gza7N8" name="hi_hat_edge_closed_2_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_2_on.wav"/>
+          <FILE id="F2PQzs" name="hi_hat_edge_closed_3_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_3_ohl.wav"/>
+          <FILE id="EUKr4e" name="hi_hat_edge_closed_3_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_3_ohr.wav"/>
+          <FILE id="estIVe" name="hi_hat_edge_closed_3_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_3_on.wav"/>
+          <FILE id="ARG9F3" name="hi_hat_edge_closed_4_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_4_ohl.wav"/>
+          <FILE id="B5t6HL" name="hi_hat_edge_closed_4_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_4_ohr.wav"/>
+          <FILE id="zHLSWD" name="hi_hat_edge_closed_4_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_4_on.wav"/>
+          <FILE id="hSRjuP" name="hi_hat_edge_closed_5_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_5_ohl.wav"/>
+          <FILE id="c9QtkZ" name="hi_hat_edge_closed_5_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_5_ohr.wav"/>
+          <FILE id="s7OJ6l" name="hi_hat_edge_closed_5_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Edge/hi_hat_edge_closed_5_on.wav"/>
+        </GROUP>
+        <GROUP id="{80F2E8F8-234D-E5DC-E0EB-14FE9E466C32}" name="Closed Tip">
+          <FILE id="hWpMyG" name="hi_hat_tip_closed_1_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_1_ohl.wav"/>
+          <FILE id="YRFA3k" name="hi_hat_tip_closed_1_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_1_ohr.wav"/>
+          <FILE id="TprbRY" name="hi_hat_tip_closed_1_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_1_on.wav"/>
+          <FILE id="T3NZFn" name="hi_hat_tip_closed_2_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_2_ohl.wav"/>
+          <FILE id="TZTO1j" name="hi_hat_tip_closed_2_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_2_ohr.wav"/>
+          <FILE id="bsLzXd" name="hi_hat_tip_closed_2_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_2_on.wav"/>
+          <FILE id="YuFBZK" name="hi_hat_tip_closed_3_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_3_ohl.wav"/>
+          <FILE id="uOsIr2" name="hi_hat_tip_closed_3_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_3_ohr.wav"/>
+          <FILE id="Ry2xf2" name="hi_hat_tip_closed_3_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_3_on.wav"/>
+          <FILE id="zpA93l" name="hi_hat_tip_closed_4_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_4_ohl.wav"/>
+          <FILE id="KB2ZP6" name="hi_hat_tip_closed_4_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_4_ohr.wav"/>
+          <FILE id="C6CVKU" name="hi_hat_tip_closed_4_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_4_on.wav"/>
+          <FILE id="AtmQpY" name="hi_hat_tip_closed_5_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_5_ohl.wav"/>
+          <FILE id="EHSoSZ" name="hi_hat_tip_closed_5_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_5_ohr.wav"/>
+          <FILE id="nQLFkx" name="hi_hat_tip_closed_5_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Closed Tip/hi_hat_tip_closed_5_on.wav"/>
+        </GROUP>
+        <GROUP id="{EB59FE02-C223-E97B-B839-CEBD6D3634C9}" name="Open 1">
+          <FILE id="u4ODIZ" name="hi_hat_open1_1_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_1_ohl.wav"/>
+          <FILE id="UQsiHj" name="hi_hat_open1_1_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_1_ohr.wav"/>
+          <FILE id="elrsor" name="hi_hat_open1_1_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_1_on.wav"/>
+          <FILE id="X9cTyY" name="hi_hat_open1_2_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_2_ohl.wav"/>
+          <FILE id="EZK54Z" name="hi_hat_open1_2_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_2_ohr.wav"/>
+          <FILE id="WcBDEI" name="hi_hat_open1_2_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_2_on.wav"/>
+          <FILE id="AGr7cy" name="hi_hat_open1_3_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_3_ohl.wav"/>
+          <FILE id="h5Uo0S" name="hi_hat_open1_3_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_3_ohr.wav"/>
+          <FILE id="oK1gyB" name="hi_hat_open1_3_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_3_on.wav"/>
+          <FILE id="miyEy9" name="hi_hat_open1_4_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_4_ohl.wav"/>
+          <FILE id="L2Kna5" name="hi_hat_open1_4_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_4_ohr.wav"/>
+          <FILE id="tm6YSw" name="hi_hat_open1_4_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_4_on.wav"/>
+          <FILE id="BPh9qq" name="hi_hat_open1_5_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_5_ohl.wav"/>
+          <FILE id="QEgR2F" name="hi_hat_open1_5_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_5_ohr.wav"/>
+          <FILE id="Pvm8sv" name="hi_hat_open1_5_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 1/hi_hat_open1_5_on.wav"/>
+        </GROUP>
+        <GROUP id="{A80260B5-C059-1715-A4CC-8241D94D871A}" name="Open 2">
+          <FILE id="d2KwRY" name="hi_hat_open2_1_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_1_ohl.wav"/>
+          <FILE id="QMORsK" name="hi_hat_open2_1_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_1_ohr.wav"/>
+          <FILE id="YkZenl" name="hi_hat_open2_1_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_1_on.wav"/>
+          <FILE id="QzXz3G" name="hi_hat_open2_2_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_2_ohl.wav"/>
+          <FILE id="m5pgYI" name="hi_hat_open2_2_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_2_ohr.wav"/>
+          <FILE id="Vohe1q" name="hi_hat_open2_2_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_2_on.wav"/>
+          <FILE id="yaJLIE" name="hi_hat_open2_3_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_3_ohl.wav"/>
+          <FILE id="tCB2Ib" name="hi_hat_open2_3_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_3_ohr.wav"/>
+          <FILE id="guj31x" name="hi_hat_open2_3_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_3_on.wav"/>
+          <FILE id="zFydr0" name="hi_hat_open2_4_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_4_ohl.wav"/>
+          <FILE id="y3PWwo" name="hi_hat_open2_4_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_4_ohr.wav"/>
+          <FILE id="pKFiVZ" name="hi_hat_open2_4_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_4_on.wav"/>
+          <FILE id="UhoitU" name="hi_hat_open2_5_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_5_ohl.wav"/>
+          <FILE id="rZQcEA" name="hi_hat_open2_5_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_5_ohr.wav"/>
+          <FILE id="RYYpiS" name="hi_hat_open2_5_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 2/hi_hat_open2_5_on.wav"/>
+        </GROUP>
+        <GROUP id="{726FC5CF-1EE3-0756-0598-B69BA771A3DF}" name="Open 3">
+          <FILE id="lVopbc" name="hi_hat_open3_1_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_1_ohl.wav"/>
+          <FILE id="rdoB5l" name="hi_hat_open3_1_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_1_ohr.wav"/>
+          <FILE id="Kl9j3T" name="hi_hat_open3_1_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_1_on.wav"/>
+          <FILE id="CnIm9j" name="hi_hat_open3_2_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_2_ohl.wav"/>
+          <FILE id="uM3VGq" name="hi_hat_open3_2_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_2_ohr.wav"/>
+          <FILE id="i9b4Yr" name="hi_hat_open3_2_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_2_on.wav"/>
+          <FILE id="QEKRZB" name="hi_hat_open3_3_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_3_ohl.wav"/>
+          <FILE id="qDSc75" name="hi_hat_open3_3_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_3_ohr.wav"/>
+          <FILE id="PMQXod" name="hi_hat_open3_3_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_3_on.wav"/>
+          <FILE id="o5uGRV" name="hi_hat_open3_4_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_4_ohl.wav"/>
+          <FILE id="RzJOSd" name="hi_hat_open3_4_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_4_ohr.wav"/>
+          <FILE id="Nd1ioJ" name="hi_hat_open3_4_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_4_on.wav"/>
+          <FILE id="d1FPVe" name="hi_hat_open3_5_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_5_ohl.wav"/>
+          <FILE id="QJzY13" name="hi_hat_open3_5_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_5_ohr.wav"/>
+          <FILE id="HtGh2U" name="hi_hat_open3_5_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Open 3/hi_hat_open3_5_on.wav"/>
+        </GROUP>
+        <GROUP id="{98FB3CF4-923D-90A3-697B-845BC666AE84}" name="Pedal">
+          <FILE id="hnpGG5" name="hi_hat_pedal_1_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_1_ohl.wav"/>
+          <FILE id="gVBxJR" name="hi_hat_pedal_1_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_1_ohr.wav"/>
+          <FILE id="O1jQOn" name="hi_hat_pedal_1_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_1_on.wav"/>
+          <FILE id="FsRI1m" name="hi_hat_pedal_2_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_2_ohl.wav"/>
+          <FILE id="EGcAFP" name="hi_hat_pedal_2_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_2_ohr.wav"/>
+          <FILE id="zbL5As" name="hi_hat_pedal_2_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_2_on.wav"/>
+          <FILE id="cyPqF2" name="hi_hat_pedal_3_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_3_ohl.wav"/>
+          <FILE id="JtcW8Y" name="hi_hat_pedal_3_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_3_ohr.wav"/>
+          <FILE id="CF5vY8" name="hi_hat_pedal_3_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_3_on.wav"/>
+          <FILE id="PUGXtJ" name="hi_hat_pedal_4_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_4_ohl.wav"/>
+          <FILE id="fHwswv" name="hi_hat_pedal_4_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_4_ohr.wav"/>
+          <FILE id="ZlFw8h" name="hi_hat_pedal_4_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_4_on.wav"/>
+          <FILE id="PsewGu" name="hi_hat_pedal_5_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_5_ohl.wav"/>
+          <FILE id="cjumsp" name="hi_hat_pedal_5_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_5_ohr.wav"/>
+          <FILE id="spk9vZ" name="hi_hat_pedal_5_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Pedal/hi_hat_pedal_5_on.wav"/>
+        </GROUP>
+        <GROUP id="{960960E4-322D-7920-2788-D718C9E0704C}" name="Tight Edge">
+          <FILE id="e9CtkM" name="hi_hat_edge_tight_1_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_1_ohl.wav"/>
+          <FILE id="jHGJuq" name="hi_hat_edge_tight_1_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_1_ohr.wav"/>
+          <FILE id="kPZFBj" name="hi_hat_edge_tight_1_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_1_on.wav"/>
+          <FILE id="X2XI4X" name="hi_hat_edge_tight_2_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_2_ohl.wav"/>
+          <FILE id="ygcZS1" name="hi_hat_edge_tight_2_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_2_ohr.wav"/>
+          <FILE id="uix6rk" name="hi_hat_edge_tight_2_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_2_on.wav"/>
+          <FILE id="rwxj2r" name="hi_hat_edge_tight_3_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_3_ohl.wav"/>
+          <FILE id="cMaODv" name="hi_hat_edge_tight_3_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_3_ohr.wav"/>
+          <FILE id="uuw5D8" name="hi_hat_edge_tight_3_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_3_on.wav"/>
+          <FILE id="m79ppT" name="hi_hat_edge_tight_4_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_4_ohl.wav"/>
+          <FILE id="YiPpfg" name="hi_hat_edge_tight_4_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_4_ohr.wav"/>
+          <FILE id="bzQthl" name="hi_hat_edge_tight_4_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_4_on.wav"/>
+          <FILE id="Rk58fE" name="hi_hat_edge_tight_5_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_5_ohl.wav"/>
+          <FILE id="O9Miva" name="hi_hat_edge_tight_5_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_5_ohr.wav"/>
+          <FILE id="hCcAEV" name="hi_hat_edge_tight_5_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Edge/hi_hat_edge_tight_5_on.wav"/>
+        </GROUP>
+        <GROUP id="{2D56404E-5D6A-5D9E-EB7B-70E9A2DC827A}" name="Tight Tip">
+          <FILE id="WEr2K0" name="hi_hat_tip_tight_1_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_1_ohl.wav"/>
+          <FILE id="N4wFW0" name="hi_hat_tip_tight_1_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_1_ohr.wav"/>
+          <FILE id="QBx6cv" name="hi_hat_tip_tight_1_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_1_on.wav"/>
+          <FILE id="asWSXk" name="hi_hat_tip_tight_2_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_2_ohl.wav"/>
+          <FILE id="C0x1im" name="hi_hat_tip_tight_2_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_2_ohr.wav"/>
+          <FILE id="TDxAx5" name="hi_hat_tip_tight_2_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_2_on.wav"/>
+          <FILE id="VSXPtI" name="hi_hat_tip_tight_3_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_3_ohl.wav"/>
+          <FILE id="cvPEg5" name="hi_hat_tip_tight_3_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_3_ohr.wav"/>
+          <FILE id="tM56fM" name="hi_hat_tip_tight_3_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_3_on.wav"/>
+          <FILE id="fsyQPx" name="hi_hat_tip_tight_4_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_4_ohl.wav"/>
+          <FILE id="BX5qJ0" name="hi_hat_tip_tight_4_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_4_ohr.wav"/>
+          <FILE id="e8itVE" name="hi_hat_tip_tight_4_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_4_on.wav"/>
+          <FILE id="NMxuJ7" name="hi_hat_tip_tight_5_ohl.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_5_ohl.wav"/>
+          <FILE id="sB6XBW" name="hi_hat_tip_tight_5_ohr.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_5_ohr.wav"/>
+          <FILE id="MzQ4KZ" name="hi_hat_tip_tight_5_on.wav" compile="0" resource="1"
+                file="Assets/Hi-Hat/Tight Tip/hi_hat_tip_tight_5_on.wav"/>
+        </GROUP>
+      </GROUP>
+      <GROUP id="{00B972B1-1A7D-8C6C-6031-BF85974549D3}" name="High Tom">
+        <GROUP id="{BF2A5553-A54F-CBAB-D1DE-3E532A7960A3}" name="Hard">
+          <FILE id="KMVKJn" name="tom_high_hard_1.wav" compile="0" resource="1"
+                file="Assets/High Tom/Hard/tom_high_hard_1.wav"/>
+          <FILE id="tSOUnw" name="tom_high_hard_2.wav" compile="0" resource="1"
+                file="Assets/High Tom/Hard/tom_high_hard_2.wav"/>
+          <FILE id="Z2Qnf7" name="tom_high_hard_3.wav" compile="0" resource="1"
+                file="Assets/High Tom/Hard/tom_high_hard_3.wav"/>
+          <FILE id="qLKGgr" name="tom_high_hard_4.wav" compile="0" resource="1"
+                file="Assets/High Tom/Hard/tom_high_hard_4.wav"/>
+          <FILE id="MVC1OZ" name="tom_high_hard_5.wav" compile="0" resource="1"
+                file="Assets/High Tom/Hard/tom_high_hard_5.wav"/>
+        </GROUP>
+        <GROUP id="{6C0CB14A-B85D-1611-CBA9-460B14D76086}" name="Medium">
+          <FILE id="b5QciM" name="tom_high_medium_1.wav" compile="0" resource="1"
+                file="Assets/High Tom/Medium/tom_high_medium_1.wav"/>
+          <FILE id="xqpKB6" name="tom_high_medium_2.wav" compile="0" resource="1"
+                file="Assets/High Tom/Medium/tom_high_medium_2.wav"/>
+          <FILE id="yLUIFK" name="tom_high_medium_3.wav" compile="0" resource="1"
+                file="Assets/High Tom/Medium/tom_high_medium_3.wav"/>
+          <FILE id="mkxQ05" name="tom_high_medium_4.wav" compile="0" resource="1"
+                file="Assets/High Tom/Medium/tom_high_medium_4.wav"/>
+          <FILE id="b1vSxo" name="tom_high_medium_5.wav" compile="0" resource="1"
+                file="Assets/High Tom/Medium/tom_high_medium_5.wav"/>
+        </GROUP>
+        <GROUP id="{1EDD6A99-2143-C9D1-EA11-66352DE1696F}" name="Soft">
+          <FILE id="UwQgol" name="tom_high_soft_1.wav" compile="0" resource="1"
+                file="Assets/High Tom/Soft/tom_high_soft_1.wav"/>
+          <FILE id="vEJr6v" name="tom_high_soft_2.wav" compile="0" resource="1"
+                file="Assets/High Tom/Soft/tom_high_soft_2.wav"/>
+          <FILE id="Hij4Fy" name="tom_high_soft_3.wav" compile="0" resource="1"
+                file="Assets/High Tom/Soft/tom_high_soft_3.wav"/>
+          <FILE id="XVxd8m" name="tom_high_soft_4.wav" compile="0" resource="1"
+                file="Assets/High Tom/Soft/tom_high_soft_4.wav"/>
+          <FILE id="GdU5Fx" name="tom_high_soft_5.wav" compile="0" resource="1"
+                file="Assets/High Tom/Soft/tom_high_soft_5.wav"/>
+        </GROUP>
+      </GROUP>
+      <GROUP id="{F35857B0-32C2-5C29-E0AD-4EEB32804B2C}" name="Maraca">
+        <FILE id="wyZc45" name="maraca_1.wav" compile="0" resource="1" file="Assets/Maraca/maraca_1.wav"/>
+        <FILE id="aaeTnE" name="maraca_2.wav" compile="0" resource="1" file="Assets/Maraca/maraca_2.wav"/>
+        <FILE id="Z20Qpp" name="maraca_3.wav" compile="0" resource="1" file="Assets/Maraca/maraca_3.wav"/>
+        <FILE id="OEkxNP" name="maraca_4.wav" compile="0" resource="1" file="Assets/Maraca/maraca_4.wav"/>
+        <FILE id="hJBWsU" name="maraca_5.wav" compile="0" resource="1" file="Assets/Maraca/maraca_5.wav"/>
+      </GROUP>
+      <GROUP id="{F9266BC8-9856-9E4F-5053-A82A45E98B24}" name="Ride">
+        <GROUP id="{0FFDD4DE-0E16-51CB-3440-0BFCC8ABCD63}" name="Bell">
+          <GROUP id="{13259561-9C9D-DE6E-598F-C1E5F5AAA4FB}" name="Hard">
+            <FILE id="FHJrjm" name="ride_bell_hard_1_ohl.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_1_ohl.wav"/>
+            <FILE id="HbYktV" name="ride_bell_hard_1_ohr.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_1_ohr.wav"/>
+            <FILE id="q45EkG" name="ride_bell_hard_1_on.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_1_on.wav"/>
+            <FILE id="VYT90x" name="ride_bell_hard_2_ohl.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_2_ohl.wav"/>
+            <FILE id="NNTLhB" name="ride_bell_hard_2_ohr.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_2_ohr.wav"/>
+            <FILE id="RAxjQt" name="ride_bell_hard_2_on.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_2_on.wav"/>
+            <FILE id="qxA4VQ" name="ride_bell_hard_3_ohl.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_3_ohl.wav"/>
+            <FILE id="meV9IR" name="ride_bell_hard_3_ohr.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_3_ohr.wav"/>
+            <FILE id="x5bAPf" name="ride_bell_hard_3_on.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_3_on.wav"/>
+            <FILE id="gD3cjV" name="ride_bell_hard_4_ohl.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_4_ohl.wav"/>
+            <FILE id="f2uENv" name="ride_bell_hard_4_ohr.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_4_ohr.wav"/>
+            <FILE id="D77GcD" name="ride_bell_hard_4_on.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_4_on.wav"/>
+            <FILE id="EewhgX" name="ride_bell_hard_5_ohl.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_5_ohl.wav"/>
+            <FILE id="zCqR5I" name="ride_bell_hard_5_ohr.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_5_ohr.wav"/>
+            <FILE id="bnqZD4" name="ride_bell_hard_5_on.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Hard/ride_bell_hard_5_on.wav"/>
+          </GROUP>
+          <GROUP id="{9CFE591C-E4A0-78EB-DF0C-F838E0D6EC84}" name="Medium">
+            <FILE id="EQxbC2" name="ride_bell_medium_1_ohl.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_1_ohl.wav"/>
+            <FILE id="kZ6r5B" name="ride_bell_medium_1_ohr.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_1_ohr.wav"/>
+            <FILE id="wmtLmw" name="ride_bell_medium_1_on.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_1_on.wav"/>
+            <FILE id="w5xINb" name="ride_bell_medium_2_ohl.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_2_ohl.wav"/>
+            <FILE id="odzQIO" name="ride_bell_medium_2_ohr.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_2_ohr.wav"/>
+            <FILE id="gzuCgR" name="ride_bell_medium_2_on.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_2_on.wav"/>
+            <FILE id="d4suuo" name="ride_bell_medium_3_ohl.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_3_ohl.wav"/>
+            <FILE id="hurMon" name="ride_bell_medium_3_ohr.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_3_ohr.wav"/>
+            <FILE id="uUVMZz" name="ride_bell_medium_3_on.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_3_on.wav"/>
+            <FILE id="RaBBFr" name="ride_bell_medium_4_ohl.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_4_ohl.wav"/>
+            <FILE id="S7zoWx" name="ride_bell_medium_4_ohr.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_4_ohr.wav"/>
+            <FILE id="zd6UDv" name="ride_bell_medium_4_on.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_4_on.wav"/>
+            <FILE id="e8ORGC" name="ride_bell_medium_5_ohl.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_5_ohl.wav"/>
+            <FILE id="RzrlC0" name="ride_bell_medium_5_ohr.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_5_ohr.wav"/>
+            <FILE id="SrmNXI" name="ride_bell_medium_5_on.wav" compile="0" resource="1"
+                  file="Assets/Ride/Bell/Medium/ride_bell_medium_5_on.wav"/>
+          </GROUP>
+        </GROUP>
+        <GROUP id="{39448784-51DF-A365-F874-4AD58BCCACD9}" name="Cymbal">
+          <FILE id="K3E1QZ" name="ride_cymbal_1_ohl.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_1_ohl.wav"/>
+          <FILE id="kmoHsz" name="ride_cymbal_1_ohr.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_1_ohr.wav"/>
+          <FILE id="X4HzPN" name="ride_cymbal_1_on.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_1_on.wav"/>
+          <FILE id="MZ6MzZ" name="ride_cymbal_2_ohl.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_2_ohl.wav"/>
+          <FILE id="kQacl8" name="ride_cymbal_2_ohr.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_2_ohr.wav"/>
+          <FILE id="jjypWD" name="ride_cymbal_2_on.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_2_on.wav"/>
+          <FILE id="ea98KC" name="ride_cymbal_3_ohl.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_3_ohl.wav"/>
+          <FILE id="rgwwAK" name="ride_cymbal_3_ohr.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_3_ohr.wav"/>
+          <FILE id="GIfs7w" name="ride_cymbal_3_on.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_3_on.wav"/>
+          <FILE id="l9tYKT" name="ride_cymbal_4_ohl.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_4_ohl.wav"/>
+          <FILE id="ywkXZr" name="ride_cymbal_4_ohr.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_4_ohr.wav"/>
+          <FILE id="mJuqvP" name="ride_cymbal_4_on.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_4_on.wav"/>
+          <FILE id="VsE7eZ" name="ride_cymbal_5_ohl.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_5_ohl.wav"/>
+          <FILE id="ElbDbJ" name="ride_cymbal_5_ohr.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_5_ohr.wav"/>
+          <FILE id="ie0gnM" name="ride_cymbal_5_on.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal_5_on.wav"/>
+        </GROUP>
+      </GROUP>
+      <GROUP id="{9DED5F9A-DC56-CE0F-FC5C-877A1BC1F448}" name="Side Stick">
+        <GROUP id="{698D5001-2F95-1ED3-063D-F680F2599C5C}" name="Hard">
+          <FILE id="FiW0mV" name="side_stick_hard_1.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Hard/side_stick_hard_1.wav"/>
+          <FILE id="NzCmLY" name="side_stick_hard_2.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Hard/side_stick_hard_2.wav"/>
+          <FILE id="rC3hCA" name="side_stick_hard_3.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Hard/side_stick_hard_3.wav"/>
+          <FILE id="hbUXKJ" name="side_stick_hard_4.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Hard/side_stick_hard_4.wav"/>
+          <FILE id="YO3N5q" name="side_stick_hard_5.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Hard/side_stick_hard_5.wav"/>
+        </GROUP>
+        <GROUP id="{9CADCB5C-E32D-8F00-FABB-C3C12363CAC9}" name="Medium">
+          <FILE id="KKqHCY" name="side_stick_medium_1.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Medium/side_stick_medium_1.wav"/>
+          <FILE id="oW93AY" name="side_stick_medium_2.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Medium/side_stick_medium_2.wav"/>
+          <FILE id="QFJYik" name="side_stick_medium_3.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Medium/side_stick_medium_3.wav"/>
+          <FILE id="evYAQE" name="side_stick_medium_4.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Medium/side_stick_medium_4.wav"/>
+          <FILE id="GCgaTO" name="side_stick_medium_5.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Medium/side_stick_medium_5.wav"/>
+        </GROUP>
+        <GROUP id="{C89E1290-3374-84E0-047E-844C5B38F9B5}" name="Soft">
+          <FILE id="TB2W7E" name="side_stick_soft_1.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Soft/side_stick_soft_1.wav"/>
+          <FILE id="PTTBwP" name="side_stick_soft_2.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Soft/side_stick_soft_2.wav"/>
+          <FILE id="GADt1X" name="side_stick_soft_3.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Soft/side_stick_soft_3.wav"/>
+          <FILE id="QBcSHX" name="side_stick_soft_4.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Soft/side_stick_soft_4.wav"/>
+          <FILE id="aBwQeH" name="side_stick_soft_5.wav" compile="0" resource="1"
+                file="Assets/Side Stick/Soft/side_stick_soft_5.wav"/>
+        </GROUP>
+      </GROUP>
+      <GROUP id="{452FABC5-7185-3AAD-7545-C66E48B1D120}" name="Splash Cymbal">
+        <FILE id="gmmHyD" name="splash_cymbal_1_ohl.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_1_ohl.wav"/>
+        <FILE id="FgIzC9" name="splash_cymbal_1_ohr.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_1_ohr.wav"/>
+        <FILE id="qG53u9" name="splash_cymbal_1_on.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_1_on.wav"/>
+        <FILE id="oaFdVN" name="splash_cymbal_2_ohl.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_2_ohl.wav"/>
+        <FILE id="myGV4H" name="splash_cymbal_2_ohr.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_2_ohr.wav"/>
+        <FILE id="YC0I6W" name="splash_cymbal_2_on.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_2_on.wav"/>
+        <FILE id="ZSrORQ" name="splash_cymbal_3_ohl.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_3_ohl.wav"/>
+        <FILE id="h2caJG" name="splash_cymbal_3_ohr.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_3_ohr.wav"/>
+        <FILE id="yiBlPw" name="splash_cymbal_3_on.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_3_on.wav"/>
+        <FILE id="BuBAuZ" name="splash_cymbal_4_ohl.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_4_ohl.wav"/>
+        <FILE id="DiWnfM" name="splash_cymbal_4_ohr.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_4_ohr.wav"/>
+        <FILE id="dAubk5" name="splash_cymbal_4_on.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_4_on.wav"/>
+        <FILE id="vePMDo" name="splash_cymbal_5_ohl.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_5_ohl.wav"/>
+        <FILE id="HzpIa4" name="splash_cymbal_5_ohr.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_5_ohr.wav"/>
+        <FILE id="V8g5t2" name="splash_cymbal_5_on.wav" compile="0" resource="1"
+              file="Assets/Splash Cymbal/splash_cymbal_5_on.wav"/>
+      </GROUP>
+      <GROUP id="{AFFEE60C-D256-B633-D2FB-8CBB8BF46E62}" name="Tambourine">
+        <FILE id="hZ9Z9O" name="tambourine_1.wav" compile="0" resource="1"
+              file="Assets/Tambourine/tambourine_1.wav"/>
+        <FILE id="OBPFzO" name="tambourine_2.wav" compile="0" resource="1"
+              file="Assets/Tambourine/tambourine_2.wav"/>
+        <FILE id="nUYnxV" name="tambourine_3.wav" compile="0" resource="1"
+              file="Assets/Tambourine/tambourine_3.wav"/>
+        <FILE id="LEYG1F" name="tambourine_4.wav" compile="0" resource="1"
+              file="Assets/Tambourine/tambourine_4.wav"/>
+        <FILE id="vfkY8T" name="tambourine_5.wav" compile="0" resource="1"
+              file="Assets/Tambourine/tambourine_5.wav"/>
+      </GROUP>
+      <GROUP id="{1438413B-5E6B-CC49-02AA-9B651B6DBE45}" name="Triangle">
+        <GROUP id="{B042BE6B-EFCA-5D16-7CA5-8F3961A67A8E}" name="Mute">
+          <FILE id="y1DxxF" name="triangle_mute_1.wav" compile="0" resource="1"
+                file="Assets/Triangle/Mute/triangle_mute_1.wav"/>
+          <FILE id="zvj8Pc" name="triangle_mute_2.wav" compile="0" resource="1"
+                file="Assets/Triangle/Mute/triangle_mute_2.wav"/>
+          <FILE id="PRZBNU" name="triangle_mute_3.wav" compile="0" resource="1"
+                file="Assets/Triangle/Mute/triangle_mute_3.wav"/>
+          <FILE id="LMlN1Y" name="triangle_mute_4.wav" compile="0" resource="1"
+                file="Assets/Triangle/Mute/triangle_mute_4.wav"/>
+          <FILE id="Mz72LD" name="triangle_mute_5.wav" compile="0" resource="1"
+                file="Assets/Triangle/Mute/triangle_mute_5.wav"/>
+        </GROUP>
+        <GROUP id="{A9F0BE19-A8ED-D23E-8182-4AB92AC133EA}" name="Open">
+          <FILE id="WT7R9u" name="triangle_open_1.wav" compile="0" resource="1"
+                file="Assets/Triangle/Open/triangle_open_1.wav"/>
+          <FILE id="kaISDx" name="triangle_open_2.wav" compile="0" resource="1"
+                file="Assets/Triangle/Open/triangle_open_2.wav"/>
+          <FILE id="N1ofQW" name="triangle_open_3.wav" compile="0" resource="1"
+                file="Assets/Triangle/Open/triangle_open_3.wav"/>
+          <FILE id="YNgW69" name="triangle_open_4.wav" compile="0" resource="1"
+                file="Assets/Triangle/Open/triangle_open_4.wav"/>
+          <FILE id="lUanMd" name="triangle_open_5.wav" compile="0" resource="1"
+                file="Assets/Triangle/Open/triangle_open_5.wav"/>
+        </GROUP>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{4F269486-30C8-FFDF-A864-4F5F2C1A2354}" name="Source">
+      <FILE id="QWF8sB" name="MultiMicrophoneSynthesiser.cpp" compile="1"
+            resource="0" file="Source/MultiMicrophoneSynthesiser.cpp"/>
+      <FILE id="QXDRzD" name="MultiMicrophoneSynthesiser.h" compile="0" resource="0"
+            file="Source/MultiMicrophoneSynthesiser.h"/>
+      <FILE id="IuHDJf" name="MultiIntensitySynthesiser.cpp" compile="1"
+            resource="0" file="Source/MultiIntensitySynthesiser.cpp"/>
+      <FILE id="DiF5aL" name="MultiIntensitySynthesiser.h" compile="0" resource="0"
+            file="Source/MultiIntensitySynthesiser.h"/>
+      <FILE id="kPFG1S" name="MultiSampleSynthesiser.cpp" compile="1" resource="0"
+            file="Source/MultiSampleSynthesiser.cpp"/>
+      <FILE id="S9AWXs" name="MultiSampleSynthesiser.h" compile="0" resource="0"
+            file="Source/MultiSampleSynthesiser.h"/>
+      <FILE id="gBhtSu" name="Samples.h" compile="0" resource="0" file="Source/Samples.h"/>
+      <FILE id="s9w4e6" name="GeneralMidi.h" compile="0" resource="0" file="Source/GeneralMidi.h"/>
+      <FILE id="L4cb2V" name="Constants.h" compile="0" resource="0" file="Source/Constants.h"/>
+      <FILE id="BVxg3g" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="dwRgN7" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="FnBmKB" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="zTrrHh" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="ABKit2"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="ABKit2"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_core" path="../../modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../modules"/>
+        <MODULEPATH id="juce_events" path="../../modules"/>
+        <MODULEPATH id="juce_graphics" path="../../modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../modules"/>
+      </MODULEPATHS>
+    </VS2022>
+  </EXPORTFORMATS>
+</JUCERPROJECT>
