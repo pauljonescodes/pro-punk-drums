@@ -13,6 +13,22 @@
 #include <string>
 
 namespace constants {
+	const int multiOutChannelAcousticBassDrum = 0;
+	const int multiOutChannelAcousticSnare = 1;
+	const int multiOutChannelTomHigh = 2;
+	const int multiOutChannelTomFloorHigh = 3;
+	const int multiOutChannelHiHat = 4; // HiHatEdgeTight hiHatTipClosed hiHatTipTight hiHatEdgeClosed hiHatPedal hiHatOpen3 hiHatOpen2 hiHatOpen1
+	const int multiOutChannelRide = 5; // RideBell RideCymbal1
+	const int multiOutChannelCrashCymbal1 = 6;
+	const int multiOutChannelChineseCymbal = 7;
+	const int multiOutChannelSplashCymbal = 8;
+	const int multiOutChannelCrashCymbal2 = 9;
+	const int multiOutChannelOverheadLeft = 10;
+	const int multiOutChannelOverheadRight = 11;
+	const int multiOutChannelPercussion = 12; // maraca triangleMute triangleOpen cowbell handClap sideStick tambourine
+	const int multiOutChannelBassDrum1 = 13;
+	const int multiOutChannelElectricSnare = 14;
+
 	const std::string acousticBassDrumId = "acoustic_bass_drum";
 	const std::string bassDrum1Id = "bass_drum1";
 	const std::string sideStickId = "side_stick";
@@ -43,10 +59,10 @@ namespace constants {
 
 	const std::string acousticBassDrumMicrophoneInId = "in";
 	const std::string acousticBassDrumMicrophoneOutId = "out";
-	
+
 	const std::string acousticSnareMicrophoneTopId = "top";
 	const std::string acousticSnareMicrophoneBottomId = "bottom";
-	
+
 	const std::string centerMicrophoneId = "on";
 	const std::string leftMicrophoneId = "ohl";
 	const std::string rightMicrophoneId = "ohr";

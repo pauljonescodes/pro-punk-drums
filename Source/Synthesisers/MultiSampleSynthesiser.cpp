@@ -10,7 +10,6 @@
 
 #include "MultiSampleSynthesiser.h"
 
-// Ignore velocity
 void MultiSampleSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, const float velocity) 
 {
     auto sound = sounds[mCurrentSoundIndex].get();

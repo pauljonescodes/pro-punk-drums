@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "CLRSamplerSound.h"
+#include "PanningSamplerSound.h"
 
 PanningSamplerSound::PanningSamplerSound(const juce::String& soundName,
 	juce::AudioFormatReader& source,

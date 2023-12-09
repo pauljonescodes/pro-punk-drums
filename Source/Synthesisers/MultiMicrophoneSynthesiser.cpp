@@ -16,16 +16,16 @@ void MultiMicrophoneSynthesiser::noteOn(const int midiChannel, const int midiNot
     int numVariations = samples::standardVariationsCount;
     int micIndex = 0;
 
-    for (const auto& micEntry : mCLRToCurrentVariationIndices) {
+    for (const auto& micEntry : mMicIdToCurrentVariationIndices) {
         const std::string& micId = micEntry.first;
        
-        int numIntensities = mCLRToIntensitySizes[micId];
+        int numIntensities = mMicIdToIntensitySizes[micId];
         
         // Check if there are intensity levels defined for this mic ID
-        if (mCLRToIntensitySizes.find(micId) == mCLRToIntensitySizes.end()) continue;
+        if (mMicIdToIntensitySizes.find(micId) == mMicIdToIntensitySizes.end()) continue;
 
         // Calculating the position in the context of total intensity levels for this mic ID
-        int totalIntensities = mCLRToIntensitySizes[micId];
+        int totalIntensities = mMicIdToIntensitySizes[micId];
         float position = velocity * (totalIntensities - 1);
 
         // Determining the lower and higher indices for intensity levels
@@ -47,8 +47,8 @@ void MultiMicrophoneSynthesiser::noteOn(const int midiChannel, const int midiNot
         int baseLowerIndex = (micIndex * totalSamplesPerMic) + (lowerIndex * numVariations);
         int baseHigherIndex = (micIndex * totalSamplesPerMic) + (higherIndex * numVariations);
 
-        int lowerSampleIndex = mCLRToCurrentVariationIndices[micId][lowerIndex] % mCLRToIntensitySizes[micId];
-        int higherSampleIndex = mCLRToCurrentVariationIndices[micId][higherIndex] % mCLRToIntensitySizes[micId];
+        int lowerSampleIndex = mMicIdToCurrentVariationIndices[micId][lowerIndex] % mMicIdToIntensitySizes[micId];
+        int higherSampleIndex = mMicIdToCurrentVariationIndices[micId][higherIndex] % mMicIdToIntensitySizes[micId];
 
         // Calculate the actual sound index in the 'sounds' array for lower and higher intensity
         int lowerSoundIndex = baseLowerIndex + lowerSampleIndex;
@@ -74,9 +74,9 @@ void MultiMicrophoneSynthesiser::noteOn(const int midiChannel, const int midiNot
             }
 
             // Update round-robin indices
-            mCLRToCurrentVariationIndices[micId][lowerIndex]++;
+            mMicIdToCurrentVariationIndices[micId][lowerIndex]++;
             if (lowerIndex != higherIndex) {
-                mCLRToCurrentVariationIndices[micId][higherIndex]++;
+                mMicIdToCurrentVariationIndices[micId][higherIndex]++;
             }
         }
 
@@ -84,23 +84,23 @@ void MultiMicrophoneSynthesiser::noteOn(const int midiChannel, const int midiNot
     }
 }
 
-void MultiMicrophoneSynthesiser::addCLRSamplerSound(const juce::SamplerSound::Ptr& newSound, int intensityIndex, const std::string& micId) {
+void MultiMicrophoneSynthesiser::addSamplerSound(const juce::SamplerSound::Ptr& newSound, int intensityIndex, const std::string& micId) {
     addSound(newSound);
 
     // Ensure the micId entry exists in mCurrentSoundIndices and mIntensitySizes
-    if (mCLRToCurrentVariationIndices.find(micId) == mCLRToCurrentVariationIndices.end()) {
-        mCLRToCurrentVariationIndices[micId] = std::vector<int>();
-        mCLRToIntensitySizes[micId] = 0;
+    if (mMicIdToCurrentVariationIndices.find(micId) == mMicIdToCurrentVariationIndices.end()) {
+        mMicIdToCurrentVariationIndices[micId] = std::vector<int>();
+        mMicIdToIntensitySizes[micId] = 0;
     }
 
     // Check if this is a new intensity level for this micId
-    if (intensityIndex >= mCLRToCurrentVariationIndices[micId].size()) {
-        mCLRToCurrentVariationIndices[micId].push_back(0);  // Initialize round-robin index for this new intensity
-        mCLRToIntensitySizes[micId] = intensityIndex + 1;  // Update the size (number of samples) for this intensity
+    if (intensityIndex >= mMicIdToCurrentVariationIndices[micId].size()) {
+        mMicIdToCurrentVariationIndices[micId].push_back(0);  // Initialize round-robin index for this new intensity
+        mMicIdToIntensitySizes[micId] = intensityIndex + 1;  // Update the size (number of samples) for this intensity
     }
     else {
         // Existing intensity level, increment the round-robin index
-        mCLRToCurrentVariationIndices[micId][intensityIndex]++;
+        mMicIdToCurrentVariationIndices[micId][intensityIndex]++;
     }
     DBG("done");
 }

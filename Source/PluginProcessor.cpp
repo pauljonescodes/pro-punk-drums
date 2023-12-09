@@ -59,7 +59,7 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 		case samples::InstrumentEnum::tambourine:
 		case samples::InstrumentEnum::maraca:
 		{
-			auto synthesiser = std::make_unique<MultiSampleSynthesiser>();
+			auto synthesiser = std::make_unique<VaryingCLRSynthesiser>();
 			
 			std::string sampleName = samples::instrumentIdMap.at(instrument);
 
@@ -71,12 +71,8 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 				juce::AudioFormatReader* reader = mFormatManager.createReaderFor(std::move(memoryInputStream));
 
 				double maxSampleLengthSeconds = dataSizeInBytes / (samples::samplesBitRate * (samples::bitDepth / 8.0));
-				juce::SamplerSound* sound = new juce::SamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
-				synthesiser.get()->addSound(sound);
-			}
-
-			if (instrument != samples::InstrumentEnum::triangleMute) {
-				synthesiser.get()->addVoice(new juce::SamplerVoice());
+				PanningSamplerSound* sound = new PanningSamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
+				synthesiser.get()->addCLRSamplerSound(sound, samples::CenterLeftRightEnum::center);
 			}
 
 			synthesisers.push_back(std::move(synthesiser));
@@ -136,10 +132,10 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 		case samples::InstrumentEnum::rideBell:
 		{
 			auto synthesiser = std::make_unique<MultiMicrophoneSynthesiser>();
-			/*addMultiMicMultiIntensitySounds(instrument, *synthesiser, samples::cymbalMicrophoneVector, {
+			addMultiMicMultiIntensitySounds(instrument, *synthesiser, samples::centerLeftRightIdVector, {
 				constants::mediumIntensityId,
 				constants::hardIntensityId,
-				});*/
+				});
 			synthesisers.push_back(std::move(synthesiser));
 		}
 		break;
@@ -222,7 +218,7 @@ void ABKit2AudioProcessor::addMultiMicMultiIntensitySounds(samples::InstrumentEn
 
 				double maxSampleLengthSeconds = dataSizeInBytes / (samples::samplesBitRate * (samples::bitDepth / 8.0));
 				juce::SamplerSound* sound = new juce::SamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
-				synthesizer.addCLRSamplerSound(sound, intensityIndex, micId);
+				synthesizer.addSamplerSound(sound, intensityIndex, micId);
 			}
 
 			synthesizer.addVoice(new juce::SamplerVoice());

@@ -823,14 +823,14 @@
         <FILE id="nSQZyH" name="Samples.h" compile="0" resource="0" file="Source/Configuration/Samples.h"/>
       </GROUP>
       <GROUP id="{48C49AB5-D8CC-3B80-A04F-723EBF691466}" name="Synthensisers">
-        <FILE id="GLY6YW" name="CLRSamplerSound.cpp" compile="1" resource="0"
-              file="Source/Synthesisers/CLRSamplerSound.cpp"/>
-        <FILE id="wtqbkS" name="CLRSamplerSound.h" compile="0" resource="0"
-              file="Source/Synthesisers/CLRSamplerSound.h"/>
-        <FILE id="l70sOV" name="CLRSamplerVoice.cpp" compile="1" resource="0"
-              file="Source/Synthesisers/CLRSamplerVoice.cpp"/>
-        <FILE id="CFf0OL" name="CLRSamplerVoice.h" compile="0" resource="0"
-              file="Source/Synthesisers/CLRSamplerVoice.h"/>
+        <FILE id="GLY6YW" name="PanningSamplerSound.cpp" compile="1" resource="0"
+              file="Source/Synthesisers/PanningSamplerSound.cpp"/>
+        <FILE id="wtqbkS" name="PanningSamplerSound.h" compile="0" resource="0"
+              file="Source/Synthesisers/PanningSamplerSound.h"/>
+        <FILE id="l70sOV" name="PanningSamplerVoice.cpp" compile="1" resource="0"
+              file="Source/Synthesisers/PanningSamplerVoice.cpp"/>
+        <FILE id="CFf0OL" name="PanningSamplerVoice.h" compile="0" resource="0"
+              file="Source/Synthesisers/PanningSamplerVoice.h"/>
         <FILE id="G46XYM" name="CLRSynthesiser.cpp" compile="1" resource="0"
               file="Source/Synthesisers/CLRSynthesiser.cpp"/>
         <FILE id="xEMfof" name="CLRSynthesiser.h" compile="0" resource="0"

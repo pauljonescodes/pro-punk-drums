@@ -16,9 +16,9 @@
 class MultiMicrophoneSynthesiser : public juce::Synthesiser {
 public:
     virtual void noteOn(int midiChannel, int midiNoteNumber, float velocity) override;
-    void addCLRSamplerSound(const juce::SamplerSound::Ptr& newSound, int intensityIndex, const std::string& micId);
+    void addSamplerSound(const juce::SamplerSound::Ptr& newSound, int intensityIndex, const std::string& micId);
 protected:
-    std::map<std::string, std::vector<int>> mCLRToCurrentVariationIndices;
-    std::map<std::string, int> mCLRToIntensitySizes;
+    std::map<std::string, std::vector<int>> mMicIdToCurrentVariationIndices;
+    std::map<std::string, int> mMicIdToIntensitySizes;
 
 };

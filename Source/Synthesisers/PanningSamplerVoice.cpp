@@ -1,7 +1,7 @@
 
 #include <JuceHeader.h>
-#include "CLRSamplerVoice.h"
-#include "CLRSamplerSound.h"
+#include "PanningSamplerVoice.h"
+#include "PanningSamplerSound.h"
 
 //==============================================================================
 PanningSamplerVoice::PanningSamplerVoice(float pan) : mPan(pan) {}
