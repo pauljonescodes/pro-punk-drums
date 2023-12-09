@@ -12,20 +12,8 @@
 #include "../Configuration/Samples.h"
 #include "PanningSamplerVoice.h"
 
-CLRSynthesiser::CLRSynthesiser() :
-	mCenterSamples(0, std::vector<PanningSamplerSound::Ptr>()),
-	mLeftSamples(0, std::vector<PanningSamplerSound::Ptr>()),
-	mRightSamples(0, std::vector<PanningSamplerSound::Ptr>())
+CLRSynthesiser::CLRSynthesiser()
 {
-
-	mCenterVoice = std::make_unique<PanningSamplerVoice>(0.0);
-	mLeftVoice = std::make_unique<PanningSamplerVoice>(-1.0f);
-	mRightVoice = std::make_unique<PanningSamplerVoice>(1);
-
-	addVoice(mCenterVoice.get());
-	addVoice(mLeftVoice.get());
-	addVoice(mRightVoice.get());
-
 	setNoteStealingEnabled(false);
 }
 
@@ -43,53 +31,32 @@ void CLRSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, con
 	}
 
 	if (hasSoundThatAppliesToNote) {
-		if (mCenterSamples.first < mCenterSamples.second.size()) {
-			auto& centerSound = mCenterSamples.second[mCenterSamples.first];
-			if (centerSound->appliesToNote(midiNoteNumber) && centerSound->appliesToChannel(midiChannel))
-			{
-				stopVoice(mCenterVoice.get(), 1.0f, true);
-				startVoice(mCenterVoice.get(), centerSound.get(), midiChannel, midiNoteNumber, velocity);
+		for (const auto& sampleInfoEntry : mSampleInfoMap) {
+			auto& sampleInfo = sampleInfoEntry.second;
+			auto samplesSize = sampleInfo.samples.size();
+			if (sampleInfo.currentVariationIndex < samplesSize) {
+				auto currentVariationIndex = sampleInfo.currentVariationIndex;
+				auto& sound = sampleInfo.samples[currentVariationIndex];
+				if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
+				{
+					stopVoice(sampleInfo.voice.get(), 1.0f, true);
+					startVoice(sampleInfo.voice.get(), sound.get(), midiChannel, midiNoteNumber, velocity);
+				}
+
+				mSampleInfoMap[sampleInfoEntry.first].currentVariationIndex = (currentVariationIndex + 1) % samplesSize;
 			}
-
-			mCenterSamples.first = (mCenterSamples.first + 1) % mCenterSamples.second.size();
-		}
-
-		if (mLeftSamples.first < mLeftSamples.second.size()) {
-			auto& leftSound = mLeftSamples.second[mLeftSamples.first];
-			if (leftSound->appliesToNote(midiNoteNumber) && leftSound->appliesToChannel(midiChannel))
-			{
-				stopVoice(mLeftVoice.get(), 1.0f, true);
-				startVoice(mLeftVoice.get(), leftSound.get(), midiChannel, midiNoteNumber, velocity);
-			}
-
-			mLeftSamples.first = (mLeftSamples.first + 1) % mLeftSamples.second.size();
-		}
-		
-		if (mRightSamples.first < mRightSamples.second.size()) {
-			auto& rightSound = mRightSamples.second[mRightSamples.first];
-			if (rightSound->appliesToNote(midiNoteNumber) && rightSound->appliesToChannel(midiChannel))
-			{
-				stopVoice(mRightVoice.get(), 1.0f, true);
-				startVoice(mRightVoice.get(), rightSound.get(), midiChannel, midiNoteNumber, velocity);
-			}
-
-			mRightSamples.first = (mRightSamples.first + 1) % mRightSamples.second.size();
 		}
 	}
 }
 
-void CLRSynthesiser::addCLRSamplerSound(const PanningSamplerSound::Ptr& newSound, const samples::CenterLeftRightEnum clr) {
+void CLRSynthesiser::addCLRSamplerSound(const PanningSamplerSound::Ptr& newSound, const std::string micId, const float defaultPan) {
 	addSound(newSound);
 
-	switch (clr) {
-	case samples::CenterLeftRightEnum::center:
-		mCenterSamples.second.push_back(newSound);
-		break;
-	case samples::CenterLeftRightEnum::left:
-		mLeftSamples.second.push_back(newSound);
-		break;
-	case samples::CenterLeftRightEnum::right:
-		mRightSamples.second.push_back(newSound);
-		break;
+	auto& sampleInfo = mSampleInfoMap[micId];
+	if (!sampleInfo.voice) {
+		sampleInfo.voice = std::make_unique<PanningSamplerVoice>(defaultPan);
+		addVoice(sampleInfo.voice.get());
 	}
+
+	sampleInfo.samples.push_back(newSound);
 }

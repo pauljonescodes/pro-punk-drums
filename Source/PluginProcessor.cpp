@@ -59,7 +59,7 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 		case samples::InstrumentEnum::tambourine:
 		case samples::InstrumentEnum::maraca:
 		{
-			auto synthesiser = std::make_unique<VaryingCLRSynthesiser>();
+			auto synthesiser = std::make_unique<CLRSynthesiser>();
 			
 			std::string sampleName = samples::instrumentIdMap.at(instrument);
 
@@ -72,7 +72,7 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 
 				double maxSampleLengthSeconds = dataSizeInBytes / (samples::samplesBitRate * (samples::bitDepth / 8.0));
 				PanningSamplerSound* sound = new PanningSamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
-				synthesiser.get()->addCLRSamplerSound(sound, samples::CenterLeftRightEnum::center);
+				synthesiser.get()->addCLRSamplerSound(sound, "on", 0);
 			}
 
 			synthesisers.push_back(std::move(synthesiser));
@@ -145,7 +145,7 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 		case samples::InstrumentEnum::splashCymbal:
 		case samples::InstrumentEnum::rideCymbal1:
 		{
-			auto synthesiser = std::make_unique<VaryingCLRSynthesiser>();
+			auto synthesiser = std::make_unique<CLRSynthesiser>();
 			for (const auto& cymbalMic : samples::centerLeftRightEnumVector) {
 
 				const auto& micId = samples::centerLeftRightEnumToIdMap.at(cymbalMic);
@@ -160,7 +160,19 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 					double maxSampleLengthSeconds = dataSizeInBytes / (samples::samplesBitRate * (samples::bitDepth / 8.0));
 					PanningSamplerSound* sound = new PanningSamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
 					
-					synthesiser.get()->addCLRSamplerSound(sound, cymbalMic);
+					switch (cymbalMic) {
+					case samples::CenterLeftRightEnum::center:
+						synthesiser.get()->addCLRSamplerSound(sound, micId, 0);
+						break;
+					case samples::CenterLeftRightEnum::left:
+						synthesiser.get()->addCLRSamplerSound(sound, micId, -1);
+						break;
+					case samples::CenterLeftRightEnum::right:
+						synthesiser.get()->addCLRSamplerSound(sound, micId, 1);
+						break;
+					}
+
+					
 				}
 			}
 

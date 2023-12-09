@@ -15,20 +15,23 @@
 #include "PanningSamplerSound.h"
 #include "../Configuration/Samples.h"
 
-class VaryingCLRSynthesiser : public juce::Synthesiser {
+struct PannedSampleInfo {
+	int currentVariationIndex;
+	std::unique_ptr<PanningSamplerVoice> voice;
+	std::vector<PanningSamplerSound::Ptr> samples;
+
+	PannedSampleInfo() : currentVariationIndex(0) {}
+};
+
+class CLRSynthesiser : public juce::Synthesiser {
 
 public:
-	VaryingCLRSynthesiser();
+	CLRSynthesiser();
 
 	virtual void noteOn(int midiChannel, int midiNoteNumber, float velocity) override;
-	void addCLRSamplerSound(const PanningSamplerSound::Ptr& newSound, const samples::CenterLeftRightEnum micId);
+	void addCLRSamplerSound(const PanningSamplerSound::Ptr& newSound, const std::string micId, const float defaultPan);
 
 protected:
-	std::unique_ptr<PanningSamplerVoice> mCenterVoice;
-	std::unique_ptr<PanningSamplerVoice> mLeftVoice;
-	std::unique_ptr<PanningSamplerVoice> mRightVoice;
 
-	std::pair<int, std::vector<PanningSamplerSound::Ptr>> mCenterSamples;
-	std::pair<int, std::vector<PanningSamplerSound::Ptr>> mLeftSamples;
-	std::pair<int, std::vector<PanningSamplerSound::Ptr>> mRightSamples;
+	std::map<std::string, PannedSampleInfo> mSampleInfoMap;
 };
