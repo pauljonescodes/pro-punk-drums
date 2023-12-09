@@ -13,30 +13,31 @@
 void MultiIntensitySynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, const float velocity)
 {
     // Calculating the position in the context of total intensity levels
-    float position = velocity * (mIntensitySizes.size() - 1);
+    float position = velocity * (mCLRToIntensitySizes.size() - 1);
 
     // Determining the lower and higher indices for intensity levels
     int lowerIndex = static_cast<int>(position);
     int higherIndex = lowerIndex + 1;
 
-    if (higherIndex >= mIntensitySizes.size()) {
+    if (higherIndex >= mCLRToIntensitySizes.size()) {
         higherIndex = lowerIndex; // If at the end, only use the highest intensity
     }
 
     // Calculating the blend ratio
     float blendRatio = position - lowerIndex;
+    float perceivedBlendRatio = std::pow(blendRatio, 0.33);
 
     // Calculating the specific sample indices within the intensity levels
-    int lowerSampleIndex = mCurrentSoundIndices[lowerIndex] % mIntensitySizes[lowerIndex];
-    int higherSampleIndex = mCurrentSoundIndices[higherIndex] % mIntensitySizes[higherIndex];
+    int lowerSampleIndex = mCLRToCurrentVariationIndices[lowerIndex] % mCLRToIntensitySizes[lowerIndex];
+    int higherSampleIndex = mCLRToCurrentVariationIndices[higherIndex] % mCLRToIntensitySizes[higherIndex];
 
     // Calculate the actual sound index in the 'sounds' array for lower intensity
-    int lowerSoundIndex = std::accumulate(mIntensitySizes.begin(), mIntensitySizes.begin() + lowerIndex, 0)
+    int lowerSoundIndex = std::accumulate(mCLRToIntensitySizes.begin(), mCLRToIntensitySizes.begin() + lowerIndex, 0)
         + lowerSampleIndex;
 
     // Calculate the actual sound index in the 'sounds' array for higher intensity
     int higherSoundIndex = (lowerIndex != higherIndex) ?
-        std::accumulate(mIntensitySizes.begin(), mIntensitySizes.begin() + higherIndex, 0)
+        std::accumulate(mCLRToIntensitySizes.begin(), mCLRToIntensitySizes.begin() + higherIndex, 0)
         + higherSampleIndex : lowerSoundIndex;
 
     // Retrieve the corresponding sounds for lower and higher intensities
@@ -51,16 +52,16 @@ void MultiIntensitySynthesiser::noteOn(const int midiChannel, const int midiNote
 
     // Starting voices for lower and higher intensity samples
     if (lowerIntensitySound && lowerIntensitySound->appliesToNote(midiNoteNumber) && lowerIntensitySound->appliesToChannel(midiChannel)) {
-        startVoice(voices[lowerIndex], lowerIntensitySound, midiChannel, midiNoteNumber, 1.0 - blendRatio);
+        startVoice(voices[lowerIndex], lowerIntensitySound, midiChannel, midiNoteNumber, 1.0 - perceivedBlendRatio);
         
         if (lowerIndex != higherIndex) {
-            startVoice(voices[higherIndex], higherIntensitySound, midiChannel, midiNoteNumber, blendRatio);
+            startVoice(voices[higherIndex], higherIntensitySound, midiChannel, midiNoteNumber, perceivedBlendRatio);
         }
 
         // Update round-robin indices
-        mCurrentSoundIndices[lowerIndex]++;
+        mCLRToCurrentVariationIndices[lowerIndex]++;
         if (lowerIndex != higherIndex) {
-            mCurrentSoundIndices[higherIndex]++;
+            mCLRToCurrentVariationIndices[higherIndex]++;
         }
     }
 }
@@ -68,11 +69,11 @@ void MultiIntensitySynthesiser::noteOn(const int midiChannel, const int midiNote
 void MultiIntensitySynthesiser::addSamplerSoundAtIntensityIndex(const juce::SamplerSound::Ptr& newSound, int index) {
     addSound(newSound);
 
-    if (index >= mCurrentSoundIndices.size()) {
-        mCurrentSoundIndices.push_back(0); // Initialize round-robin index for this new intensity
-        mIntensitySizes.push_back(1);      // Initialize size (number of samples) for this intensity
+    if (index >= mCLRToCurrentVariationIndices.size()) {
+        mCLRToCurrentVariationIndices.push_back(0); // Initialize round-robin index for this new intensity
+        mCLRToIntensitySizes.push_back(1);      // Initialize size (number of samples) for this intensity
     } else {
         // Existing intensity level, just add a new sample to it
-        mIntensitySizes[index]++;
+        mCLRToIntensitySizes[index]++;
     }
 }

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="Q0tYTq" name="ABKit2" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              bundleIdentifier="com.propunkstudio.abkit2" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              pluginName="Basement Kit" pluginManufacturer="Pro Punk Studio"
+              aaxIdentifier="com.proppunkstudio.abkit2">
   <MAINGROUP id="eIDGb1" name="ABKit2">
     <GROUP id="{95755CA2-B0D0-D393-296E-7490F1BAFDDB}" name="Assets">
       <GROUP id="{2D2A1D1F-BFA4-1CD6-6C1D-1C874C545E54}" name="Acoustic Bass Drum">
@@ -666,36 +669,36 @@
           </GROUP>
         </GROUP>
         <GROUP id="{39448784-51DF-A365-F874-4AD58BCCACD9}" name="Cymbal">
-          <FILE id="K3E1QZ" name="ride_cymbal_1_ohl.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_1_ohl.wav"/>
-          <FILE id="kmoHsz" name="ride_cymbal_1_ohr.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_1_ohr.wav"/>
-          <FILE id="X4HzPN" name="ride_cymbal_1_on.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_1_on.wav"/>
-          <FILE id="MZ6MzZ" name="ride_cymbal_2_ohl.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_2_ohl.wav"/>
-          <FILE id="kQacl8" name="ride_cymbal_2_ohr.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_2_ohr.wav"/>
-          <FILE id="jjypWD" name="ride_cymbal_2_on.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_2_on.wav"/>
-          <FILE id="ea98KC" name="ride_cymbal_3_ohl.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_3_ohl.wav"/>
-          <FILE id="rgwwAK" name="ride_cymbal_3_ohr.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_3_ohr.wav"/>
-          <FILE id="GIfs7w" name="ride_cymbal_3_on.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_3_on.wav"/>
-          <FILE id="l9tYKT" name="ride_cymbal_4_ohl.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_4_ohl.wav"/>
-          <FILE id="ywkXZr" name="ride_cymbal_4_ohr.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_4_ohr.wav"/>
-          <FILE id="mJuqvP" name="ride_cymbal_4_on.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_4_on.wav"/>
-          <FILE id="VsE7eZ" name="ride_cymbal_5_ohl.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_5_ohl.wav"/>
-          <FILE id="ElbDbJ" name="ride_cymbal_5_ohr.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_5_ohr.wav"/>
-          <FILE id="ie0gnM" name="ride_cymbal_5_on.wav" compile="0" resource="1"
-                file="Assets/Ride/Cymbal/ride_cymbal_5_on.wav"/>
+          <FILE id="K3E1QZ" name="ride_cymbal1_1_ohl.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_1_ohl.wav"/>
+          <FILE id="kmoHsz" name="ride_cymbal1_1_ohr.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_1_ohr.wav"/>
+          <FILE id="X4HzPN" name="ride_cymbal1_1_on.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_1_on.wav"/>
+          <FILE id="MZ6MzZ" name="ride_cymbal1_2_ohl.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_2_ohl.wav"/>
+          <FILE id="kQacl8" name="ride_cymbal1_2_ohr.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_2_ohr.wav"/>
+          <FILE id="jjypWD" name="ride_cymbal1_2_on.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_2_on.wav"/>
+          <FILE id="ea98KC" name="ride_cymbal1_3_ohl.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_3_ohl.wav"/>
+          <FILE id="rgwwAK" name="ride_cymbal1_3_ohr.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_3_ohr.wav"/>
+          <FILE id="GIfs7w" name="ride_cymbal1_3_on.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_3_on.wav"/>
+          <FILE id="l9tYKT" name="ride_cymbal1_4_ohl.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_4_ohl.wav"/>
+          <FILE id="ywkXZr" name="ride_cymbal1_4_ohr.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_4_ohr.wav"/>
+          <FILE id="mJuqvP" name="ride_cymbal1_4_on.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_4_on.wav"/>
+          <FILE id="VsE7eZ" name="ride_cymbal1_5_ohl.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_5_ohl.wav"/>
+          <FILE id="ElbDbJ" name="ride_cymbal1_5_ohr.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_5_ohr.wav"/>
+          <FILE id="ie0gnM" name="ride_cymbal1_5_on.wav" compile="0" resource="1"
+                file="Assets/Ride/Cymbal/ride_cymbal1_5_on.wav"/>
         </GROUP>
       </GROUP>
       <GROUP id="{9DED5F9A-DC56-CE0F-FC5C-877A1BC1F448}" name="Side Stick">
@@ -808,21 +811,47 @@
       </GROUP>
     </GROUP>
     <GROUP id="{4F269486-30C8-FFDF-A864-4F5F2C1A2354}" name="Source">
-      <FILE id="QWF8sB" name="MultiMicrophoneSynthesiser.cpp" compile="1"
-            resource="0" file="Source/MultiMicrophoneSynthesiser.cpp"/>
-      <FILE id="QXDRzD" name="MultiMicrophoneSynthesiser.h" compile="0" resource="0"
-            file="Source/MultiMicrophoneSynthesiser.h"/>
-      <FILE id="IuHDJf" name="MultiIntensitySynthesiser.cpp" compile="1"
-            resource="0" file="Source/MultiIntensitySynthesiser.cpp"/>
-      <FILE id="DiF5aL" name="MultiIntensitySynthesiser.h" compile="0" resource="0"
-            file="Source/MultiIntensitySynthesiser.h"/>
-      <FILE id="kPFG1S" name="MultiSampleSynthesiser.cpp" compile="1" resource="0"
-            file="Source/MultiSampleSynthesiser.cpp"/>
-      <FILE id="S9AWXs" name="MultiSampleSynthesiser.h" compile="0" resource="0"
-            file="Source/MultiSampleSynthesiser.h"/>
-      <FILE id="gBhtSu" name="Samples.h" compile="0" resource="0" file="Source/Samples.h"/>
-      <FILE id="s9w4e6" name="GeneralMidi.h" compile="0" resource="0" file="Source/GeneralMidi.h"/>
-      <FILE id="L4cb2V" name="Constants.h" compile="0" resource="0" file="Source/Constants.h"/>
+      <GROUP id="{91AD8FAC-EF24-BE9E-B417-D983B88C88CF}" name="Components">
+        <FILE id="SSq1xN" name="SamplerComponent.cpp" compile="1" resource="0"
+              file="Source/Components/SamplerComponent.cpp"/>
+        <FILE id="YGVArC" name="SamplerComponent.h" compile="0" resource="0"
+              file="Source/Components/SamplerComponent.h"/>
+      </GROUP>
+      <GROUP id="{174326FA-B300-8EB3-EC61-A97E87DA421F}" name="Configuration">
+        <FILE id="O8ypxf" name="Constants.h" compile="0" resource="0" file="Source/Configuration/Constants.h"/>
+        <FILE id="iV5taV" name="GeneralMidi.h" compile="0" resource="0" file="Source/Configuration/GeneralMidi.h"/>
+        <FILE id="nSQZyH" name="Samples.h" compile="0" resource="0" file="Source/Configuration/Samples.h"/>
+      </GROUP>
+      <GROUP id="{48C49AB5-D8CC-3B80-A04F-723EBF691466}" name="Synthensisers">
+        <FILE id="GLY6YW" name="CLRSamplerSound.cpp" compile="1" resource="0"
+              file="Source/Synthesisers/CLRSamplerSound.cpp"/>
+        <FILE id="wtqbkS" name="CLRSamplerSound.h" compile="0" resource="0"
+              file="Source/Synthesisers/CLRSamplerSound.h"/>
+        <FILE id="l70sOV" name="CLRSamplerVoice.cpp" compile="1" resource="0"
+              file="Source/Synthesisers/CLRSamplerVoice.cpp"/>
+        <FILE id="CFf0OL" name="CLRSamplerVoice.h" compile="0" resource="0"
+              file="Source/Synthesisers/CLRSamplerVoice.h"/>
+        <FILE id="G46XYM" name="CLRSynthesiser.cpp" compile="1" resource="0"
+              file="Source/Synthesisers/CLRSynthesiser.cpp"/>
+        <FILE id="xEMfof" name="CLRSynthesiser.h" compile="0" resource="0"
+              file="Source/Synthesisers/CLRSynthesiser.h"/>
+        <FILE id="QKz4KK" name="MultiIntensitySynthesiser.cpp" compile="1"
+              resource="0" file="Source/Synthesisers/MultiIntensitySynthesiser.cpp"/>
+        <FILE id="X9D6KF" name="MultiIntensitySynthesiser.h" compile="0" resource="0"
+              file="Source/Synthesisers/MultiIntensitySynthesiser.h"/>
+        <FILE id="PZ8xJy" name="MultiMicrophoneSynthesiser.cpp" compile="1"
+              resource="0" file="Source/Synthesisers/MultiMicrophoneSynthesiser.cpp"/>
+        <FILE id="SfNRoU" name="MultiMicrophoneSynthesiser.h" compile="0" resource="0"
+              file="Source/Synthesisers/MultiMicrophoneSynthesiser.h"/>
+        <FILE id="PztKLM" name="MultiSampleSynthesiser.cpp" compile="1" resource="0"
+              file="Source/Synthesisers/MultiSampleSynthesiser.cpp"/>
+        <FILE id="rz5gRA" name="MultiSampleSynthesiser.h" compile="0" resource="0"
+              file="Source/Synthesisers/MultiSampleSynthesiser.h"/>
+        <FILE id="B17pxb" name="MultiVoicingSynthesizer.cpp" compile="1" resource="0"
+              file="Source/Synthesisers/MultiVoicingSynthesizer.cpp"/>
+        <FILE id="JDp2NJ" name="MultiVoicingSynthesizer.h" compile="0" resource="0"
+              file="Source/Synthesisers/MultiVoicingSynthesizer.h"/>
+      </GROUP>
       <FILE id="BVxg3g" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="dwRgN7" name="PluginProcessor.h" compile="0" resource="0"
@@ -851,7 +880,7 @@
   <EXPORTFORMATS>
     <VS2022 targetFolder="Builds/VisualStudio2022">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="ABKit2"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="ABKit2" generateManifest="1"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="ABKit2"/>
       </CONFIGURATIONS>
       <MODULEPATHS>

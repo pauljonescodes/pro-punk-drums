@@ -18,6 +18,8 @@
 namespace samples {
 
 	static const int standardVariationsCount = 5;
+	static const int samplesBitRate = 44100;
+	static const int bitDepth = 24;
 
 	enum class InstrumentEnum {
 		acousticBassDrum,
@@ -108,7 +110,7 @@ namespace samples {
 		{InstrumentEnum::triangleMute, constants::triangleMuteId},
 		{InstrumentEnum::triangleOpen, constants::triangleOpenId}
 	};
-	
+
 	//==============================================================================
 	// Intensity
 	//==============================================================================
@@ -119,40 +121,39 @@ namespace samples {
 		hard
 	};
 
-	static const std::vector<IntensityEnum> intensityVector = {
-	IntensityEnum::soft,
-	IntensityEnum::medium,
-	IntensityEnum::hard,
-	};
-
-
-	static const std::map<IntensityEnum, std::string> intensityIdMap = {
-		{IntensityEnum::soft, constants::softIntensityId},
-		{IntensityEnum::medium, constants::mediumIntensityId},
-		{IntensityEnum::hard, constants::hardIntensityId}
-		// Add more entries for other velocity types as needed...
+	static const std::vector<std::string> intensityIdVector = {
+	constants::softIntensityId,
+	constants::mediumIntensityId,
+	constants::hardIntensityId,
 	};
 
 	//==============================================================================
 	// Cymbal mics
 	//==============================================================================
 
-	enum class CymbalMicrophoneEnum {
-		cymbal,
-		overheadLeft,
-		overheadRight
+	enum class CenterLeftRightEnum {
+		center,
+		left,
+		right
 	};
 
-	static const std::vector<CymbalMicrophoneEnum> cymbalMicrophoneVector = {
-	CymbalMicrophoneEnum::cymbal,
-	CymbalMicrophoneEnum::overheadLeft,
-	CymbalMicrophoneEnum::overheadRight,
+	const std::vector<CenterLeftRightEnum> centerLeftRightEnumVector = {
+		CenterLeftRightEnum::center,
+		CenterLeftRightEnum::left,
+		CenterLeftRightEnum::right,
 	};
 
-	static const std::map<CymbalMicrophoneEnum, std::string> cymbalMicrophoneIdMap = {
-		{CymbalMicrophoneEnum::cymbal, constants::cymbalMicrophoneId},
-		{CymbalMicrophoneEnum::overheadLeft, constants::overheadLeftMicrophoneId},
-		{CymbalMicrophoneEnum::overheadRight, constants::overheadRightMicrophoneId}	};
+	static const std::vector<std::string> centerLeftRightIdVector = {
+		constants::centerMicrophoneId,
+		constants::leftMicrophoneId,
+		constants::rightMicrophoneId,
+	};
+
+	const std::map<CenterLeftRightEnum, std::string> centerLeftRightEnumToIdMap = {
+	{CenterLeftRightEnum::center, constants::centerMicrophoneId},
+	{CenterLeftRightEnum::left, constants::leftMicrophoneId},
+	{CenterLeftRightEnum::right, constants::rightMicrophoneId}
+	};
 
 	//==============================================================================
 	// Acoustic Snare Microphones
@@ -163,14 +164,9 @@ namespace samples {
 		bottom
 	};
 
-	static const std::vector<AcousticSnareMicrophoneEnum> allAcousticSnareMicrophones = {
-		AcousticSnareMicrophoneEnum::top,
-		AcousticSnareMicrophoneEnum::bottom,
-	};
-
-	static const std::map<AcousticSnareMicrophoneEnum, std::string> acousticSnareMicrophoneIdMap = {
-	{AcousticSnareMicrophoneEnum::top, constants::acousticSnareMicrophoneTopId},
-	{AcousticSnareMicrophoneEnum::bottom, constants::acousticSnareMicrophoneBottomId}
+	static const std::vector<std::string> acousticSnareMicrophoneIdVector = {
+		constants::acousticSnareMicrophoneTopId,
+		constants::acousticSnareMicrophoneBottomId,
 	};
 
 	//==============================================================================
@@ -182,27 +178,20 @@ namespace samples {
 		out
 	};
 
-	static const std::vector<AcousticBassDrumMicrophoneEnum> acousticBassDrumMicrophoneVector = {
-		AcousticBassDrumMicrophoneEnum::in,
-		AcousticBassDrumMicrophoneEnum::out,
+	static const std::vector<std::string> acousticBassDrumMicrophoneIdVector = {
+		constants::acousticBassDrumMicrophoneInId,
+		constants::acousticBassDrumMicrophoneOutId,
 	};
 
-	static const std::map<AcousticBassDrumMicrophoneEnum, std::string> acousticBassDrumMicrophoneIdMap = {
-	{AcousticBassDrumMicrophoneEnum::in, constants::acousticBassDrumMicrophoneInId},
-	{AcousticBassDrumMicrophoneEnum::out, constants::acousticBassDrumMicrophoneOutId}
-	};
-	
 	//==============================================================================
 	// General Midi
 	//==============================================================================
 
 	const std::vector<int> generalMidiNotesVector = {
 	generalmidi::midinotes::acousticBassDrum,
-	generalmidi::midinotes::bassDrum1,
 	generalmidi::midinotes::sideStick,
 	generalmidi::midinotes::acousticSnare,
 	generalmidi::midinotes::handClap,
-	generalmidi::midinotes::electricSnare,
 	generalmidi::midinotes::closedHiHat,
 	generalmidi::midinotes::highFloorTom,
 	generalmidi::midinotes::pedalHiHat,

@@ -25,9 +25,8 @@ void MultiSampleSynthesiser::noteOn(const int midiChannel, const int midiNoteNum
             }
         }
 
-        startVoice(findFreeVoice(sound, midiChannel, midiNoteNumber, true), sound, midiChannel, midiNoteNumber, 1.0f);
+        startVoice(findFreeVoice(sound, midiChannel, midiNoteNumber, true), sound, midiChannel, midiNoteNumber, 0.1f + velocity * 0.9f);
     }
-
 
     mCurrentSoundIndex = (mCurrentSoundIndex + 1) % sounds.size();
 }

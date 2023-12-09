@@ -18,6 +18,6 @@ public:
     virtual void noteOn(int midiChannel, int midiNoteNumber, float velocity) override;
     void addSamplerSoundAtIntensityIndex(const juce::SamplerSound::Ptr& newSound, int index);
 protected:
-	std::vector<int> mCurrentSoundIndices;
-    std::vector<int> mIntensitySizes;
+	std::vector<int> mCLRToCurrentVariationIndices;
+    std::vector<int> mCLRToIntensitySizes;
 };

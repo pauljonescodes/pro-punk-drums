@@ -9,9 +9,11 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "Samples.h"
-#include "MultiSampleSynthesiser.h"
-#include "MultiIntensitySynthesiser.h"
+#include "Configuration/Samples.h"
+#include "Synthesisers/MultiSampleSynthesiser.h"
+#include "Synthesisers/MultiIntensitySynthesiser.h"
+#include "Synthesisers/MultiMicrophoneSynthesiser.h"
+#include "Synthesisers/MultiVoicingSynthesizer.h"
 
 //==============================================================================
 /**
@@ -57,40 +59,22 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     //==============================================================================
-    void noteOnSynthesiser(int midiNoteNumber, float velocity);
+    void noteOnSynthesisers(int midiNoteNumber, float velocity);
 
 private:
     //==============================================================================
     
     juce::AudioFormatManager mFormatManager;
 
-    std::unique_ptr<juce::Synthesiser> mBassDrum1Synthesiser;
-    std::unique_ptr<juce::Synthesiser> mElectricSnareSynthesiser;
+    std::vector<std::unique_ptr<juce::Synthesiser>> synthesisers;
 
-    std::unique_ptr<MultiSampleSynthesiser> mHandClapSynthesiser;
-    std::unique_ptr<MultiSampleSynthesiser> mTambourineSynthesiser;
-    std::unique_ptr<MultiSampleSynthesiser> mCowbellSynthesiser;
-    std::unique_ptr<MultiSampleSynthesiser> mMaracaSynthesiser;
-    std::unique_ptr<MultiSampleSynthesiser> mTriangleSynthesiser;
-
-    std::unique_ptr<MultiIntensitySynthesiser> mHighTomSynthesiser;
-    std::unique_ptr<MultiIntensitySynthesiser> mSideStickSynthesiser;
-    std::unique_ptr<MultiIntensitySynthesiser> mHighFloorTomSynthesiser;
-
-    std::unique_ptr<juce::Synthesiser> mAcousticBassDrumSynthesiser;
-    std::unique_ptr<juce::Synthesiser> mAcousticSnareSynthesiser;
-    std::unique_ptr<juce::Synthesiser> mCrashCymbal1Synthesiser;
-    std::unique_ptr<juce::Synthesiser> mRideCymbal1Synthesiser;
-    std::unique_ptr<juce::Synthesiser> mChineseCymbalSynthesiser;
-    std::unique_ptr<juce::Synthesiser> mRideBellSynthesiser;
-    std::unique_ptr<juce::Synthesiser> mSplashCymbalSynthesiser;
-    std::unique_ptr<juce::Synthesiser> mCrashCymbal2Synthesiser;
+    std::unique_ptr<MultiVoicingSynthesiser> mTriangleSynthesiser;
 
     std::unique_ptr<juce::Synthesiser> mHiHatSynthesiser;
     
-    void initializeSimpleInstrument(samples::InstrumentEnum instrument, juce::Synthesiser& synthesizer);
-    void initializeVariedInstrument(samples::InstrumentEnum instrument, MultiSampleSynthesiser& synthesizer);
-    void initializeIntensityInstrument(samples::InstrumentEnum instrument, MultiIntensitySynthesiser& synthesizer);
+    void addMultiVoicedSounds(samples::InstrumentEnum instrument, MultiVoicingSynthesiser& synthesizer);
+    void addVariedSounds(samples::InstrumentEnum instrument, MultiSampleSynthesiser& synthesizer);
+    void addMultiMicMultiIntensitySounds(samples::InstrumentEnum instrument, MultiMicrophoneSynthesiser& synthesizer, std::vector<std::string> micIds, std::vector<std::string> intensityIds);    
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ABKit2AudioProcessor)
