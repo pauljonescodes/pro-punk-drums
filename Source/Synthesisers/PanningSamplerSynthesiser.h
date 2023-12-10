@@ -21,9 +21,10 @@ public:
 	PanningSamplerSynthesiser();
 
 	virtual void noteOn(int midiChannel, int midiNoteNumber, float velocity) override;
+	virtual void noteOff(int midiChannel, int midiNoteNumber, float velocity, bool allowTailOff) override;
 	
 	void addSample(
-		const std::string name,
+		const std::string resourceName,
 		const int bitRate,
 		const int bitDepth,
 		const int midiNote,
@@ -31,39 +32,56 @@ public:
 	);
 
 	void addSample(
-		const std::string name, 
+		const std::string resourceName,
 		const int bitRate, 
 		const int bitDepth, 
 		const int midiNote, 
-		const std::string micId, 
 		const float defaultStereoPan,
 		juce::AudioFormatManager& audioFormatManager
 	);
 
 	void addSample(
-		const std::string name,
+		const std::string resourceName,
 		const int bitRate,
 		const int bitDepth,
 		const int midiNote,
-		const std::string micId,
 		const int intensityIndex,
 		const float defaultStereoPan,
 		juce::AudioFormatManager& audioFormatManager
 	);
 
 protected:
-	struct Variations {
-		int currentVariationIndex;
+	
+	// on
+	struct Variation {
+		PanningSamplerSound::Ptr sound;
 		std::unique_ptr<PanningSamplerVoice> voice;
-		std::vector<PanningSamplerSound::Ptr> variations;
-
-		Variations() : currentVariationIndex(0) {}
+		
+		Variation(PanningSamplerSound::Ptr s, std::unique_ptr<PanningSamplerVoice> v)
+			: sound(std::move(s)), voice(std::move(v))
+		{}
 	};
 
-	struct Intensities {
-		std::vector<Variations> intensities;
-		Intensities() {}
+	// medium
+	struct Intensity {
+		int currentVariationIndex;
+
+		// 1
+		std::vector<Variation> variations;
+
+		Intensity() : currentVariationIndex(0) {
+			
+		}
 	};
 
-	std::map<std::string, Intensities> mSampleInfoMap;
+	// acoustic_bass_drum
+	struct Instrument {
+		std::vector<Intensity> intensities;
+
+		Instrument() {
+			intensities.emplace_back();
+		}
+	};
+
+	std::unordered_map<int, Instrument> mMidiNoteToInstruments;
 };

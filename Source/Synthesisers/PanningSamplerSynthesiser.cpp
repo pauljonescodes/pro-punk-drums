@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "CLRSynthesiser.h"
+#include "PanningSamplerSynthesiser.h"
 #include "../Configuration/Samples.h"
 #include "PanningSamplerVoice.h"
 
@@ -17,79 +17,69 @@ PanningSamplerSynthesiser::PanningSamplerSynthesiser()
 	setNoteStealingEnabled(false);
 }
 
+void PanningSamplerSynthesiser::noteOff(int midiChannel, int midiNoteNumber, float velocity, bool allowTailOff) {
+
+}
+
 void PanningSamplerSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, const float velocity)
 {
-	auto hasSoundThatAppliesToNote = false;
+	if (mMidiNoteToInstruments.find(midiNoteNumber) != mMidiNoteToInstruments.end()) {
+		auto& intensities = mMidiNoteToInstruments.at(midiNoteNumber).intensities;
+		float position = velocity * (intensities.size() - 1);
 
-	for (auto* sound : sounds)
-	{
-		if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
-		{
-			hasSoundThatAppliesToNote = true;
-			break;
+		int lowerIntensityIndex = static_cast<int>(position);
+		int higherIntensityIndex = lowerIntensityIndex + 1;
+
+		if (lowerIntensityIndex >= intensities.size()) {
+			lowerIntensityIndex = 0;
 		}
-	}
 
-	if (hasSoundThatAppliesToNote) {
-		for (const auto& sampleInfoEntry : mSampleInfoMap) {
-			auto& sampleInfo = sampleInfoEntry.second;
-			auto& intensities = sampleInfo.intensities;
-			
-			// Calculating the position in the context of total intensity levels
-			float position = velocity * (intensities.size() - 1);
+		if (higherIntensityIndex >= intensities.size()) {
+			higherIntensityIndex = lowerIntensityIndex;
+		}
 
-			// Determining the lower and higher indices for intensity levels
-			int lowerIntensityIndex = static_cast<int>(position);
-			int higherIntensityIndex = lowerIntensityIndex + 1;
+		float blendRatio = position - lowerIntensityIndex;
+		float perceivedBlendRatio = lowerIntensityIndex != higherIntensityIndex ? std::pow(blendRatio, 0.33) : 1.0f;
 
-			if (lowerIntensityIndex >= intensities.size()) {
-				lowerIntensityIndex = 0;
+		auto& lowerIntensity = intensities[lowerIntensityIndex];
+		auto samplesSize = lowerIntensity.variations.size();
+
+		if (lowerIntensity.currentVariationIndex < samplesSize) {
+			auto& variation = lowerIntensity.variations[lowerIntensity.currentVariationIndex];
+			auto& sound = variation.sound;
+			auto& voice = variation.voice;
+
+			if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
+			{
+				stopVoice(voice.get(), 1.0f, true);
+				startVoice(voice.get(), sound.get(), midiChannel, midiNoteNumber, perceivedBlendRatio);
 			}
 
-			if (higherIntensityIndex >= intensities.size()) {
-				higherIntensityIndex = lowerIntensityIndex; 
+			lowerIntensity.currentVariationIndex = (lowerIntensity.currentVariationIndex + 1) % samplesSize;
+		}
+
+		if (lowerIntensityIndex != higherIntensityIndex) {
+			auto& higherIntensity = intensities[higherIntensityIndex];
+			auto& variation = higherIntensity.variations[higherIntensity.currentVariationIndex];
+			auto& sound = variation.sound;
+			auto& voice = variation.voice;
+
+			if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
+			{
+				stopVoice(voice.get(), 1.0f, true);
+				startVoice(voice.get(), sound.get(), midiChannel, midiNoteNumber, perceivedBlendRatio);
 			}
 
-			float blendRatio = position - lowerIntensityIndex;
-			float perceivedBlendRatio = lowerIntensityIndex != higherIntensityIndex ? std::pow(blendRatio, 0.33) : 1.0f;
-
-			auto& lowerIntensity = intensities[lowerIntensityIndex];
-			auto samplesSize = lowerIntensity.variations.size();
-
-			if (lowerIntensity.currentVariationIndex < samplesSize) {
-				auto& sound = lowerIntensity.variations[lowerIntensity.currentVariationIndex];
-				if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
-				{
-					stopVoice(lowerIntensity.voice.get(), 1.0f, true);
-					startVoice(lowerIntensity.voice.get(), sound.get(), midiChannel, midiNoteNumber, perceivedBlendRatio);
-				}
-
-				// Sorry
-				mSampleInfoMap[sampleInfoEntry.first].intensities[lowerIntensityIndex].currentVariationIndex = (lowerIntensity.currentVariationIndex + 1) % samplesSize;
-			}
-
-			if (lowerIntensityIndex != higherIntensityIndex) {
-				auto& higherIntensity = intensities[higherIntensityIndex];
-				auto& sound = higherIntensity.variations[higherIntensity.currentVariationIndex];
-				if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
-				{
-					stopVoice(higherIntensity.voice.get(), 1.0f, true);
-					startVoice(higherIntensity.voice.get(), sound.get(), midiChannel, midiNoteNumber, perceivedBlendRatio);
-				}
-
-				// Sorry
-				mSampleInfoMap[sampleInfoEntry.first].intensities[higherIntensityIndex].currentVariationIndex = (higherIntensity.currentVariationIndex + 1) % samplesSize;
-			}
+			higherIntensity.currentVariationIndex = (higherIntensity.currentVariationIndex + 1) % samplesSize;
 		}
 	}
 }
 
 void PanningSamplerSynthesiser::addSample(
-	const std::string name,
+	const std::string resourceName,
 	const int bitRate,
 	const int bitDepth,
 	const int midiNote,
-	const std::string micId,
 	const int intensityIndex,
 	const float defaultStereoPan,
 	juce::AudioFormatManager& audioFormatManager
@@ -98,51 +88,46 @@ void PanningSamplerSynthesiser::addSample(
 	range.setRange(midiNote, 1, true);
 	int dataSizeInBytes;
 
-	const char* sourceData = BinaryData::getNamedResource(name.c_str(), dataSizeInBytes);
+	const char* sourceData = BinaryData::getNamedResource(resourceName.c_str(), dataSizeInBytes);
 	auto memoryInputStream = std::make_unique<juce::MemoryInputStream>(sourceData, dataSizeInBytes, false);
 	juce::AudioFormatReader* reader = audioFormatManager.createReaderFor(std::move(memoryInputStream));
 
 	double maxSampleLengthSeconds = dataSizeInBytes / (samples::bitRate * (samples::bitDepth / 8.0));
-	PanningSamplerSound* sound = new PanningSamplerSound(juce::String(name), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
+	PanningSamplerSound* sound = new PanningSamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
 
 	addSound(sound);
 
-	auto& sampleIntensities = mSampleInfoMap[micId];
+	auto& instrument = mMidiNoteToInstruments[midiNote];
 
 	// Ensure there's at least one SampleVariations instance for the base intensity level
-	if (sampleIntensities.intensities.empty() || intensityIndex >= sampleIntensities.intensities.size()) {
-		sampleIntensities.intensities.emplace_back(); 
+	if (instrument.intensities.empty() || intensityIndex >= instrument.intensities.size()) {
+		instrument.intensities.emplace_back();
 	}
 
-	auto& variationInfo = sampleIntensities.intensities[intensityIndex]; 
+	auto& intensity = instrument.intensities[intensityIndex];
 
-	if (!variationInfo.voice) {
-		variationInfo.voice = std::make_unique<PanningSamplerVoice>(defaultStereoPan);
-		addVoice(variationInfo.voice.get());
-	}
-
-	// Add the new sound to the variations of the base intensity
-	variationInfo.variations.push_back(PanningSamplerSound::Ptr(sound));
+	auto variation = Variation(PanningSamplerSound::Ptr(sound), std::make_unique<PanningSamplerVoice>(defaultStereoPan));
+	addVoice(variation.voice.get());
+	intensity.variations.push_back(std::move(variation));
 }
 
 void PanningSamplerSynthesiser::addSample(
-	const std::string name,
+	const std::string resourceName,
 	const int bitRate,
 	const int bitDepth,
 	const int midiNote,
-	const std::string micId,
 	const float defaultStereoPan,
 	juce::AudioFormatManager& audioFormatManager
 ) {
-	addSample(name, bitRate, bitDepth, midiNote, micId, 0, defaultStereoPan, audioFormatManager);
+	addSample(resourceName, bitRate, bitDepth, midiNote, 0, defaultStereoPan, audioFormatManager);
 }
 
 void PanningSamplerSynthesiser::addSample(
-	const std::string name,
+	const std::string resourceName,
 	const int bitRate,
 	const int bitDepth,
 	const int midiNote,
 	juce::AudioFormatManager& audioFormatManager
 ) {
-	addSample(name, bitRate, bitDepth, midiNote, "defaultMicId-1234", 0, audioFormatManager);
+	addSample(resourceName, bitRate, bitDepth, midiNote, 0, audioFormatManager);
 }

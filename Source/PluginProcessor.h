@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "Configuration/Samples.h"
 #include "Synthesisers/MultiVoicingSynthesizer.h"
+#include "Synthesisers/PanningSamplerSynthesiser.h"
 
 //==============================================================================
 /**
