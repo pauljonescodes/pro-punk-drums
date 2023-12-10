@@ -9,7 +9,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "Configuration/Samples.h"
-#include "Synthesisers/CLRSynthesiser.h"
+#include "Synthesisers/PanningSamplerSynthesiser.h"
 
 //==============================================================================
 ABKit2AudioProcessor::ABKit2AudioProcessor()
@@ -24,7 +24,7 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 	)
 #endif
 {
-	mFormatManager.registerBasicFormats();
+	mAudioFormatManager.registerBasicFormats();
 	mTriangleSynthesiser = std::make_unique< MultiVoicingSynthesiser>();
 
 	for (const auto& instrument : samples::instrumentVector) {
@@ -41,16 +41,16 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 			auto synthesiser = std::make_unique<juce::Synthesiser>();
 
 			std::string resourceName = sampleName + "_wav";
-			
+
 			const char* sourceData = BinaryData::getNamedResource(resourceName.c_str(), dataSizeInBytes);
 			auto memoryInputStream = std::make_unique<juce::MemoryInputStream>(sourceData, dataSizeInBytes, false);
-			juce::AudioFormatReader* reader = mFormatManager.createReaderFor(std::move(memoryInputStream));
+			juce::AudioFormatReader* reader = mAudioFormatManager.createReaderFor(std::move(memoryInputStream));
 
-			double maxSampleLengthSeconds = dataSizeInBytes / (samples::samplesBitRate * (samples::bitDepth / 8.0));
+			double maxSampleLengthSeconds = dataSizeInBytes / (samples::bitRate * (samples::bitDepth / 8.0));
 			juce::SamplerSound* sound = new juce::SamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
 			synthesiser.get()->addSound(sound);
 			synthesiser.get()->addVoice(new juce::SamplerVoice());
-			
+
 			synthesisers.push_back(std::move(synthesiser));
 		}
 		break;
@@ -59,20 +59,18 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 		case samples::InstrumentEnum::tambourine:
 		case samples::InstrumentEnum::maraca:
 		{
-			auto synthesiser = std::make_unique<CLRSynthesiser>();
-			
+			auto synthesiser = std::make_unique<PanningSamplerSynthesiser>();
+
 			std::string sampleName = samples::instrumentIdMap.at(instrument);
 
 			for (int i = 0; i < samples::standardVariationsCount; i++) {
 				std::string resourceName = sampleName + "_" + std::to_string(i + 1) + "_wav";
 
-				const char* sourceData = BinaryData::getNamedResource(resourceName.c_str(), dataSizeInBytes);
-				auto memoryInputStream = std::make_unique<juce::MemoryInputStream>(sourceData, dataSizeInBytes, false);
-				juce::AudioFormatReader* reader = mFormatManager.createReaderFor(std::move(memoryInputStream));
-
-				double maxSampleLengthSeconds = dataSizeInBytes / (samples::samplesBitRate * (samples::bitDepth / 8.0));
-				PanningSamplerSound* sound = new PanningSamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
-				synthesiser.get()->addCLRSamplerSound(sound, "on", 0);
+				synthesiser.get()->addSample(resourceName,
+					samples::bitRate,
+					samples::bitDepth,
+					midiNote,
+					mAudioFormatManager);
 			}
 
 			synthesisers.push_back(std::move(synthesiser));
@@ -92,24 +90,16 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 		case samples::InstrumentEnum::tomFloorHigh:
 		case samples::InstrumentEnum::sideStick:
 		{
-			auto synthesiser = std::make_unique<MultiIntensitySynthesiser>();
-			
+			auto synthesiser = std::make_unique<PanningSamplerSynthesiser>();
+
 			for (int intensityIndex = 0; intensityIndex < samples::intensityIdVector.size(); intensityIndex++) {
 				std::string intensityId = samples::intensityIdVector[intensityIndex];
 
 				for (int variationIndex = 0; variationIndex < samples::standardVariationsCount; variationIndex++) {
 					std::string resourceName = sampleName + "_" + intensityId + "_" + std::to_string(variationIndex + 1) + "_wav";
 
-					const char* sourceData = BinaryData::getNamedResource(resourceName.c_str(), dataSizeInBytes);
-					auto memoryInputStream = std::make_unique<juce::MemoryInputStream>(sourceData, dataSizeInBytes, false);
-					juce::AudioFormatReader* reader = mFormatManager.createReaderFor(std::move(memoryInputStream));
-
-					double maxSampleLengthSeconds = dataSizeInBytes / (samples::samplesBitRate * (samples::bitDepth / 8.0));
-					juce::SamplerSound* sound = new juce::SamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
-					synthesiser.get()->addSamplerSoundAtIntensityIndex(sound, intensityIndex);
+					synthesiser->addSample(resourceName, samples::bitRate, samples::bitDepth, midiNote, "on", intensityIndex, 0, mAudioFormatManager);
 				}
-
-				synthesiser.get()->addVoice(new juce::SamplerVoice());
 			}
 
 			synthesisers.push_back(std::move(synthesiser));
@@ -117,25 +107,58 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 		break;
 		case samples::InstrumentEnum::acousticBassDrum:
 		{
-			auto synthesiser = std::make_unique<MultiMicrophoneSynthesiser>();
-			addMultiMicMultiIntensitySounds(instrument, *synthesiser, samples::acousticBassDrumMicrophoneIdVector, samples::intensityIdVector);
+			auto synthesiser = std::make_unique<PanningSamplerSynthesiser>();
+
+			for (const auto& micId : samples::acousticBassDrumMicrophoneIdVector) {
+				int intensityIndex = 0;
+				for (const auto& intensityId : samples::intensityIdVector) {
+					for (int variationIndex = 0; variationIndex < samples::standardVariationsCount; variationIndex++) {
+						std::string resourceName = sampleName + "_" + intensityId + "_" + std::to_string(variationIndex + 1) + "_" + micId + "_wav";
+						synthesiser->addSample(resourceName, samples::bitRate, samples::bitDepth, midiNote, micId, intensityIndex, 0, mAudioFormatManager);
+					}
+
+					++intensityIndex;
+				}
+			}
+
 			synthesisers.push_back(std::move(synthesiser));
 		}
 		break;
 		case samples::InstrumentEnum::acousticSnare:
 		{
-			auto synthesiser = std::make_unique<MultiMicrophoneSynthesiser>();
-			addMultiMicMultiIntensitySounds(instrument, *synthesiser, samples::acousticSnareMicrophoneIdVector, samples::intensityIdVector);
+			auto synthesiser = std::make_unique<PanningSamplerSynthesiser>();
+
+			for (const auto& micId : samples::acousticSnareMicrophoneIdVector) {
+				int intensityIndex = 0;
+				for (const auto& intensityId : samples::intensityIdVector) {
+					for (int variationIndex = 0; variationIndex < samples::standardVariationsCount; variationIndex++) {
+						std::string resourceName = sampleName + "_" + intensityId + "_" + std::to_string(variationIndex + 1) + "_" + micId + "_wav";
+						synthesiser->addSample(resourceName, samples::bitRate, samples::bitDepth, midiNote, micId, intensityIndex, 0, mAudioFormatManager);
+					}
+
+					++intensityIndex;
+				}
+			}
+
 			synthesisers.push_back(std::move(synthesiser));
 		}
 		break;
 		case samples::InstrumentEnum::rideBell:
 		{
-			auto synthesiser = std::make_unique<MultiMicrophoneSynthesiser>();
-			addMultiMicMultiIntensitySounds(instrument, *synthesiser, samples::centerLeftRightIdVector, {
-				constants::mediumIntensityId,
-				constants::hardIntensityId,
-				});
+			auto synthesiser = std::make_unique<PanningSamplerSynthesiser>();
+
+			for (const auto& micId : samples::centerLeftRightIdVector) {
+				int intensityIndex = 0;
+				for (const auto& intensityId : { constants::mediumIntensityId, constants::hardIntensityId }) {
+					for (int variationIndex = 0; variationIndex < samples::standardVariationsCount; variationIndex++) {
+						std::string resourceName = sampleName + "_" + intensityId + "_" + std::to_string(variationIndex + 1) + "_" + micId + "_wav";
+						synthesiser->addSample(resourceName, samples::bitRate, samples::bitDepth, midiNote, micId, intensityIndex, 0, mAudioFormatManager);
+					}
+
+					++intensityIndex;
+				}
+			}
+
 			synthesisers.push_back(std::move(synthesiser));
 		}
 		break;
@@ -145,34 +168,20 @@ ABKit2AudioProcessor::ABKit2AudioProcessor()
 		case samples::InstrumentEnum::splashCymbal:
 		case samples::InstrumentEnum::rideCymbal1:
 		{
-			auto synthesiser = std::make_unique<CLRSynthesiser>();
+			auto synthesiser = std::make_unique<PanningSamplerSynthesiser>();
 			for (const auto& cymbalMic : samples::centerLeftRightEnumVector) {
-
 				const auto& micId = samples::centerLeftRightEnumToIdMap.at(cymbalMic);
-				
+
 				for (int variationIndex = 0; variationIndex < samples::standardVariationsCount; variationIndex++) {
 					std::string resourceName = sampleName + "_" + std::to_string(variationIndex + 1) + "_" + micId + "_wav";
 
-					const char* sourceData = BinaryData::getNamedResource(resourceName.c_str(), dataSizeInBytes);
-					auto memoryInputStream = std::make_unique<juce::MemoryInputStream>(sourceData, dataSizeInBytes, false);
-					juce::AudioFormatReader* reader = mFormatManager.createReaderFor(std::move(memoryInputStream));
-
-					double maxSampleLengthSeconds = dataSizeInBytes / (samples::samplesBitRate * (samples::bitDepth / 8.0));
-					PanningSamplerSound* sound = new PanningSamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
-					
-					switch (cymbalMic) {
-					case samples::CenterLeftRightEnum::center:
-						synthesiser.get()->addCLRSamplerSound(sound, micId, 0);
-						break;
-					case samples::CenterLeftRightEnum::left:
-						synthesiser.get()->addCLRSamplerSound(sound, micId, -1);
-						break;
-					case samples::CenterLeftRightEnum::right:
-						synthesiser.get()->addCLRSamplerSound(sound, micId, 1);
-						break;
-					}
-
-					
+					synthesiser.get()->addSample(resourceName,
+						samples::bitRate,
+						samples::bitDepth,
+						midiNote,
+						micId,
+						samples::centerLeftRightEnumToPanMap.at(cymbalMic),
+						mAudioFormatManager);
 				}
 			}
 
@@ -197,45 +206,14 @@ void ABKit2AudioProcessor::addMultiVoicedSounds(samples::InstrumentEnum instrume
 
 		const char* sourceData = BinaryData::getNamedResource(resourceName.c_str(), dataSizeInBytes);
 		auto memoryInputStream = std::make_unique<juce::MemoryInputStream>(sourceData, dataSizeInBytes, false);
-		juce::AudioFormatReader* reader = mFormatManager.createReaderFor(std::move(memoryInputStream));
+		juce::AudioFormatReader* reader = mAudioFormatManager.createReaderFor(std::move(memoryInputStream));
 
 		juce::BigInteger range;
 		range.setRange(midiNote, 1, true);
 
-		double maxSampleLengthSeconds = dataSizeInBytes / (samples::samplesBitRate * (samples::bitDepth / 8.0));
+		double maxSampleLengthSeconds = dataSizeInBytes / (samples::bitRate * (samples::bitDepth / 8.0));
 		juce::SamplerSound* sound = new juce::SamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
 		synthesizer.addSamplerSound(sound, midiNote);
-	}
-}
-
-void ABKit2AudioProcessor::addMultiMicMultiIntensitySounds(samples::InstrumentEnum instrument, MultiMicrophoneSynthesiser& synthesizer, std::vector<std::string> micIds, std::vector<std::string> intensityIds) {
-	std::string sampleName = samples::instrumentIdMap.at(instrument);
-
-	int midiNote = samples::instrumentToGeneralMidiNoteMap.at(instrument);
-
-	int dataSizeInBytes;
-
-	for (const auto& micId : micIds) {
-		int intensityIndex = 0;
-		for (const auto& intensityId : intensityIds) {
-			for (int variationIndex = 0; variationIndex < samples::standardVariationsCount; variationIndex++) {
-				std::string resourceName = sampleName + "_" + intensityId + "_" + std::to_string(variationIndex + 1) + "_" + micId + "_wav";
-
-				const char* sourceData = BinaryData::getNamedResource(resourceName.c_str(), dataSizeInBytes);
-				auto memoryInputStream = std::make_unique<juce::MemoryInputStream>(sourceData, dataSizeInBytes, false);
-				juce::AudioFormatReader* reader = mFormatManager.createReaderFor(std::move(memoryInputStream));
-
-				juce::BigInteger range;
-				range.setRange(midiNote, 1, true);
-
-				double maxSampleLengthSeconds = dataSizeInBytes / (samples::samplesBitRate * (samples::bitDepth / 8.0));
-				juce::SamplerSound* sound = new juce::SamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
-				synthesizer.addSamplerSound(sound, intensityIndex, micId);
-			}
-
-			synthesizer.addVoice(new juce::SamplerVoice());
-			++intensityIndex;
-		}
 	}
 }
 
@@ -247,7 +225,7 @@ ABKit2AudioProcessor::~ABKit2AudioProcessor()
 const juce::String ABKit2AudioProcessor::getName() const
 {
 	return JucePlugin_Name;
-}
+	}
 
 bool ABKit2AudioProcessor::acceptsMidi() const
 {

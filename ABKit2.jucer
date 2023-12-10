@@ -831,22 +831,10 @@
               file="Source/Synthesisers/PanningSamplerVoice.cpp"/>
         <FILE id="CFf0OL" name="PanningSamplerVoice.h" compile="0" resource="0"
               file="Source/Synthesisers/PanningSamplerVoice.h"/>
-        <FILE id="G46XYM" name="CLRSynthesiser.cpp" compile="1" resource="0"
-              file="Source/Synthesisers/CLRSynthesiser.cpp"/>
-        <FILE id="xEMfof" name="CLRSynthesiser.h" compile="0" resource="0"
-              file="Source/Synthesisers/CLRSynthesiser.h"/>
-        <FILE id="QKz4KK" name="MultiIntensitySynthesiser.cpp" compile="1"
-              resource="0" file="Source/Synthesisers/MultiIntensitySynthesiser.cpp"/>
-        <FILE id="X9D6KF" name="MultiIntensitySynthesiser.h" compile="0" resource="0"
-              file="Source/Synthesisers/MultiIntensitySynthesiser.h"/>
-        <FILE id="PZ8xJy" name="MultiMicrophoneSynthesiser.cpp" compile="1"
-              resource="0" file="Source/Synthesisers/MultiMicrophoneSynthesiser.cpp"/>
-        <FILE id="SfNRoU" name="MultiMicrophoneSynthesiser.h" compile="0" resource="0"
-              file="Source/Synthesisers/MultiMicrophoneSynthesiser.h"/>
-        <FILE id="PztKLM" name="MultiSampleSynthesiser.cpp" compile="1" resource="0"
-              file="Source/Synthesisers/MultiSampleSynthesiser.cpp"/>
-        <FILE id="rz5gRA" name="MultiSampleSynthesiser.h" compile="0" resource="0"
-              file="Source/Synthesisers/MultiSampleSynthesiser.h"/>
+        <FILE id="G46XYM" name="PanningSamplerSynthesiser.cpp" compile="1"
+              resource="0" file="Source/Synthesisers/PanningSamplerSynthesiser.cpp"/>
+        <FILE id="xEMfof" name="PanningSamplerSynthesiser.h" compile="0" resource="0"
+              file="Source/Synthesisers/PanningSamplerSynthesiser.h"/>
         <FILE id="B17pxb" name="MultiVoicingSynthesizer.cpp" compile="1" resource="0"
               file="Source/Synthesisers/MultiVoicingSynthesizer.cpp"/>
         <FILE id="JDp2NJ" name="MultiVoicingSynthesizer.h" compile="0" resource="0"

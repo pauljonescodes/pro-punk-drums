@@ -18,7 +18,7 @@
 namespace samples {
 
 	static const int standardVariationsCount = 5;
-	static const int samplesBitRate = 44100;
+	static const int bitRate = 44100;
 	static const int bitDepth = 24;
 
 	enum class InstrumentEnum {
@@ -153,6 +153,12 @@ namespace samples {
 	{CenterLeftRightEnum::center, constants::centerMicrophoneId},
 	{CenterLeftRightEnum::left, constants::leftMicrophoneId},
 	{CenterLeftRightEnum::right, constants::rightMicrophoneId}
+	};
+
+	const std::map<CenterLeftRightEnum, int> centerLeftRightEnumToPanMap = {
+	{CenterLeftRightEnum::center, 0},
+	{CenterLeftRightEnum::left, -1},
+	{CenterLeftRightEnum::right, 1}
 	};
 
 	//==============================================================================

@@ -10,9 +10,6 @@
 
 #include <JuceHeader.h>
 #include "Configuration/Samples.h"
-#include "Synthesisers/MultiSampleSynthesiser.h"
-#include "Synthesisers/MultiIntensitySynthesiser.h"
-#include "Synthesisers/MultiMicrophoneSynthesiser.h"
 #include "Synthesisers/MultiVoicingSynthesizer.h"
 
 //==============================================================================
@@ -64,7 +61,7 @@ public:
 private:
     //==============================================================================
     
-    juce::AudioFormatManager mFormatManager;
+    juce::AudioFormatManager mAudioFormatManager;
 
     std::vector<std::unique_ptr<juce::Synthesiser>> synthesisers;
 
@@ -73,8 +70,6 @@ private:
     std::unique_ptr<juce::Synthesiser> mHiHatSynthesiser;
     
     void addMultiVoicedSounds(samples::InstrumentEnum instrument, MultiVoicingSynthesiser& synthesizer);
-    void addVariedSounds(samples::InstrumentEnum instrument, MultiSampleSynthesiser& synthesizer);
-    void addMultiMicMultiIntensitySounds(samples::InstrumentEnum instrument, MultiMicrophoneSynthesiser& synthesizer, std::vector<std::string> micIds, std::vector<std::string> intensityIds);    
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ABKit2AudioProcessor)

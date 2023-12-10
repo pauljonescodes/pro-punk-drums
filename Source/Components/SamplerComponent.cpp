@@ -56,8 +56,10 @@ void SamplerComponent::resized()
     auto area = getLocalBounds();
 
     // Allocate space for the slider at the top
-    auto sliderArea = area.removeFromTop(50); // Adjust the height as needed
-    mVelocitySlider->setBounds(sliderArea);
+    auto topArea = area.removeFromTop(50); // Adjust the height as needed
+    auto velocitySliderArea = topArea.removeFromRight(topArea.getWidth() - 64);
+
+    mVelocitySlider->setBounds(velocitySliderArea);
 
     // Layout for buttons
     int numRows = std::max(1, (area.getHeight()) / 125);
@@ -69,7 +71,7 @@ void SamplerComponent::resized()
     {
         int row = i / numCols;
         int col = i % numCols;
-        mMidiNoteButtons[i]->setBounds(col * buttonWidth, row * buttonHeight + sliderArea.getHeight(), buttonWidth, buttonHeight);
+        mMidiNoteButtons[i]->setBounds(col * buttonWidth, row * buttonHeight + topArea.getHeight(), buttonWidth, buttonHeight);
     }
 }
 
