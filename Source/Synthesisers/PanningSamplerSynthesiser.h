@@ -23,8 +23,7 @@ public:
     virtual void noteOn(int midiChannel, int midiNoteNumber, float velocity) override;
     virtual void noteOff(int midiChannel, int midiNoteNumber, float velocity, bool allowTailOff) override;
     
-    void addSample(
-                   const std::string resourceName,
+    void addSample(const std::string resourceName,
                    const int bitRate,
                    const int bitDepth,
                    const int midiNote,
@@ -32,8 +31,7 @@ public:
                    const int intensityIndex,
                    const int variationIndex,
                    const float defaultStereoPan,
-                   juce::AudioFormatManager& audioFormatManager
-                   );
+                   juce::AudioFormatManager& audioFormatManager);
     
 protected:
     
