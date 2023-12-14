@@ -21,6 +21,11 @@ static const int standardVariationsCount = 5;
 static const int bitRate = 44100;
 static const int bitDepth = 24;
 
+static const int maxRecordingLengthInSeconds = 10; // for example, 10 seconds
+static const int numChannels = 1; // Stereo
+
+
+
 enum class InstrumentEnum {
     acousticBassDrum,
     bassDrum1,
@@ -166,12 +171,6 @@ const std::map<CenterLeftRightEnum, std::string> centerLeftRightEnumToIdMap = {
     {CenterLeftRightEnum::center, constants::centerMicrophoneId},
     {CenterLeftRightEnum::left, constants::leftMicrophoneId},
     {CenterLeftRightEnum::right, constants::rightMicrophoneId}
-};
-
-const std::map<CenterLeftRightEnum, int> centerLeftRightEnumToPanMap = {
-    {CenterLeftRightEnum::center, 0},
-    {CenterLeftRightEnum::left, -1},
-    {CenterLeftRightEnum::right, 1}
 };
 
 //==============================================================================

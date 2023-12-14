@@ -835,10 +835,6 @@
               resource="0" file="Source/Synthesisers/PanningSamplerSynthesiser.cpp"/>
         <FILE id="xEMfof" name="PanningSamplerSynthesiser.h" compile="0" resource="0"
               file="Source/Synthesisers/PanningSamplerSynthesiser.h"/>
-        <FILE id="B17pxb" name="MultiVoicingSynthesizer.cpp" compile="1" resource="0"
-              file="Source/Synthesisers/MultiVoicingSynthesizer.cpp"/>
-        <FILE id="JDp2NJ" name="MultiVoicingSynthesizer.h" compile="0" resource="0"
-              file="Source/Synthesisers/MultiVoicingSynthesizer.h"/>
       </GROUP>
       <FILE id="BVxg3g" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

@@ -99,7 +99,8 @@ void PanningSamplerSynthesiser::addSample(const std::string resourceName,
                                           const std::vector<int> stopsMidiNotes,
                                           const int intensityIndex,
                                           const int variationIndex,
-                                          const float defaultStereoPan,
+                                          juce::AudioBuffer<float>& targetBuffer,
+                                          const int targetBufferChannel,
                                           juce::AudioFormatManager& audioFormatManager
                                           ) {
     juce::BigInteger range;
@@ -128,7 +129,7 @@ void PanningSamplerSynthesiser::addSample(const std::string resourceName,
         intensity.variations.emplace_back();
     }
     
-    auto microphone = Microphone(PanningSamplerSound::Ptr(sound), std::make_unique<PanningSamplerVoice>(defaultStereoPan));
+    auto microphone = Microphone(PanningSamplerSound::Ptr(sound), std::make_unique<PanningSamplerVoice>(targetBuffer, targetBufferChannel));
     addVoice(microphone.voice.get());
     intensity.variations[variationIndex].microphones.push_back(std::move(microphone));
 }

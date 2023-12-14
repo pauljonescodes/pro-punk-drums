@@ -13,21 +13,41 @@
 #include <string>
 
 namespace constants {
-	const int multiOutChannelAcousticBassDrum = 0;
-	const int multiOutChannelAcousticSnare = 1;
-	const int multiOutChannelTomHigh = 2;
-	const int multiOutChannelTomFloorHigh = 3;
-	const int multiOutChannelHiHat = 4; // HiHatEdgeTight hiHatTipClosed hiHatTipTight hiHatEdgeClosed hiHatPedal hiHatOpen3 hiHatOpen2 hiHatOpen1
-	const int multiOutChannelRide = 5; // RideBell RideCymbal1
-	const int multiOutChannelCrashCymbal1 = 6;
-	const int multiOutChannelChineseCymbal = 7;
-	const int multiOutChannelSplashCymbal = 8;
-	const int multiOutChannelCrashCymbal2 = 9;
-	const int multiOutChannelOverheadLeft = 10;
-	const int multiOutChannelOverheadRight = 11;
-	const int multiOutChannelPercussion = 12; // maraca triangleMute triangleOpen cowbell handClap sideStick tambourine
-	const int multiOutChannelBassDrum1 = 13;
-	const int multiOutChannelElectricSnare = 14;
+	const int outChannelL = 0;
+	const int outChannelR = 1;
+	const int outChannelAcousticBassDrum = 2;
+	const int outChannelAcousticSnare = 3;
+	const int outChannelTomHigh = 4;
+	const int outChannelTomFloorHigh = 5;
+	const int outChannelHiHat = 6; // HiHatEdgeTight hiHatTipClosed hiHatTipTight hiHatEdgeClosed hiHatPedal hiHatOpen3 hiHatOpen2 hiHatOpen1
+	const int outChannelRide = 7; // RideBell RideCymbal1
+	const int outChannelCrashCymbal1 = 8;
+	const int outChannelChineseCymbal = 9;
+	const int outChannelSplashCymbal = 10;
+	const int outChannelCrashCymbal2 = 11;
+	const int outChannelOverheadLeft = 12;
+	const int outChannelOverheadRight = 13;
+	const int outChannelPercussion = 14; // maraca triangleMute triangleOpen cowbell handClap sideStick tambourine
+	const int outChannelBassDrum1 = 15;
+	const int outChannelElectricSnare = 16;
+
+	const int inChannelAcousticBassDrumIn = 0;
+	const int inChannelAcousticBassDrumOut = 1;
+	const int inChannelAcousticSnareTop = 2;
+	const int inChannelAcousticSnareBottom = 3;
+	const int inChannelTomHigh = 4;
+	const int inChannelTomFloorHigh = 5;
+	const int inChannelHiHat = 6; // HiHatEdgeTight hiHatTipClosed hiHatTipTight hiHatEdgeClosed hiHatPedal hiHatOpen3 hiHatOpen2 hiHatOpen1
+	const int inChannelRide = 7; // RideBell RideCymbal1
+	const int inChannelCrashCymbal1 = 8;
+	const int inChannelChineseCymbal = 9;
+	const int inChannelSplashCymbal = 10;
+	const int inChannelCrashCymbal2 = 11;
+	const int inChannelOverheadLeft = 12;
+	const int inChannelOverheadRight = 13;
+	const int inChannelPercussion = 14; // maraca triangleMute triangleOpen cowbell handClap sideStick tambourine
+	const int inChannelBassDrum1 = 15;
+	const int inChannelElectricSnare = 16;
 
 	const std::string acousticBassDrumId = "acoustic_bass_drum";
 	const std::string bassDrum1Id = "bass_drum1";

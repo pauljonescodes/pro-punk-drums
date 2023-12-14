@@ -15,7 +15,7 @@
 class PanningSamplerVoice : public juce::SynthesiserVoice
 {
 public:
-    PanningSamplerVoice(float pan);
+    PanningSamplerVoice(juce::AudioBuffer<float>& targetBuffer, int targetBufferChannel);
     ~PanningSamplerVoice() override;
     
     bool canPlaySound(juce::SynthesiserSound*) override;
@@ -32,6 +32,9 @@ private:
     juce::ADSR mAdsr;
     float mPan = 0;
     float mVelocityGain = 1.0f;
+
+    juce::AudioBuffer<float>& mTargetBuffer;
+    int mTargetBufferChannel;
     
     JUCE_LEAK_DETECTOR(PanningSamplerVoice)
 };

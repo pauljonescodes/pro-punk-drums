@@ -57,13 +57,14 @@ public:
     
     //==============================================================================
     void noteOnSynthesisers(int midiNoteNumber, float velocity);
-    
+
 private:
     //==============================================================================
     
     juce::AudioFormatManager mAudioFormatManager;
-    std::unique_ptr<PanningSamplerSynthesiser> mSynthesiser;
-        
+    std::unique_ptr<PanningSamplerSynthesiser> mSynthesiserPtr;
+    std::unique_ptr<juce::AudioBuffer<float>> mInternalBufferPtr;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ABKit2AudioProcessor)
 };
