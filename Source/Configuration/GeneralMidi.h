@@ -62,6 +62,56 @@ constexpr int muteTriangle = 80;
 constexpr int openTriangle = 81;
 }
 
+const std::vector<int> midiNotesVector = {
+    midinotes::acousticBassDrum,
+    midinotes::bassDrum1,
+    midinotes::sideStick,
+    midinotes::acousticSnare,
+    midinotes::handClap,
+    midinotes::electricSnare,
+    midinotes::lowFloorTom,
+    midinotes::closedHiHat,
+    midinotes::highFloorTom,
+    midinotes::pedalHiHat,
+    midinotes::lowTom,
+    midinotes::openHiHat,
+    midinotes::lowMidTom,
+    midinotes::hiMidTom,
+    midinotes::crashCymbal1,
+    midinotes::highTom,
+    midinotes::rideCymbal1,
+    midinotes::chineseCymbal,
+    midinotes::rideBell,
+    midinotes::tambourine,
+    midinotes::splashCymbal,
+    midinotes::cowbell,
+    midinotes::crashCymbal2,
+    midinotes::vibraslap,
+    midinotes::rideCymbal2,
+    midinotes::hiBongo,
+    midinotes::lowBongo,
+    midinotes::muteHiConga,
+    midinotes::openHiConga,
+    midinotes::lowConga,
+    midinotes::highTimbale,
+    midinotes::lowTimbale,
+    midinotes::highAgog,
+    midinotes::lowAgog,
+    midinotes::cabas,
+    midinotes::maraca,
+    midinotes::shortWhistle,
+    midinotes::longWhistle,
+    midinotes::shortGuir,
+    midinotes::longGuir,
+    midinotes::clave,
+    midinotes::hiWoodBlock,
+    midinotes::lowWoodBlock,
+    midinotes::muteCuica,
+    midinotes::openCuica,
+    midinotes::muteTriangle,
+    midinotes::openTriangle
+};
+
 namespace names {
 const std::string acousticBassDrum = "Acoustic Bass Drum";
 const std::string bassDrum1 = "Bass Drum 1";

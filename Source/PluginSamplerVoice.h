@@ -10,13 +10,13 @@
 
 #pragma once
 #include <JuceHeader.h>
-#include "../Configuration/Samples.h"
+#include "./Configuration/Samples.h"
 
-class PanningSamplerVoice : public juce::SynthesiserVoice
+class PluginSamplerVoice : public juce::SynthesiserVoice
 {
 public:
-    PanningSamplerVoice(float pan);
-    ~PanningSamplerVoice() override;
+    PluginSamplerVoice();
+    ~PluginSamplerVoice() override;
     
     bool canPlaySound(juce::SynthesiserSound*) override;
     void startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound*, int pitchWheel) override;
@@ -33,5 +33,5 @@ private:
     float mPan = 0;
     float mVelocityGain = 1.0f;
     
-    JUCE_LEAK_DETECTOR(PanningSamplerVoice)
+    JUCE_LEAK_DETECTOR(PluginSamplerVoice)
 };

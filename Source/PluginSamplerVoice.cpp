@@ -1,21 +1,21 @@
 
 #include <JuceHeader.h>
-#include "PanningSamplerVoice.h"
-#include "PanningSamplerSound.h"
+#include "PluginSamplerVoice.h"
+#include "PluginSamplerSound.h"
 
 //==============================================================================
-PanningSamplerVoice::PanningSamplerVoice(float pan) : mPan(pan) {}
+PluginSamplerVoice::PluginSamplerVoice() {}
 
-PanningSamplerVoice::~PanningSamplerVoice() {}
+PluginSamplerVoice::~PluginSamplerVoice() {}
 
-bool PanningSamplerVoice::canPlaySound(juce::SynthesiserSound* sound)
+bool PluginSamplerVoice::canPlaySound(juce::SynthesiserSound* sound)
 {
-    return dynamic_cast<const PanningSamplerSound*> (sound) != nullptr;
+    return dynamic_cast<const PluginSamplerSound*> (sound) != nullptr;
 }
 
-void PanningSamplerVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* s, int /*currentPitchWheelPosition*/)
+void PluginSamplerVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* s, int /*currentPitchWheelPosition*/)
 {
-    if (auto* sound = dynamic_cast<const PanningSamplerSound*> (s))
+    if (auto* sound = dynamic_cast<const PluginSamplerSound*> (s))
     {
         mSourceSamplePosition = 0.0;
         
@@ -31,7 +31,7 @@ void PanningSamplerVoice::startNote(int midiNoteNumber, float velocity, juce::Sy
     }
 }
 
-void PanningSamplerVoice::stopNote(float /*velocity*/, bool allowTailOff)
+void PluginSamplerVoice::stopNote(float /*velocity*/, bool allowTailOff)
 {
     if (allowTailOff)
     {
@@ -44,13 +44,13 @@ void PanningSamplerVoice::stopNote(float /*velocity*/, bool allowTailOff)
     }
 }
 
-void PanningSamplerVoice::pitchWheelMoved(int newValue) {}
-void PanningSamplerVoice::controllerMoved(int controllerNumber, int newValue) {}
+void PluginSamplerVoice::pitchWheelMoved(int newValue) {}
+void PluginSamplerVoice::controllerMoved(int controllerNumber, int newValue) {}
 
 //==============================================================================
-void PanningSamplerVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
+void PluginSamplerVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
-    if (auto* playingSound = static_cast<PanningSamplerSound*> (getCurrentlyPlayingSound().get()))
+    if (auto* playingSound = static_cast<PluginSamplerSound*> (getCurrentlyPlayingSound().get()))
     {
         auto& data = *playingSound->mData;
         const float* const inL = data.getReadPointer(0);

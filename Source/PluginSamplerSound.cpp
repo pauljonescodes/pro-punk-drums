@@ -8,9 +8,9 @@
  ==============================================================================
  */
 
-#include "PanningSamplerSound.h"
+#include "PluginSamplerSound.h"
 
-PanningSamplerSound::PanningSamplerSound(const juce::String& soundName,
+PluginSamplerSound::PluginSamplerSound(const juce::String& soundName,
                                          juce::AudioFormatReader& source,
                                          const juce::BigInteger& notes,
                                          int midiNoteForNormalPitch,
@@ -35,16 +35,16 @@ mMidiRootNote(midiNoteForNormalPitch)
     }
 }
 
-PanningSamplerSound::~PanningSamplerSound()
+PluginSamplerSound::~PluginSamplerSound()
 {
 }
 
-bool PanningSamplerSound::appliesToNote(int midiNoteNumber)
+bool PluginSamplerSound::appliesToNote(int midiNoteNumber)
 {
     return mMidiNotes[midiNoteNumber];
 }
 
-bool PanningSamplerSound::appliesToChannel(int /*midiChannel*/)
+bool PluginSamplerSound::appliesToChannel(int /*midiChannel*/)
 {
     return true;
 }

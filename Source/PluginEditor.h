@@ -15,11 +15,11 @@
 //==============================================================================
 /**
  */
-class ABKit2AudioProcessorEditor : public juce::AudioProcessorEditor
+class PluginProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
-    ABKit2AudioProcessorEditor(ABKit2AudioProcessor&);
-    ~ABKit2AudioProcessorEditor() override;
+    PluginProcessorEditor(PluginAudioProcessor&);
+    ~PluginProcessorEditor() override;
     
     //==============================================================================
     void paint(juce::Graphics&) override;
@@ -27,7 +27,7 @@ public:
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    ABKit2AudioProcessor& mAudioProcessor;
+    PluginAudioProcessor& mAudioProcessor;
     
     //==============================================================================
     std::unique_ptr<juce::TabbedComponent> mTabbedComponent;
@@ -35,5 +35,5 @@ private:
     juce::OwnedArray<juce::TextButton> mMidiNoteButtons;
     //==============================================================================
     
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(ABKit2AudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginProcessorEditor)
 };

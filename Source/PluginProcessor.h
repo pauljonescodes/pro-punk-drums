@@ -10,17 +10,17 @@
 
 #include <JuceHeader.h>
 #include "Configuration/Samples.h"
-#include "Synthesisers/PanningSamplerSynthesiser.h"
+#include "PluginSynthesiser.h"
 
 //==============================================================================
 /**
  */
-class ABKit2AudioProcessor  : public juce::AudioProcessor
+class PluginAudioProcessor  : public juce::AudioProcessor
 {
 public:
     //==============================================================================
-    ABKit2AudioProcessor();
-    ~ABKit2AudioProcessor() override;
+    PluginAudioProcessor();
+    ~PluginAudioProcessor() override;
     
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -61,9 +61,12 @@ public:
 private:
     //==============================================================================
     
-    juce::AudioFormatManager mAudioFormatManager;
-    std::unique_ptr<PanningSamplerSynthesiser> mSynthesiser;
+    std::unique_ptr<juce::AudioFormatManager> mAudioFormatManager;
+    std::unique_ptr<juce::AudioProcessorValueTreeState> mParameterValueTreeState;
+    std::unique_ptr<PluginSynthesiser> mSynthesiserPtr;
+    std::unique_ptr<juce::AudioBuffer<float>> mInternalBufferPtr;
         
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ABKit2AudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginAudioProcessor)
 };

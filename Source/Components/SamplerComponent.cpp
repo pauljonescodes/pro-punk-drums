@@ -10,6 +10,7 @@
 
 #include "SamplerComponent.h"
 #include "../Configuration/Samples.h"
+#include "../Configuration/GeneralMidi.h"
 
 //==============================================================================
 SamplerComponent::SamplerComponent()
@@ -26,7 +27,30 @@ SamplerComponent::SamplerComponent()
     mVelocityLabel->attachToComponent(mVelocitySlider.get(), true);
     addAndMakeVisible(mVelocityLabel.get());
 
-    for (int note : samples::generalMidiNotesVector)
+    const std::vector<int> generalMidiNotesVector = {
+    generalmidi::midinotes::acousticBassDrum,
+    generalmidi::midinotes::sideStick,
+    generalmidi::midinotes::acousticSnare,
+    generalmidi::midinotes::handClap,
+    generalmidi::midinotes::closedHiHat,
+    generalmidi::midinotes::highFloorTom,
+    generalmidi::midinotes::pedalHiHat,
+    generalmidi::midinotes::openHiHat,
+    generalmidi::midinotes::crashCymbal1,
+    generalmidi::midinotes::highTom,
+    generalmidi::midinotes::rideCymbal1,
+    generalmidi::midinotes::chineseCymbal,
+    generalmidi::midinotes::rideBell,
+    generalmidi::midinotes::tambourine,
+    generalmidi::midinotes::splashCymbal,
+    generalmidi::midinotes::cowbell,
+    generalmidi::midinotes::crashCymbal2,
+    generalmidi::midinotes::maraca,
+    generalmidi::midinotes::muteTriangle,
+    generalmidi::midinotes::openTriangle
+    };
+
+    for (int note : generalMidiNotesVector)
     {
         juce::TextButton* button = new juce::TextButton(juce::String(note) + " " + generalmidi::midiNoteToNameMap.at(note));
         button->setComponentID(juce::String(note));

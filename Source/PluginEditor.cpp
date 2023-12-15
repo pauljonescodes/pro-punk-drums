@@ -13,7 +13,7 @@
 #include <random>
 
 //==============================================================================
-ABKit2AudioProcessorEditor::ABKit2AudioProcessorEditor(ABKit2AudioProcessor& p)
+PluginProcessorEditor::PluginProcessorEditor(PluginAudioProcessor& p)
 : AudioProcessorEditor(&p), mAudioProcessor(p)
 {
     mTabbedComponent = std::make_unique<juce::TabbedComponent>(juce::TabbedButtonBar::Orientation::TabsAtTop);
@@ -37,18 +37,18 @@ ABKit2AudioProcessorEditor::ABKit2AudioProcessorEditor(ABKit2AudioProcessor& p)
     
 }
 
-ABKit2AudioProcessorEditor::~ABKit2AudioProcessorEditor()
+PluginProcessorEditor::~PluginProcessorEditor()
 {
 }
 
 //==============================================================================
-void ABKit2AudioProcessorEditor::paint(juce::Graphics& g)
+void PluginProcessorEditor::paint(juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 }
 
-void ABKit2AudioProcessorEditor::resized()
+void PluginProcessorEditor::resized()
 {
     mTabbedComponent->setBounds(getLocalBounds());
 }
