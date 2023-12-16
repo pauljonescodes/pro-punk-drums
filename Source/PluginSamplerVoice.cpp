@@ -4,7 +4,15 @@
 #include "PluginSamplerSound.h"
 
 //==============================================================================
-PluginSamplerVoice::PluginSamplerVoice() {}
+PluginSamplerVoice::PluginSamplerVoice(
+    juce::RangedAudioParameter& gainParameter,
+    juce::RangedAudioParameter& panParameter,
+    juce::AudioParameterBool& phaseParameter
+) :
+    mGainParameter(gainParameter), 
+    mPanParameter(panParameter), 
+    mPhaseParameter(phaseParameter)
+{ }
 
 PluginSamplerVoice::~PluginSamplerVoice() {}
 
@@ -19,10 +27,10 @@ void PluginSamplerVoice::startNote(int midiNoteNumber, float velocity, juce::Syn
     {
         mSourceSamplePosition = 0.0;
         
-        mVelocityGain = 0.1f + velocity * 0.9f;
+        mVelocityGain = 0.2f + velocity * 0.8f;
         
         mAdsr.setSampleRate(sound->mSourceSampleRate);
-        mAdsr.setParameters(sound->mParams);
+        mAdsr.setParameters(sound->mAdsrParameters);
         mAdsr.noteOn();
     }
     else
@@ -65,17 +73,20 @@ void PluginSamplerVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer,
             auto alpha = (float)(mSourceSamplePosition - pos);
             auto invAlpha = 1.0f - alpha;
             
-            // just using a very simple linear interpolation here..
             float l = (inL[pos] * invAlpha + inL[pos + 1] * alpha);
             float r = (inR != nullptr) ? (inR[pos] * invAlpha + inR[pos + 1] * alpha) : l;
             
             auto envelopeValue = mAdsr.getNextSample();
             
-            float panLeft = mPan <= 0.0f ? 1.0f : 1.0f - mPan;
-            float panRight = mPan >= 0.0f ? 1.0f : 1.0f + mPan;
+            float pan = mPanParameter.getValue();
+            float panLeft = pan <= 0.0f ? 1.0f : 1.0f - pan;
+            float panRight = pan >= 0.0f ? 1.0f : 1.0f + pan;
             
-            l *= panLeft * envelopeValue * mVelocityGain;
-            r *= panRight * envelopeValue * mVelocityGain;
+            float phaseMultiplier = mPhaseParameter.get() ? -1 : 1;
+            float gain = mGainParameter.getValue();
+            
+            l *= panLeft * envelopeValue * gain * mVelocityGain * phaseMultiplier;
+            r *= panRight * envelopeValue * gain * mVelocityGain * phaseMultiplier;
             
             if (outR != nullptr)
             {

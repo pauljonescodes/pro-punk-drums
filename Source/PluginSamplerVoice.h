@@ -15,7 +15,11 @@
 class PluginSamplerVoice : public juce::SynthesiserVoice
 {
 public:
-    PluginSamplerVoice();
+    PluginSamplerVoice(
+        juce::RangedAudioParameter& gainParameter,
+        juce::RangedAudioParameter& panParameter,
+        juce::AudioParameterBool& phaseParameter
+    );
     ~PluginSamplerVoice() override;
     
     bool canPlaySound(juce::SynthesiserSound*) override;
@@ -25,13 +29,17 @@ public:
     void controllerMoved(int controllerNumber, int newValue) override;
     void renderNextBlock(juce::AudioBuffer<float>&, int startSample, int numSamples) override;
     using SynthesiserVoice::renderNextBlock;
-    
+
 private:
+    juce::RangedAudioParameter& mGainParameter;
+    juce::RangedAudioParameter& mPanParameter;
+    juce::AudioParameterBool& mPhaseParameter;
+
+    float mVelocityGain = 0;
     double mPitchRatio = 0;
     double mSourceSamplePosition = 0;
     juce::ADSR mAdsr;
     float mPan = 0;
-    float mVelocityGain = 1.0f;
     
     JUCE_LEAK_DETECTOR(PluginSamplerVoice)
 };

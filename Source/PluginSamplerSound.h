@@ -29,14 +29,14 @@ public:
     
     const juce::String& getName() const noexcept { return mName; }
     juce::AudioBuffer<float>* getAudioData() const noexcept { return mData.get(); }
-    void setEnvelopeParameters(juce::ADSR::Parameters parametersToUse) { mParams = parametersToUse; }
+    void setEnvelopeParameters(juce::ADSR::Parameters parametersToUse) { mAdsrParameters = parametersToUse; }
     bool appliesToNote(int midiNoteNumber) override;
     bool appliesToChannel(int midiChannel) override;
     
     double mSourceSampleRate;
     int mLength = 0;
     std::unique_ptr<juce::AudioBuffer<float>> mData;
-    juce::ADSR::Parameters mParams;
+    juce::ADSR::Parameters mAdsrParameters;
     juce::String mName;
     juce::BigInteger mMidiNotes;
     int mMidiRootNote = 0;

@@ -16,7 +16,7 @@
 class SamplerComponent : public juce::Component, public juce::Button::Listener, public juce::Slider::Listener
 {
 public:
-	SamplerComponent();
+	SamplerComponent(std::vector<int> midiNotesVector);
 	~SamplerComponent() override;
 
 	//==============================================================================
@@ -25,8 +25,6 @@ public:
 
 
 	std::optional<std::function<void(int, float)>> mOnDrumMidiButtonClicked; 
-
-	
 
 private:
 	juce::OwnedArray<juce::TextButton> mMidiNoteButtons;

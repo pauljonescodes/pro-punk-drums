@@ -23,15 +23,21 @@ public:
 	virtual void noteOn(int midiChannel, int midiNoteNumber, float velocity) override;
 	virtual void noteOff(int midiChannel, int midiNoteNumber, float velocity, bool allowTailOff) override;
 
-	void addSample(const std::string resourceName,
+	void addSample(
+		const std::string resourceName,
 		const int bitRate,
 		const int bitDepth,
 		const int midiNote,
 		const std::vector<int> stopsMidiNotes,
 		const int intensityIndex,
 		const int variationIndex,
-		juce::AudioFormatManager& audioFormatManager
+		juce::AudioFormatManager& audioFormatManager,
+		juce::RangedAudioParameter& gainParameter,
+		juce::RangedAudioParameter& panParameter,
+		juce::AudioParameterBool& phaseParameter
 	);
+
+	std::vector<int> getMidiNotesVector();
 
 protected:
 
@@ -58,13 +64,13 @@ protected:
 	};
 
 	struct Instrument {
-		std::vector<Intensity> intensities;
+		std::vector<Intensity> velocities;
 		std::vector<int> stopsMidiNotes;
 
 		Instrument() {
-			intensities.emplace_back();
+			velocities.emplace_back();
 		}
 	};
 
-	std::unordered_map<int, Instrument> mMidiNoteToInstruments;
+	std::map<int, Instrument> mMidiNoteToInstruments;
 };

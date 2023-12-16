@@ -16,7 +16,7 @@ PluginAudioProcessor::PluginAudioProcessor()
 		.withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
 	), mParameterValueTreeState(std::make_unique<juce::AudioProcessorValueTreeState>(*this,
-		nullptr, juce::Identifier("ABKParams"), createParameterLayout()))
+		nullptr, juce::Identifier("plugin_params"), createParameterLayout()))
 #endif
 {
 	mAudioFormatManager = std::make_unique<juce::AudioFormatManager>();
@@ -25,65 +25,209 @@ PluginAudioProcessor::PluginAudioProcessor()
 	mSynthesiserPtr = std::make_unique<PluginSynthesiser>();
 	mInternalBufferPtr = std::make_unique<juce::AudioBuffer<float>>(1, 1024);
 
-
-	for (const auto& midiNote : generalmidi::midiNotesVector)
+	for (int resourceIndex = 0; resourceIndex < BinaryData::namedResourceListSize; resourceIndex++)
 	{
-		std::string generalMidiName = generalmidi::midiNoteToNameMap.at(midiNote);
-		std::string generalMidiSnakeCaseName = PluginUtils::toSnakeCase(generalMidiName);
+		std::string namedResource = BinaryData::namedResourceList[resourceIndex];
+		std::string micId, midiName, generalMidiSnakeCaseName = "";
+		int variationIndex, velocityIndex, midiNote = -1;
 
-		for (int velocityIndex = midi::minimumVelocity; velocityIndex <= midi::maximumVelocity; velocityIndex++)
+		for (int midiNameIndex = 0; midiNameIndex < generalmidi::midiNamesVector.size(); midiNameIndex++)
 		{
-			bool foundResourceAtVelocity = false;
-			for (int variationIndex = 0; variationIndex < constants::maximumVariations; variationIndex++)
+			midiName = generalmidi::midiNamesVector.at(midiNameIndex);
+			generalMidiSnakeCaseName = PluginUtils::toSnakeCase(midiName);
+
+			std::string cleanedNamedResource = namedResource.substr(0, namedResource.size() - 4);
+			size_t pos = cleanedNamedResource.find(generalMidiSnakeCaseName);
+			if (pos == 0)
 			{
-				std::string resourceName = generalMidiSnakeCaseName + "_" + std::to_string(velocityIndex + 1) + "_" + std::to_string(variationIndex + 1);
-				bool foundResourceAtVariation = false;
+				std::string resourceMetadata = cleanedNamedResource.substr(pos + generalMidiSnakeCaseName.length());
 
-				for (int resourceIndex = 0; resourceIndex < BinaryData::namedResourceListSize; ++resourceIndex)
+				std::istringstream iss(resourceMetadata);
+				std::vector<std::string> parts;
+				std::string part;
+
+				while (std::getline(iss, part, '_'))
 				{
-					std::string namedResourceAtIndex = std::string(BinaryData::namedResourceList[resourceIndex]);
-					size_t resourceNameFindResult = namedResourceAtIndex.find(resourceName);
-					if (resourceNameFindResult != std::string::npos)
-					{
-						foundResourceAtVariation = true;
-						foundResourceAtVelocity = true;
-
-						mSynthesiserPtr->addSample(
-							namedResourceAtIndex,
-							samples::bitRate,
-							samples::bitDepth,
-							midiNote,
-							generalmidi::midiNoteToStopNotesMap.at(midiNote),
-							velocityIndex,
-							variationIndex,
-							*mAudioFormatManager.get()
-						);
+					if (!part.empty()) {
+						parts.push_back(part);
 					}
 				}
 
-				if (!foundResourceAtVariation)
+				switch (parts.size())
 				{
+				case 0:
+					midiNote = generalmidi::midiNameToNoteMap.at(midiName);
+					velocityIndex = 0;
+					variationIndex = 0;
+					break;
+				case 1:
+					midiNote = generalmidi::midiNameToNoteMap.at(midiName);
+					velocityIndex = 0;
+					if (PluginUtils::isNumeric(parts[0]))
+					{
+						variationIndex = std::stoi(parts[0].substr(0, parts[0].find("_"))) - 1;
+					}
+					else
+					{
+						variationIndex = 0;
+						micId = parts[0];
+					}
+					break;
+				case 2:
+					if (PluginUtils::isNumeric(parts[0]) && PluginUtils::isNumeric(parts[1]))
+					{
+						midiNote = generalmidi::midiNameToNoteMap.at(midiName);
+						velocityIndex = std::stoi(parts[0]) - 1;
+						variationIndex = std::stoi(parts[1]) - 1;
+					}
+					else
+					{
+						midiNote = generalmidi::midiNameToNoteMap.at(midiName);
+						velocityIndex = 0;
+						variationIndex = std::stoi(parts[0]) - 1;
+						micId = parts[1];
+					}
+					break;
+				case 3:
+					if (PluginUtils::isNumeric(parts[0]) && PluginUtils::isNumeric(parts[1]))
+					{
+						midiNote = generalmidi::midiNameToNoteMap.at(midiName);
+						velocityIndex = std::stoi(parts[0]) - 1;
+						variationIndex = std::stoi(parts[1]) - 1;
+						micId = parts[2];
+					}
+					else
+					{
+						DBG("invalid name " + generalMidiSnakeCaseName);
+						midiNameIndex = generalmidi::midiNamesVector.size() + 1;
+					}
+					break;
+				default:
+					DBG("invalid name " + generalMidiSnakeCaseName);
+					midiNameIndex = generalmidi::midiNamesVector.size() + 1;
 					break;
 				}
 			}
-
-			if (!foundResourceAtVelocity)
-			{
-				break;
-			}
 		}
 
+		if (midiNote != -1)
+		{
+			auto* gainParameter = mParameterValueTreeState->getParameter(PluginUtils::getParamId(midiNote, micId, constants::gainId));
+			auto* panParameter = mParameterValueTreeState->getParameter(PluginUtils::getParamId(midiNote, micId, constants::panId));
+			auto* phaseParameter = dynamic_cast<juce::AudioParameterBool*>(mParameterValueTreeState->getParameter(PluginUtils::getParamId(midiNote, micId, constants::phaseId)));
+
+			mSynthesiserPtr->addSample(
+				namedResource,
+				samples::bitRate,
+				samples::bitDepth,
+				midiNote,
+				generalmidi::midiNoteToStopNotesMap.at(midiNote),
+				velocityIndex,
+				variationIndex,
+				*mAudioFormatManager.get(),
+				*gainParameter,
+				*panParameter,
+				*phaseParameter
+			);
+		}
 	}
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout PluginAudioProcessor::createParameterLayout() {
 	juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
+	std::map<int, std::set<std::string>> uniqueMidiNoteMicCombinations;
 
-	for (const auto& element : samples::samplesVector) {
-		std::string gainId = element + "_gain";
-		std::string gainName = element + " Gain";
-		layout.add(std::make_unique<juce::AudioParameterFloat>(gainId, gainName, 0.0f, 1.0f, 0.5f));
+	for (int resourceIndex = 0; resourceIndex < BinaryData::namedResourceListSize; resourceIndex++)
+	{
+		std::string namedResource = BinaryData::namedResourceList[resourceIndex];
+		std::string micId, midiName, generalMidiSnakeCaseName = "";
+		int midiNote = -1;
+
+		for (int midiNameIndex = 0; midiNameIndex < generalmidi::midiNamesVector.size(); midiNameIndex++)
+		{
+			midiName = generalmidi::midiNamesVector.at(midiNameIndex);
+			generalMidiSnakeCaseName = PluginUtils::toSnakeCase(midiName);
+
+			std::string cleanedNamedResource = namedResource.substr(0, namedResource.size() - 4);
+			size_t pos = cleanedNamedResource.find(generalMidiSnakeCaseName);
+			if (pos == 0)
+			{
+				std::string resourceMetadata = cleanedNamedResource.substr(pos + generalMidiSnakeCaseName.length());
+
+				std::istringstream iss(resourceMetadata);
+				std::vector<std::string> parts;
+				std::string part;
+
+				while (std::getline(iss, part, '_')) {
+					if (!part.empty()) {
+						parts.push_back(part);
+					}
+				}
+
+				switch (parts.size()) {
+				case 0:
+					midiNote = generalmidi::midiNameToNoteMap.at(midiName);
+					break;
+				case 1:
+					midiNote = generalmidi::midiNameToNoteMap.at(midiName);
+					if (!PluginUtils::isNumeric(parts[0]))
+					{
+						micId = parts[0];
+					}
+					break;
+				case 2:
+					if (PluginUtils::isNumeric(parts[0]) && PluginUtils::isNumeric(parts[1]))
+					{
+						midiNote = generalmidi::midiNameToNoteMap.at(midiName);
+					}
+					else
+					{
+						midiNote = generalmidi::midiNameToNoteMap.at(midiName);
+						micId = parts[1];
+					}
+					break;
+				case 3:
+					if (PluginUtils::isNumeric(parts[0]) && PluginUtils::isNumeric(parts[1]))
+					{
+						midiNote = generalmidi::midiNameToNoteMap.at(midiName);
+						micId = parts[2];
+					}
+					else
+					{
+						DBG("invalid name " + generalMidiSnakeCaseName);
+						midiNameIndex = generalmidi::midiNamesVector.size() + 1;
+					}
+					break;
+				default:
+					DBG("invalid name " + generalMidiSnakeCaseName);
+					midiNameIndex = generalmidi::midiNamesVector.size() + 1;
+					break;
+				}
+			}
+		}
+
+		if (midiNote != -1)
+		{
+			uniqueMidiNoteMicCombinations[midiNote].insert(micId);
+		}
+	}
+
+	for (const auto& pair : uniqueMidiNoteMicCombinations) {
+		int midiNote = pair.first;
+		std::string midiName = generalmidi::midiNoteToNameMap.at(midiNote);
+		const std::set<std::string>& micIds = pair.second;
+
+		for (const std::string& micId : micIds) {
+			std::string gainName = midiName + " " + PluginUtils::capitalizeFirstLetter(micId) + " Gain";
+			layout.add(std::make_unique<juce::AudioParameterFloat>(PluginUtils::getParamId(midiNote, micId, constants::gainId), gainName, 0.0f, 1.0f, 0.5f));
+
+			std::string panName = midiName + " " + PluginUtils::capitalizeFirstLetter(micId) + " Pan";
+			layout.add(std::make_unique<juce::AudioParameterFloat>(PluginUtils::getParamId(midiNote, micId, constants::panId), panName, 0.0f, 1.0f, 0.5f));
+
+			std::string phaseName = midiName + " " + PluginUtils::capitalizeFirstLetter(micId) + " Phase";
+			layout.add(std::make_unique<juce::AudioParameterBool>(PluginUtils::getParamId(midiNote, micId, constants::phaseId), phaseName, false));
+		}
 	}
 
 	return layout;
@@ -91,6 +235,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginAudioProcessor::create
 
 PluginAudioProcessor::~PluginAudioProcessor()
 {
+}
+
+std::vector<int> PluginAudioProcessor::getMidiNotesVector()
+{
+	return mSynthesiserPtr.get()->getMidiNotesVector();
 }
 
 //==============================================================================
@@ -232,15 +381,22 @@ juce::AudioProcessorEditor* PluginAudioProcessor::createEditor()
 //==============================================================================
 void PluginAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
 {
-	// You should use this method to store your parameters in the memory block.
-	// You could do that either as raw data, or use the XML or ValueTree classes
-	// as intermediaries to make it easy to save and load complex data.
+	auto state = mParameterValueTreeState.get()->copyState();
+	std::unique_ptr<juce::XmlElement> xml(state.createXml());
+	copyXmlToBinary(*xml, destData);
 }
 
 void PluginAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
 {
-	// You should use this method to restore your parameters from this memory block,
-	// whose contents will have been created by the getStateInformation() call.
+	std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
+
+	if (xmlState.get() != nullptr)
+	{
+		if (xmlState->hasTagName(mParameterValueTreeState.get()->state.getType()))
+		{
+			mParameterValueTreeState.get()->replaceState(juce::ValueTree::fromXml(*xmlState));
+		}
+	}
 }
 
 //==============================================================================

@@ -13,7 +13,7 @@
 #include "../Configuration/GeneralMidi.h"
 
 //==============================================================================
-SamplerComponent::SamplerComponent()
+SamplerComponent::SamplerComponent(std::vector<int> midiNotesVector)
 {
     mVelocitySlider = std::make_unique<juce::Slider>();
     mVelocitySlider->setRange(0, 127, 1);
@@ -27,30 +27,7 @@ SamplerComponent::SamplerComponent()
     mVelocityLabel->attachToComponent(mVelocitySlider.get(), true);
     addAndMakeVisible(mVelocityLabel.get());
 
-    const std::vector<int> generalMidiNotesVector = {
-    generalmidi::midinotes::acousticBassDrum,
-    generalmidi::midinotes::sideStick,
-    generalmidi::midinotes::acousticSnare,
-    generalmidi::midinotes::handClap,
-    generalmidi::midinotes::closedHiHat,
-    generalmidi::midinotes::highFloorTom,
-    generalmidi::midinotes::pedalHiHat,
-    generalmidi::midinotes::openHiHat,
-    generalmidi::midinotes::crashCymbal1,
-    generalmidi::midinotes::highTom,
-    generalmidi::midinotes::rideCymbal1,
-    generalmidi::midinotes::chineseCymbal,
-    generalmidi::midinotes::rideBell,
-    generalmidi::midinotes::tambourine,
-    generalmidi::midinotes::splashCymbal,
-    generalmidi::midinotes::cowbell,
-    generalmidi::midinotes::crashCymbal2,
-    generalmidi::midinotes::maraca,
-    generalmidi::midinotes::muteTriangle,
-    generalmidi::midinotes::openTriangle
-    };
-
-    for (int note : generalMidiNotesVector)
+    for (int note : midiNotesVector)
     {
         juce::TextButton* button = new juce::TextButton(juce::String(note) + " " + generalmidi::midiNoteToNameMap.at(note));
         button->setComponentID(juce::String(note));

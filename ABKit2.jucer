@@ -75,9 +75,8 @@
                 resource="1" file="Assets/35 Acoustic Bass Drum/Soft/acoustic_bass_drum_1_5_out.wav"/>
         </GROUP>
       </GROUP>
-      <GROUP id="{540C97CF-73DE-F2B7-82BB-7454C55BA872}" name="36 Bass Drum 1">
-        <FILE id="ToPvoR" name="bass_drum_1_1_1.wav" compile="0" resource="1"
-              file="Assets/36 Bass Drum 1/bass_drum_1_1_1.wav"/>
+      <GROUP id="{B4171908-B391-5D6F-F153-9B8A98C258C0}" name="36 Bass Drum 1">
+        <FILE id="pwkzNg" name="bass_drum_1.wav" compile="0" resource="1" file="Assets/36 Bass Drum 1/bass_drum_1.wav"/>
       </GROUP>
       <GROUP id="{A6A5201B-655F-69F9-921D-65CF6D5B4CA4}" name="37 Side Stick">
         <GROUP id="{01D0D850-FAF9-598F-414D-01B1982E2613}" name="Hard">
@@ -186,20 +185,15 @@
         </GROUP>
       </GROUP>
       <GROUP id="{39D65302-E231-AEAC-D5E3-1F7218875884}" name="39 Hand Clap">
-        <FILE id="q8M1h8" name="hand_clap_1_1.wav" compile="0" resource="1"
-              file="Assets/39 Hand Clap/hand_clap_1_1.wav"/>
-        <FILE id="PobT0X" name="hand_clap_1_2.wav" compile="0" resource="1"
-              file="Assets/39 Hand Clap/hand_clap_1_2.wav"/>
-        <FILE id="QTfK1z" name="hand_clap_1_3.wav" compile="0" resource="1"
-              file="Assets/39 Hand Clap/hand_clap_1_3.wav"/>
-        <FILE id="PNmBNb" name="hand_clap_1_4.wav" compile="0" resource="1"
-              file="Assets/39 Hand Clap/hand_clap_1_4.wav"/>
-        <FILE id="bwbjtY" name="hand_clap_1_5.wav" compile="0" resource="1"
-              file="Assets/39 Hand Clap/hand_clap_1_5.wav"/>
+        <FILE id="q8M1h8" name="hand_clap_1.wav" compile="0" resource="1" file="Assets/39 Hand Clap/hand_clap_1.wav"/>
+        <FILE id="PobT0X" name="hand_clap_2.wav" compile="0" resource="1" file="Assets/39 Hand Clap/hand_clap_2.wav"/>
+        <FILE id="QTfK1z" name="hand_clap_3.wav" compile="0" resource="1" file="Assets/39 Hand Clap/hand_clap_3.wav"/>
+        <FILE id="PNmBNb" name="hand_clap_4.wav" compile="0" resource="1" file="Assets/39 Hand Clap/hand_clap_4.wav"/>
+        <FILE id="bwbjtY" name="hand_clap_5.wav" compile="0" resource="1" file="Assets/39 Hand Clap/hand_clap_5.wav"/>
       </GROUP>
-      <GROUP id="{B4E89345-BFF2-9293-60DD-8DB4DC31169C}" name="40 Electric Snare">
-        <FILE id="lmxGxf" name="electric_snare_1_1.wav" compile="0" resource="1"
-              file="Assets/40 Electric Snare/electric_snare_1_1.wav"/>
+      <GROUP id="{DA5FFB32-32B5-8EAB-962B-B141586B4E23}" name="40 Electric Snare">
+        <FILE id="r1yiUM" name="electric_snare.wav" compile="0" resource="1"
+              file="Assets/40 Electric Snare/electric_snare.wav"/>
       </GROUP>
       <GROUP id="{2E62E8C8-F456-72CA-CBEF-12CD1372BD31}" name="42 Closed Hi-Hat">
         <GROUP id="{7215AA12-5D36-8F84-2CEB-73FBD24D4F50}" name="Closed Edge">
@@ -370,36 +364,36 @@
         </GROUP>
       </GROUP>
       <GROUP id="{CC24ABA1-80E8-F961-FFBC-C846563A8E83}" name="44 Pedal Hi-Hat">
-        <FILE id="hT66f2" name="pedal_hi_hat_1_1.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_1.wav"/>
-        <FILE id="xqH5C4" name="pedal_hi_hat_1_1_left.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_1_left.wav"/>
-        <FILE id="PUfGMs" name="pedal_hi_hat_1_1_right.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_1_right.wav"/>
-        <FILE id="Hup7oH" name="pedal_hi_hat_1_2.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_2.wav"/>
-        <FILE id="ys7rcc" name="pedal_hi_hat_1_2_left.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_2_left.wav"/>
-        <FILE id="H16EDc" name="pedal_hi_hat_1_2_right.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_2_right.wav"/>
-        <FILE id="oIGigD" name="pedal_hi_hat_1_3.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_3.wav"/>
-        <FILE id="NbvIRD" name="pedal_hi_hat_1_3_left.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_3_left.wav"/>
-        <FILE id="GAeFVJ" name="pedal_hi_hat_1_3_right.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_3_right.wav"/>
-        <FILE id="QBN8Eg" name="pedal_hi_hat_1_4.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_4.wav"/>
-        <FILE id="qTnqUR" name="pedal_hi_hat_1_4_left.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_4_left.wav"/>
-        <FILE id="K0j07Y" name="pedal_hi_hat_1_4_right.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_4_right.wav"/>
-        <FILE id="vrb1Vz" name="pedal_hi_hat_1_5.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_5.wav"/>
-        <FILE id="goCisf" name="pedal_hi_hat_1_5_left.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_5_left.wav"/>
-        <FILE id="bF4ZzL" name="pedal_hi_hat_1_5_right.wav" compile="0" resource="1"
-              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_5_right.wav"/>
+        <FILE id="hT66f2" name="pedal_hi_hat_1.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1.wav"/>
+        <FILE id="xqH5C4" name="pedal_hi_hat_1_left.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_left.wav"/>
+        <FILE id="PUfGMs" name="pedal_hi_hat_1_right.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_1_right.wav"/>
+        <FILE id="Hup7oH" name="pedal_hi_hat_2.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_2.wav"/>
+        <FILE id="ys7rcc" name="pedal_hi_hat_2_left.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_2_left.wav"/>
+        <FILE id="H16EDc" name="pedal_hi_hat_2_right.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_2_right.wav"/>
+        <FILE id="oIGigD" name="pedal_hi_hat_3.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_3.wav"/>
+        <FILE id="NbvIRD" name="pedal_hi_hat_3_left.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_3_left.wav"/>
+        <FILE id="GAeFVJ" name="pedal_hi_hat_3_right.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_3_right.wav"/>
+        <FILE id="QBN8Eg" name="pedal_hi_hat_4.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_4.wav"/>
+        <FILE id="qTnqUR" name="pedal_hi_hat_4_left.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_4_left.wav"/>
+        <FILE id="K0j07Y" name="pedal_hi_hat_4_right.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_4_right.wav"/>
+        <FILE id="vrb1Vz" name="pedal_hi_hat_5.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_5.wav"/>
+        <FILE id="goCisf" name="pedal_hi_hat_5_left.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_5_left.wav"/>
+        <FILE id="bF4ZzL" name="pedal_hi_hat_5_right.wav" compile="0" resource="1"
+              file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_5_right.wav"/>
       </GROUP>
       <GROUP id="{F992FAF1-6A8C-2526-FD6B-546AF02717E8}" name="46 Open Hi-Hat">
         <GROUP id="{FB92B8C2-920E-11A2-79BB-E7B95BB176A4}" name="Open 1">
@@ -500,36 +494,36 @@
         </GROUP>
       </GROUP>
       <GROUP id="{C1F7AA73-7933-EF24-C58B-65143994470F}" name="49 Crash Cymbal 1">
-        <FILE id="tfLgjg" name="crash_cymbal_1_1_1.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_1.wav"/>
-        <FILE id="VuPQFZ" name="crash_cymbal_1_1_1_left.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_1_left.wav"/>
-        <FILE id="vO3Avf" name="crash_cymbal_1_1_1_right.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_1_right.wav"/>
-        <FILE id="sfTgeI" name="crash_cymbal_1_1_2.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_2.wav"/>
-        <FILE id="sbvF25" name="crash_cymbal_1_1_2_left.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_2_left.wav"/>
-        <FILE id="u9FgoA" name="crash_cymbal_1_1_2_right.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_2_right.wav"/>
-        <FILE id="hWYzbp" name="crash_cymbal_1_1_3.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_3.wav"/>
-        <FILE id="uXv65k" name="crash_cymbal_1_1_3_left.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_3_left.wav"/>
-        <FILE id="JbgjeT" name="crash_cymbal_1_1_3_right.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_3_right.wav"/>
-        <FILE id="jGHfvC" name="crash_cymbal_1_1_4.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_4.wav"/>
-        <FILE id="WMwUaH" name="crash_cymbal_1_1_4_left.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_4_left.wav"/>
-        <FILE id="GMZEjM" name="crash_cymbal_1_1_4_right.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_4_right.wav"/>
-        <FILE id="poCVKZ" name="crash_cymbal_1_1_5.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_5.wav"/>
-        <FILE id="FDQByI" name="crash_cymbal_1_1_5_left.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_5_left.wav"/>
-        <FILE id="AmHPSY" name="crash_cymbal_1_1_5_right.wav" compile="0" resource="1"
-              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_5_right.wav"/>
+        <FILE id="tfLgjg" name="crash_cymbal_1_1.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1.wav"/>
+        <FILE id="VuPQFZ" name="crash_cymbal_1_1_left.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_left.wav"/>
+        <FILE id="vO3Avf" name="crash_cymbal_1_1_right.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_1_right.wav"/>
+        <FILE id="sfTgeI" name="crash_cymbal_1_2.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_2.wav"/>
+        <FILE id="sbvF25" name="crash_cymbal_1_2_left.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_2_left.wav"/>
+        <FILE id="u9FgoA" name="crash_cymbal_1_2_right.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_2_right.wav"/>
+        <FILE id="hWYzbp" name="crash_cymbal_1_3.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_3.wav"/>
+        <FILE id="uXv65k" name="crash_cymbal_1_3_left.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_3_left.wav"/>
+        <FILE id="JbgjeT" name="crash_cymbal_1_3_right.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_3_right.wav"/>
+        <FILE id="jGHfvC" name="crash_cymbal_1_4.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_4.wav"/>
+        <FILE id="WMwUaH" name="crash_cymbal_1_4_left.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_4_left.wav"/>
+        <FILE id="GMZEjM" name="crash_cymbal_1_4_right.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_4_right.wav"/>
+        <FILE id="poCVKZ" name="crash_cymbal_1_5.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_5.wav"/>
+        <FILE id="FDQByI" name="crash_cymbal_1_5_left.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_5_left.wav"/>
+        <FILE id="AmHPSY" name="crash_cymbal_1_5_right.wav" compile="0" resource="1"
+              file="Assets/49 Crash Cymbal 1/crash_cymbal_1_5_right.wav"/>
       </GROUP>
       <GROUP id="{CB9F5043-C6A2-4B14-D090-B2B5698F2618}" name="50 High Tom">
         <GROUP id="{C60EEBBC-3580-EEA0-B41A-3144B4C97943}" name="Hard">
@@ -570,68 +564,68 @@
         </GROUP>
       </GROUP>
       <GROUP id="{05CEEBCA-D6BC-4462-5A7B-F1E2ADFA8ECA}" name="51 Ride Cymbal 1">
-        <FILE id="oAO7dX" name="ride_cymbal_1_1_1.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_1.wav"/>
-        <FILE id="YqdAiM" name="ride_cymbal_1_1_1_left.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_1_left.wav"/>
-        <FILE id="DWGZAK" name="ride_cymbal_1_1_1_right.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_1_right.wav"/>
-        <FILE id="j8fpMX" name="ride_cymbal_1_1_2.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_2.wav"/>
-        <FILE id="h63gIU" name="ride_cymbal_1_1_2_left.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_2_left.wav"/>
-        <FILE id="cToghs" name="ride_cymbal_1_1_2_right.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_2_right.wav"/>
-        <FILE id="RLacME" name="ride_cymbal_1_1_3.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_3.wav"/>
-        <FILE id="mt5zyG" name="ride_cymbal_1_1_3_left.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_3_left.wav"/>
-        <FILE id="yKfmIK" name="ride_cymbal_1_1_3_right.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_3_right.wav"/>
-        <FILE id="nu979K" name="ride_cymbal_1_1_4.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_4.wav"/>
-        <FILE id="ipmOiG" name="ride_cymbal_1_1_4_left.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_4_left.wav"/>
-        <FILE id="X0Sh3D" name="ride_cymbal_1_1_4_right.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_4_right.wav"/>
-        <FILE id="UCMw23" name="ride_cymbal_1_1_5.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_5.wav"/>
-        <FILE id="ZpPxe8" name="ride_cymbal_1_1_5_left.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_5_left.wav"/>
-        <FILE id="rqAlNN" name="ride_cymbal_1_1_5_right.wav" compile="0" resource="1"
-              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_5_right.wav"/>
+        <FILE id="oAO7dX" name="ride_cymbal_1_1.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1.wav"/>
+        <FILE id="YqdAiM" name="ride_cymbal_1_1_left.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_left.wav"/>
+        <FILE id="DWGZAK" name="ride_cymbal_1_1_right.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_1_right.wav"/>
+        <FILE id="j8fpMX" name="ride_cymbal_1_2.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_2.wav"/>
+        <FILE id="h63gIU" name="ride_cymbal_1_2_left.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_2_left.wav"/>
+        <FILE id="cToghs" name="ride_cymbal_1_2_right.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_2_right.wav"/>
+        <FILE id="RLacME" name="ride_cymbal_1_3.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_3.wav"/>
+        <FILE id="mt5zyG" name="ride_cymbal_1_3_left.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_3_left.wav"/>
+        <FILE id="yKfmIK" name="ride_cymbal_1_3_right.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_3_right.wav"/>
+        <FILE id="nu979K" name="ride_cymbal_1_4.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_4.wav"/>
+        <FILE id="ipmOiG" name="ride_cymbal_1_4_left.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_4_left.wav"/>
+        <FILE id="X0Sh3D" name="ride_cymbal_1_4_right.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_4_right.wav"/>
+        <FILE id="UCMw23" name="ride_cymbal_1_5.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_5.wav"/>
+        <FILE id="ZpPxe8" name="ride_cymbal_1_5_left.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_5_left.wav"/>
+        <FILE id="rqAlNN" name="ride_cymbal_1_5_right.wav" compile="0" resource="1"
+              file="Assets/51 Ride Cymbal 1/ride_cymbal_1_5_right.wav"/>
       </GROUP>
       <GROUP id="{584052FA-C41F-6329-162B-F18EF35E3AB0}" name="52 Chinese Cymbal">
-        <FILE id="umnKuT" name="chinese_cymbal_1_1.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_1.wav"/>
-        <FILE id="J6okwG" name="chinese_cymbal_1_1_left.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_1_left.wav"/>
-        <FILE id="TrwyVX" name="chinese_cymbal_1_1_right.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_1_right.wav"/>
-        <FILE id="DNvzyV" name="chinese_cymbal_1_2.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_2.wav"/>
-        <FILE id="AXRBgr" name="chinese_cymbal_1_2_left.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_2_left.wav"/>
-        <FILE id="zGuAeD" name="chinese_cymbal_1_2_right.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_2_right.wav"/>
-        <FILE id="ZDdTNk" name="chinese_cymbal_1_3.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_3.wav"/>
-        <FILE id="W5yPkI" name="chinese_cymbal_1_3_left.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_3_left.wav"/>
-        <FILE id="xReX0Q" name="chinese_cymbal_1_3_right.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_3_right.wav"/>
-        <FILE id="K003WP" name="chinese_cymbal_1_4.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_4.wav"/>
-        <FILE id="uGs7sg" name="chinese_cymbal_1_4_left.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_4_left.wav"/>
-        <FILE id="RV3yfq" name="chinese_cymbal_1_4_right.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_4_right.wav"/>
-        <FILE id="ThaHSr" name="chinese_cymbal_1_5.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_5.wav"/>
-        <FILE id="GhXMPb" name="chinese_cymbal_1_5_left.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_5_left.wav"/>
-        <FILE id="LDL0TH" name="chinese_cymbal_1_5_right.wav" compile="0" resource="1"
-              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_5_right.wav"/>
+        <FILE id="umnKuT" name="chinese_cymbal_1.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_1.wav"/>
+        <FILE id="J6okwG" name="chinese_cymbal_1_left.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_left.wav"/>
+        <FILE id="TrwyVX" name="chinese_cymbal_1_right.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_1_right.wav"/>
+        <FILE id="DNvzyV" name="chinese_cymbal_2.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_2.wav"/>
+        <FILE id="AXRBgr" name="chinese_cymbal_2_left.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_2_left.wav"/>
+        <FILE id="zGuAeD" name="chinese_cymbal_2_right.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_2_right.wav"/>
+        <FILE id="ZDdTNk" name="chinese_cymbal_3.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_3.wav"/>
+        <FILE id="W5yPkI" name="chinese_cymbal_3_left.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_3_left.wav"/>
+        <FILE id="xReX0Q" name="chinese_cymbal_3_right.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_3_right.wav"/>
+        <FILE id="K003WP" name="chinese_cymbal_4.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_4.wav"/>
+        <FILE id="uGs7sg" name="chinese_cymbal_4_left.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_4_left.wav"/>
+        <FILE id="RV3yfq" name="chinese_cymbal_4_right.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_4_right.wav"/>
+        <FILE id="ThaHSr" name="chinese_cymbal_5.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_5.wav"/>
+        <FILE id="GhXMPb" name="chinese_cymbal_5_left.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_5_left.wav"/>
+        <FILE id="LDL0TH" name="chinese_cymbal_5_right.wav" compile="0" resource="1"
+              file="Assets/52 Chinese Cymbal/chinese_cymbal_5_right.wav"/>
       </GROUP>
       <GROUP id="{5C0D5B38-B90A-18BB-0E0B-E49828F84384}" name="53 Ride Bell">
         <GROUP id="{ABA58465-449F-3CFC-1BD0-245BF2A128BD}" name="Hard">
@@ -700,118 +694,118 @@
         </GROUP>
       </GROUP>
       <GROUP id="{972B3993-7778-51A0-40A4-5DA204A00896}" name="54 Tambourine">
-        <FILE id="tBjQB4" name="tambourine_1_1.wav" compile="0" resource="1"
-              file="Assets/54 Tambourine/tambourine_1_1.wav"/>
-        <FILE id="AV4lCi" name="tambourine_1_2.wav" compile="0" resource="1"
-              file="Assets/54 Tambourine/tambourine_1_2.wav"/>
-        <FILE id="ryPbi2" name="tambourine_1_3.wav" compile="0" resource="1"
-              file="Assets/54 Tambourine/tambourine_1_3.wav"/>
-        <FILE id="PjBODF" name="tambourine_1_4.wav" compile="0" resource="1"
-              file="Assets/54 Tambourine/tambourine_1_4.wav"/>
-        <FILE id="fszVge" name="tambourine_1_5.wav" compile="0" resource="1"
-              file="Assets/54 Tambourine/tambourine_1_5.wav"/>
+        <FILE id="tBjQB4" name="tambourine_1.wav" compile="0" resource="1"
+              file="Assets/54 Tambourine/tambourine_1.wav"/>
+        <FILE id="AV4lCi" name="tambourine_2.wav" compile="0" resource="1"
+              file="Assets/54 Tambourine/tambourine_2.wav"/>
+        <FILE id="ryPbi2" name="tambourine_3.wav" compile="0" resource="1"
+              file="Assets/54 Tambourine/tambourine_3.wav"/>
+        <FILE id="PjBODF" name="tambourine_4.wav" compile="0" resource="1"
+              file="Assets/54 Tambourine/tambourine_4.wav"/>
+        <FILE id="fszVge" name="tambourine_5.wav" compile="0" resource="1"
+              file="Assets/54 Tambourine/tambourine_5.wav"/>
       </GROUP>
       <GROUP id="{4B2E2645-6C50-51BB-5388-17C4201EA310}" name="55 Splash Cymbal">
-        <FILE id="s7MbiQ" name="splash_cymbal_1_1.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_1.wav"/>
-        <FILE id="dOunoJ" name="splash_cymbal_1_1_left.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_1_left.wav"/>
-        <FILE id="lS5xB0" name="splash_cymbal_1_1_right.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_1_right.wav"/>
-        <FILE id="dGOuNZ" name="splash_cymbal_1_2.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_2.wav"/>
-        <FILE id="vXrmIp" name="splash_cymbal_1_2_left.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_2_left.wav"/>
-        <FILE id="aEXYXW" name="splash_cymbal_1_2_right.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_2_right.wav"/>
-        <FILE id="MJjwBD" name="splash_cymbal_1_3.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_3.wav"/>
-        <FILE id="B7qrVD" name="splash_cymbal_1_3_left.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_3_left.wav"/>
-        <FILE id="mmr1jX" name="splash_cymbal_1_3_right.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_3_right.wav"/>
-        <FILE id="S5pe9t" name="splash_cymbal_1_4.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_4.wav"/>
-        <FILE id="A2PSsJ" name="splash_cymbal_1_4_left.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_4_left.wav"/>
-        <FILE id="BK9dZF" name="splash_cymbal_1_4_right.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_4_right.wav"/>
-        <FILE id="G6Vsmr" name="splash_cymbal_1_5.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_5.wav"/>
-        <FILE id="q0a4cb" name="splash_cymbal_1_5_left.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_5_left.wav"/>
-        <FILE id="zORfKx" name="splash_cymbal_1_5_right.wav" compile="0" resource="1"
-              file="Assets/55 Splash Cymbal/splash_cymbal_1_5_right.wav"/>
+        <FILE id="s7MbiQ" name="splash_cymbal_1.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_1.wav"/>
+        <FILE id="dOunoJ" name="splash_cymbal_1_left.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_1_left.wav"/>
+        <FILE id="lS5xB0" name="splash_cymbal_1_right.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_1_right.wav"/>
+        <FILE id="dGOuNZ" name="splash_cymbal_2.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_2.wav"/>
+        <FILE id="vXrmIp" name="splash_cymbal_2_left.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_2_left.wav"/>
+        <FILE id="aEXYXW" name="splash_cymbal_2_right.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_2_right.wav"/>
+        <FILE id="MJjwBD" name="splash_cymbal_3.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_3.wav"/>
+        <FILE id="B7qrVD" name="splash_cymbal_3_left.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_3_left.wav"/>
+        <FILE id="mmr1jX" name="splash_cymbal_3_right.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_3_right.wav"/>
+        <FILE id="S5pe9t" name="splash_cymbal_4.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_4.wav"/>
+        <FILE id="A2PSsJ" name="splash_cymbal_4_left.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_4_left.wav"/>
+        <FILE id="BK9dZF" name="splash_cymbal_4_right.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_4_right.wav"/>
+        <FILE id="G6Vsmr" name="splash_cymbal_5.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_5.wav"/>
+        <FILE id="q0a4cb" name="splash_cymbal_5_left.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_5_left.wav"/>
+        <FILE id="zORfKx" name="splash_cymbal_5_right.wav" compile="0" resource="1"
+              file="Assets/55 Splash Cymbal/splash_cymbal_5_right.wav"/>
       </GROUP>
       <GROUP id="{1A9CAF86-6E2D-BA61-3D55-6F57C738286D}" name="56 Cowbell">
-        <FILE id="elXost" name="cowbell_1_1.wav" compile="0" resource="1" file="Assets/56 Cowbell/cowbell_1_1.wav"/>
-        <FILE id="Nl9rGW" name="cowbell_1_2.wav" compile="0" resource="1" file="Assets/56 Cowbell/cowbell_1_2.wav"/>
-        <FILE id="qpzZfu" name="cowbell_1_3.wav" compile="0" resource="1" file="Assets/56 Cowbell/cowbell_1_3.wav"/>
-        <FILE id="KOPKdi" name="cowbell_1_4.wav" compile="0" resource="1" file="Assets/56 Cowbell/cowbell_1_4.wav"/>
-        <FILE id="LNWZLQ" name="cowbell_1_5.wav" compile="0" resource="1" file="Assets/56 Cowbell/cowbell_1_5.wav"/>
+        <FILE id="elXost" name="cowbell_1.wav" compile="0" resource="1" file="Assets/56 Cowbell/cowbell_1.wav"/>
+        <FILE id="Nl9rGW" name="cowbell_2.wav" compile="0" resource="1" file="Assets/56 Cowbell/cowbell_2.wav"/>
+        <FILE id="qpzZfu" name="cowbell_3.wav" compile="0" resource="1" file="Assets/56 Cowbell/cowbell_3.wav"/>
+        <FILE id="KOPKdi" name="cowbell_4.wav" compile="0" resource="1" file="Assets/56 Cowbell/cowbell_4.wav"/>
+        <FILE id="LNWZLQ" name="cowbell_5.wav" compile="0" resource="1" file="Assets/56 Cowbell/cowbell_5.wav"/>
       </GROUP>
       <GROUP id="{4319E08F-C0C1-CFC3-4D8D-0EC768E46E7C}" name="57 Crash Cymbal 2">
-        <FILE id="CCe0YO" name="crash_cymbal_2_1_1.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_1.wav"/>
-        <FILE id="JjGdVj" name="crash_cymbal_2_1_1_left.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_1_left.wav"/>
-        <FILE id="PVro7R" name="crash_cymbal_2_1_1_right.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_1_right.wav"/>
-        <FILE id="Rmdlsb" name="crash_cymbal_2_1_2.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_2.wav"/>
-        <FILE id="UjX0U3" name="crash_cymbal_2_1_2_left.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_2_left.wav"/>
-        <FILE id="M6BCKw" name="crash_cymbal_2_1_2_right.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_2_right.wav"/>
-        <FILE id="IatZve" name="crash_cymbal_2_1_3.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_3.wav"/>
-        <FILE id="DZ3wfQ" name="crash_cymbal_2_1_3_left.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_3_left.wav"/>
-        <FILE id="GKaEsu" name="crash_cymbal_2_1_3_right.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_3_right.wav"/>
-        <FILE id="dBz9VA" name="crash_cymbal_2_1_4.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_4.wav"/>
-        <FILE id="RVq8QP" name="crash_cymbal_2_1_4_left.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_4_left.wav"/>
-        <FILE id="orRDrs" name="crash_cymbal_2_1_4_right.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_4_right.wav"/>
-        <FILE id="BxmD3M" name="crash_cymbal_2_1_5.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_5.wav"/>
-        <FILE id="oT3Ycx" name="crash_cymbal_2_1_5_left.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_5_left.wav"/>
-        <FILE id="mUjRts" name="crash_cymbal_2_1_5_right.wav" compile="0" resource="1"
-              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_5_right.wav"/>
+        <FILE id="CCe0YO" name="crash_cymbal_2_1.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1.wav"/>
+        <FILE id="JjGdVj" name="crash_cymbal_2_1_left.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_left.wav"/>
+        <FILE id="PVro7R" name="crash_cymbal_2_1_right.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_1_right.wav"/>
+        <FILE id="Rmdlsb" name="crash_cymbal_2_2.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_2.wav"/>
+        <FILE id="UjX0U3" name="crash_cymbal_2_2_left.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_2_left.wav"/>
+        <FILE id="M6BCKw" name="crash_cymbal_2_2_right.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_2_right.wav"/>
+        <FILE id="IatZve" name="crash_cymbal_2_3.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_3.wav"/>
+        <FILE id="DZ3wfQ" name="crash_cymbal_2_3_left.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_3_left.wav"/>
+        <FILE id="GKaEsu" name="crash_cymbal_2_3_right.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_3_right.wav"/>
+        <FILE id="dBz9VA" name="crash_cymbal_2_4.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_4.wav"/>
+        <FILE id="RVq8QP" name="crash_cymbal_2_4_left.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_4_left.wav"/>
+        <FILE id="orRDrs" name="crash_cymbal_2_4_right.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_4_right.wav"/>
+        <FILE id="BxmD3M" name="crash_cymbal_2_5.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_5.wav"/>
+        <FILE id="oT3Ycx" name="crash_cymbal_2_5_left.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_5_left.wav"/>
+        <FILE id="mUjRts" name="crash_cymbal_2_5_right.wav" compile="0" resource="1"
+              file="Assets/57 Crash Cymbal 2/crash_cymbal_2_5_right.wav"/>
       </GROUP>
       <GROUP id="{73F5D00E-8213-2D6C-009C-71DE2BED0D87}" name="70 Maraca">
-        <FILE id="bvH6QE" name="maraca_1_1.wav" compile="0" resource="1" file="Assets/70 Maraca/maraca_1_1.wav"/>
-        <FILE id="irR8qa" name="maraca_1_2.wav" compile="0" resource="1" file="Assets/70 Maraca/maraca_1_2.wav"/>
-        <FILE id="F95Ylr" name="maraca_1_3.wav" compile="0" resource="1" file="Assets/70 Maraca/maraca_1_3.wav"/>
-        <FILE id="OXnxY1" name="maraca_1_4.wav" compile="0" resource="1" file="Assets/70 Maraca/maraca_1_4.wav"/>
-        <FILE id="mD71eQ" name="maraca_1_5.wav" compile="0" resource="1" file="Assets/70 Maraca/maraca_1_5.wav"/>
+        <FILE id="bvH6QE" name="maraca_1.wav" compile="0" resource="1" file="Assets/70 Maraca/maraca_1.wav"/>
+        <FILE id="irR8qa" name="maraca_2.wav" compile="0" resource="1" file="Assets/70 Maraca/maraca_2.wav"/>
+        <FILE id="F95Ylr" name="maraca_3.wav" compile="0" resource="1" file="Assets/70 Maraca/maraca_3.wav"/>
+        <FILE id="OXnxY1" name="maraca_4.wav" compile="0" resource="1" file="Assets/70 Maraca/maraca_4.wav"/>
+        <FILE id="mD71eQ" name="maraca_5.wav" compile="0" resource="1" file="Assets/70 Maraca/maraca_5.wav"/>
       </GROUP>
       <GROUP id="{3B8DE361-387A-8A0A-9726-3EB52EA32584}" name="80 Mute Triangle">
-        <FILE id="aNkT6U" name="mute_triangle_1_1.wav" compile="0" resource="1"
-              file="Assets/80 Mute Triangle/mute_triangle_1_1.wav"/>
-        <FILE id="E2FgRw" name="mute_triangle_1_2.wav" compile="0" resource="1"
-              file="Assets/80 Mute Triangle/mute_triangle_1_2.wav"/>
-        <FILE id="WOcLwQ" name="mute_triangle_1_3.wav" compile="0" resource="1"
-              file="Assets/80 Mute Triangle/mute_triangle_1_3.wav"/>
-        <FILE id="KqhEEj" name="mute_triangle_1_4.wav" compile="0" resource="1"
-              file="Assets/80 Mute Triangle/mute_triangle_1_4.wav"/>
-        <FILE id="NZfmtH" name="mute_triangle_1_5.wav" compile="0" resource="1"
-              file="Assets/80 Mute Triangle/mute_triangle_1_5.wav"/>
+        <FILE id="aNkT6U" name="mute_triangle_1.wav" compile="0" resource="1"
+              file="Assets/80 Mute Triangle/mute_triangle_1.wav"/>
+        <FILE id="E2FgRw" name="mute_triangle_2.wav" compile="0" resource="1"
+              file="Assets/80 Mute Triangle/mute_triangle_2.wav"/>
+        <FILE id="WOcLwQ" name="mute_triangle_3.wav" compile="0" resource="1"
+              file="Assets/80 Mute Triangle/mute_triangle_3.wav"/>
+        <FILE id="KqhEEj" name="mute_triangle_4.wav" compile="0" resource="1"
+              file="Assets/80 Mute Triangle/mute_triangle_4.wav"/>
+        <FILE id="NZfmtH" name="mute_triangle_5.wav" compile="0" resource="1"
+              file="Assets/80 Mute Triangle/mute_triangle_5.wav"/>
       </GROUP>
       <GROUP id="{0A7DE477-7AAA-ECCC-CF34-DB7D683938C9}" name="81 Open Triangle">
-        <FILE id="f0jJhf" name="open_triangle_1_1.wav" compile="0" resource="1"
-              file="Assets/81 Open Triangle/open_triangle_1_1.wav"/>
-        <FILE id="o98IsR" name="open_triangle_1_2.wav" compile="0" resource="1"
-              file="Assets/81 Open Triangle/open_triangle_1_2.wav"/>
-        <FILE id="HxTXpA" name="open_triangle_1_3.wav" compile="0" resource="1"
-              file="Assets/81 Open Triangle/open_triangle_1_3.wav"/>
-        <FILE id="Or3aWR" name="open_triangle_1_4.wav" compile="0" resource="1"
-              file="Assets/81 Open Triangle/open_triangle_1_4.wav"/>
-        <FILE id="BnnioV" name="open_triangle_1_5.wav" compile="0" resource="1"
-              file="Assets/81 Open Triangle/open_triangle_1_5.wav"/>
+        <FILE id="f0jJhf" name="open_triangle_1.wav" compile="0" resource="1"
+              file="Assets/81 Open Triangle/open_triangle_1.wav"/>
+        <FILE id="o98IsR" name="open_triangle_2.wav" compile="0" resource="1"
+              file="Assets/81 Open Triangle/open_triangle_2.wav"/>
+        <FILE id="HxTXpA" name="open_triangle_3.wav" compile="0" resource="1"
+              file="Assets/81 Open Triangle/open_triangle_3.wav"/>
+        <FILE id="Or3aWR" name="open_triangle_4.wav" compile="0" resource="1"
+              file="Assets/81 Open Triangle/open_triangle_4.wav"/>
+        <FILE id="BnnioV" name="open_triangle_5.wav" compile="0" resource="1"
+              file="Assets/81 Open Triangle/open_triangle_5.wav"/>
       </GROUP>
     </GROUP>
     <GROUP id="{4F269486-30C8-FFDF-A864-4F5F2C1A2354}" name="Source">

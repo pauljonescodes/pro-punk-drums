@@ -20,12 +20,12 @@ PluginProcessorEditor::PluginProcessorEditor(PluginAudioProcessor& p)
     
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize(625, 750);
+    setSize(750, 750);
     setResizable(true, true);
     
     addAndMakeVisible(mTabbedComponent.get());
     
-    mSamplerComponent.reset(new SamplerComponent());
+    mSamplerComponent.reset(new SamplerComponent(mAudioProcessor.getMidiNotesVector()));
     
     auto samplerComponent = mSamplerComponent.get();
     samplerComponent->mOnDrumMidiButtonClicked = ([this](int midiNote, float midiVelocity) -> void {
@@ -33,8 +33,8 @@ PluginProcessorEditor::PluginProcessorEditor(PluginAudioProcessor& p)
     });
     
     mTabbedComponent->addTab(TRANS("Drums"), juce::Colours::lightgrey, samplerComponent, true);
+    mTabbedComponent->addTab(TRANS("Samples"), juce::Colours::lightgrey, new juce::Component(), true);
     mTabbedComponent->addTab(TRANS("Mixer"), juce::Colours::lightgrey, new juce::Component(), true);
-    
 }
 
 PluginProcessorEditor::~PluginProcessorEditor()

@@ -30,8 +30,8 @@ mMidiRootNote(midiNoteForNormalPitch)
         
         source.read(mData.get(), 0, mLength + 4, 0, true, true);
         
-        mParams.attack = static_cast<float> (attackTimeSecs);
-        mParams.release = static_cast<float> (releaseTimeSecs);
+        mAdsrParameters.attack = static_cast<float> (attackTimeSecs);
+        mAdsrParameters.release = static_cast<float> (releaseTimeSecs);
     }
 }
 

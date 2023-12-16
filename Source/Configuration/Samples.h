@@ -16,8 +16,6 @@
 #include "GeneralMidi.h"
 
 namespace samples {
-
-	static const int standardVariationsCount = 5;
 	static const int bitRate = 44100;
 	static const int bitDepth = 24;
 

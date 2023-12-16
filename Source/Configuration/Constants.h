@@ -13,19 +13,7 @@
 #include <string>
 
 namespace constants {
-	const int maximumVariations = 127;
-
-	const std::string acousticBassDrumMicrophoneInId = "in";
-	const std::string acousticBassDrumMicrophoneOutId = "out";
-
-	const std::string acousticSnareMicrophoneTopId = "top";
-	const std::string acousticSnareMicrophoneBottomId = "bottom";
-
-	const std::string centerMicrophoneId = "on";
-	const std::string leftMicrophoneId = "ohl";
-	const std::string rightMicrophoneId = "ohr";
-
-	const std::string softIntensityId = "soft";
-	const std::string mediumIntensityId = "medium";
-	const std::string hardIntensityId = "hard";
+	const std::string gainId = "gain";
+	const std::string panId = "pan";
+	const std::string phaseId = "phase";
 }
