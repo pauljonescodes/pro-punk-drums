@@ -17,7 +17,6 @@ class PluginSamplerVoice : public juce::SynthesiserVoice
 public:
     PluginSamplerVoice(
         juce::RangedAudioParameter& gainParameter,
-        juce::RangedAudioParameter& panParameter,
         juce::AudioParameterBool& phaseParameter
     );
     ~PluginSamplerVoice() override;
@@ -32,14 +31,11 @@ public:
 
 private:
     juce::RangedAudioParameter& mGainParameter;
-    juce::RangedAudioParameter& mPanParameter;
-    juce::AudioParameterBool& mPhaseParameter;
+    juce::AudioParameterBool& mInvertPhaseParameter;
 
     float mVelocityGain = 0;
-    double mPitchRatio = 0;
     double mSourceSamplePosition = 0;
     juce::ADSR mAdsr;
-    float mPan = 0;
     
     JUCE_LEAK_DETECTOR(PluginSamplerVoice)
 };

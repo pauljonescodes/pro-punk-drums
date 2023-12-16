@@ -10,6 +10,8 @@
 
 #pragma once
 #include <string>
+#include <map>
+#include <set>
 
 class PluginUtils {
 public:
@@ -17,4 +19,5 @@ public:
     static bool isNumeric(const std::string& str);
     static std::string capitalizeFirstLetter(const std::string& str);
     static std::string getParamId(int midiNote, std::string micId, std::string param);
+    static std::map<int, std::set<std::string>> getUniqueMidiNoteMicCombinations();
 };

@@ -16,7 +16,7 @@
 class SamplesParameterComponent : public juce::Component
 {
 public:
-	SamplesParameterComponent(int midiNote, juce::AudioProcessorValueTreeState& apvts);
+	SamplesParameterComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState& apvts);
 	~SamplesParameterComponent() override;
 
 	//==============================================================================
@@ -26,17 +26,15 @@ public:
 	std::optional<std::function<void(int, float)>> mOnDrumMidiButtonClicked;
 
 private:
+	juce::AudioProcessorValueTreeState& mApvts;
 
 	std::unique_ptr <juce::Slider> mGainSlider;
 	std::unique_ptr <juce::Label> mGainLabel;
 	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mGainAttachment;
 
-
-	std::unique_ptr <juce::Slider> mPanSlider;
-	std::unique_ptr <juce::Label> mPanLabel;
-
 	std::unique_ptr <juce::ToggleButton> mInvertPhaseToggleButton;
 	std::unique_ptr <juce::Label> mInvertPhaseLabel;
+	std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mInvertPhaseAttachment;
 
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SamplesParameterComponent)
 };

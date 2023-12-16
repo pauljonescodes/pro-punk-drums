@@ -12,19 +12,23 @@
 #include "../PluginUtils.h"
 #include "../Configuration/Constants.h"
 #include "SamplesParameterComponent.h"
+#include "../Configuration/GeneralMidi.h"
 
 SamplesComponent::SamplesComponent(const std::vector<int> midiNotesVector, juce::AudioProcessorValueTreeState& apvts)
 {
-    for (int midiNote : midiNotesVector)
-    {
-        auto gainParameterId = PluginUtils::getParamId(midiNote, "", constants::gainId);
-        auto* gainParameter = apvts.getParameter(gainParameterId);
-        if (gainParameter != nullptr) {
-            auto* component = new SamplesParameterComponent(midiNote, apvts);
+    addAndMakeVisible(viewport);
+    viewport.setViewedComponent(&container, false);
+
+    for (const auto& pair : PluginUtils::getUniqueMidiNoteMicCombinations()) {
+        int midiNote = pair.first;
+        std::string midiName = generalmidi::midiNoteToNameMap.at(midiNote);
+        const std::set<std::string>& micIds = pair.second;
+
+        for (const std::string& micId : micIds) {
+            auto* component = new SamplesParameterComponent(midiNote, micId, apvts);
             mSamplesParameterComponents.add(component);
-            addAndMakeVisible(component);
+            container.addAndMakeVisible(component);
         }
-       
     }
 }
 
@@ -40,9 +44,13 @@ void SamplesComponent::paint(juce::Graphics& g)
 
 void SamplesComponent::resized()
 {
-    auto area = getLocalBounds(); // Get the entire area of this component
-    int heightPerComponent = 100;
+    viewport.setBounds(getLocalBounds());
+    int heightPerComponent = 50;
+    int totalHeight = heightPerComponent * mSamplesParameterComponents.size();
 
+    container.setBounds(0, 0, viewport.getWidth(), totalHeight);
+
+    auto area = container.getLocalBounds();
     for (auto* component : mSamplesParameterComponents)
     {
         component->setBounds(area.removeFromTop(heightPerComponent));

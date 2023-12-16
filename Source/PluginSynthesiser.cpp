@@ -143,10 +143,7 @@ void PluginSynthesiser::addSample(
 	}
 
 	auto microphone = Microphone(PluginSamplerSound::Ptr(sound),
-		std::make_unique<PluginSamplerVoice>(
-			gainParameter,
-			panParameter,
-			phaseParameter)
+		std::make_unique<PluginSamplerVoice>(gainParameter, phaseParameter)
 	);
 
 	addVoice(microphone.voice.get());

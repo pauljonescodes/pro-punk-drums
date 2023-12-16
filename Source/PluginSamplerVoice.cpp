@@ -6,12 +6,10 @@
 //==============================================================================
 PluginSamplerVoice::PluginSamplerVoice(
     juce::RangedAudioParameter& gainParameter,
-    juce::RangedAudioParameter& panParameter,
     juce::AudioParameterBool& phaseParameter
 ) :
     mGainParameter(gainParameter), 
-    mPanParameter(panParameter), 
-    mPhaseParameter(phaseParameter)
+    mInvertPhaseParameter(phaseParameter)
 { }
 
 PluginSamplerVoice::~PluginSamplerVoice() {}
@@ -78,11 +76,11 @@ void PluginSamplerVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer,
             
             auto envelopeValue = mAdsr.getNextSample();
             
-            float pan = mPanParameter.getValue();
+            float pan = 0.5;
             float panLeft = pan <= 0.0f ? 1.0f : 1.0f - pan;
             float panRight = pan >= 0.0f ? 1.0f : 1.0f + pan;
             
-            float phaseMultiplier = mPhaseParameter.get() ? -1 : 1;
+            float phaseMultiplier = mInvertPhaseParameter.get() ? -1 : 1;
             juce::NormalisableRange<float> range(-60.0f, 12.0f, 0.01f);
             float normalizedValue = mGainParameter.getValue(); // Get the normalized value
 
