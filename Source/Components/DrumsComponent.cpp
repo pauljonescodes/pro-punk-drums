@@ -8,23 +8,25 @@
   ==============================================================================
 */
 
-#include "SamplerComponent.h"
+#include "DrumsComponent.h"
 #include "../Configuration/Samples.h"
 #include "../Configuration/GeneralMidi.h"
+#include "../Configuration/Strings.h"
 
 //==============================================================================
-SamplerComponent::SamplerComponent(std::vector<int> midiNotesVector)
+DrumsComponent::DrumsComponent(std::vector<int> midiNotesVector)
 {
     mVelocitySlider = std::make_unique<juce::Slider>();
     mVelocitySlider->setRange(0, 127, 1);
     mVelocitySlider->setValue(64);
-
-    addAndMakeVisible(mVelocitySlider.get());
     mVelocitySlider->addListener(this);
 
+    addAndMakeVisible(mVelocitySlider.get());
+
     mVelocityLabel = std::make_unique<juce::Label>();
-    mVelocityLabel->setText("Velocity", juce::dontSendNotification);
+    mVelocityLabel->setText(strings::velocity, juce::dontSendNotification);
     mVelocityLabel->attachToComponent(mVelocitySlider.get(), true);
+   
     addAndMakeVisible(mVelocityLabel.get());
 
     for (int note : midiNotesVector)
@@ -39,7 +41,7 @@ SamplerComponent::SamplerComponent(std::vector<int> midiNotesVector)
     resized();
 }
 
-SamplerComponent::~SamplerComponent()
+DrumsComponent::~DrumsComponent()
 {
     for (auto button : mMidiNoteButtons) {
         button = nullptr;
@@ -47,12 +49,12 @@ SamplerComponent::~SamplerComponent()
 }
 
 //==============================================================================
-void SamplerComponent::paint(juce::Graphics& g)
+void DrumsComponent::paint(juce::Graphics& g)
 {
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 }
 
-void SamplerComponent::resized()
+void DrumsComponent::resized()
 {
     auto area = getLocalBounds();
 
@@ -76,7 +78,7 @@ void SamplerComponent::resized()
     }
 }
 
-void SamplerComponent::buttonClicked(juce::Button* button)
+void DrumsComponent::buttonClicked(juce::Button* button)
 {
     const juce::String componentID = button->getComponentID();
 
@@ -88,7 +90,7 @@ void SamplerComponent::buttonClicked(juce::Button* button)
     }
 }
 
-void SamplerComponent::sliderValueChanged(juce::Slider* slider)
+void DrumsComponent::sliderValueChanged(juce::Slider* slider)
 {
     if (slider == mVelocitySlider.get())
     {

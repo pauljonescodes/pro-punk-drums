@@ -83,10 +83,17 @@ void PluginSamplerVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer,
             float panRight = pan >= 0.0f ? 1.0f : 1.0f + pan;
             
             float phaseMultiplier = mPhaseParameter.get() ? -1 : 1;
-            float gain = mGainParameter.getValue();
+            juce::NormalisableRange<float> range(-60.0f, 12.0f, 0.01f);
+            float normalizedValue = mGainParameter.getValue(); // Get the normalized value
+
+            // Convert normalized value to dB
+            float dB = range.convertFrom0to1(normalizedValue);
+
+            // Convert dB to linear gain
+            float linearGain = std::pow(10.0f, dB / 20.0f);
             
-            l *= panLeft * envelopeValue * gain * mVelocityGain * phaseMultiplier;
-            r *= panRight * envelopeValue * gain * mVelocityGain * phaseMultiplier;
+            l *= panLeft * envelopeValue * linearGain * mVelocityGain * phaseMultiplier;
+            r *= panRight * envelopeValue * linearGain * mVelocityGain * phaseMultiplier;
             
             if (outR != nullptr)
             {

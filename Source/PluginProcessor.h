@@ -54,7 +54,8 @@ public:
     void noteOnSynthesisers(int midiNoteNumber, float velocity);
 
     std::vector<int> getMidiNotesVector();
-    
+    juce::AudioProcessorValueTreeState& getParameterValueTreeState() const;
+
 private:
     
     std::unique_ptr<juce::AudioFormatManager> mAudioFormatManager;

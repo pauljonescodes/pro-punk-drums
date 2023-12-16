@@ -831,10 +831,18 @@
       <FILE id="sdSw0a" name="PluginSynthesiser.h" compile="0" resource="0"
             file="Source/PluginSynthesiser.h"/>
       <GROUP id="{91AD8FAC-EF24-BE9E-B417-D983B88C88CF}" name="Components">
-        <FILE id="SSq1xN" name="SamplerComponent.cpp" compile="1" resource="0"
-              file="Source/Components/SamplerComponent.cpp"/>
-        <FILE id="YGVArC" name="SamplerComponent.h" compile="0" resource="0"
-              file="Source/Components/SamplerComponent.h"/>
+        <FILE id="SSq1xN" name="DrumsComponent.cpp" compile="1" resource="0"
+              file="Source/Components/DrumsComponent.cpp"/>
+        <FILE id="YGVArC" name="DrumsComponent.h" compile="0" resource="0"
+              file="Source/Components/DrumsComponent.h"/>
+        <FILE id="hBVOOR" name="SamplesComponent.cpp" compile="1" resource="0"
+              file="Source/Components/SamplesComponent.cpp"/>
+        <FILE id="eHKljJ" name="SamplesComponent.h" compile="0" resource="0"
+              file="Source/Components/SamplesComponent.h"/>
+        <FILE id="eDXIcm" name="SamplesParameterComponent.cpp" compile="1"
+              resource="0" file="Source/Components/SamplesParameterComponent.cpp"/>
+        <FILE id="EsGN7P" name="SamplesParameterComponent.h" compile="0" resource="0"
+              file="Source/Components/SamplesParameterComponent.h"/>
       </GROUP>
       <GROUP id="{174326FA-B300-8EB3-EC61-A97E87DA421F}" name="Configuration">
         <FILE id="it4wSJ" name="Channels.h" compile="0" resource="0" file="Source/Configuration/Channels.h"/>
@@ -842,6 +850,7 @@
         <FILE id="iV5taV" name="GeneralMidi.h" compile="0" resource="0" file="Source/Configuration/GeneralMidi.h"/>
         <FILE id="DqGTYm" name="Midi.h" compile="0" resource="0" file="Source/Configuration/Midi.h"/>
         <FILE id="nSQZyH" name="Samples.h" compile="0" resource="0" file="Source/Configuration/Samples.h"/>
+        <FILE id="o1OyTo" name="Strings.h" compile="0" resource="0" file="Source/Configuration/Strings.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>

@@ -12,17 +12,14 @@
 
 #include <JuceHeader.h>
 
-//==============================================================================
-class SamplerComponent : public juce::Component, public juce::Button::Listener, public juce::Slider::Listener
+class DrumsComponent : public juce::Component, public juce::Button::Listener, public juce::Slider::Listener
 {
 public:
-	SamplerComponent(std::vector<int> midiNotesVector);
-	~SamplerComponent() override;
+	DrumsComponent(std::vector<int> midiNotesVector);
+	~DrumsComponent() override;
 
-	//==============================================================================
 	void paint(juce::Graphics&) override;
 	void resized() override;
-
 
 	std::optional<std::function<void(int, float)>> mOnDrumMidiButtonClicked; 
 
@@ -34,6 +31,6 @@ private:
 	void buttonClicked(juce::Button* button) override;
 	void sliderValueChanged(juce::Slider* slider) override;
 
-	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SamplerComponent)
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DrumsComponent)
 
 };

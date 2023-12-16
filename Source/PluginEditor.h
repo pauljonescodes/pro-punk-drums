@@ -10,7 +10,8 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
-#include "Components/SamplerComponent.h"
+#include "Components/DrumsComponent.h"
+#include "Components/SamplesComponent.h"
 
 //==============================================================================
 /**
@@ -31,7 +32,8 @@ private:
     
     //==============================================================================
     std::unique_ptr<juce::TabbedComponent> mTabbedComponent;
-    std::unique_ptr<SamplerComponent> mSamplerComponent;
+    std::unique_ptr<DrumsComponent> mDrumsComponent;
+    std::unique_ptr<SamplesComponent> mSamplesComponent;
     juce::OwnedArray<juce::TextButton> mMidiNoteButtons;
     //==============================================================================
     

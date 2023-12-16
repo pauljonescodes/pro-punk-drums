@@ -220,7 +220,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginAudioProcessor::create
 
 		for (const std::string& micId : micIds) {
 			std::string gainName = midiName + " " + PluginUtils::capitalizeFirstLetter(micId) + " Gain";
-			layout.add(std::make_unique<juce::AudioParameterFloat>(PluginUtils::getParamId(midiNote, micId, constants::gainId), gainName, 0.0f, 1.0f, 0.5f));
+			std::string gainParameterId = PluginUtils::getParamId(midiNote, micId, constants::gainId);
+			layout.add(std::make_unique<juce::AudioParameterFloat>(gainParameterId, gainName, juce::NormalisableRange(-60.0f, 12.0f, 0.01f), 0.0f));
 
 			std::string panName = midiName + " " + PluginUtils::capitalizeFirstLetter(micId) + " Pan";
 			layout.add(std::make_unique<juce::AudioParameterFloat>(PluginUtils::getParamId(midiNote, micId, constants::panId), panName, 0.0f, 1.0f, 0.5f));
@@ -242,10 +243,14 @@ std::vector<int> PluginAudioProcessor::getMidiNotesVector()
 	return mSynthesiserPtr.get()->getMidiNotesVector();
 }
 
-//==============================================================================
 const juce::String PluginAudioProcessor::getName() const
 {
 	return JucePlugin_Name;
+}
+
+juce::AudioProcessorValueTreeState& PluginAudioProcessor::getParameterValueTreeState() const
+{
+	return *mParameterValueTreeState;
 }
 
 bool PluginAudioProcessor::acceptsMidi() const
