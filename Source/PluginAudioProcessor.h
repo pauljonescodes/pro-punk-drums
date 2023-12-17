@@ -10,7 +10,7 @@
 
 #include <JuceHeader.h>
 #include "Configuration/Samples.h"
-#include "PluginSynthesiser.h"
+#include "Synthesiser/PluginSynthesiser.h"
 
 //==============================================================================
 /**
@@ -56,13 +56,17 @@ public:
     std::vector<int> getMidiNotesVector();
     juce::AudioProcessorValueTreeState& getParameterValueTreeState() const;
 
+    void loadAndPlayMidiFile(const juce::File& midiFile);
 private:
     
     std::unique_ptr<juce::AudioFormatManager> mAudioFormatManager;
     std::unique_ptr<juce::AudioProcessorValueTreeState> mParameterValueTreeState;
     std::unique_ptr<PluginSynthesiser> mSynthesiserPtr;
     std::unique_ptr<juce::AudioBuffer<float>> mInternalBufferPtr;
-        
+
+    std::vector<std::pair<double, juce::MidiMessage>> scheduledMidiEvents;
+    long long currentSamplePosition = 0;
+
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginAudioProcessor)

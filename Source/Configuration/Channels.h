@@ -9,41 +9,67 @@
 */
 
 #pragma once
+#include <map>
+#include "GeneralMidi.h"
 
 namespace channels {
-    const int outL = 0;
-    const int outR = 1;
-    const int outAcousticBassDrum = 2;
-    const int outAcousticSnare = 3;
-    const int outTomHigh = 4;
-    const int outTomFloorHigh = 5;
-    const int outHiHat = 6; // HiHatEdgeTight hiHatTipClosed hiHatTipTight hiHatEdgeClosed hiHatPedal hiHatOpen3 hiHatOpen2 hiHatOpen1
-    const int outRide = 7; // RideBell RideCymbal1
-    const int outCrashCymbal1 = 8;
-    const int outChineseCymbal = 9;
-    const int outSplashCymbal = 10;
-    const int outCrashCymbal2 = 11;
-    const int outOverheadLeft = 12;
-    const int outOverheadRight = 13;
-    const int outPercussion = 14; // maraca triangleMute triangleOpen cowbell handClap sideStick tambourine
-    const int outBassDrum1 = 15;
-    const int outElectricSnare = 16;
+    const int stereo = 0;
+    const int kick = 1;
+    const int snare = 2;
+    const int toms = 3;
+    const int hiHat = 4;
+    const int cymbals = 5;
+    const int percussion = 6;
+    const int overheadLeft = 7;
+    const int overheadRight = 8;
 
-    const int inAcousticBassDrumIn = 0;
-    const int inAcousticBassDrumOut = 1;
-    const int inAcousticSnareTop = 2;
-    const int inAcousticSnareBottom = 3;
-    const int inTomHigh = 4;
-    const int inTomFloorHigh = 5;
-    const int inHiHat = 6; // HiHatEdgeTight hiHatTipClosed hiHatTipTight hiHatEdgeClosed hiHatPedal hiHatOpen3 hiHatOpen2 hiHatOpen1
-    const int inRide = 7; // RideBell RideCymbal1
-    const int inCrashCymbal1 = 8;
-    const int inChineseCymbal = 9;
-    const int inSplashCymbal = 10;
-    const int inCrashCymbal2 = 11;
-    const int inOverheadLeft = 12;
-    const int inOverheadRight = 13;
-    const int inPercussion = 14; // maraca triangleMute triangleOpen cowbell handClap sideStick tambourine
-    const int inBassDrum1 = 15;
-    const int inElectricSnare = 16;
+    std::map<int, int> generalMidiNoteToChannel = {
+    {generalmidi::midinotes::acousticBassDrum, kick},
+    {generalmidi::midinotes::bassDrum1, kick},
+    {generalmidi::midinotes::sideStick, snare},
+    {generalmidi::midinotes::acousticSnare, snare},
+    {generalmidi::midinotes::handClap, percussion},
+    {generalmidi::midinotes::electricSnare, snare},
+    {generalmidi::midinotes::lowFloorTom, toms},
+    {generalmidi::midinotes::closedHiHat, hiHat},
+    {generalmidi::midinotes::highFloorTom, toms},
+    {generalmidi::midinotes::pedalHiHat, hiHat},
+    {generalmidi::midinotes::lowTom, toms},
+    {generalmidi::midinotes::openHiHat, hiHat},
+    {generalmidi::midinotes::lowMidTom, toms},
+    {generalmidi::midinotes::hiMidTom, toms},
+    {generalmidi::midinotes::crashCymbal1, cymbals},
+    {generalmidi::midinotes::highTom, toms},
+    {generalmidi::midinotes::rideCymbal1, cymbals},
+    {generalmidi::midinotes::chineseCymbal, cymbals},
+    {generalmidi::midinotes::rideBell, cymbals},
+    {generalmidi::midinotes::tambourine, percussion},
+    {generalmidi::midinotes::splashCymbal, cymbals},
+    {generalmidi::midinotes::cowbell, percussion},
+    {generalmidi::midinotes::crashCymbal2, cymbals},
+    {generalmidi::midinotes::vibraslap, percussion},
+    {generalmidi::midinotes::rideCymbal2, cymbals},
+    {generalmidi::midinotes::hiBongo, percussion},
+    {generalmidi::midinotes::lowBongo, percussion},
+    {generalmidi::midinotes::muteHiConga, percussion},
+    {generalmidi::midinotes::openHiConga, percussion},
+    {generalmidi::midinotes::lowConga, percussion},
+    {generalmidi::midinotes::highTimbale, percussion},
+    {generalmidi::midinotes::lowTimbale, percussion},
+    {generalmidi::midinotes::highAgog, percussion},
+    {generalmidi::midinotes::lowAgog, percussion},
+    {generalmidi::midinotes::cabas, percussion},
+    {generalmidi::midinotes::maraca, percussion},
+    {generalmidi::midinotes::shortWhistle, percussion},
+    {generalmidi::midinotes::longWhistle, percussion},
+    {generalmidi::midinotes::shortGuir, percussion},
+    {generalmidi::midinotes::longGuir, percussion},
+    {generalmidi::midinotes::clave, percussion},
+    {generalmidi::midinotes::hiWoodBlock, percussion},
+    {generalmidi::midinotes::lowWoodBlock, percussion},
+    {generalmidi::midinotes::muteCuica, percussion},
+    {generalmidi::midinotes::openCuica, percussion},
+    {generalmidi::midinotes::muteTriangle, percussion},
+    {generalmidi::midinotes::openTriangle, percussion}
+    };
 }

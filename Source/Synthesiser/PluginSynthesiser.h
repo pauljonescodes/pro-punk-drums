@@ -11,9 +11,9 @@
 #pragma once
 #include <JuceHeader.h>
 #include <vector>
-#include "PluginSamplerVoice.h"
-#include "PluginSamplerSound.h"
-#include "./Configuration/Samples.h"
+#include "PluginSynthesiserVoice.h"
+#include "PluginSynthesiserSound.h"
+#include "../Configuration/Samples.h"
 
 class PluginSynthesiser : public juce::Synthesiser {
 
@@ -42,10 +42,10 @@ public:
 protected:
 
 	struct Microphone {
-		PluginSamplerSound::Ptr sound;
-		std::unique_ptr<PluginSamplerVoice> voice;
+		PluginSynthesiserSound::Ptr sound;
+		std::unique_ptr<PluginSynthesiserVoice> voice;
 
-		Microphone(PluginSamplerSound::Ptr s, std::unique_ptr<PluginSamplerVoice> v)
+		Microphone(PluginSynthesiserSound::Ptr s, std::unique_ptr<PluginSynthesiserVoice> v)
 			: sound(std::move(s)), voice(std::move(v))
 		{}
 	};

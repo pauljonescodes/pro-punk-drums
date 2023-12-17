@@ -10,13 +10,13 @@
 
 #pragma once
 #include <JuceHeader.h>
-#include "./Configuration/Samples.h"
+#include "../Configuration/Samples.h"
 
-class PluginSamplerSound : public juce::SynthesiserSound
+class PluginSynthesiserSound : public juce::SynthesiserSound
 {
 public:
     
-    PluginSamplerSound(const juce::String& name,
+    PluginSynthesiserSound(const juce::String& name,
                         juce::AudioFormatReader& source,
                         const juce::BigInteger& midiNotes,
                         int midiNoteForNormalPitch,
@@ -25,7 +25,7 @@ public:
                         double maxSampleLengthSeconds);
     
     /** Destructor. */
-    ~PluginSamplerSound() override;
+    ~PluginSynthesiserSound() override;
     
     const juce::String& getName() const noexcept { return mName; }
     juce::AudioBuffer<float>* getAudioData() const noexcept { return mData.get(); }
@@ -41,5 +41,5 @@ public:
     juce::BigInteger mMidiNotes;
     int mMidiRootNote = 0;
     
-    JUCE_LEAK_DETECTOR(PluginSamplerSound)
+    JUCE_LEAK_DETECTOR(PluginSynthesiserSound)
 };

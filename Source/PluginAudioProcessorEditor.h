@@ -9,18 +9,18 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "PluginProcessor.h"
+#include "PluginAudioProcessor.h"
 #include "Components/DrumsComponent.h"
 #include "Components/SamplesComponent.h"
 
 //==============================================================================
 /**
  */
-class PluginProcessorEditor : public juce::AudioProcessorEditor
+class PluginAudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
-    PluginProcessorEditor(PluginAudioProcessor&);
-    ~PluginProcessorEditor() override;
+    PluginAudioProcessorEditor(PluginAudioProcessor&);
+    ~PluginAudioProcessorEditor() override;
     
     //==============================================================================
     void paint(juce::Graphics&) override;
@@ -37,5 +37,5 @@ private:
     juce::OwnedArray<juce::TextButton> mMidiNoteButtons;
     //==============================================================================
     
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginAudioProcessorEditor)
 };

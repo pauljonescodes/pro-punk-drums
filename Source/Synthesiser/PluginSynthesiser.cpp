@@ -9,8 +9,8 @@
  */
 
 #include "PluginSynthesiser.h"
-#include "./Configuration/Samples.h"
-#include "PluginSamplerVoice.h"
+#include "../Configuration/Samples.h"
+#include "PluginSynthesiserVoice.h"
 
 PluginSynthesiser::PluginSynthesiser()
 {
@@ -123,7 +123,7 @@ void PluginSynthesiser::addSample(
 	juce::AudioFormatReader* reader = audioFormatManager.createReaderFor(std::move(memoryInputStream));
 
 	double maxSampleLengthSeconds = dataSizeInBytes / (samples::bitRate * (samples::bitDepth / 8.0));
-	PluginSamplerSound* sound = new PluginSamplerSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
+	PluginSynthesiserSound* sound = new PluginSynthesiserSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
 
 	addSound(sound);
 
@@ -142,8 +142,8 @@ void PluginSynthesiser::addSample(
 		velocity.variations.emplace_back();
 	}
 
-	auto microphone = Microphone(PluginSamplerSound::Ptr(sound),
-		std::make_unique<PluginSamplerVoice>(gainParameter, phaseParameter)
+	auto microphone = Microphone(PluginSynthesiserSound::Ptr(sound),
+		std::make_unique<PluginSynthesiserVoice>(gainParameter, phaseParameter)
 	);
 
 	addVoice(microphone.voice.get());

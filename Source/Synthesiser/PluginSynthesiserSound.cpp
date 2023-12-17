@@ -8,9 +8,9 @@
  ==============================================================================
  */
 
-#include "PluginSamplerSound.h"
+#include "PluginSynthesiserSound.h"
 
-PluginSamplerSound::PluginSamplerSound(const juce::String& soundName,
+PluginSynthesiserSound::PluginSynthesiserSound(const juce::String& soundName,
                                          juce::AudioFormatReader& source,
                                          const juce::BigInteger& notes,
                                          int midiNoteForNormalPitch,
@@ -35,16 +35,16 @@ mMidiRootNote(midiNoteForNormalPitch)
     }
 }
 
-PluginSamplerSound::~PluginSamplerSound()
+PluginSynthesiserSound::~PluginSynthesiserSound()
 {
 }
 
-bool PluginSamplerSound::appliesToNote(int midiNoteNumber)
+bool PluginSynthesiserSound::appliesToNote(int midiNoteNumber)
 {
     return mMidiNotes[midiNoteNumber];
 }
 
-bool PluginSamplerSound::appliesToChannel(int /*midiChannel*/)
+bool PluginSynthesiserSound::appliesToChannel(int /*midiChannel*/)
 {
     return true;
 }

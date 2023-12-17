@@ -10,16 +10,16 @@
 
 #pragma once
 #include <JuceHeader.h>
-#include "./Configuration/Samples.h"
+#include "../Configuration/Samples.h"
 
-class PluginSamplerVoice : public juce::SynthesiserVoice
+class PluginSynthesiserVoice : public juce::SynthesiserVoice
 {
 public:
-    PluginSamplerVoice(
+    PluginSynthesiserVoice(
         juce::RangedAudioParameter& gainParameter,
         juce::AudioParameterBool& phaseParameter
     );
-    ~PluginSamplerVoice() override;
+    ~PluginSynthesiserVoice() override;
     
     bool canPlaySound(juce::SynthesiserSound*) override;
     void startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound*, int pitchWheel) override;
@@ -37,5 +37,5 @@ private:
     double mSourceSamplePosition = 0;
     juce::ADSR mAdsr;
     
-    JUCE_LEAK_DETECTOR(PluginSamplerVoice)
+    JUCE_LEAK_DETECTOR(PluginSynthesiserVoice)
 };

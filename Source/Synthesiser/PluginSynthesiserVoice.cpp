@@ -1,10 +1,10 @@
 
 #include <JuceHeader.h>
-#include "PluginSamplerVoice.h"
-#include "PluginSamplerSound.h"
+#include "PluginSynthesiserVoice.h"
+#include "PluginSynthesiserSound.h"
 
 //==============================================================================
-PluginSamplerVoice::PluginSamplerVoice(
+PluginSynthesiserVoice::PluginSynthesiserVoice(
     juce::RangedAudioParameter& gainParameter,
     juce::AudioParameterBool& phaseParameter
 ) :
@@ -12,16 +12,16 @@ PluginSamplerVoice::PluginSamplerVoice(
     mInvertPhaseParameter(phaseParameter)
 { }
 
-PluginSamplerVoice::~PluginSamplerVoice() {}
+PluginSynthesiserVoice::~PluginSynthesiserVoice() {}
 
-bool PluginSamplerVoice::canPlaySound(juce::SynthesiserSound* sound)
+bool PluginSynthesiserVoice::canPlaySound(juce::SynthesiserSound* sound)
 {
-    return dynamic_cast<const PluginSamplerSound*> (sound) != nullptr;
+    return dynamic_cast<const PluginSynthesiserSound*> (sound) != nullptr;
 }
 
-void PluginSamplerVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* s, int /*currentPitchWheelPosition*/)
+void PluginSynthesiserVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* s, int /*currentPitchWheelPosition*/)
 {
-    if (auto* sound = dynamic_cast<const PluginSamplerSound*> (s))
+    if (auto* sound = dynamic_cast<const PluginSynthesiserSound*> (s))
     {
         mSourceSamplePosition = 0.0;
         
@@ -37,7 +37,7 @@ void PluginSamplerVoice::startNote(int midiNoteNumber, float velocity, juce::Syn
     }
 }
 
-void PluginSamplerVoice::stopNote(float /*velocity*/, bool allowTailOff)
+void PluginSynthesiserVoice::stopNote(float /*velocity*/, bool allowTailOff)
 {
     if (allowTailOff)
     {
@@ -50,13 +50,13 @@ void PluginSamplerVoice::stopNote(float /*velocity*/, bool allowTailOff)
     }
 }
 
-void PluginSamplerVoice::pitchWheelMoved(int newValue) {}
-void PluginSamplerVoice::controllerMoved(int controllerNumber, int newValue) {}
+void PluginSynthesiserVoice::pitchWheelMoved(int newValue) {}
+void PluginSynthesiserVoice::controllerMoved(int controllerNumber, int newValue) {}
 
 //==============================================================================
-void PluginSamplerVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
+void PluginSynthesiserVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
-    if (auto* playingSound = static_cast<PluginSamplerSound*> (getCurrentlyPlayingSound().get()))
+    if (auto* playingSound = static_cast<PluginSynthesiserSound*> (getCurrentlyPlayingSound().get()))
     {
         auto& data = *playingSound->mData;
         const float* const inL = data.getReadPointer(0);

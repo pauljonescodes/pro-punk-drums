@@ -1,9 +1,11 @@
-#include "PluginProcessor.h"
-#include "PluginEditor.h"
+#include "PluginAudioProcessor.h"
+#include "PluginAudioProcessorEditor.h"
 #include "Configuration/Samples.h"
-#include "PluginSynthesiser.h"
+#include "Synthesiser/PluginSynthesiser.h"
 #include "PluginUtils.h"
 #include "Configuration/Midi.h"
+#include <juce_core/juce_core.h>
+#include <juce_audio_basics/juce_audio_basics.h>
 
 //==============================================================================
 PluginAudioProcessor::PluginAudioProcessor()
@@ -14,6 +16,12 @@ PluginAudioProcessor::PluginAudioProcessor()
 		.withInput("Input", juce::AudioChannelSet::stereo(), true)
 #endif
 		.withOutput("Output", juce::AudioChannelSet::stereo(), true)
+		.withOutput("1 Kick", juce::AudioChannelSet::stereo(), true) 
+		.withOutput("2 Snare", juce::AudioChannelSet::stereo(), true)
+		.withOutput("3 Toms", juce::AudioChannelSet::stereo(), true)
+		.withOutput("4 Hi-hat", juce::AudioChannelSet::stereo(), true)
+		.withOutput("5 Cymbals", juce::AudioChannelSet::stereo(), true)
+		.withOutput("6 Percussion", juce::AudioChannelSet::stereo(), true)
 #endif
 	), mParameterValueTreeState(std::make_unique<juce::AudioProcessorValueTreeState>(*this,
 		nullptr, juce::Identifier("plugin_params"), createParameterLayout()))
@@ -273,26 +281,40 @@ bool PluginAudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) co
 
 void PluginAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+	juce::MidiBuffer bufferToProcess;
+
+	// Iterate through scheduled MIDI events
+	for (auto it = scheduledMidiEvents.begin(); it != scheduledMidiEvents.end();)
+	{
+		if (it->first <= currentSamplePosition)
+		{
+			// Calculate the sample number relative to the start of the current buffer
+			int sampleNumberInBuffer = static_cast<int>(it->first - currentSamplePosition + buffer.getNumSamples());
+			bufferToProcess.addEvent(it->second, sampleNumberInBuffer);
+			it = scheduledMidiEvents.erase(it); // Remove the event after scheduling
+		}
+		else
+		{
+			++it;
+		}
+	}
+	currentSamplePosition += buffer.getNumSamples();
+
+	// Merge with incoming MIDI messages
+	bufferToProcess.addEvents(midiMessages, 0, buffer.getNumSamples(), 0);
+	midiMessages.swapWith(bufferToProcess);
+
 	juce::ScopedNoDenormals noDenormals;
 	auto totalNumInputChannels = getTotalNumInputChannels();
 	auto totalNumOutputChannels = getTotalNumOutputChannels();
 
-	int numSamples = buffer.getNumSamples();  // Number of samples to process
-	mInternalBufferPtr->setSize(1, numSamples, true, true, true);
-
-	mInternalBufferPtr->clear();
-
-	// In case we have more outputs than inputs, this code clears any output
-	// channels that didn't contain input data, (because these aren't
-	// guaranteed to be empty - they may contain garbage).
-	// This is here to avoid people getting screaming feedback
-	// when they first compile a plugin, but obviously you don't need to keep
-	// this code if your algorithm always overwrites all the output channels.
 	for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i) {
 		buffer.clear(i, 0, buffer.getNumSamples());
 	}
 
 	mSynthesiserPtr->renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+
+	
 }
 
 //==============================================================================
@@ -303,7 +325,7 @@ bool PluginAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* PluginAudioProcessor::createEditor()
 {
-	return new PluginProcessorEditor(*this);
+	return new PluginAudioProcessorEditor(*this);
 }
 
 //==============================================================================
@@ -339,4 +361,32 @@ void PluginAudioProcessor::noteOnSynthesisers(int midiNoteNumber, const float ve
 {
 	mSynthesiserPtr->noteOn(0, midiNoteNumber, velocity);
 }
+
+void PluginAudioProcessor::loadAndPlayMidiFile(const juce::File& midiFile)
+{
+	juce::MidiFile midi;
+	juce::FileInputStream stream(midiFile);
+
+	if (!stream.openedOk() || !midi.readFrom(stream)) {
+		DBG("Error reading MIDI file");
+		return;
+	}
+
+	midi.convertTimestampTicksToSeconds();
+
+	scheduledMidiEvents.clear(); // Clear previous MIDI events
+	for (int track = 0; track < midi.getNumTracks(); ++track)
+	{
+		auto* midiTrack = midi.getTrack(track);
+		for (int event = 0; event < midiTrack->getNumEvents(); ++event)
+		{
+			auto midiEvent = midiTrack->getEventPointer(event);
+			auto message = midiEvent->message;
+			auto timestamp = static_cast<double>(message.getTimeStamp() * getSampleRate());
+			scheduledMidiEvents.emplace_back(timestamp, message);
+		}
+	}
+
+}
+
 

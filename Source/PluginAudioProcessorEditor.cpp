@@ -6,15 +6,15 @@
  ==============================================================================
  */
 
-#include "PluginProcessor.h"
-#include "PluginEditor.h"
+#include "PluginAudioProcessor.h"
+#include "PluginAudioProcessorEditor.h"
 #include "Configuration/Samples.h"
 #include "Components/DrumsComponent.h"
 #include "Components/SamplesComponent.h"
 #include <random>
 
  //==============================================================================
-PluginProcessorEditor::PluginProcessorEditor(PluginAudioProcessor& p)
+PluginAudioProcessorEditor::PluginAudioProcessorEditor(PluginAudioProcessor& p)
 	: AudioProcessorEditor(&p), mAudioProcessor(p)
 {
 	mTabbedComponent = std::make_unique<juce::TabbedComponent>(juce::TabbedButtonBar::Orientation::TabsAtTop);
@@ -31,6 +31,9 @@ PluginProcessorEditor::PluginProcessorEditor(PluginAudioProcessor& p)
 	drumsComponent->mOnDrumMidiButtonClicked = ([this](int midiNote, float midiVelocity) -> void {
 		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity);
 	});
+	drumsComponent->mOnMidiFileChoser = ([this](juce::File midiFile) -> void {
+		mAudioProcessor.loadAndPlayMidiFile(midiFile);
+		});
 	mTabbedComponent->addTab("Drums", juce::Colours::lightgrey, drumsComponent, true);
 
 	auto& apvts = mAudioProcessor.getParameterValueTreeState();
@@ -41,16 +44,16 @@ PluginProcessorEditor::PluginProcessorEditor(PluginAudioProcessor& p)
 	mTabbedComponent->addTab("Mixer", juce::Colours::lightgrey, new juce::Component(), true);
 }
 
-PluginProcessorEditor::~PluginProcessorEditor()
+PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
 {
 }
 
-void PluginProcessorEditor::paint(juce::Graphics& g)
+void PluginAudioProcessorEditor::paint(juce::Graphics& g)
 {
 	g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 }
 
-void PluginProcessorEditor::resized()
+void PluginAudioProcessorEditor::resized()
 {
 	mTabbedComponent->setBounds(getLocalBounds());
 }
