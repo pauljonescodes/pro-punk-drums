@@ -1,13 +1,3 @@
-/*
- ==============================================================================
- 
- CLROHSamplerVoice.h
- Created: 8 Dec 2023 5:42:13pm
- Author:  paulm
- 
- ==============================================================================
- */
-
 #pragma once
 #include <JuceHeader.h>
 #include "../Configuration/Samples.h"
@@ -16,10 +6,10 @@ class PluginSynthesiserVoice : public juce::SynthesiserVoice
 {
 public:
     PluginSynthesiserVoice(
-        juce::RangedAudioParameter& gainParameter,
-        juce::RangedAudioParameter& panParameter,
-        juce::AudioParameterBool& phaseParameter
-    );
+                           juce::RangedAudioParameter& gainParameter,
+                           juce::RangedAudioParameter& panParameter,
+                           juce::AudioParameterBool& phaseParameter
+                           );
     ~PluginSynthesiserVoice() override;
     
     bool canPlaySound(juce::SynthesiserSound*) override;
@@ -29,12 +19,12 @@ public:
     void controllerMoved(int controllerNumber, int newValue) override;
     void renderNextBlock(juce::AudioBuffer<float>&, int startSample, int numSamples) override;
     using SynthesiserVoice::renderNextBlock;
-
+    
 private:
     juce::RangedAudioParameter& mGainParameter;
     juce::RangedAudioParameter& mPanParameter;
     juce::AudioParameterBool& mInvertPhaseParameter;
-
+    
     float mVelocityGain = 0;
     double mSourceSamplePosition = 0;
     juce::ADSR mAdsr;

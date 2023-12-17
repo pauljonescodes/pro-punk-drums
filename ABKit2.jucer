@@ -980,6 +980,7 @@
         <FILE id="it4wSJ" name="Channels.h" compile="0" resource="0" file="Source/Configuration/Channels.h"/>
         <FILE id="O8ypxf" name="Constants.h" compile="0" resource="0" file="Source/Configuration/Constants.h"/>
         <FILE id="iV5taV" name="GeneralMidi.h" compile="0" resource="0" file="Source/Configuration/GeneralMidi.h"/>
+        <FILE id="Ekysw9" name="JuceConstants.h" compile="0" resource="0" file="Source/Configuration/JuceConstants.h"/>
         <FILE id="DqGTYm" name="Midi.h" compile="0" resource="0" file="Source/Configuration/Midi.h"/>
         <FILE id="nSQZyH" name="Samples.h" compile="0" resource="0" file="Source/Configuration/Samples.h"/>
         <FILE id="o1OyTo" name="Strings.h" compile="0" resource="0" file="Source/Configuration/Strings.h"/>

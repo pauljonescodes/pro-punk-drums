@@ -1,13 +1,3 @@
-/*
- ==============================================================================
- 
- CLRSamplerSound.h
- Created: 9 Dec 2023 11:30:35am
- Author:  paulm
- 
- ==============================================================================
- */
-
 #pragma once
 #include <JuceHeader.h>
 #include "../Configuration/Samples.h"
@@ -17,12 +7,12 @@ class PluginSynthesiserSound : public juce::SynthesiserSound
 public:
     
     PluginSynthesiserSound(const juce::String& name,
-                        juce::AudioFormatReader& source,
-                        const juce::BigInteger& midiNotes,
-                        int midiNoteForNormalPitch,
-                        double attackTimeSecs,
-                        double releaseTimeSecs,
-                        double maxSampleLengthSeconds);
+                           juce::AudioFormatReader& source,
+                           const juce::BigInteger& midiNotes,
+                           int midiNoteForNormalPitch,
+                           double attackTimeSecs,
+                           double releaseTimeSecs,
+                           double maxSampleLengthSeconds);
     
     /** Destructor. */
     ~PluginSynthesiserSound() override;

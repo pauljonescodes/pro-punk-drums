@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    SamplesParameterComponent.cpp
-    Created: 16 Dec 2023 12:02:19am
-    Author:  paulm
-
-  ==============================================================================
-*/
-
 #include "SamplesParameterComponent.h"
 #include "../PluginUtils.h"
 #include "../Configuration/Constants.h"
@@ -15,7 +5,7 @@
 #include "../Configuration/GeneralMidi.h"
 
 SamplesParameterComponent::SamplesParameterComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState& apvts)
-    : mApvts(apvts)
+: mApvts(apvts)
 {
     mLabel.reset(new juce::Label(std::to_string(midiNote) + "_label", generalmidi::midiNoteToNameMap.at(midiNote) + " " + PluginUtils::capitalizeFirstLetter(micId)));
     addAndMakeVisible(mLabel.get());
@@ -27,13 +17,13 @@ SamplesParameterComponent::SamplesParameterComponent(int midiNote, std::string m
     addAndMakeVisible(mGainSlider.get());
     auto& gainNormalizableRange = gainParameter->getNormalisableRange();
     mGainSlider->setRange(gainNormalizableRange.start, gainNormalizableRange.end, gainNormalizableRange.interval);
-    mGainSlider->setValue(gainParameter->getValue()); 
+    mGainSlider->setValue(gainParameter->getValue());
     mGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
-        apvts,
-        juce::String(gainParameterId),
-        *mGainSlider
-    );
-
+                                                                                             apvts,
+                                                                                             juce::String(gainParameterId),
+                                                                                             *mGainSlider
+                                                                                             );
+    
     auto panParameterId = PluginUtils::getParamId(midiNote, micId, constants::panId);
     auto* panParameter = apvts.getParameter(panParameterId);
     mPanSlider.reset(new juce::Slider(juce::Slider::SliderStyle::Rotary, juce::Slider::NoTextBox));
@@ -42,21 +32,21 @@ SamplesParameterComponent::SamplesParameterComponent(int midiNote, std::string m
     mPanSlider->setRange(panNormalizableRange.start, panNormalizableRange.end, panNormalizableRange.interval);
     mPanSlider->setValue(panParameter->getValue());
     mPanAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
-        apvts,
-        juce::String(panParameterId),
-        *mPanSlider
-        );
-
+                                                                                            apvts,
+                                                                                            juce::String(panParameterId),
+                                                                                            *mPanSlider
+                                                                                            );
+    
     auto phaseParameterId = PluginUtils::getParamId(midiNote, micId, constants::phaseId);
     auto* phaseParameter = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter(phaseParameterId));
     mInvertPhaseToggleButton.reset(new juce::ToggleButton(strings::invertPhase));
     addAndMakeVisible(mInvertPhaseToggleButton.get());
     mInvertPhaseToggleButton->setToggleState(phaseParameter->get(), juce::dontSendNotification);
     mInvertPhaseAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
-        apvts,
-        phaseParameterId,
-        *mInvertPhaseToggleButton
-    );
+                                                                                                    apvts,
+                                                                                                    phaseParameterId,
+                                                                                                    *mInvertPhaseToggleButton
+                                                                                                    );
 }
 
 SamplesParameterComponent::~SamplesParameterComponent()
@@ -77,7 +67,7 @@ void SamplesParameterComponent::resized()
     int labelHeight = 15; // Set the height for the label
     
     auto area = getLocalBounds().reduced(padding); // Reduce the entire area first for padding
-
+    
     mLabel->setBounds(area.removeFromTop(labelHeight));
     mInvertPhaseToggleButton->setBounds(area.removeFromLeft(toggleSize).reduced(0, padding));
     mPanSlider->setBounds(area.removeFromLeft(toggleSize).reduced(0, padding));

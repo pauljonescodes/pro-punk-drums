@@ -1,22 +1,12 @@
-/*
- ==============================================================================
- 
- CLRSamplerSound.cpp
- Created: 9 Dec 2023 11:30:35am
- Author:  paulm
- 
- ==============================================================================
- */
-
 #include "PluginSynthesiserSound.h"
 
 PluginSynthesiserSound::PluginSynthesiserSound(const juce::String& soundName,
-                                         juce::AudioFormatReader& source,
-                                         const juce::BigInteger& notes,
-                                         int midiNoteForNormalPitch,
-                                         double attackTimeSecs,
-                                         double releaseTimeSecs,
-                                         double maxSampleLengthSeconds) :
+                                               juce::AudioFormatReader& source,
+                                               const juce::BigInteger& notes,
+                                               int midiNoteForNormalPitch,
+                                               double attackTimeSecs,
+                                               double releaseTimeSecs,
+                                               double maxSampleLengthSeconds) :
 mSourceSampleRate(source.sampleRate),
 mName(soundName),
 mMidiNotes(notes),

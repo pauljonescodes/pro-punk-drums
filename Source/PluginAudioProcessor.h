@@ -1,28 +1,16 @@
-/*
- ==============================================================================
- 
- This file contains the basic framework code for a JUCE plugin processor.
- 
- ==============================================================================
- */
-
 #pragma once
-
 #include <JuceHeader.h>
 #include "Configuration/Samples.h"
 #include "Synthesiser/PluginSynthesiser.h"
 
-//==============================================================================
-/**
- */
 class PluginAudioProcessor  : public juce::AudioProcessor
 {
 public:
-    //==============================================================================
+    
     PluginAudioProcessor();
     ~PluginAudioProcessor() override;
     
-    //==============================================================================
+    
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
     
@@ -52,10 +40,10 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     
     void noteOnSynthesisers(int midiNoteNumber, float velocity);
-
+    
     std::vector<int> getMidiNotesVector();
     juce::AudioProcessorValueTreeState& getParameterValueTreeState() const;
-
+    
     void loadAndPlayMidiFile(const juce::File& midiFile);
 private:
     
@@ -63,11 +51,11 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState> mParameterValueTreeState;
     std::unique_ptr<PluginSynthesiser> mSynthesiserPtr;
     std::unique_ptr<juce::AudioBuffer<float>> mInternalBufferPtr;
-
+    
     std::vector<std::pair<double, juce::MidiMessage>> scheduledMidiEvents;
     long long currentSamplePosition = 0;
-
+    
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginAudioProcessor)
 };

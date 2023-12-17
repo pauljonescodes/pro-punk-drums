@@ -1,9 +1,7 @@
-
 #include <JuceHeader.h>
 #include "PluginSynthesiserVoice.h"
 #include "PluginSynthesiserSound.h"
 
-//==============================================================================
 PluginSynthesiserVoice::PluginSynthesiserVoice(
     juce::RangedAudioParameter& gainParameter,
     juce::RangedAudioParameter& panParameter,
@@ -27,7 +25,7 @@ void PluginSynthesiserVoice::startNote(int midiNoteNumber, float velocity, juce:
     {
         mSourceSamplePosition = 0.0;
         
-        mVelocityGain = 0.2f + velocity * 0.8f;
+        mVelocityGain = velocity;
         
         mAdsr.setSampleRate(sound->mSourceSampleRate);
         mAdsr.setParameters(sound->mAdsrParameters);
@@ -55,7 +53,7 @@ void PluginSynthesiserVoice::stopNote(float /*velocity*/, bool allowTailOff)
 void PluginSynthesiserVoice::pitchWheelMoved(int newValue) {}
 void PluginSynthesiserVoice::controllerMoved(int controllerNumber, int newValue) {}
 
-//==============================================================================
+
 void PluginSynthesiserVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
     if (auto* playingSound = static_cast<PluginSynthesiserSound*> (getCurrentlyPlayingSound().get()))
@@ -78,16 +76,15 @@ void PluginSynthesiserVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuf
             
             auto envelopeValue = mAdsr.getNextSample();
             
-            float pan = mPanParameter.getValue();
-            float panLeft = pan <= 0.0f ? 1.0f : 1.0f - pan;
-            float panRight = pan >= 0.0f ? 1.0f : 1.0f + pan;
+            float panValue = mPanParameter.getValue();
+            float panNormalisedValue = constants::panNormalizableRange.convertFrom0to1(panValue);
+            float panLeft = panNormalisedValue <= 0.0f ? 1.0f : 1.0f - panNormalisedValue;
+            float panRight = panNormalisedValue >= 0.0f ? 1.0f : 1.0f + panNormalisedValue;
             
             float phaseMultiplier = mInvertPhaseParameter.get() ? -1 : 1;
-            juce::NormalisableRange<float> range(-60.0f, 12.0f, 0.01f);
             float normalizedValue = mGainParameter.getValue(); // Get the normalized value
 
-            // Convert normalized value to dB
-            float dB = range.convertFrom0to1(normalizedValue);
+            float dB = constants::gainNormalizableRange.convertFrom0to1(normalizedValue);
 
             // Convert dB to linear gain
             float linearGain = std::pow(10.0f, dB / 20.0f);
