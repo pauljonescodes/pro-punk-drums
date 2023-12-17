@@ -17,6 +17,7 @@ class PluginSynthesiserVoice : public juce::SynthesiserVoice
 public:
     PluginSynthesiserVoice(
         juce::RangedAudioParameter& gainParameter,
+        juce::RangedAudioParameter& panParameter,
         juce::AudioParameterBool& phaseParameter
     );
     ~PluginSynthesiserVoice() override;
@@ -31,6 +32,7 @@ public:
 
 private:
     juce::RangedAudioParameter& mGainParameter;
+    juce::RangedAudioParameter& mPanParameter;
     juce::AudioParameterBool& mInvertPhaseParameter;
 
     float mVelocityGain = 0;

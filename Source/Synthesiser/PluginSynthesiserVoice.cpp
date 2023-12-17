@@ -6,9 +6,11 @@
 //==============================================================================
 PluginSynthesiserVoice::PluginSynthesiserVoice(
     juce::RangedAudioParameter& gainParameter,
+    juce::RangedAudioParameter& panParameter,
     juce::AudioParameterBool& phaseParameter
 ) :
     mGainParameter(gainParameter), 
+    mPanParameter(panParameter),
     mInvertPhaseParameter(phaseParameter)
 { }
 
@@ -76,7 +78,7 @@ void PluginSynthesiserVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuf
             
             auto envelopeValue = mAdsr.getNextSample();
             
-            float pan = 0.5;
+            float pan = mPanParameter.getValue();
             float panLeft = pan <= 0.0f ? 1.0f : 1.0f - pan;
             float panRight = pan >= 0.0f ? 1.0f : 1.0f + pan;
             

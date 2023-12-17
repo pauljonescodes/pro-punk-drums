@@ -28,12 +28,15 @@ public:
 private:
 	juce::AudioProcessorValueTreeState& mApvts;
 
+	std::unique_ptr <juce::Label> mLabel;
+
 	std::unique_ptr <juce::Slider> mGainSlider;
-	std::unique_ptr <juce::Label> mGainLabel;
 	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mGainAttachment;
 
+	std::unique_ptr <juce::Slider> mPanSlider;
+	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mPanAttachment;
+
 	std::unique_ptr <juce::ToggleButton> mInvertPhaseToggleButton;
-	std::unique_ptr <juce::Label> mInvertPhaseLabel;
 	std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mInvertPhaseAttachment;
 
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SamplesParameterComponent)

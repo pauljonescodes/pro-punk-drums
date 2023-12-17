@@ -4,6 +4,7 @@
 #include "Synthesiser/PluginSynthesiser.h"
 #include "PluginUtils.h"
 #include "Configuration/Midi.h"
+#include "Configuration/Channels.h"
 #include <juce_core/juce_core.h>
 #include <juce_audio_basics/juce_audio_basics.h>
 
@@ -15,13 +16,13 @@ PluginAudioProcessor::PluginAudioProcessor()
 #if ! JucePlugin_IsSynth
 		.withInput("Input", juce::AudioChannelSet::stereo(), true)
 #endif
-		.withOutput("Output", juce::AudioChannelSet::stereo(), true)
-		.withOutput("1 Kick", juce::AudioChannelSet::stereo(), true) 
-		.withOutput("2 Snare", juce::AudioChannelSet::stereo(), true)
-		.withOutput("3 Toms", juce::AudioChannelSet::stereo(), true)
-		.withOutput("4 Hi-hat", juce::AudioChannelSet::stereo(), true)
-		.withOutput("5 Cymbals", juce::AudioChannelSet::stereo(), true)
-		.withOutput("6 Percussion", juce::AudioChannelSet::stereo(), true)
+		.withOutput(channels::outputName, juce::AudioChannelSet::stereo(), true)
+		.withOutput(channels::kickName, juce::AudioChannelSet::stereo(), true) 
+		.withOutput(channels::snareName, juce::AudioChannelSet::stereo(), true)
+		.withOutput(channels::tomsName, juce::AudioChannelSet::stereo(), true)
+		.withOutput(channels::hiHatName, juce::AudioChannelSet::stereo(), true)
+		.withOutput(channels::cymbalsName, juce::AudioChannelSet::stereo(), true)
+		.withOutput(channels::percussionName, juce::AudioChannelSet::stereo(), true)
 #endif
 	), mParameterValueTreeState(std::make_unique<juce::AudioProcessorValueTreeState>(*this,
 		nullptr, juce::Identifier("plugin_params"), createParameterLayout()))

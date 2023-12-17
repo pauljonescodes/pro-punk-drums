@@ -11,48 +11,52 @@
 #include "SamplesParameterComponent.h"
 #include "../PluginUtils.h"
 #include "../Configuration/Constants.h"
+#include "../Configuration/Strings.h"
+#include "../Configuration/GeneralMidi.h"
 
 SamplesParameterComponent::SamplesParameterComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState& apvts)
     : mApvts(apvts)
 {
+    mLabel.reset(new juce::Label(std::to_string(midiNote) + "_label", generalmidi::midiNoteToNameMap.at(midiNote) + " " + PluginUtils::capitalizeFirstLetter(micId)));
+    addAndMakeVisible(mLabel.get());
+    
+    // Initialize gain slider and label
     auto gainParameterId = PluginUtils::getParamId(midiNote, micId, constants::gainId);
     auto* gainParameter = apvts.getParameter(gainParameterId);
-
-    // Initialize gain slider and label
     mGainSlider.reset(new juce::Slider("Gain Slider"));
     addAndMakeVisible(mGainSlider.get());
-    auto& normalizableRange = gainParameter->getNormalisableRange();
-    mGainSlider->setRange(normalizableRange.start, normalizableRange.end, normalizableRange.interval);
+    auto& gainNormalizableRange = gainParameter->getNormalisableRange();
+    mGainSlider->setRange(gainNormalizableRange.start, gainNormalizableRange.end, gainNormalizableRange.interval);
     mGainSlider->setValue(gainParameter->getValue()); 
-        const std::string test = "";
-
     mGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
         apvts,
         juce::String(gainParameterId),
         *mGainSlider
-        );
+    );
 
-    mGainLabel.reset(new juce::Label(gainParameter->getParameterID() + "_label", gainParameter->getName(99)));
-    addAndMakeVisible(mGainLabel.get());
-    mGainLabel->attachToComponent(mGainSlider.get(), true);
+    auto panParameterId = PluginUtils::getParamId(midiNote, micId, constants::panId);
+    auto* panParameter = apvts.getParameter(panParameterId);
+    mPanSlider.reset(new juce::Slider(juce::Slider::SliderStyle::Rotary, juce::Slider::NoTextBox));
+    addAndMakeVisible(mPanSlider.get());
+    auto& panNormalizableRange = panParameter->getNormalisableRange();
+    mPanSlider->setRange(panNormalizableRange.start, panNormalizableRange.end, panNormalizableRange.interval);
+    mPanSlider->setValue(panParameter->getValue());
+    mPanAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+        apvts,
+        juce::String(panParameterId),
+        *mPanSlider
+        );
 
     auto phaseParameterId = PluginUtils::getParamId(midiNote, micId, constants::phaseId);
     auto* phaseParameter = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter(phaseParameterId));
-
-    // Initialize phase toggle button and label
-    mInvertPhaseToggleButton.reset(new juce::ToggleButton("Invert Phase"));
+    mInvertPhaseToggleButton.reset(new juce::ToggleButton(strings::invertPhase));
     addAndMakeVisible(mInvertPhaseToggleButton.get());
     mInvertPhaseToggleButton->setToggleState(phaseParameter->get(), juce::dontSendNotification);
-
-    mInvertPhaseLabel.reset(new juce::Label("Phase Label", "Invert Phase"));
-    addAndMakeVisible(mInvertPhaseLabel.get());
-    mInvertPhaseLabel->attachToComponent(mInvertPhaseToggleButton.get(), true);
-
     mInvertPhaseAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
         apvts,
         phaseParameterId,
         *mInvertPhaseToggleButton
-        );
+    );
 }
 
 SamplesParameterComponent::~SamplesParameterComponent()
@@ -68,11 +72,14 @@ void SamplesParameterComponent::paint(juce::Graphics& g)
 
 void SamplesParameterComponent::resized()
 {
-    auto area = getLocalBounds(); // Get the local bounds of the component
-    auto sliderArea = area.removeFromTop(50).removeFromRight(area.getWidth() - 250).reduced(10, 0);
-    mGainSlider->setBounds(sliderArea);
+    int padding = 10;
+    int toggleSize = 75;
+    int labelHeight = 15; // Set the height for the label
+    
+    auto area = getLocalBounds().reduced(padding); // Reduce the entire area first for padding
 
-    auto buttonArea = area.removeFromTop(50); // Assuming the height of the button area is 50
-    mInvertPhaseToggleButton->setBounds(0, 0 , 50, 50);
-    mInvertPhaseLabel->setBounds(buttonArea);
+    mLabel->setBounds(area.removeFromTop(labelHeight));
+    mInvertPhaseToggleButton->setBounds(area.removeFromLeft(toggleSize).reduced(0, padding));
+    mPanSlider->setBounds(area.removeFromLeft(toggleSize).reduced(0, padding));
+    mGainSlider->setBounds(area);
 }

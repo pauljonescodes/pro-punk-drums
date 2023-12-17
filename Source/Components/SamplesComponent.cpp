@@ -45,7 +45,7 @@ void SamplesComponent::paint(juce::Graphics& g)
 void SamplesComponent::resized()
 {
     viewport.setBounds(getLocalBounds());
-    int heightPerComponent = 50;
+    int heightPerComponent = 100;
     int totalHeight = heightPerComponent * mSamplesParameterComponents.size();
 
     container.setBounds(0, 0, viewport.getWidth(), totalHeight);
