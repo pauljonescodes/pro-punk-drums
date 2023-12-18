@@ -4,11 +4,11 @@
 #include "../Configuration/Strings.h"
 
 
-DrumsComponent::DrumsComponent(std::vector<int> midiNotesVector)
+DrumsComponent::DrumsComponent(std::vector<int> midiNotesVector, juce::AudioProcessorValueTreeState& apvts)
 {
     mVelocitySlider = std::make_unique<juce::Slider>();
     mVelocitySlider->setRange(0, 127, 1);
-    mVelocitySlider->setValue(64);
+    mVelocitySlider->setValue(100);
     
     addAndMakeVisible(mVelocitySlider.get());
     
@@ -36,6 +36,16 @@ DrumsComponent::DrumsComponent(std::vector<int> midiNotesVector)
                                                        juce::File::getSpecialLocation(juce::File::userDesktopDirectory),
                                                        "*.mid");
     
+    auto* multiOutParameter = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter(constants::multiOutId));
+    mMultiOutToggleButton.reset(new juce::ToggleButton(strings::multiOut));
+    addAndMakeVisible(mMultiOutToggleButton.get());
+    mMultiOutToggleButton->setToggleState(multiOutParameter->get(), juce::dontSendNotification);
+    mMultiOutAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
+        apvts,
+        constants::multiOutId,
+        *mMultiOutToggleButton
+        );
+
     resized();
 }
 
@@ -55,22 +65,25 @@ void DrumsComponent::paint(juce::Graphics& g)
 void DrumsComponent::resized()
 {
     auto area = getLocalBounds();
-    
-    // Allocate space for the slider at the top
+
+    // Allocate space at the top
     auto topArea = area.removeFromTop(50); // Adjust the height as needed
-    auto velocitySliderArea = topArea.removeFromRight(topArea.getWidth() - 64).reduced(50, 0);
-    
-    mVelocitySlider->setBounds(velocitySliderArea);
-    
-    auto midiFileButtonArea = topArea.reduced(10, 0); // Use the remaining part of topArea
+
+    auto midiFileButtonArea = topArea.removeFromRight(75).reduced(5, 5);
     mMidiFileButton->setBounds(midiFileButtonArea);
-    
-    // Layout for buttons
+
+    auto toggleButtonArea = topArea.removeFromLeft(75).reduced(10, 0);
+    mMultiOutToggleButton->setBounds(toggleButtonArea);
+
+    auto velocitySliderArea = topArea.reduced(50, 0);
+    mVelocitySlider->setBounds(velocitySliderArea);
+
+    // Layout for the MIDI note buttons
     int numRows = std::max(1, (area.getHeight()) / 125);
     int numCols = std::max(1, area.getWidth() / 125);
     int buttonWidth = area.getWidth() / numCols;
     int buttonHeight = area.getHeight() / numRows;
-    
+
     for (int i = 0; i < mMidiNoteButtons.size(); ++i)
     {
         int row = i / numCols;

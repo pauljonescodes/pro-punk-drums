@@ -1,5 +1,14 @@
 # Notes
 
+## Values
+
+Cymbals -20
+Hihat -25
+Kick -15
+Percussion -10
+Snare -10
+Toms -7
+
 ## Original
 
 ```C++

@@ -19,12 +19,10 @@ private:
     // access the processor object that created it.
     PluginAudioProcessor& mAudioProcessor;
     
-    
     std::unique_ptr<juce::TabbedComponent> mTabbedComponent;
     std::unique_ptr<DrumsComponent> mDrumsComponent;
     std::unique_ptr<SamplesComponent> mSamplesComponent;
     juce::OwnedArray<juce::TextButton> mMidiNoteButtons;
-    
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginAudioProcessorEditor)
 };

@@ -26,7 +26,7 @@ SamplesParameterComponent::SamplesParameterComponent(int midiNote, std::string m
     
     auto panParameterId = PluginUtils::getParamId(midiNote, micId, constants::panId);
     auto* panParameter = apvts.getParameter(panParameterId);
-    mPanSlider.reset(new juce::Slider(juce::Slider::SliderStyle::Rotary, juce::Slider::NoTextBox));
+    mPanSlider.reset(new juce::Slider(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::NoTextBox));
     addAndMakeVisible(mPanSlider.get());
     auto& panNormalizableRange = panParameter->getNormalisableRange();
     mPanSlider->setRange(panNormalizableRange.start, panNormalizableRange.end, panNormalizableRange.interval);

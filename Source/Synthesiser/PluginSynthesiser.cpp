@@ -47,9 +47,10 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
         
         float blendRatio = position - lowerIntensityIndex;
         float perceivedBlendRatio = lowerIntensityIndex != higherIntensityIndex ? std::pow(blendRatio, 0.25) : 0.0f;
+        float velocityFactor = std::sqrt(velocity);
         
         auto& lowerIntensity = intensities[lowerIntensityIndex];
-        auto samplesSize = lowerIntensity.variations.size();
+        int samplesSize = lowerIntensity.variations.size();
         
         if (lowerIntensity.currentVariationIndex < samplesSize)
         {
@@ -63,7 +64,7 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
                 if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
                 {
                     stopVoice(voice.get(), 1.0f, true);
-                    startVoice(voice.get(), sound.get(), midiChannel, midiNoteNumber, 1.0f - perceivedBlendRatio);
+                    startVoice(voice.get(), sound.get(), midiChannel, midiNoteNumber, (1.0f - perceivedBlendRatio) * velocityFactor);
                 }
             }
             
@@ -82,7 +83,7 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
                 if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
                 {
                     stopVoice(voice.get(), 1.0f, true);
-                    startVoice(voice.get(), sound.get(), midiChannel, midiNoteNumber, perceivedBlendRatio);
+                    startVoice(voice.get(), sound.get(), midiChannel, midiNoteNumber, perceivedBlendRatio * velocityFactor);
                 }
             }
             

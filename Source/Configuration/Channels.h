@@ -12,6 +12,8 @@ const int hiHatIndex = 4;
 const int cymbalsIndex = 5;
 const int percussionIndex = 6;
 
+const int size = 7;
+
 const std::string outputName = "Output";
 const std::string kickName = "1 Kick";
 const std::string snareName = "2 Snare";

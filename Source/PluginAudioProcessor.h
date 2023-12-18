@@ -10,7 +10,6 @@ public:
     PluginAudioProcessor();
     ~PluginAudioProcessor() override;
     
-    
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
     
@@ -49,8 +48,9 @@ private:
     
     std::unique_ptr<juce::AudioFormatManager> mAudioFormatManager;
     std::unique_ptr<juce::AudioProcessorValueTreeState> mParameterValueTreeState;
-    std::unique_ptr<PluginSynthesiser> mSynthesiserPtr;
-    std::unique_ptr<juce::AudioBuffer<float>> mInternalBufferPtr;
+    
+    std::vector<std::unique_ptr<PluginSynthesiser>> mSynthesiserPtrVector;
+    std::vector<std::unique_ptr<juce::AudioBuffer<float>>> mInternalBufferPtrVector;
     
     std::vector<std::pair<double, juce::MidiMessage>> scheduledMidiEvents;
     long long currentSamplePosition = 0;
