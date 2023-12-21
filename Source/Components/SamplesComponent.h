@@ -5,9 +5,9 @@
 class SamplesComponent : public juce::Component
 {
 public:
-    SamplesComponent(const std::vector<int> midiNotesVector, juce::AudioProcessorValueTreeState& apvts);
+    SamplesComponent(const std::vector<int> midiNotesVector, juce::AudioProcessorValueTreeState& apvts, std::function<void(int, float, std::string)> onDrumMidiButtonClicked);
     ~SamplesComponent() override;
-    
+
     void paint(juce::Graphics&) override;
     void resized() override;
     

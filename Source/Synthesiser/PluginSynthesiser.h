@@ -10,14 +10,15 @@ class PluginSynthesiser : public juce::Synthesiser {
 public:
     PluginSynthesiser();
     
+    virtual void noteOn(int midiChannel, int midiNoteNumber, float velocity, std::string micId);
     virtual void noteOn(int midiChannel, int midiNoteNumber, float velocity) override;
     virtual void noteOff(int midiChannel, int midiNoteNumber, float velocity, bool allowTailOff) override;
     
-    void addSample(
-                   const std::string resourceName,
+    void addSample(const std::string resourceName,
                    const int bitRate,
                    const int bitDepth,
                    const int midiNote,
+                   const std::string micId,
                    const std::vector<int> stopsMidiNotes,
                    const int intensityIndex,
                    const int variationIndex,
@@ -33,15 +34,17 @@ protected:
     
     struct Microphone {
         PluginSynthesiserSound::Ptr sound;
-        std::unique_ptr<PluginSynthesiserVoice> voice;
+        std::shared_ptr<PluginSynthesiserVoice> voice;
         
-        Microphone(PluginSynthesiserSound::Ptr s, std::unique_ptr<PluginSynthesiserVoice> v)
+        Microphone() = default;
+
+        Microphone(PluginSynthesiserSound::Ptr s, std::shared_ptr<PluginSynthesiserVoice> v)
         : sound(std::move(s)), voice(std::move(v))
         {}
     };
     
     struct Variation {
-        std::vector<Microphone> microphones;
+        std::map<std::string, Microphone> microphones;
         
         Variation() {}
     };

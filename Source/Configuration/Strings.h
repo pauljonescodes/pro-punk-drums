@@ -7,5 +7,5 @@ namespace strings {
 	const std::string multiOut = "Multi-Out";
 	const std::string drums = "Drums";
 	const std::string samples = "Samples";
-	const std::string mixer = "Mixer";
+	const std::string outputs = "Outputs";
 }

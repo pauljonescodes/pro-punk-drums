@@ -19,20 +19,20 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor(PluginAudioProcessor& p)
 	addAndMakeVisible(mTabbedComponent.get());
 
 	mDrumsComponent.reset(new DrumsComponent(mAudioProcessor.getMidiNotesVector(), apvts));
-	auto drumsComponent = mDrumsComponent.get();
-	drumsComponent->mOnDrumMidiButtonClicked = ([this](int midiNote, float midiVelocity) -> void {
+	mDrumsComponent->mOnDrumMidiButtonClicked = ([this](int midiNote, float midiVelocity) -> void {
 		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity);
 		});
-	drumsComponent->mOnMidiFileChoser = ([this](juce::File midiFile) -> void {
+	mDrumsComponent->mOnMidiFileChoser = ([this](juce::File midiFile) -> void {
 		mAudioProcessor.loadAndPlayMidiFile(midiFile);
 		});
-	mTabbedComponent->addTab(strings::drums, juce::Colours::lightgrey, drumsComponent, true);
+	mTabbedComponent->addTab(strings::drums, juce::Colours::lightgrey, mDrumsComponent.get(), true);
+	
+	mSamplesComponent.reset(new SamplesComponent(mAudioProcessor.getMidiNotesVector(), apvts, ([this](int midiNote, float midiVelocity, std::string micId) -> void {
+		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity, micId);
+	})));
 
-	mSamplesComponent.reset(new SamplesComponent(mAudioProcessor.getMidiNotesVector(), apvts));
-	auto samplesComponent = mSamplesComponent.get();
-
-	mTabbedComponent->addTab(strings::samples, juce::Colours::lightgrey, samplesComponent, true);
-	mTabbedComponent->addTab(strings::mixer, juce::Colours::lightgrey, new juce::Component(), true);
+	mTabbedComponent->addTab(strings::samples, juce::Colours::lightgrey, mSamplesComponent.get(), true);
+	mTabbedComponent->addTab(strings::outputs, juce::Colours::lightgrey, new juce::Component(), true);
 }
 
 PluginAudioProcessorEditor::~PluginAudioProcessorEditor()

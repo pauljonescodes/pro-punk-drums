@@ -5,10 +5,15 @@
 #include "../Configuration/GeneralMidi.h"
 
 SamplesParameterComponent::SamplesParameterComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState& apvts)
-: mApvts(apvts)
+: mApvts(apvts), mMicId(micId)
 {
     mLabel.reset(new juce::Label(std::to_string(midiNote) + "_label", generalmidi::midiNoteToNameMap.at(midiNote) + " " + PluginUtils::capitalizeFirstLetter(micId)));
     addAndMakeVisible(mLabel.get());
+
+    mNoteOnButton.reset(new juce::TextButton(std::to_string(midiNote) + " " + micId));
+    mNoteOnButton->setComponentID(juce::String(midiNote));
+    addAndMakeVisible(mNoteOnButton.get());
+    mNoteOnButton->addListener(this);
     
     // Initialize gain slider and label
     auto gainParameterId = PluginUtils::getParamId(midiNote, micId, constants::gainId);
@@ -64,12 +69,28 @@ void SamplesParameterComponent::resized()
 {
     int padding = 10;
     int toggleSize = 75;
-    int labelHeight = 15; // Set the height for the label
-    
-    auto area = getLocalBounds().reduced(padding); // Reduce the entire area first for padding
-    
+    int buttonWidth = 75;
+    int labelHeight = 15; 
+
+    auto area = getLocalBounds().reduced(padding); 
+
     mLabel->setBounds(area.removeFromTop(labelHeight));
+
     mInvertPhaseToggleButton->setBounds(area.removeFromLeft(toggleSize).reduced(0, padding));
     mPanSlider->setBounds(area.removeFromLeft(toggleSize).reduced(0, padding));
+
+    auto buttonArea = area.removeFromRight(buttonWidth).reduced(padding, padding);
+
     mGainSlider->setBounds(area);
+    mNoteOnButton->setBounds(buttonArea);
+}
+
+void SamplesParameterComponent::buttonClicked(juce::Button* button)
+{
+    const juce::String componentID = button->getComponentID();
+    int midiNoteValue = componentID.getIntValue();
+
+    if (mOnDrumMidiButtonClicked.has_value()) {
+        mOnDrumMidiButtonClicked.value()(midiNoteValue, 0.75f, mMicId);
+    }
 }

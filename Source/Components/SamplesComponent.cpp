@@ -4,7 +4,7 @@
 #include "SamplesParameterComponent.h"
 #include "../Configuration/GeneralMidi.h"
 
-SamplesComponent::SamplesComponent(const std::vector<int> midiNotesVector, juce::AudioProcessorValueTreeState& apvts)
+SamplesComponent::SamplesComponent(const std::vector<int> midiNotesVector, juce::AudioProcessorValueTreeState& apvts, std::function<void(int, float, std::string)> onDrumMidiButtonClicked)
 {
     addAndMakeVisible(viewport);
     viewport.setViewedComponent(&container, false);
@@ -16,6 +16,7 @@ SamplesComponent::SamplesComponent(const std::vector<int> midiNotesVector, juce:
         
         for (const std::string& micId : micIds) {
             auto* component = new SamplesParameterComponent(midiNote, micId, apvts);
+            component->mOnDrumMidiButtonClicked = onDrumMidiButtonClicked;
             mSamplesParameterComponents.add(component);
             container.addAndMakeVisible(component);
         }

@@ -136,6 +136,7 @@ PluginAudioProcessor::PluginAudioProcessor()
 					samples::bitRate,
 					samples::bitDepth,
 					midiNote,
+					micId,
 					generalmidi::midiNoteToStopNotesMap.at(midiNote),
 					velocityIndex,
 					variationIndex,
@@ -418,6 +419,16 @@ void PluginAudioProcessor::noteOnSynthesisers(int midiNoteNumber, const float ve
 	for (const auto& synthesiser : mSynthesiserPtrVector)
 	{
 		synthesiser->noteOn(0, midiNoteNumber, velocity);
+	}
+
+}
+
+
+void PluginAudioProcessor::noteOnSynthesisers(int midiNoteNumber, const float velocity, std::string micId)
+{
+	for (const auto& synthesiser : mSynthesiserPtrVector)
+	{
+		synthesiser->noteOn(0, midiNoteNumber, velocity, micId);
 	}
 
 }

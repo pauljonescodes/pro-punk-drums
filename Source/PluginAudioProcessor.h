@@ -39,6 +39,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     
     void noteOnSynthesisers(int midiNoteNumber, float velocity);
+    void noteOnSynthesisers(int midiNoteNumber, float velocity, std::string micId);
     
     std::vector<int> getMidiNotesVector();
     juce::AudioProcessorValueTreeState& getParameterValueTreeState() const;
@@ -52,8 +53,8 @@ private:
     std::vector<std::unique_ptr<PluginSynthesiser>> mSynthesiserPtrVector;
     std::vector<std::unique_ptr<juce::AudioBuffer<float>>> mInternalBufferPtrVector;
     
-    std::vector<std::pair<double, juce::MidiMessage>> scheduledMidiEvents;
-    long long currentSamplePosition = 0;
+    std::vector<std::pair<double, juce::MidiMessage>> mScheduledMidiEvents;
+    long long mCurrentSamplePosition = 0;
     
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     
