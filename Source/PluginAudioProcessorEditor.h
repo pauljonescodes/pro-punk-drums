@@ -2,6 +2,7 @@
 
 #include <JuceHeader.h>
 #include "PluginAudioProcessor.h"
+#include "PluginPresetManager.h"
 #include "Components/DrumsComponent.h"
 #include "Components/SamplesComponent.h"
 

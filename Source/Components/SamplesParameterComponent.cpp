@@ -16,7 +16,7 @@ SamplesParameterComponent::SamplesParameterComponent(int midiNote, std::string m
     mNoteOnButton->addListener(this);
     
     // Initialize gain slider and label
-    auto gainParameterId = PluginUtils::getParamId(midiNote, micId, constants::gainId);
+    auto gainParameterId = PluginUtils::getMidiNoteParameterId(midiNote, micId, parameters::gainId);
     auto* gainParameter = apvts.getParameter(gainParameterId);
     mGainSlider.reset(new juce::Slider("Gain Slider"));
     addAndMakeVisible(mGainSlider.get());
@@ -29,7 +29,7 @@ SamplesParameterComponent::SamplesParameterComponent(int midiNote, std::string m
                                                                                              *mGainSlider
                                                                                              );
     
-    auto panParameterId = PluginUtils::getParamId(midiNote, micId, constants::panId);
+    auto panParameterId = PluginUtils::getMidiNoteParameterId(midiNote, micId, parameters::panId);
     auto* panParameter = apvts.getParameter(panParameterId);
     mPanSlider.reset(new juce::Slider(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::NoTextBox));
     addAndMakeVisible(mPanSlider.get());
@@ -42,7 +42,7 @@ SamplesParameterComponent::SamplesParameterComponent(int midiNote, std::string m
                                                                                             *mPanSlider
                                                                                             );
     
-    auto phaseParameterId = PluginUtils::getParamId(midiNote, micId, constants::phaseId);
+    auto phaseParameterId = PluginUtils::getMidiNoteParameterId(midiNote, micId, parameters::phaseId);
     auto* phaseParameter = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter(phaseParameterId));
     mInvertPhaseToggleButton.reset(new juce::ToggleButton(strings::invertPhase));
     addAndMakeVisible(mInvertPhaseToggleButton.get());

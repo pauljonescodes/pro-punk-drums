@@ -15,12 +15,12 @@ const int percussionIndex = 6;
 const int size = 7;
 
 const std::string outputName = "Output";
-const std::string kickName = "1 Kick";
-const std::string snareName = "2 Snare";
-const std::string tomsName = "3 Toms";
-const std::string hiHatName = "4 Hi-hat";
-const std::string cymbalsName = "5 Cymbals";
-const std::string percussionName = "6 Percussion";
+const std::string kickName = "Kick";
+const std::string snareName = "Snare";
+const std::string tomsName = "Toms";
+const std::string hiHatName = "Hi-hat";
+const std::string cymbalsName = "Cymbals";
+const std::string percussionName = "Perc";
 
 std::map<int, std::string> channelIndexToNameMap = {
     { channels::outputIndex, channels::outputName },

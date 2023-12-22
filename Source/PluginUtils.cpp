@@ -34,14 +34,24 @@ std::string PluginUtils::capitalizeFirstLetter(const std::string& str)
     return capitalized;
 }
 
-std::string PluginUtils::getParamId(int midiNote, std::string micId, std::string param)
+std::string PluginUtils::getMidiNoteParameterId(int midiNote, std::string micId, std::string parameterId)
 {
     if (micId.size() > 0) {
-        return std::to_string(midiNote) + "_" + micId + "_" + param;
+        return std::to_string(midiNote) + "_" + micId + "_" + parameterId;
     }
     else {
-        return std::to_string(midiNote) + "_" + param;
+        return std::to_string(midiNote) + "_" + parameterId;
     }
+}
+
+std::string PluginUtils::getEqualizationParameterId(std::string channelName, std::string equalitizationTypeId, std::string equalizationSubtypeId)
+{
+    return PluginUtils::toSnakeCase(channelName) + "_" + PluginUtils::toSnakeCase(equalitizationTypeId) + "_" + PluginUtils::toSnakeCase(equalizationSubtypeId);
+}
+
+std::string PluginUtils::getChannelParameterId(std::string channelName, std::string parameterId)
+{
+    return PluginUtils::toSnakeCase(channelName) + "_" + parameterId;
 }
 
 std::map<int, std::set<std::string>> PluginUtils::getUniqueMidiNoteMicCombinations()

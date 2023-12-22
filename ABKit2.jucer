@@ -938,6 +938,10 @@
       </GROUP>
     </GROUP>
     <GROUP id="{4F269486-30C8-FFDF-A864-4F5F2C1A2354}" name="Source">
+      <FILE id="ZkpecM" name="PluginPresetManager.cpp" compile="1" resource="0"
+            file="Source/PluginPresetManager.cpp"/>
+      <FILE id="dnlCeq" name="PluginPresetManager.h" compile="0" resource="0"
+            file="Source/PluginPresetManager.h"/>
       <FILE id="fM2KyD" name="PluginUtils.cpp" compile="1" resource="0" file="Source/PluginUtils.cpp"/>
       <FILE id="n15p7U" name="PluginUtils.h" compile="0" resource="0" file="Source/PluginUtils.h"/>
       <FILE id="BVxg3g" name="PluginAudioProcessor.cpp" compile="1" resource="0"
@@ -967,6 +971,10 @@
               file="Source/Components/DrumsComponent.cpp"/>
         <FILE id="YGVArC" name="DrumsComponent.h" compile="0" resource="0"
               file="Source/Components/DrumsComponent.h"/>
+        <FILE id="iNvWKh" name="PresetComponent.cpp" compile="1" resource="0"
+              file="Source/Components/PresetComponent.cpp"/>
+        <FILE id="xWHbwc" name="PresetComponent.h" compile="0" resource="0"
+              file="Source/Components/PresetComponent.h"/>
         <FILE id="hBVOOR" name="SamplesComponent.cpp" compile="1" resource="0"
               file="Source/Components/SamplesComponent.cpp"/>
         <FILE id="eHKljJ" name="SamplesComponent.h" compile="0" resource="0"
@@ -996,6 +1004,7 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
@@ -1021,6 +1030,7 @@
         <MODULEPATH id="juce_graphics" path="../../modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../modules"/>
+        <MODULEPATH id="juce_dsp" path="../../modules"/>
       </MODULEPATHS>
     </VS2022>
     <XCODE_MAC targetFolder="Builds/MacOSX">
@@ -1041,6 +1051,7 @@
         <MODULEPATH id="juce_graphics" path="../../juce"/>
         <MODULEPATH id="juce_gui_basics" path="../../juce"/>
         <MODULEPATH id="juce_gui_extra" path="../../juce"/>
+        <MODULEPATH id="juce_dsp" path="../../modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>
