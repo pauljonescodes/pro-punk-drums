@@ -16,42 +16,48 @@ std::string PluginUtils::toSnakeCase(const std::string& str) {
     return result;
 }
 
+std::string PluginUtils::toTitleCase(const std::string& str) {
+    std::string result;
+    bool nextUpper = false;
+
+    for (char ch : str) {
+        if (ch == '_') {
+            nextUpper = true; 
+            result += " ";
+        }
+        else if (nextUpper) {
+            result += std::toupper(ch);
+            nextUpper = false; // Reset the flag
+        }
+        else {
+            if (result.empty()) { // first letter in lowercase for camelCase
+                result += std::tolower(ch);
+            }
+            else {
+                result += ch; // preserve the original case for the rest
+            }
+        }
+    }
+
+    return result;
+}
+
 bool PluginUtils::isNumeric(const std::string& str) {
     return !str.empty() && std::find_if(str.begin(),
                                         str.end(), [](unsigned char c) { return !std::isdigit(c); }) == str.end();
 }
 
-std::string PluginUtils::capitalizeFirstLetter(const std::string& str) 
-{
-    if (str.empty()) {
-        return str;
+std::string PluginUtils::joinId(const std::vector<std::string>& strings) {
+    std::ostringstream result;
+    for (size_t i = 0; i < strings.size(); ++i) {
+        if (!strings[i].empty()) {
+            if (!result.str().empty()) {
+                result << "_";
+            }
+            result << strings[i];
+        }
     }
-    
-    std::string capitalized = str;
-    if (std::islower(capitalized[0])) {
-        capitalized[0] = std::toupper(capitalized[0]);
-    }
-    return capitalized;
-}
-
-std::string PluginUtils::getMidiNoteParameterId(int midiNote, std::string micId, std::string parameterId)
-{
-    if (micId.size() > 0) {
-        return std::to_string(midiNote) + "_" + micId + "_" + parameterId;
-    }
-    else {
-        return std::to_string(midiNote) + "_" + parameterId;
-    }
-}
-
-std::string PluginUtils::getEqualizationParameterId(std::string channelName, std::string equalitizationTypeId, std::string equalizationSubtypeId)
-{
-    return PluginUtils::toSnakeCase(channelName) + "_" + PluginUtils::toSnakeCase(equalitizationTypeId) + "_" + PluginUtils::toSnakeCase(equalizationSubtypeId);
-}
-
-std::string PluginUtils::getChannelParameterId(std::string channelName, std::string parameterId)
-{
-    return PluginUtils::toSnakeCase(channelName) + "_" + parameterId;
+    return PluginUtils::toSnakeCase(result.str());
 }
 
 std::map<int, std::set<std::string>> PluginUtils::getUniqueMidiNoteMicCombinations()

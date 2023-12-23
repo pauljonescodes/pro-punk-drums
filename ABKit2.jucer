@@ -967,10 +967,18 @@
               file="Source/Synthesiser/PluginSynthesiser.h"/>
       </GROUP>
       <GROUP id="{91AD8FAC-EF24-BE9E-B417-D983B88C88CF}" name="Components">
+        <FILE id="syuRor" name="OutputsComponent.cpp" compile="1" resource="0"
+              file="Source/Components/OutputsComponent.cpp"/>
+        <FILE id="c3DS10" name="OutputsComponent.h" compile="0" resource="0"
+              file="Source/Components/OutputsComponent.h"/>
         <FILE id="SSq1xN" name="DrumsComponent.cpp" compile="1" resource="0"
               file="Source/Components/DrumsComponent.cpp"/>
         <FILE id="YGVArC" name="DrumsComponent.h" compile="0" resource="0"
               file="Source/Components/DrumsComponent.h"/>
+        <FILE id="xX5IaA" name="OutputParametersComponent.cpp" compile="1"
+              resource="0" file="Source/Components/OutputParametersComponent.cpp"/>
+        <FILE id="olxVh6" name="OutputParametersComponent.h" compile="0" resource="0"
+              file="Source/Components/OutputParametersComponent.h"/>
         <FILE id="iNvWKh" name="PresetComponent.cpp" compile="1" resource="0"
               file="Source/Components/PresetComponent.cpp"/>
         <FILE id="xWHbwc" name="PresetComponent.h" compile="0" resource="0"
@@ -979,14 +987,14 @@
               file="Source/Components/SamplesComponent.cpp"/>
         <FILE id="eHKljJ" name="SamplesComponent.h" compile="0" resource="0"
               file="Source/Components/SamplesComponent.h"/>
-        <FILE id="eDXIcm" name="SamplesParameterComponent.cpp" compile="1"
-              resource="0" file="Source/Components/SamplesParameterComponent.cpp"/>
-        <FILE id="EsGN7P" name="SamplesParameterComponent.h" compile="0" resource="0"
-              file="Source/Components/SamplesParameterComponent.h"/>
+        <FILE id="eDXIcm" name="SampleParametersComponent.cpp" compile="1"
+              resource="0" file="Source/Components/SampleParametersComponent.cpp"/>
+        <FILE id="EsGN7P" name="SampleParametersComponent.h" compile="0" resource="0"
+              file="Source/Components/SampleParametersComponent.h"/>
       </GROUP>
       <GROUP id="{174326FA-B300-8EB3-EC61-A97E87DA421F}" name="Configuration">
         <FILE id="it4wSJ" name="Channels.h" compile="0" resource="0" file="Source/Configuration/Channels.h"/>
-        <FILE id="O8ypxf" name="Constants.h" compile="0" resource="0" file="Source/Configuration/Constants.h"/>
+        <FILE id="O8ypxf" name="Parameters.h" compile="0" resource="0" file="Source/Configuration/Parameters.h"/>
         <FILE id="iV5taV" name="GeneralMidi.h" compile="0" resource="0" file="Source/Configuration/GeneralMidi.h"/>
         <FILE id="DqGTYm" name="Midi.h" compile="0" resource="0" file="Source/Configuration/Midi.h"/>
         <FILE id="nSQZyH" name="Samples.h" compile="0" resource="0" file="Source/Configuration/Samples.h"/>

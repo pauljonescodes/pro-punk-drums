@@ -1,6 +1,6 @@
 #pragma once
 
 namespace midi {
-constexpr int minimumVelocity = 0;
-constexpr int maximumVelocity = 127;
+	static constexpr int minimumVelocity = 0;
+	static constexpr int maximumVelocity = 127;
 }

@@ -4,7 +4,7 @@
 #include "Synthesiser/PluginSynthesiser.h"
 #include "PluginPresetManager.h"
 
-class PluginAudioProcessor : public juce::AudioProcessor
+class PluginAudioProcessor : public juce::AudioProcessor, juce::AudioProcessorValueTreeState::Listener
 {
 public:
 
@@ -36,6 +36,8 @@ public:
 	const juce::String getProgramName(int index) override;
 	void changeProgramName(int index, const juce::String& newName) override;
 
+	void parameterChanged(const juce::String& parameterID, float newValue) override;
+
 	void getStateInformation(juce::MemoryBlock& destData) override;
 	void setStateInformation(const void* data, int sizeInBytes) override;
 
@@ -54,10 +56,16 @@ private:
 	std::unique_ptr<PluginPresetManager> mPresetManager;
 	std::unique_ptr<juce::AudioProcessorValueTreeState> mParameterValueTreeState;
 
-	std::vector<std::unique_ptr<PluginSynthesiser>> mSynthesiserPtrVector;
-	std::vector<std::unique_ptr<juce::AudioBuffer<float>>> mInternalBufferPtrVector;
-
-	std::vector<std::unique_ptr<juce::dsp::Compressor<float>>> mCompressors;
+	std::vector<std::unique_ptr<PluginSynthesiser>> mSynthesiserPtrVector; // 6 synths
+	std::vector<std::unique_ptr<juce::AudioBuffer<float>>> mInternalBufferPtrVector; 
+	std::vector<std::unique_ptr<juce::dsp::Compressor<float>>> mCompressors; // 7 comps
+	
+	std::vector<juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>,
+		juce::dsp::IIR::Coefficients<float>>> mHighPassFilters;
+	std::vector<juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>,
+		juce::dsp::IIR::Coefficients<float>>> mPeakFilters;
+	std::vector<juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>,
+		juce::dsp::IIR::Coefficients<float>>> mLowPassFilters;
 
 	std::vector<std::pair<double, juce::MidiMessage>> mScheduledMidiEvents;
 	long long mCurrentSamplePosition = 0;

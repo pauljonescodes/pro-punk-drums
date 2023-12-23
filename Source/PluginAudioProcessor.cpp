@@ -8,6 +8,7 @@
 #include <juce_core/juce_core.h>
 #include <juce_audio_basics/juce_audio_basics.h>
 #include "Configuration/Strings.h"
+#include "Configuration/Parameters.h"
 
 PluginAudioProcessor::PluginAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -38,6 +39,13 @@ PluginAudioProcessor::PluginAudioProcessor()
 	{
 		mSynthesiserPtrVector.push_back(std::make_unique<PluginSynthesiser>());
 		mInternalBufferPtrVector.push_back(std::make_unique<juce::AudioBuffer<float>>(2, 1024));
+	}
+
+	for (int channelIndex = 0; channelIndex < channels::size; channelIndex++) {
+		mCompressors.push_back(std::make_unique<juce::dsp::Compressor<float>>());
+		mHighPassFilters.emplace_back();
+		mPeakFilters.emplace_back();
+		mLowPassFilters.emplace_back();
 	}
 
 	for (int resourceIndex = 0; resourceIndex < BinaryData::namedResourceListSize; resourceIndex++)
@@ -127,11 +135,11 @@ PluginAudioProcessor::PluginAudioProcessor()
 
 			if (midiNote != -1)
 			{
-				auto* gainParameter = mParameterValueTreeState->getParameter(PluginUtils::getMidiNoteParameterId(midiNote, micId, parameters::gainId));
-				auto* panParameter = mParameterValueTreeState->getParameter(PluginUtils::getMidiNoteParameterId(midiNote, micId, parameters::panId));
-				auto* phaseParameter = dynamic_cast<juce::AudioParameterBool*>(mParameterValueTreeState->getParameter(PluginUtils::getMidiNoteParameterId(midiNote, micId, parameters::phaseId)));
+				auto* gainParameter = mParameterValueTreeState->getParameter(PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::gainId }));
+				auto* panParameter = mParameterValueTreeState->getParameter(PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::panId }));
+				auto* phaseParameter = dynamic_cast<juce::AudioParameterBool*>(mParameterValueTreeState->getParameter(PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::phaseId })));
 
-				auto& synthesiser = mSynthesiserPtrVector.at(channels::generalMidiNoteToChannelIndex.at(midiNote) - 1);
+				auto& synthesiser = mSynthesiserPtrVector.at(channels::generalMidiNoteToChannelIndex.at(midiNote));
 
 				synthesiser->addSample(
 					namedResource,
@@ -159,58 +167,55 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginAudioProcessor::create
 
 	for (const auto& pair : PluginUtils::getUniqueMidiNoteMicCombinations()) {
 		int midiNote = pair.first;
-		std::string midiName = generalmidi::midiNoteToNameMap.at(midiNote);
+		auto& midiName = generalmidi::midiNoteToNameMap.at(midiNote);
 		const std::set<std::string>& micIds = pair.second;
 
 		for (const std::string& micId : micIds) {
-			std::string gainName = midiName + " " + PluginUtils::capitalizeFirstLetter(micId) + " Gain";
-			std::string gainParameterId = PluginUtils::getMidiNoteParameterId(midiNote, micId, parameters::gainId);
-			layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ gainParameterId, 1 }, gainName, parameters::gainNormalizableRange, parameters::gainDefault));
+			auto gainParameterId = PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::gainId });
+			layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ gainParameterId, 1 }, PluginUtils::toTitleCase(gainParameterId), parameters::gainNormalizableRange, parameters::gainDefaultValue));
 
-			std::string panName = midiName + " " + PluginUtils::capitalizeFirstLetter(micId) + " Pan";
-			std::string panParameterId = PluginUtils::getMidiNoteParameterId(midiNote, micId, parameters::panId);
-			bool containsRight = micId.find(parameters::rightId) != std::string::npos;
-			bool containsLeft = micId.find(parameters::leftId) != std::string::npos;
+			auto panParameterId = PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::panId });
+			bool containsRight = micId.find(samples::rightId) != std::string::npos;
+			bool containsLeft = micId.find(samples::leftId) != std::string::npos;
 			float defaultPan = containsRight ? 1.0f : containsLeft ? -1.0f : 0;
-			layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ panParameterId, 1 }, panName, parameters::panNormalizableRange, defaultPan));
+			layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ panParameterId, 1 }, PluginUtils::toTitleCase(panParameterId), parameters::panNormalizableRange, defaultPan));
 
-			std::string phaseName = midiName + " " + PluginUtils::capitalizeFirstLetter(micId) + " Phase";
-			std::string phaseParameterId = PluginUtils::getMidiNoteParameterId(midiNote, micId, parameters::phaseId);
-			bool containsBottom = micId.find(parameters::bottomId) != std::string::npos;
-			layout.add(std::make_unique<juce::AudioParameterBool>(juce::ParameterID{ phaseParameterId, 1 }, phaseName, containsBottom));
+			auto phaseParameterId = PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::phaseId });
+			bool containsBottom = micId.find(samples::bottomId) != std::string::npos;
+			layout.add(std::make_unique<juce::AudioParameterBool>(juce::ParameterID{ phaseParameterId, 1 }, PluginUtils::toTitleCase(phaseParameterId), containsBottom));
 		}
 	}
 
-	for (const auto& channel : channels::channelIndexToNameMap) {
-		const std::string channelName = channel.second;
-		const std::string thresholdName = channelName + " " + parameters::thresholdId;
-		const std::string thresholdId = PluginUtils::getChannelParameterId(channelName, parameters::thresholdId);
-		layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ thresholdId, 1 }, thresholdName, parameters::thresholdNormalizableRange, parameters::thresholdDefault));
+	for (const auto& channel : channels::channelIndexToIdMap) {
+		const auto& channelId = channel.second;
+		const auto compressionOnId = PluginUtils::joinId({ channelId, parameters::compressionId, parameters::onId });
+		const auto compressionThresholdId = PluginUtils::joinId({ channelId, parameters::thresholdId });
+		const auto compressionRatioId = PluginUtils::joinId({ channelId, parameters::ratioId });
+		const auto compressionAttackId = PluginUtils::joinId({ channelId, parameters::attackId });
+		const auto compressionReleaseId = PluginUtils::joinId({ channelId, parameters::releaseId });
 
-		const std::string ratioName = channelName + " " + parameters::ratioId;
-		const std::string ratioId = PluginUtils::getChannelParameterId(channelName, parameters::ratioId);
-		layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ ratioId, 1 }, ratioName, parameters::ratioNormalizableRange, parameters::ratioDefault));
+		layout.add(std::make_unique<juce::AudioParameterBool>(juce::ParameterID{ compressionOnId, 1 }, PluginUtils::toTitleCase(compressionOnId), true));
+		layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ compressionThresholdId, 1 }, PluginUtils::toTitleCase(compressionThresholdId), parameters::thresholdNormalizableRange, parameters::thresholdDefaultValue));
+		layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ compressionRatioId, 1 }, PluginUtils::toTitleCase(compressionRatioId), parameters::ratioNormalizableRange, parameters::ratioDefaultValue));
+		layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ compressionAttackId, 1 }, PluginUtils::toTitleCase(compressionAttackId), parameters::attackNormalizableRange, parameters::attackDefaultValue));
+		layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ compressionReleaseId, 1 }, PluginUtils::toTitleCase(compressionReleaseId), parameters::releaseNormalizableRange, parameters::releaseDefaultValue));
 
-		const std::string attackName = channelName + " " + parameters::attackId;
-		const std::string attackId = PluginUtils::getChannelParameterId(channelName, parameters::attackId);
-		layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ attackId, 1 }, attackName, parameters::attackNormalizableRange, parameters::attackDefault));
+		for (const auto& equalizationTypeIdToDefaultFrequency : parameters::equalizationTypeIdToDefaultFrequencyMap) {
+			const auto equalizationDefaultValue = equalizationTypeIdToDefaultFrequency.second;
 
-		const std::string releaseName = channelName + " " + parameters::releaseId;
-		const std::string releaseId = PluginUtils::getChannelParameterId(channelName, parameters::releaseId);
-		layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ releaseId, 1 }, releaseName, parameters::releaseNormalizableRange, parameters::releaseDefault));
-
-		for (const auto& equalization : parameters::equalizationTypeIdToDefaultFrequencyMap) {
-			const auto& equalizationTypeId = equalization.first;
-			const auto equalizationDefaultValue = equalization.second;
-
-			const auto eqGainId = PluginUtils::getEqualizationParameterId(channelName, equalizationTypeId, parameters::gainId);
-			layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ eqGainId, 1 }, eqGainId, parameters::gainNormalizableRange, parameters::gainDefault));
-
-			const auto eqFreqId = PluginUtils::getEqualizationParameterId(channelName, equalizationTypeId, parameters::frequencyId);
-			layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ eqFreqId, 1 }, eqFreqId, parameters::frequencyNormalizableRange, equalizationDefaultValue));
-
-			const auto eqQualityId = PluginUtils::getEqualizationParameterId(channelName, equalizationTypeId, parameters::qualityId);
-			layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ eqQualityId, 1 }, eqQualityId, parameters::qualityNormalizableRange, parameters::qualityDefaultValue));
+			const auto& equalizationTypeId = equalizationTypeIdToDefaultFrequency.first;
+			const auto eqOnId = PluginUtils::joinId({ channelId, equalizationTypeId, parameters::onId });
+			const auto eqFrequencyId = PluginUtils::joinId({ channelId, equalizationTypeId, parameters::frequencyId });
+			
+			layout.add(std::make_unique<juce::AudioParameterBool>(juce::ParameterID{ eqOnId, 1 }, PluginUtils::toTitleCase(eqOnId), false));
+			layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ eqFrequencyId, 1 }, PluginUtils::toTitleCase(eqFrequencyId), parameters::frequencyNormalizableRange, equalizationDefaultValue));
+			
+			if (equalizationTypeId == parameters::peakFilterEqualizationTypeId) {
+				const auto eqGainId = PluginUtils::joinId({ channelId, equalizationTypeId, parameters::gainId });
+				const auto eqQualityId = PluginUtils::joinId({ channelId, equalizationTypeId, parameters::qualityId });
+				layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ eqQualityId, 1 }, PluginUtils::toTitleCase(eqQualityId), parameters::qualityNormalizableRange, parameters::qualityDefaultValue));
+				layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ eqGainId, 1 }, PluginUtils::toTitleCase(eqGainId), parameters::gainNormalizableRange, parameters::gainDefaultValue));
+			}
 		}
 	}
 
@@ -302,9 +307,12 @@ void PluginAudioProcessor::changeProgramName(int index, const juce::String& newN
 {
 }
 
-
 void PluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
+	juce::dsp::ProcessSpec spec;
+	spec.sampleRate = getSampleRate();
+	spec.maximumBlockSize = samplesPerBlock; // Example block size
+	spec.numChannels = 2; // Stereo
 
 	for (const auto& synthesiser : mSynthesiserPtrVector)
 	{
@@ -314,6 +322,30 @@ void PluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 	for (const auto& buffer : mInternalBufferPtrVector)
 	{
 		buffer->setSize(2, samplesPerBlock);
+	}
+
+	for (const auto& compressor : mCompressors)
+	{
+		compressor->prepare(spec);
+	}
+
+	for (auto& highPassFilter : mHighPassFilters)
+	{
+		highPassFilter.prepare(spec);
+
+		*highPassFilter.state = *juce::dsp::IIR::Coefficients<float>::makeHighPass(sampleRate, parameters::highPassFrequencyDefaultValue);
+	}
+
+	for (auto& lowPassFilter : mLowPassFilters)
+	{
+		lowPassFilter.prepare(spec);
+		*lowPassFilter.state = *juce::dsp::IIR::Coefficients<float>::makeLowPass(sampleRate, parameters::lowPassFrequencyDefaultValue);
+	}
+
+	for (auto& peakFilter : mPeakFilters)
+	{
+		peakFilter.prepare(spec);
+		*peakFilter.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, parameters::peakFilterFrequencyDefaultValue, parameters::qualityDefaultValue, parameters::gainDefaultValue);
 	}
 }
 
@@ -351,6 +383,107 @@ bool PluginAudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) co
 
 void PluginAudioProcessor::processBlock(juce::AudioBuffer<float>& outputBuffer, juce::MidiBuffer& midiMessages)
 {
+	juce::ScopedNoDenormals noDenormals;
+	auto totalNumInputChannels = getTotalNumInputChannels();
+	auto totalNumOutputChannels = getTotalNumOutputChannels();
+
+	for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i) {
+		outputBuffer.clear(i, 0, outputBuffer.getNumSamples());
+	}
+
+	auto* multiOutParameter = dynamic_cast<juce::AudioParameterBool*>(mParameterValueTreeState->getParameter(parameters::multiOutId));
+	bool isMultiOut = multiOutParameter->get() && totalNumOutputChannels > 2;
+
+	for (const auto& channel : channels::channelIndexToIdMap) {
+		const auto channelIndex = channel.first;
+		const auto& channelId = channel.second;
+
+		if (channelIndex == channels::outputIndex) {
+			break;
+		}
+
+		auto& synthesiser = mSynthesiserPtrVector[channelIndex];
+		auto& internalBufferPtr = mInternalBufferPtrVector[channelIndex];
+		
+		internalBufferPtr->clear();
+		synthesiser->renderNextBlock(*internalBufferPtr, midiMessages, 0, internalBufferPtr->getNumSamples());
+
+		juce::dsp::AudioBlock<float> block(*internalBufferPtr);
+		juce::dsp::ProcessContextReplacing<float> context(block);
+
+		const auto compressionOnId = PluginUtils::joinId({ channelId, parameters::compressionId, parameters::onId });
+		if (mParameterValueTreeState->getParameterAsValue(compressionOnId).getValue()) {
+			auto& compressor = mCompressors[channelIndex];
+			compressor->process(context);
+		}
+
+		const auto highPassOnId = PluginUtils::joinId({ channelId, parameters::highPassEqualizationTypeId, parameters::onId });
+		if (mParameterValueTreeState->getParameterAsValue(highPassOnId).getValue()) {
+			auto& highPass = mHighPassFilters[channelIndex];
+			highPass.process(context);
+		}
+
+		const auto peakFilterOnId = PluginUtils::joinId({ channelId, parameters::peakFilterEqualizationTypeId, parameters::onId });
+		if (mParameterValueTreeState->getParameterAsValue(peakFilterOnId).getValue()) {
+			auto& peakFilter = mPeakFilters[channelIndex];
+			peakFilter.process(context);
+		}
+
+		const auto lowPassOnId = PluginUtils::joinId({ channelId, parameters::lowPassEqualizationTypeId, parameters::onId });
+		if (mParameterValueTreeState->getParameterAsValue(lowPassOnId).getValue()) {
+			auto& lowPass = mLowPassFilters[channelIndex];
+			lowPass.process(context);
+		}
+
+		// send to output
+
+		const float* inL = internalBufferPtr->getReadPointer(0);
+		const float* inR = internalBufferPtr->getNumChannels() > 1 ? internalBufferPtr->getReadPointer(1) : nullptr;
+
+		int leftChannelIndex = isMultiOut ? 2 + (channelIndex * 2) : 0;
+		int rightChannelIndex = isMultiOut ? 2 + (channelIndex * 2) + 1 : 1;
+
+		float* outL = outputBuffer.getWritePointer(leftChannelIndex);
+		float* outR = outputBuffer.getNumChannels() > 1 ? outputBuffer.getWritePointer(rightChannelIndex) : nullptr;
+
+		for (int sample = 0; sample < internalBufferPtr->getNumSamples(); ++sample)
+		{
+			outL[sample] += inL[sample];
+			if (outR && inR)
+			{
+				outR[sample] += inR[sample];
+			}
+		}
+	}
+
+	juce::dsp::AudioBlock<float> block(outputBuffer);
+	juce::dsp::ProcessContextReplacing<float> context(block);
+
+	const auto compressionOnId = PluginUtils::joinId({ channels::outputId, parameters::compressionId, parameters::onId });
+	if (mParameterValueTreeState->getParameterAsValue(compressionOnId).getValue()) {
+		auto& compressor = mCompressors[channels::size - 1];
+		compressor->process(context);
+	}
+
+	const auto highPassOnId = PluginUtils::joinId({ channels::outputId, parameters::highPassEqualizationTypeId, parameters::onId });
+	if (mParameterValueTreeState->getParameterAsValue(highPassOnId).getValue()) {
+		auto& highPass = mHighPassFilters[channels::size - 1];
+		highPass.process(context);
+	}
+
+	const auto peakFilterOnId = PluginUtils::joinId({ channels::outputId, parameters::peakFilterEqualizationTypeId, parameters::onId });
+	if (mParameterValueTreeState->getParameterAsValue(peakFilterOnId).getValue()) {
+		auto& peakFilter = mPeakFilters[channels::size - 1];
+		peakFilter.process(context);
+	}
+
+	const auto lowPassOnId = PluginUtils::joinId({ channels::outputId, parameters::lowPassEqualizationTypeId, parameters::onId });
+	if (mParameterValueTreeState->getParameterAsValue(lowPassOnId).getValue()) {
+		auto& lowPass = mLowPassFilters[channels::size - 1];
+		lowPass.process(context);
+	}
+
+
 	juce::MidiBuffer bufferToProcess;
 
 	/// Iterate through scheduled MIDI events
@@ -371,45 +504,48 @@ void PluginAudioProcessor::processBlock(juce::AudioBuffer<float>& outputBuffer, 
 	mCurrentSamplePosition += outputBuffer.getNumSamples();
 	bufferToProcess.addEvents(midiMessages, 0, outputBuffer.getNumSamples(), 0);
 	midiMessages.swapWith(bufferToProcess);
+}
 
-	///
+void PluginAudioProcessor::parameterChanged(const juce::String& parameterID, float newValue)
+{
+	auto sampleRate = getSampleRate();
 
-	juce::ScopedNoDenormals noDenormals;
-	auto totalNumInputChannels = getTotalNumInputChannels();
-	auto totalNumOutputChannels = getTotalNumOutputChannels();
+	for (const auto& channel : channels::channelIndexToIdMap) {
+		const auto channelIndex = channel.first;
+		const auto& channelId = channel.second;
 
-	for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i) {
-		outputBuffer.clear(i, 0, outputBuffer.getNumSamples());
-	}
+		const auto& compressor = mCompressors[channelIndex];
 
-	auto* multiOutParameter = dynamic_cast<juce::AudioParameterBool*>(mParameterValueTreeState->getParameter(parameters::multiOutId));
-	bool isMultiOut = multiOutParameter->get() && totalNumOutputChannels > 2;
+		const auto compressionThresholdId = PluginUtils::joinId({ channelId, parameters::thresholdId });
+		const auto compressionRatioId = PluginUtils::joinId({ channelId, parameters::ratioId });
+		const auto compressionAttackId = PluginUtils::joinId({ channelId, parameters::attackId });
+		const auto compressionReleaseId = PluginUtils::joinId({ channelId, parameters::releaseId });
 
-	for (auto i = 0; i < mSynthesiserPtrVector.size(); i++) {
-		auto& synthesiser = mSynthesiserPtrVector[i];
-		auto& internalBuffer = mInternalBufferPtrVector[i];
+		const auto compressorThreshold = mParameterValueTreeState->getParameterAsValue(compressionThresholdId).getValue();
+		const auto compressorRatio = mParameterValueTreeState->getParameterAsValue(compressionRatioId).getValue();
+		const auto compressorAttack = mParameterValueTreeState->getParameterAsValue(compressionAttackId).getValue();
+		const auto compressorRelease = mParameterValueTreeState->getParameterAsValue(compressionReleaseId).getValue();
 
-		internalBuffer->clear();
-		synthesiser->renderNextBlock(*internalBuffer, midiMessages, 0, internalBuffer->getNumSamples());
+		compressor->setThreshold(compressorThreshold);
+		compressor->setRatio(compressorRatio);
+		compressor->setAttack(compressorAttack);
+		compressor->setRelease(compressorRelease);
 
-		int leftChannelIndex = isMultiOut ? 2 + (i * 2) : 0;
-		int rightChannelIndex = isMultiOut ? 2 + (i * 2) + 1 : 1;
+		const auto highPassFrequencyId = PluginUtils::joinId({ channelId, parameters::highPassEqualizationTypeId, parameters::frequencyId });
+		const auto highPassFrequency = mParameterValueTreeState->getParameterAsValue(highPassFrequencyId).getValue();
+		*mHighPassFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighPass(sampleRate, highPassFrequency);
 
-		float* outL = outputBuffer.getWritePointer(leftChannelIndex);
-		float* outR = outputBuffer.getNumChannels() > 1 ? outputBuffer.getWritePointer(rightChannelIndex) : nullptr;
+		const auto lowPassFrequencyId = PluginUtils::joinId({ channelId, parameters::lowPassEqualizationTypeId, parameters::frequencyId });
+		const auto lowPassFrequency = mParameterValueTreeState->getParameterAsValue(lowPassFrequencyId).getValue();
+		*mLowPassFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighPass(sampleRate, lowPassFrequency);
 
-		const float* inL = internalBuffer->getReadPointer(0);
-		const float* inR = internalBuffer->getNumChannels() > 1 ? internalBuffer->getReadPointer(1) : nullptr;
-
-		for (auto sample = 0; sample < outputBuffer.getNumSamples(); ++sample) 
-		{
-			outL[sample] += inL[sample];
-			
-			if (outR != nullptr && inR != nullptr) 
-			{ 
-				outR[sample] += inR[sample];
-			}
-		}
+		const auto peakFilterCenterFrequencyId = PluginUtils::joinId({ channelId, parameters::peakFilterEqualizationTypeId, parameters::frequencyId });
+		const auto peakFilterCenterFrequency = mParameterValueTreeState->getParameterAsValue(peakFilterCenterFrequencyId).getValue();
+		const auto peakFilterQualityId = PluginUtils::joinId({ channelId, parameters::peakFilterEqualizationTypeId, parameters::qualityId });
+		const auto peakFilterQuality = mParameterValueTreeState->getParameterAsValue(peakFilterQualityId).getValue();
+		const auto peakFilterGainId = PluginUtils::joinId({ channelId, parameters::peakFilterEqualizationTypeId, parameters::gainId });
+		const auto peakFilterGain = mParameterValueTreeState->getParameterAsValue(peakFilterGainId).getValue();
+		*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, peakFilterCenterFrequency, peakFilterQuality, peakFilterGain);
 	}
 }
 

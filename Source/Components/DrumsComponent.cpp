@@ -2,7 +2,7 @@
 #include "../Configuration/Samples.h"
 #include "../Configuration/GeneralMidi.h"
 #include "../Configuration/Strings.h"
-
+#include "../Configuration/Parameters.h"
 
 DrumsComponent::DrumsComponent(
 	const std::vector<int> midiNotesVector, 

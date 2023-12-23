@@ -1,6 +1,7 @@
 #include <JuceHeader.h>
 #include "PluginSynthesiserVoice.h"
 #include "PluginSynthesiserSound.h"
+#include "../Configuration/Parameters.h"
 
 PluginSynthesiserVoice::PluginSynthesiserVoice(
     juce::RangedAudioParameter& gainParameter,

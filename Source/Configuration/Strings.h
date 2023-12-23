@@ -2,10 +2,11 @@
 #include <string>
 
 namespace strings {
-	const std::string velocity = "Velocity";
-	const std::string invertPhase = "Invert Phase";
-	const std::string multiOut = "Multi-Out";
-	const std::string drums = "Drums";
-	const std::string samples = "Samples";
-	const std::string outputs = "Outputs";
+	static const std::string velocity = "Velocity";
+	static const std::string invertPhase = "Invert Phase";
+	static const std::string multiOut = "Multi-Out";
+	static const std::string drums = "Drums";
+	static const std::string samples = "Samples";
+	static const std::string outputs = "Outputs";
+	static const std::string compressorOn = "Compressor on";
 }

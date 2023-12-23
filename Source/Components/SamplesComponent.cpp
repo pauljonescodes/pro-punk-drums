@@ -1,7 +1,7 @@
 #include "SamplesComponent.h"
 #include "../PluginUtils.h"
-#include "../Configuration/Constants.h"
-#include "SamplesParameterComponent.h"
+#include "../Configuration/Parameters.h"
+#include "SampleParametersComponent.h"
 #include "../Configuration/GeneralMidi.h"
 
 SamplesComponent::SamplesComponent(const std::vector<int> midiNotesVector, juce::AudioProcessorValueTreeState& apvts, std::function<void(int, float, std::string)> onDrumMidiButtonClicked)
@@ -15,9 +15,9 @@ SamplesComponent::SamplesComponent(const std::vector<int> midiNotesVector, juce:
         const std::set<std::string>& micIds = pair.second;
         
         for (const std::string& micId : micIds) {
-            auto* component = new SamplesParameterComponent(midiNote, micId, apvts);
+            auto* component = new SamplesParametersComponent(midiNote, micId, apvts);
             component->mOnDrumMidiButtonClicked = onDrumMidiButtonClicked;
-            mSamplesParameterComponents.add(component);
+            mComponents.add(component);
             container.addAndMakeVisible(component);
         }
     }
@@ -37,12 +37,12 @@ void SamplesComponent::resized()
 {
     viewport.setBounds(getLocalBounds());
     int heightPerComponent = 100;
-    int totalHeight = heightPerComponent * mSamplesParameterComponents.size();
+    int totalHeight = heightPerComponent * mComponents.size();
     
     container.setBounds(0, 0, viewport.getWidth(), totalHeight);
     
     auto area = container.getLocalBounds();
-    for (auto* component : mSamplesParameterComponents)
+    for (auto* component : mComponents)
     {
         component->setBounds(area.removeFromTop(heightPerComponent));
     }

@@ -1,11 +1,11 @@
 #pragma once
 #include <JuceHeader.h>
 
-class SamplesParameterComponent : public juce::Component, public juce::Button::Listener
+class SamplesParametersComponent : public juce::Component, public juce::Button::Listener
 {
 public:
-    SamplesParameterComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState& apvts);
-    ~SamplesParameterComponent() override;
+    SamplesParametersComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState& apvts);
+    ~SamplesParametersComponent() override;
     
     
     void paint(juce::Graphics&) override;
@@ -33,5 +33,5 @@ private:
 
     void buttonClicked(juce::Button* button) override;
     
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SamplesParameterComponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SamplesParametersComponent)
 };

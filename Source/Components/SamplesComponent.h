@@ -1,6 +1,6 @@
 #pragma once
 #include <JuceHeader.h>
-#include "SamplesParameterComponent.h"
+#include "SampleParametersComponent.h"
 
 class SamplesComponent : public juce::Component
 {
@@ -14,7 +14,7 @@ public:
 private:
     juce::Viewport viewport;
     juce::Component container;
-    juce::OwnedArray<SamplesParameterComponent> mSamplesParameterComponents;
+    juce::OwnedArray<SamplesParametersComponent> mComponents;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SamplesComponent)
 };
