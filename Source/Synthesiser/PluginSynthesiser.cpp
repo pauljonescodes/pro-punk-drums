@@ -49,7 +49,7 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
         float velocityFactor = std::sqrt(velocity);
 
         auto& lowerIntensity = intensities[lowerIntensityIndex];
-        int samplesSize = lowerIntensity.variations.size();
+        auto samplesSize = lowerIntensity.variations.size();
 
         if (lowerIntensity.currentVariationIndex < samplesSize)
         {
@@ -125,7 +125,7 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
         float velocityFactor = std::sqrt(velocity);
         
         auto& lowerIntensity = intensities[lowerIntensityIndex];
-        int samplesSize = lowerIntensity.variations.size();
+        auto samplesSize = lowerIntensity.variations.size();
         
         if (lowerIntensity.currentVariationIndex < samplesSize)
         {

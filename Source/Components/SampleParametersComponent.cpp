@@ -5,7 +5,7 @@
 #include "../Configuration/GeneralMidi.h"
 
 SamplesParametersComponent::SamplesParametersComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState& apvts)
-: mApvts(apvts), mMicId(micId)
+: mMicId(micId), mApvts(apvts)
 {
     mLabel.reset(new juce::Label(std::to_string(midiNote) + "_label", generalmidi::midiNoteToNameMap.at(midiNote) + " " + micId));
     addAndMakeVisible(mLabel.get());

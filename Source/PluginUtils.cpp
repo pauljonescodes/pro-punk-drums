@@ -70,7 +70,7 @@ std::map<int, std::set<std::string>> PluginUtils::getUniqueMidiNoteMicCombinatio
         std::string micId, midiName, generalMidiSnakeCaseName = "";
         int midiNote = -1;
         
-        for (int midiNameIndex = 0; midiNameIndex < generalmidi::midiNamesVector.size(); midiNameIndex++)
+        for (auto midiNameIndex = 0; midiNameIndex < generalmidi::midiNamesVector.size(); midiNameIndex++)
         {
             midiName = generalmidi::midiNamesVector.at(midiNameIndex);
             generalMidiSnakeCaseName = PluginUtils::toSnakeCase(midiName);
@@ -121,11 +121,11 @@ std::map<int, std::set<std::string>> PluginUtils::getUniqueMidiNoteMicCombinatio
                         }
                         else
                         {
-                            midiNameIndex = generalmidi::midiNamesVector.size() + 1;
+                            midiNameIndex = (int)generalmidi::midiNamesVector.size() + 1;
                         }
                         break;
                     default:
-                        midiNameIndex = generalmidi::midiNamesVector.size() + 1;
+                        midiNameIndex = (int)generalmidi::midiNamesVector.size() + 1;
                         break;
                 }
             }

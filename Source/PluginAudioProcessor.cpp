@@ -200,7 +200,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginAudioProcessor::create
 
 	for (const auto& pair : PluginUtils::getUniqueMidiNoteMicCombinations()) {
 		int midiNote = pair.first;
-		auto& midiName = generalmidi::midiNoteToNameMap.at(midiNote);
 		const std::set<std::string>& micIds = pair.second;
 
 		for (const std::string& micId : micIds) {

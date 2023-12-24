@@ -7,12 +7,8 @@
 OutputParametersComponent::OutputParametersComponent(int channelIndex, juce::AudioProcessorValueTreeState& apvts)
 	: mApvts(apvts)
 {
-	const auto& channelName = channels::channelIndexToNameMap.at(channelIndex);
 	const auto& channelId = channels::channelIndexToIdMap.at(channelIndex);
 	const auto channelMidi = channels::channelIndexToMainGeneralMidiNote.at(channelIndex);
-
-	auto textBoxWidth = 75;
-	auto textBoxHeight = 15;
 
 	mNoteOnButton.reset(new juce::TextButton(std::to_string(channelMidi) + " " + channels::channelIndexToNameMap.at(channelIndex)));
 	mNoteOnButton->setComponentID(juce::String(channelMidi));
