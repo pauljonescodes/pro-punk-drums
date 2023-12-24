@@ -326,70 +326,6 @@
         </GROUP>
       </GROUP>
       <GROUP id="{2E62E8C8-F456-72CA-CBEF-12CD1372BD31}" name="42 Closed Hi-Hat">
-        <GROUP id="{7215AA12-5D36-8F84-2CEB-73FBD24D4F50}" name="Closed Edge">
-          <FILE id="IEOHcu" name="closed_hi_hat_4_1.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_1.wav"/>
-          <FILE id="xFbP3o" name="closed_hi_hat_4_1_left.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_1_left.wav"/>
-          <FILE id="D12Ry1" name="closed_hi_hat_4_1_right.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_1_right.wav"/>
-          <FILE id="bMBebz" name="closed_hi_hat_4_2.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_2.wav"/>
-          <FILE id="hWy0wn" name="closed_hi_hat_4_2_left.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_2_left.wav"/>
-          <FILE id="wNGOO2" name="closed_hi_hat_4_2_right.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_2_right.wav"/>
-          <FILE id="eWh24J" name="closed_hi_hat_4_3.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_3.wav"/>
-          <FILE id="tmWE9X" name="closed_hi_hat_4_3_left.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_3_left.wav"/>
-          <FILE id="mxI5p4" name="closed_hi_hat_4_3_right.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_3_right.wav"/>
-          <FILE id="l8xN43" name="closed_hi_hat_4_4.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_4.wav"/>
-          <FILE id="mBifdG" name="closed_hi_hat_4_4_left.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_4_left.wav"/>
-          <FILE id="G4emk6" name="closed_hi_hat_4_4_right.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_4_right.wav"/>
-          <FILE id="lrDLqT" name="closed_hi_hat_4_5.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_5.wav"/>
-          <FILE id="FI5q0M" name="closed_hi_hat_4_5_left.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_5_left.wav"/>
-          <FILE id="WZL9n3" name="closed_hi_hat_4_5_right.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Edge/closed_hi_hat_4_5_right.wav"/>
-        </GROUP>
-        <GROUP id="{667A4195-BAA7-8BF2-0A54-0B367B5390ED}" name="Closed Tip">
-          <FILE id="xLIwnm" name="closed_hi_hat_3_1.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_1.wav"/>
-          <FILE id="U2DfM4" name="closed_hi_hat_3_1_left.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_1_left.wav"/>
-          <FILE id="z6f1Lm" name="closed_hi_hat_3_1_right.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_1_right.wav"/>
-          <FILE id="EMj9nd" name="closed_hi_hat_3_2.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_2.wav"/>
-          <FILE id="VCCgZ5" name="closed_hi_hat_3_2_left.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_2_left.wav"/>
-          <FILE id="JkNOdW" name="closed_hi_hat_3_2_right.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_2_right.wav"/>
-          <FILE id="zJZDZC" name="closed_hi_hat_3_3.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_3.wav"/>
-          <FILE id="R78XGK" name="closed_hi_hat_3_3_left.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_3_left.wav"/>
-          <FILE id="bBgdDs" name="closed_hi_hat_3_3_right.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_3_right.wav"/>
-          <FILE id="s85mRi" name="closed_hi_hat_3_4.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_4.wav"/>
-          <FILE id="oX4o9Z" name="closed_hi_hat_3_4_left.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_4_left.wav"/>
-          <FILE id="zM7pq2" name="closed_hi_hat_3_4_right.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_4_right.wav"/>
-          <FILE id="nv2r6A" name="closed_hi_hat_3_5.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_5.wav"/>
-          <FILE id="ZzuCuJ" name="closed_hi_hat_3_5_left.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_5_left.wav"/>
-          <FILE id="oic099" name="closed_hi_hat_3_5_right.wav" compile="0" resource="1"
-                file="Assets/42 Closed Hi-Hat/Closed Tip/closed_hi_hat_3_5_right.wav"/>
-        </GROUP>
         <GROUP id="{F1C595A8-CA87-F077-B1BE-F6CC2667E053}" name="Tight Edge">
           <FILE id="IJjj0B" name="closed_hi_hat_2_1.wav" compile="0" resource="1"
                 file="Assets/42 Closed Hi-Hat/Tight Edge/closed_hi_hat_2_1.wav"/>
@@ -526,101 +462,165 @@
               file="Assets/44 Pedal Hi-Hat/pedal_hi_hat_5_right.wav"/>
       </GROUP>
       <GROUP id="{F992FAF1-6A8C-2526-FD6B-546AF02717E8}" name="46 Open Hi-Hat">
-        <GROUP id="{FB92B8C2-920E-11A2-79BB-E7B95BB176A4}" name="Open 1">
-          <FILE id="z7IIeg" name="open_hi_hat_1_1.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_1.wav"/>
-          <FILE id="EdbQJ7" name="open_hi_hat_1_1_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_1_left.wav"/>
-          <FILE id="DZ9485" name="open_hi_hat_1_1_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_1_right.wav"/>
-          <FILE id="VbWNbk" name="open_hi_hat_1_2.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_2.wav"/>
-          <FILE id="zWbgwO" name="open_hi_hat_1_2_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_2_left.wav"/>
-          <FILE id="l8yymB" name="open_hi_hat_1_2_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_2_right.wav"/>
-          <FILE id="kDhs2f" name="open_hi_hat_1_3.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_3.wav"/>
-          <FILE id="v9jdnj" name="open_hi_hat_1_3_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_3_left.wav"/>
-          <FILE id="hWfcnz" name="open_hi_hat_1_3_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_3_right.wav"/>
-          <FILE id="R4HSeb" name="open_hi_hat_1_4.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_4.wav"/>
-          <FILE id="gI3kL6" name="open_hi_hat_1_4_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_4_left.wav"/>
-          <FILE id="Cvhbj8" name="open_hi_hat_1_4_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_4_right.wav"/>
-          <FILE id="fy54na" name="open_hi_hat_1_5.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_5.wav"/>
-          <FILE id="vHWkOo" name="open_hi_hat_1_5_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_5_left.wav"/>
-          <FILE id="hyDm0F" name="open_hi_hat_1_5_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_1_5_right.wav"/>
+        <GROUP id="{F58EFAA2-AC2E-F036-32BC-6C03362B81EC}" name="Closed Edge">
+          <FILE id="KhVbcb" name="open_hi_hat_2_1.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_1.wav"/>
+          <FILE id="df8OBn" name="open_hi_hat_2_1_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_1_left.wav"/>
+          <FILE id="fOvrpl" name="open_hi_hat_2_1_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_1_right.wav"/>
+          <FILE id="ZPaNOY" name="open_hi_hat_2_2.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_2.wav"/>
+          <FILE id="jg6Hj5" name="open_hi_hat_2_2_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_2_left.wav"/>
+          <FILE id="Pu5Tkm" name="open_hi_hat_2_2_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_2_right.wav"/>
+          <FILE id="Q8E9Bl" name="open_hi_hat_2_3.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_3.wav"/>
+          <FILE id="oFIksc" name="open_hi_hat_2_3_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_3_left.wav"/>
+          <FILE id="UTQyQ4" name="open_hi_hat_2_3_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_3_right.wav"/>
+          <FILE id="p30Au2" name="open_hi_hat_2_4.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_4.wav"/>
+          <FILE id="LOAosY" name="open_hi_hat_2_4_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_4_left.wav"/>
+          <FILE id="UjMxVk" name="open_hi_hat_2_4_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_4_right.wav"/>
+          <FILE id="aqhKIo" name="open_hi_hat_2_5.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_5.wav"/>
+          <FILE id="d32w7M" name="open_hi_hat_2_5_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_5_left.wav"/>
+          <FILE id="tLNAtU" name="open_hi_hat_2_5_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Edge/open_hi_hat_2_5_right.wav"/>
+        </GROUP>
+        <GROUP id="{D16A7F80-CA31-E0D0-FDEC-34032B4FB5A6}" name="Closed Tip">
+          <FILE id="TQ6ZXi" name="open_hi_hat_1_1.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_1.wav"/>
+          <FILE id="JxZekm" name="open_hi_hat_1_1_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_1_left.wav"/>
+          <FILE id="xWwUTn" name="open_hi_hat_1_1_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_1_right.wav"/>
+          <FILE id="nniW8D" name="open_hi_hat_1_2.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_2.wav"/>
+          <FILE id="NzPb42" name="open_hi_hat_1_2_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_2_left.wav"/>
+          <FILE id="EApUYz" name="open_hi_hat_1_2_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_2_right.wav"/>
+          <FILE id="IHOIud" name="open_hi_hat_1_3.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_3.wav"/>
+          <FILE id="ERW4Uu" name="open_hi_hat_1_3_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_3_left.wav"/>
+          <FILE id="vihWVc" name="open_hi_hat_1_3_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_3_right.wav"/>
+          <FILE id="H67ROV" name="open_hi_hat_1_4.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_4.wav"/>
+          <FILE id="elHtZ8" name="open_hi_hat_1_4_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_4_left.wav"/>
+          <FILE id="oPXTsQ" name="open_hi_hat_1_4_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_4_right.wav"/>
+          <FILE id="IMNUzm" name="open_hi_hat_1_5.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_5.wav"/>
+          <FILE id="qsj3Cr" name="open_hi_hat_1_5_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_5_left.wav"/>
+          <FILE id="MsDMG6" name="open_hi_hat_1_5_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Closed Tip/open_hi_hat_1_5_right.wav"/>
+        </GROUP>
+        <GROUP id="{A91E7162-B82F-0E9B-17BC-55CF7BFBCA9A}" name="Open 1">
+          <FILE id="h7fJ9f" name="open_hi_hat_3_1.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_1.wav"/>
+          <FILE id="Sb0JSu" name="open_hi_hat_3_1_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_1_left.wav"/>
+          <FILE id="XRTqpf" name="open_hi_hat_3_1_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_1_right.wav"/>
+          <FILE id="UZyCGn" name="open_hi_hat_3_2.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_2.wav"/>
+          <FILE id="L4MPTL" name="open_hi_hat_3_2_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_2_left.wav"/>
+          <FILE id="CPRbPQ" name="open_hi_hat_3_2_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_2_right.wav"/>
+          <FILE id="zom3yt" name="open_hi_hat_3_3.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_3.wav"/>
+          <FILE id="gVcx2x" name="open_hi_hat_3_3_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_3_left.wav"/>
+          <FILE id="w1fDO0" name="open_hi_hat_3_3_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_3_right.wav"/>
+          <FILE id="YhRboc" name="open_hi_hat_3_4.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_4.wav"/>
+          <FILE id="P34TmU" name="open_hi_hat_3_4_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_4_left.wav"/>
+          <FILE id="Op5XoU" name="open_hi_hat_3_4_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_4_right.wav"/>
+          <FILE id="juJqtF" name="open_hi_hat_3_5.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_5.wav"/>
+          <FILE id="Y2uz75" name="open_hi_hat_3_5_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_5_left.wav"/>
+          <FILE id="FlEmEe" name="open_hi_hat_3_5_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 1/open_hi_hat_3_5_right.wav"/>
         </GROUP>
         <GROUP id="{3DACE4DA-46CD-029E-995C-B02A64F7BC09}" name="Open 2">
-          <FILE id="eTUKgk" name="open_hi_hat_2_1.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_1.wav"/>
-          <FILE id="pv4wR7" name="open_hi_hat_2_1_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_1_left.wav"/>
-          <FILE id="jMwn3X" name="open_hi_hat_2_1_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_1_right.wav"/>
-          <FILE id="hEOrWw" name="open_hi_hat_2_2.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_2.wav"/>
-          <FILE id="qb7klk" name="open_hi_hat_2_2_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_2_left.wav"/>
-          <FILE id="BRtc2K" name="open_hi_hat_2_2_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_2_right.wav"/>
-          <FILE id="Ya4aMt" name="open_hi_hat_2_3.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_3.wav"/>
-          <FILE id="f30nUM" name="open_hi_hat_2_3_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_3_left.wav"/>
-          <FILE id="RLDB6n" name="open_hi_hat_2_3_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_3_right.wav"/>
-          <FILE id="IZ7TRk" name="open_hi_hat_2_4.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_4.wav"/>
-          <FILE id="ipn743" name="open_hi_hat_2_4_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_4_left.wav"/>
-          <FILE id="EMbQ8x" name="open_hi_hat_2_4_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_4_right.wav"/>
-          <FILE id="efvJZW" name="open_hi_hat_2_5.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_5.wav"/>
-          <FILE id="zHv670" name="open_hi_hat_2_5_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_5_left.wav"/>
-          <FILE id="GeiEKV" name="open_hi_hat_2_5_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_2_5_right.wav"/>
+          <FILE id="CGAKgi" name="open_hi_hat_4_1.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_1.wav"/>
+          <FILE id="LRFOW4" name="open_hi_hat_4_1_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_1_left.wav"/>
+          <FILE id="zTr8lk" name="open_hi_hat_4_1_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_1_right.wav"/>
+          <FILE id="MPYZ5A" name="open_hi_hat_4_2.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_2.wav"/>
+          <FILE id="KAttv5" name="open_hi_hat_4_2_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_2_left.wav"/>
+          <FILE id="Tzzetp" name="open_hi_hat_4_2_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_2_right.wav"/>
+          <FILE id="N1eDWU" name="open_hi_hat_4_3.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_3.wav"/>
+          <FILE id="y9SAyg" name="open_hi_hat_4_3_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_3_left.wav"/>
+          <FILE id="YL0ZFz" name="open_hi_hat_4_3_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_3_right.wav"/>
+          <FILE id="rBVppz" name="open_hi_hat_4_4.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_4.wav"/>
+          <FILE id="VGIamJ" name="open_hi_hat_4_4_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_4_left.wav"/>
+          <FILE id="h2NVQV" name="open_hi_hat_4_4_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_4_right.wav"/>
+          <FILE id="YW5PdG" name="open_hi_hat_4_5.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_5.wav"/>
+          <FILE id="O55uAq" name="open_hi_hat_4_5_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_5_left.wav"/>
+          <FILE id="sHAsLG" name="open_hi_hat_4_5_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 2/open_hi_hat_4_5_right.wav"/>
         </GROUP>
-        <GROUP id="{A202F6BF-10B2-6CDE-94A6-900BE03AFE30}" name="Open 3">
-          <FILE id="vOWuLH" name="open_hi_hat_3_1.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_1.wav"/>
-          <FILE id="qMHxW9" name="open_hi_hat_3_1_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_1_left.wav"/>
-          <FILE id="tWQAUZ" name="open_hi_hat_3_1_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_1_right.wav"/>
-          <FILE id="YXXTfp" name="open_hi_hat_3_2.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_2.wav"/>
-          <FILE id="RQDorP" name="open_hi_hat_3_2_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_2_left.wav"/>
-          <FILE id="MtLy8w" name="open_hi_hat_3_2_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_2_right.wav"/>
-          <FILE id="AVvXY2" name="open_hi_hat_3_3.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_3.wav"/>
-          <FILE id="iDLpoa" name="open_hi_hat_3_3_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_3_left.wav"/>
-          <FILE id="BunW3C" name="open_hi_hat_3_3_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_3_right.wav"/>
-          <FILE id="EGSNcT" name="open_hi_hat_3_4.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_4.wav"/>
-          <FILE id="Q5FBKt" name="open_hi_hat_3_4_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_4_left.wav"/>
-          <FILE id="uWpTaC" name="open_hi_hat_3_4_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_4_right.wav"/>
-          <FILE id="EkiVKr" name="open_hi_hat_3_5.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_5.wav"/>
-          <FILE id="z0XbSZ" name="open_hi_hat_3_5_left.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_5_left.wav"/>
-          <FILE id="HQy57e" name="open_hi_hat_3_5_right.wav" compile="0" resource="1"
-                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_3_5_right.wav"/>
+        <GROUP id="{7338204B-9EED-C2A2-E23B-1A364496EBE7}" name="Open 3">
+          <FILE id="o7zD3I" name="open_hi_hat_5_1.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_1.wav"/>
+          <FILE id="F8sr1U" name="open_hi_hat_5_1_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_1_left.wav"/>
+          <FILE id="OsqeOi" name="open_hi_hat_5_1_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_1_right.wav"/>
+          <FILE id="iEAcYL" name="open_hi_hat_5_2.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_2.wav"/>
+          <FILE id="a7fvDu" name="open_hi_hat_5_2_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_2_left.wav"/>
+          <FILE id="npdNOK" name="open_hi_hat_5_2_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_2_right.wav"/>
+          <FILE id="lPSRIl" name="open_hi_hat_5_3.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_3.wav"/>
+          <FILE id="Jc4GaS" name="open_hi_hat_5_3_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_3_left.wav"/>
+          <FILE id="tOu5uF" name="open_hi_hat_5_3_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_3_right.wav"/>
+          <FILE id="YxHjoq" name="open_hi_hat_5_4.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_4.wav"/>
+          <FILE id="kT6Wqi" name="open_hi_hat_5_4_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_4_left.wav"/>
+          <FILE id="XSehXh" name="open_hi_hat_5_4_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_4_right.wav"/>
+          <FILE id="VIlDe3" name="open_hi_hat_5_5.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_5.wav"/>
+          <FILE id="QCcmdH" name="open_hi_hat_5_5_left.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_5_left.wav"/>
+          <FILE id="ewWvXH" name="open_hi_hat_5_5_right.wav" compile="0" resource="1"
+                file="Assets/46 Open Hi-Hat/Open 3/open_hi_hat_5_5_right.wav"/>
         </GROUP>
       </GROUP>
       <GROUP id="{C1F7AA73-7933-EF24-C58B-65143994470F}" name="49 Crash Cymbal 1">

@@ -524,6 +524,9 @@ void PluginAudioProcessor::processBlock(juce::AudioBuffer<float>& outputBuffer, 
 		lowPass.process(context);
 	}
 
+    auto& channelGain = mChannelGains[mChannelGains.size() - 1];
+    channelGain->process(context);
+    
 	juce::MidiBuffer bufferToProcess;
 
 	for (auto it = mScheduledMidiEvents.begin(); it != mScheduledMidiEvents.end();)
