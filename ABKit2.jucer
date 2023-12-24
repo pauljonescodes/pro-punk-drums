@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="Q0tYTq" name="ABKit2" projectType="audioplug" useAppConfig="0"
+<JUCERPROJECT id="Q0tYTq" name="Basement Kit" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
               bundleIdentifier="com.propunkstudio.abkit2" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginName="Basement Kit" pluginManufacturer="Pro Punk Studio"
-              aaxIdentifier="com.proppunkstudio.abkit2">
-  <MAINGROUP id="eIDGb1" name="ABKit2">
+              aaxIdentifier="com.proppunkstudio.abkit2" version="0.0.1" companyName="Pro Punk Studio"
+              companyCopyright="2023" companyEmail="paul@propunkstudio.com">
+  <MAINGROUP id="eIDGb1" name="Basement Kit">
     <GROUP id="{95755CA2-B0D0-D393-296E-7490F1BAFDDB}" name="Assets">
       <GROUP id="{BDC2527B-255C-6B2B-A38B-8BBA1DA4D972}" name="35 Acoustic Bass Drum">
         <GROUP id="{E03FD2A6-2F9B-8CFF-999D-39D4181C8F44}" name="Hard">

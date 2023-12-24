@@ -5,7 +5,7 @@
 class OutputsComponent : public juce::Component
 {
 public:
-    OutputsComponent(juce::AudioProcessorValueTreeState& apvts, std::function<void(int, float, std::string)> onDrumMidiButtonClicked);
+    OutputsComponent(juce::AudioProcessorValueTreeState& apvts, std::function<void(int, float)> onDrumMidiButtonClicked);
     ~OutputsComponent() override;
 
     void paint(juce::Graphics&) override;

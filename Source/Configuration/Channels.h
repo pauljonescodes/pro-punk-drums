@@ -57,6 +57,7 @@ namespace channels {
 		{ channels::hiHatIndex, generalmidi::midinotes::closedHiHat},
 		{ channels::cymbalsIndex, generalmidi::midinotes::crashCymbal2 },
 		{ channels::percussionIndex, generalmidi::midinotes::tambourine },
+		{ channels::outputIndex, generalmidi::midinotes::notApplicable },
 	};
 
 	static const std::map<int, int> generalMidiNoteToChannelIndex = {

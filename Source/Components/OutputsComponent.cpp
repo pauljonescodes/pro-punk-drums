@@ -1,7 +1,7 @@
 #include "OutputsComponent.h"
 #include "../Configuration/Channels.h"
 
-OutputsComponent::OutputsComponent(juce::AudioProcessorValueTreeState& apvts, std::function<void(int, float, std::string)> onDrumMidiButtonClicked)
+OutputsComponent::OutputsComponent(juce::AudioProcessorValueTreeState& apvts, std::function<void(int, float)> onDrumMidiButtonClicked)
 {
     addAndMakeVisible(viewport);
     viewport.setViewedComponent(&container, false);
@@ -25,7 +25,7 @@ void OutputsComponent::paint(juce::Graphics&)
 void OutputsComponent::resized()
 {
     viewport.setBounds(getLocalBounds());
-    int heightPerComponent = 200;
+    int heightPerComponent = getHeight();
     int totalHeight = heightPerComponent * mComponents.size();
 
     container.setBounds(0, 0, viewport.getWidth(), totalHeight);

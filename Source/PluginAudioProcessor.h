@@ -59,7 +59,8 @@ private:
 	std::vector<std::unique_ptr<PluginSynthesiser>> mSynthesiserPtrVector; // 6 synths
 	std::vector<std::unique_ptr<juce::AudioBuffer<float>>> mInternalBufferPtrVector; 
 	std::vector<std::unique_ptr<juce::dsp::Compressor<float>>> mCompressors; // 7 comps
-	
+	std::vector<std::unique_ptr<juce::dsp::Gain<float>>> mChannelGains;
+
 	std::vector<juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>,
 		juce::dsp::IIR::Coefficients<float>>> mHighPassFilters;
 	std::vector<juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>,

@@ -34,8 +34,8 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor(PluginAudioProcessor& p)
 		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity, micId);
 		})));
 
-	mOutputsComponent.reset(new OutputsComponent(apvts, ([this](int midiNote, float midiVelocity, std::string micId) -> void {
-		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity, micId);
+	mOutputsComponent.reset(new OutputsComponent(apvts, ([this](int midiNote, float midiVelocity) -> void {
+		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity);
 		})));
 
 	mTabbedComponent->addTab(strings::samples, juce::Colours::lightgrey, mSamplesComponent.get(), true);
