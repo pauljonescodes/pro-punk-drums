@@ -19,7 +19,6 @@ private:
 	void timerCallback() override;
 
 	juce::AudioProcessorValueTreeState& mApvts;
-	std::unique_ptr <juce::Label> mLabel;
 
 	std::unique_ptr <juce::ToggleButton> mCompressionOnToggleButton;
 	std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mCompressionOnAttachment;
@@ -42,16 +41,20 @@ private:
 
 	//
 
-	std::unique_ptr <juce::ToggleButton> mHighPassOnToggleButton;
-	std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mHighPassOnAttachment;
+	std::unique_ptr <juce::ToggleButton> mLowShelfOnToggleButton;
+	std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mLowShelfOnAttachment;
 
-	std::unique_ptr <juce::Slider> mHighPassFrequencySlider;
-	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mHighPassFrequencyAttachment;
-	std::unique_ptr <juce::Label> mHighPassFrequencyLabel;
+	std::unique_ptr <juce::Slider> mLowShelfFrequencySlider;
+	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mLowShelfFrequencyAttachment;
+	std::unique_ptr <juce::Label> mLowShelfFrequencyLabel;
 
-	std::unique_ptr<juce::Slider> mHighPassQualitySlider;
-	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mHighPassQualityAttachment;
-	std::unique_ptr<juce::Label> mHighPassQualityLabel;
+	std::unique_ptr<juce::Slider> mLowShelfQualitySlider;
+	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mLowShelfQualityAttachment;
+	std::unique_ptr<juce::Label> mLowShelfQualityLabel;
+
+	std::unique_ptr<juce::Slider> mLowShelfGainSlider;
+	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mLowShelfGainAttachment;
+	std::unique_ptr<juce::Label> mLowShelfGainLabel;
 
 	//
 
@@ -72,16 +75,20 @@ private:
 
 	//
 
-	std::unique_ptr <juce::ToggleButton> mLowPassOnToggleButton;
-	std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mLowPassOnAttachment;
+	std::unique_ptr <juce::ToggleButton> mHighShelfOnToggleButton;
+	std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mHighShelfOnAttachment;
 
-	std::unique_ptr <juce::Slider> mLowPassFrequencySlider;
-	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mLowPassFrequencyAttachment;
-	std::unique_ptr <juce::Label> mLowPassFrequencyLabel;
+	std::unique_ptr <juce::Slider> mHighShelfFrequencySlider;
+	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mHighShelfFrequencyAttachment;
+	std::unique_ptr <juce::Label> mHighShelfFrequencyLabel;
 
-	std::unique_ptr<juce::Slider> mLowPassQualitySlider;
-	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mLowPassQualityAttachment;
-	std::unique_ptr<juce::Label> mLowPassQualityLabel;
+	std::unique_ptr<juce::Slider> mHighShelfQualitySlider;
+	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mHighShelfQualityAttachment;
+	std::unique_ptr<juce::Label> mHighShelfQualityLabel;
+
+	std::unique_ptr<juce::Slider> mHighShelfGainSlider;
+	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mHighShelfGainAttachment;
+	std::unique_ptr<juce::Label> mHighShelfGainLabel;
 
 	//
 

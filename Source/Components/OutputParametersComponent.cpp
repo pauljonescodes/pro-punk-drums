@@ -14,14 +14,12 @@ OutputParametersComponent::OutputParametersComponent(int channelIndex, juce::Aud
 	auto textBoxWidth = 75;
 	auto textBoxHeight = 15;
 
-	mNoteOnButton.reset(new juce::TextButton(std::to_string(channelMidi)));
+	mNoteOnButton.reset(new juce::TextButton(std::to_string(channelMidi) + " " + channels::channelIndexToNameMap.at(channelIndex)));
 	mNoteOnButton->setComponentID(juce::String(channelMidi));
 	mNoteOnButton->addListener(this);
 	mMidiNoteValue = channelMidi;
 	addAndMakeVisible(mNoteOnButton.get());
 
-	mLabel.reset(new juce::Label(std::to_string(channelIndex) + "_label", channels::channelIndexToNameMap.at(channelIndex)));
-	addAndMakeVisible(mLabel.get());
 
 	mCompressionOnToggleButton.reset(new juce::ToggleButton(strings::compressor));
 	mCompressionOnAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
@@ -31,38 +29,51 @@ OutputParametersComponent::OutputParametersComponent(int channelIndex, juce::Aud
 		);
 	addAndMakeVisible(mCompressionOnToggleButton.get());
 
-	mHighPassOnToggleButton.reset(new juce::ToggleButton(strings::highPass));
-	mHighPassOnAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
+	mLowShelfOnToggleButton.reset(new juce::ToggleButton(strings::lowShelf));
+	mLowShelfOnAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
 		apvts,
-		PluginUtils::joinId({ channelId, parameters::highPassEqualizationTypeId, parameters::onId }),
-		*mHighPassOnToggleButton
+		PluginUtils::joinId({ channelId, parameters::lowShelfEqualizationTypeId, parameters::onId }),
+		*mLowShelfOnToggleButton
 		);
-	addAndMakeVisible(mHighPassOnToggleButton.get());
+	addAndMakeVisible(mLowShelfOnToggleButton.get());
 
-	mHighPassFrequencySlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
-	mHighPassFrequencySlider->setTitle(strings::frequency);
-	mHighPassFrequencyAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+	mLowShelfFrequencySlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
+	mLowShelfFrequencySlider->setTitle(strings::frequency);
+	mLowShelfFrequencyAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
 		apvts,
-		PluginUtils::joinId({ channelId, parameters::highPassEqualizationTypeId, parameters::frequencyId }),
-		*mHighPassFrequencySlider);
-	addAndMakeVisible(mHighPassFrequencySlider.get());
+		PluginUtils::joinId({ channelId, parameters::lowShelfEqualizationTypeId, parameters::frequencyId }),
+		*mLowShelfFrequencySlider);
+	addAndMakeVisible(mLowShelfFrequencySlider.get());
 
-	mHighPassFrequencyLabel.reset(new juce::Label());
-	mHighPassFrequencyLabel->setText(strings::frequency, juce::dontSendNotification);
-	mHighPassFrequencyLabel->attachToComponent(mHighPassFrequencySlider.get(), false);
-	addAndMakeVisible(mHighPassFrequencyLabel.get());
+	mLowShelfFrequencyLabel.reset(new juce::Label());
+	mLowShelfFrequencyLabel->setText(strings::frequency, juce::dontSendNotification);
+	mLowShelfFrequencyLabel->attachToComponent(mLowShelfFrequencySlider.get(), false);
+	addAndMakeVisible(mLowShelfFrequencyLabel.get());
 
-	mHighPassQualitySlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
-	mHighPassQualityAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+	mLowShelfQualitySlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
+	mLowShelfQualityAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
 		apvts,
-		PluginUtils::joinId({ channelId, parameters::highPassEqualizationTypeId, parameters::qualityId }),
-		*mHighPassQualitySlider);
-	addAndMakeVisible(mHighPassQualitySlider.get());
+		PluginUtils::joinId({ channelId, parameters::lowShelfEqualizationTypeId, parameters::qualityId }),
+		*mLowShelfQualitySlider);
+	addAndMakeVisible(mLowShelfQualitySlider.get());
 
-	mHighPassQualityLabel.reset(new juce::Label());
-	mHighPassQualityLabel->setText(strings::quality, juce::dontSendNotification);
-	mHighPassQualityLabel->attachToComponent(mHighPassQualitySlider.get(), false);
-	addAndMakeVisible(mHighPassQualityLabel.get());
+	mLowShelfQualityLabel.reset(new juce::Label());
+	mLowShelfQualityLabel->setText(strings::quality, juce::dontSendNotification);
+	mLowShelfQualityLabel->attachToComponent(mLowShelfQualitySlider.get(), false);
+	addAndMakeVisible(mLowShelfQualityLabel.get());
+
+	mLowShelfGainSlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
+	mLowShelfGainSlider->setTitle(strings::frequency);
+	mLowShelfQualityAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+		apvts,
+		PluginUtils::joinId({ channelId, parameters::lowShelfEqualizationTypeId, parameters::gainId }),
+		*mLowShelfGainSlider);
+	addAndMakeVisible(mLowShelfGainSlider.get());
+
+	mLowShelfGainLabel.reset(new juce::Label());
+	mLowShelfGainLabel->setText(strings::gain, juce::dontSendNotification);
+	mLowShelfGainLabel->attachToComponent(mLowShelfGainSlider.get(), false);
+	addAndMakeVisible(mLowShelfGainLabel.get());
 
 	mPeakFilterOnToggleButton.reset(new juce::ToggleButton(strings::midPeak));
 	mPeakFilterOnAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
@@ -109,38 +120,51 @@ OutputParametersComponent::OutputParametersComponent(int channelIndex, juce::Aud
 	mPeakFilterGainLabel->attachToComponent(mPeakFilterGainSlider.get(), false);
 	addAndMakeVisible(mPeakFilterGainLabel.get());
 
-	mLowPassOnToggleButton.reset(new juce::ToggleButton(strings::lowPass));
-	mLowPassOnAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
+	mHighShelfOnToggleButton.reset(new juce::ToggleButton(strings::highShelf));
+	mHighShelfOnAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
 		apvts,
-		PluginUtils::joinId({ channelId, parameters::lowPassEqualizationTypeId, parameters::onId }),
-		*mLowPassOnToggleButton
+		PluginUtils::joinId({ channelId, parameters::highShelfEqualizationTypeId, parameters::onId }),
+		*mHighShelfOnToggleButton
 		);
-	addAndMakeVisible(mLowPassOnToggleButton.get());
+	addAndMakeVisible(mHighShelfOnToggleButton.get());
 
-	mLowPassFrequencySlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
-	mLowPassFrequencySlider->setTitle(strings::frequency);
-	mLowPassFrequencyAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+	mHighShelfFrequencySlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
+	mHighShelfFrequencySlider->setTitle(strings::frequency);
+	mHighShelfFrequencyAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
 		apvts,
-		PluginUtils::joinId({ channelId, parameters::lowPassEqualizationTypeId, parameters::frequencyId }),
-		*mLowPassFrequencySlider);
-	addAndMakeVisible(mLowPassFrequencySlider.get());
+		PluginUtils::joinId({ channelId, parameters::highShelfEqualizationTypeId, parameters::frequencyId }),
+		*mHighShelfFrequencySlider);
+	addAndMakeVisible(mHighShelfFrequencySlider.get());
 
-	mLowPassFrequencyLabel.reset(new juce::Label());
-	mLowPassFrequencyLabel->setText(strings::frequency, juce::dontSendNotification);
-	mLowPassFrequencyLabel->attachToComponent(mLowPassFrequencySlider.get(), false);
-	addAndMakeVisible(mLowPassFrequencyLabel.get());
+	mHighShelfFrequencyLabel.reset(new juce::Label());
+	mHighShelfFrequencyLabel->setText(strings::frequency, juce::dontSendNotification);
+	mHighShelfFrequencyLabel->attachToComponent(mHighShelfFrequencySlider.get(), false);
+	addAndMakeVisible(mHighShelfFrequencyLabel.get());
 
-	mLowPassQualitySlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
-	mLowPassQualityAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+	mHighShelfQualitySlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
+	mHighShelfQualityAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
 		apvts,
-		PluginUtils::joinId({ channelId, parameters::lowPassEqualizationTypeId, parameters::qualityId }),
-		*mLowPassQualitySlider);
-	addAndMakeVisible(mLowPassQualitySlider.get());
+		PluginUtils::joinId({ channelId, parameters::highShelfEqualizationTypeId, parameters::qualityId }),
+		*mHighShelfQualitySlider);
+	addAndMakeVisible(mHighShelfQualitySlider.get());
 
-	mLowPassQualityLabel.reset(new juce::Label());
-	mLowPassQualityLabel->setText(strings::quality, juce::dontSendNotification);
-	mLowPassQualityLabel->attachToComponent(mLowPassQualitySlider.get(), false);
-	addAndMakeVisible(mLowPassQualityLabel.get());
+	mHighShelfQualityLabel.reset(new juce::Label());
+	mHighShelfQualityLabel->setText(strings::quality, juce::dontSendNotification);
+	mHighShelfQualityLabel->attachToComponent(mHighShelfQualitySlider.get(), false);
+	addAndMakeVisible(mHighShelfQualityLabel.get());
+
+	mHighShelfGainSlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
+	mHighShelfGainSlider->setTitle(strings::frequency);
+	mHighShelfQualityAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+		apvts,
+		PluginUtils::joinId({ channelId, parameters::highShelfEqualizationTypeId, parameters::gainId }),
+		*mHighShelfGainSlider);
+	addAndMakeVisible(mHighShelfGainSlider.get());
+
+	mHighShelfGainLabel.reset(new juce::Label());
+	mHighShelfGainLabel->setText(strings::gain, juce::dontSendNotification);
+	mHighShelfGainLabel->attachToComponent(mHighShelfGainSlider.get(), false);
+	addAndMakeVisible(mHighShelfGainLabel.get());
 
 	mThresholdSlider.reset(new juce::Slider(juce::Slider::Rotary, juce::Slider::TextBoxBelow));
 	mThresholdSlider->setTitle(strings::frequency);
@@ -220,50 +244,48 @@ void OutputParametersComponent::paint(juce::Graphics& g)
 void OutputParametersComponent::resized()
 {
 	auto bounds = getLocalBounds();
-	auto row0Height = 25.0f;
 	auto row1Height = 25.0f;
 	auto spacerHeight = 25.0f;
-	auto rowHeight = ((bounds.getHeight() - row0Height - row1Height - spacerHeight * 3) / 3); // Set the height for each row
+	auto rowHeight = ((bounds.getHeight() - (spacerHeight * 4)) / 4) - row1Height; // Set the height for each row
 	auto rowWidth = (bounds.getWidth() / 5); // Set the height for each row
 
 	// Create flex boxes for each row
-	juce::FlexBox row0, row1, row2, row3, row4;
+	juce::FlexBox row1, row2, row3, row4, row5;
 
 	// Configure the flex boxes for horizontal layout
-	row0.flexDirection = juce::FlexBox::Direction::row;
 	row1.flexDirection = juce::FlexBox::Direction::row;
 	row2.flexDirection = juce::FlexBox::Direction::row;
 	row3.flexDirection = juce::FlexBox::Direction::row;
 	row4.flexDirection = juce::FlexBox::Direction::row;
+	row5.flexDirection = juce::FlexBox::Direction::row;
 
 	// Add components to each row as FlexItem
-	row0.items.add(juce::FlexItem(*mLabel).withWidth(bounds.getWidth() / 2.0f).withHeight(row0Height));
-	row0.items.add(juce::FlexItem(*mNoteOnButton).withWidth(bounds.getWidth() / 2.0f).withHeight(row0Height));
+	row1.items.add(juce::FlexItem(*mNoteOnButton).withWidth(getWidth()).withHeight(row1Height));
 
-	row1.items.add(juce::FlexItem(*mHighPassOnToggleButton).withWidth(rowWidth).withHeight(row1Height));
-	row1.items.add(juce::FlexItem(*mPeakFilterOnToggleButton).withWidth(rowWidth).withHeight(row1Height));
-	row1.items.add(juce::FlexItem(*mLowPassOnToggleButton).withWidth(rowWidth).withHeight(row1Height));
-	row1.items.add(juce::FlexItem(*mCompressionOnToggleButton).withWidth(rowWidth).withHeight(row1Height));
+	row2.items.add(juce::FlexItem(*mLowShelfOnToggleButton).withWidth(rowWidth).withHeight(rowHeight));
+	row2.items.add(juce::FlexItem(*mLowShelfFrequencySlider).withWidth(rowWidth).withHeight(rowHeight));
+	row2.items.add(juce::FlexItem(*mLowShelfQualitySlider).withWidth(rowWidth).withHeight(rowHeight));
+	row2.items.add(juce::FlexItem(*mLowShelfGainSlider).withWidth(rowWidth).withHeight(rowHeight));
 
-	row2.items.add(juce::FlexItem(*mHighPassFrequencySlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row2.items.add(juce::FlexItem(*mPeakFilterFrequencySlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row2.items.add(juce::FlexItem(*mLowPassFrequencySlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row2.items.add(juce::FlexItem(*mThresholdSlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row2.items.add(juce::FlexItem(*mAttackSlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
+	row3.items.add(juce::FlexItem(*mPeakFilterOnToggleButton).withWidth(rowWidth).withHeight(rowHeight));
+	row3.items.add(juce::FlexItem(*mPeakFilterFrequencySlider).withWidth(rowWidth).withHeight(rowHeight));
+	row3.items.add(juce::FlexItem(*mPeakFilterQualitySlider).withWidth(rowWidth).withHeight(rowHeight));
+	row3.items.add(juce::FlexItem(*mPeakFilterGainSlider).withWidth(rowWidth).withHeight(rowHeight));
 
-	row3.items.add(juce::FlexItem(*mHighPassQualitySlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row3.items.add(juce::FlexItem(*mPeakFilterQualitySlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row3.items.add(juce::FlexItem(*mLowPassQualitySlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row3.items.add(juce::FlexItem(*mRatioSlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row3.items.add(juce::FlexItem(*mReleaseSlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
+	row4.items.add(juce::FlexItem(*mHighShelfOnToggleButton).withWidth(rowWidth).withHeight(rowHeight));
+	row4.items.add(juce::FlexItem(*mHighShelfFrequencySlider).withWidth(rowWidth).withHeight(rowHeight));
+	row4.items.add(juce::FlexItem(*mHighShelfQualitySlider).withWidth(rowWidth).withHeight(rowHeight));
+	row4.items.add(juce::FlexItem(*mHighShelfGainSlider).withWidth(rowWidth).withHeight(rowHeight));
 
-	row4.items.add(juce::FlexItem().withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row4.items.add(juce::FlexItem(*mPeakFilterGainSlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row4.items.add(juce::FlexItem().withMinWidth(rowWidth).withMinHeight(rowHeight));
-	row4.items.add(juce::FlexItem(*mChannelGainSlider).withMinWidth(rowWidth).withMinHeight(rowHeight));
+	row5.items.add(juce::FlexItem(*mCompressionOnToggleButton).withWidth(rowWidth).withHeight(rowHeight));
+	row5.items.add(juce::FlexItem(*mThresholdSlider).withWidth(rowWidth).withHeight(rowHeight));
+	row5.items.add(juce::FlexItem(*mAttackSlider).withWidth(rowWidth).withHeight(rowHeight));
+	row5.items.add(juce::FlexItem(*mRatioSlider).withWidth(rowWidth).withHeight(rowHeight));
+	row5.items.add(juce::FlexItem(*mReleaseSlider).withWidth(rowWidth).withHeight(rowHeight));
+	row5.items.add(juce::FlexItem(*mChannelGainSlider).withWidth(rowWidth).withHeight(rowHeight));
 	
 	// Perform layout for each row
-	row0.performLayout(bounds.removeFromTop(row0Height));
+	bounds.removeFromTop(12.5);
 	row1.performLayout(bounds.removeFromTop(row1Height));
 	bounds.removeFromTop(spacerHeight);
 	row2.performLayout(bounds.removeFromTop(rowHeight));
@@ -271,6 +293,8 @@ void OutputParametersComponent::resized()
 	row3.performLayout(bounds.removeFromTop(rowHeight));
 	bounds.removeFromTop(spacerHeight);
 	row4.performLayout(bounds.removeFromTop(rowHeight));
+	bounds.removeFromTop(spacerHeight);
+	row5.performLayout(bounds.removeFromTop(rowHeight));
 }
 
 void OutputParametersComponent::buttonClicked(juce::Button* button)

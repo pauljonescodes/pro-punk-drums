@@ -45,7 +45,7 @@ namespace parameters {
 	static constexpr float releaseDefaultValue = 0.0f;
 
 	static const std::string qualityId = "quality";
-	static constexpr float qualityDefaultValue = 0.7f;
+	static constexpr float qualityDefaultValue = 1.1f;
 	static constexpr float qualityMinimumValue = 0.1f;
 	static constexpr float qualityMaximumValue = 10.f;
 	static constexpr float qualityIntervalValue = 0.01f;
@@ -57,27 +57,27 @@ namespace parameters {
 	static constexpr float frequencyIntervalValue = 1.0f;
 	static const juce::NormalisableRange<float> frequencyNormalizableRange = juce::NormalisableRange<float>(frequencyMinimumValue, frequencyMaximumValue, frequencyIntervalValue);
 
-	static const juce::NormalisableRange<float> peakFilterGainNormalizableRange = juce::NormalisableRange<float>(0.01f, 12.0f, 0.001f);
-	static constexpr float peakFilterGainDefaultValue = 1.0f;
+	static const juce::NormalisableRange<float> eqFilterGainNormalizableRange = juce::NormalisableRange<float>(0.001f, 12.0f, 0.001f);
+	static constexpr float eqFilterGainDefaultValue = 1.0f;
 
-	static const std::string highPassEqualizationTypeId = "high pass";
-	static constexpr float highPassFrequencyDefaultValue = 800.0f;
+	static const std::string lowShelfEqualizationTypeId = "low shelf";
+	static constexpr float lowShelfFrequencyDefaultValue = 20.0f;
 
 	static const std::string peakFilterEqualizationTypeId = "peak filter";
 	static constexpr float peakFilterFrequencyDefaultValue = 1000.0f;
 
-	static const std::string lowPassEqualizationTypeId = "low pass";
-	static constexpr float lowPassFrequencyDefaultValue = 10000.0f;
+	static const std::string highShelfEqualizationTypeId = "high shelf";
+	static constexpr float highShelfFrequencyDefaultValue = 15000.0f;
 
 	static const std::vector<std::string> equalizationTypeIdVector = {
-		highPassEqualizationTypeId,
+		lowShelfEqualizationTypeId,
 		peakFilterEqualizationTypeId,
-		lowPassEqualizationTypeId,
+		highShelfEqualizationTypeId,
 	};
 
 	static const std::map<std::string, float> equalizationTypeIdToDefaultFrequencyMap = {
-		{lowPassEqualizationTypeId,lowPassFrequencyDefaultValue},
+		{highShelfEqualizationTypeId,highShelfFrequencyDefaultValue},
 		{peakFilterEqualizationTypeId,peakFilterFrequencyDefaultValue},
-		{highPassEqualizationTypeId,highPassFrequencyDefaultValue}
+		{lowShelfEqualizationTypeId,lowShelfFrequencyDefaultValue}
 	};
 }

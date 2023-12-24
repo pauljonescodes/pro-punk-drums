@@ -9,8 +9,8 @@ namespace strings {
 	static const std::string samples = "Samples";
 	static const std::string outputs = "Outputs";
 	static const std::string compressor = "Compressor";
-	static const std::string highPass = "High pass";
-	static const std::string lowPass = "Low pass";
+	static const std::string lowShelf = "Low shelf";
+	static const std::string highShelf = "High shelf";
 	static const std::string midPeak = "Mid peak";
 	static const std::string frequency = "Frequency";
 	static const std::string quality = "Quality";

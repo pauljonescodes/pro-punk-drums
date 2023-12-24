@@ -62,11 +62,11 @@ private:
 	std::vector<std::unique_ptr<juce::dsp::Gain<float>>> mChannelGains;
 
 	std::vector<juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>,
-		juce::dsp::IIR::Coefficients<float>>> mHighPassFilters;
+		juce::dsp::IIR::Coefficients<float>>> mLowShelfFilters;
 	std::vector<juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>,
 		juce::dsp::IIR::Coefficients<float>>> mPeakFilters;
 	std::vector<juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>,
-		juce::dsp::IIR::Coefficients<float>>> mLowPassFilters;
+		juce::dsp::IIR::Coefficients<float>>> mHighShelfFilters;
 
 	std::vector<std::pair<double, juce::MidiMessage>> mScheduledMidiEvents;
 	long long mCurrentSamplePosition = 0;
