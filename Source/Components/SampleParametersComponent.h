@@ -7,7 +7,6 @@ public:
     SamplesParametersComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState& apvts);
     ~SamplesParametersComponent() override;
     
-    
     void paint(juce::Graphics&) override;
     void resized() override;
     
@@ -15,21 +14,21 @@ public:
     
 private:
     std::string mMicId;
-
-    juce::AudioProcessorValueTreeState& mApvts;
     
     std::unique_ptr <juce::Label> mLabel;
     
-    std::unique_ptr <juce::Slider> mGainSlider;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mGainAttachment;
+    std::unique_ptr<juce::Slider> mGainSlider;
     
-    std::unique_ptr <juce::Slider> mPanSlider;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mPanAttachment;
+    std::unique_ptr<juce::Slider> mPanSlider;
     
-    std::unique_ptr <juce::ToggleButton> mInvertPhaseToggleButton;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mInvertPhaseAttachment;
+    std::unique_ptr <juce::ToggleButton> mInvertPhaseToggleButton;
 
     std::unique_ptr <juce::TextButton> mNoteOnButton;
+    
+    juce::AudioProcessorValueTreeState& mApvts;
 
     void buttonClicked(juce::Button* button) override;
     

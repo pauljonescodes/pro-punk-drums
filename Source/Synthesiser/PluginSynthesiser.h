@@ -9,6 +9,7 @@ class PluginSynthesiser : public juce::Synthesiser {
     
 public:
     PluginSynthesiser();
+    ~PluginSynthesiser();
     
     virtual void noteOn(int midiChannel, int midiNoteNumber, float velocity, std::string micId);
     virtual void noteOn(int midiChannel, int midiNoteNumber, float velocity) override;
@@ -33,13 +34,13 @@ public:
 protected:
     
     struct Microphone {
-        PluginSynthesiserSound::Ptr sound;
-        std::shared_ptr<PluginSynthesiserVoice> voice;
-        
-        Microphone() = default;
+        PluginSynthesiserSound* sound;
+        PluginSynthesiserVoice* voice; 
 
-        Microphone(PluginSynthesiserSound::Ptr s, std::shared_ptr<PluginSynthesiserVoice> v)
-        : sound(std::move(s)), voice(std::move(v))
+        Microphone() = default; 
+        
+        Microphone(PluginSynthesiserSound*  s, PluginSynthesiserVoice* v)
+        : sound(s), voice(v)
         {}
     };
     

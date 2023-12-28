@@ -2,11 +2,6 @@
 #include "../Configuration/Samples.h"
 #include "PluginSynthesiserVoice.h"
 
-PluginSynthesiser::PluginSynthesiser()
-{
-    setNoteStealingEnabled(false);
-}
-
 void PluginSynthesiser::noteOff(const int midiChannel, const int midiNoteNumber, const float velocity, const bool allowTailOff) {
     
 }
@@ -56,12 +51,12 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
             auto& variation = lowerIntensity.variations[lowerIntensity.currentVariationIndex];
 
             auto& sound = variation.microphones[micId].sound;
-            auto& voice = variation.microphones[micId].voice;
+            auto voice = variation.microphones[micId].voice;
 
             if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
             {
-                stopVoice(voice.get(), 1.0f, true);
-                startVoice(voice.get(), sound.get(), midiChannel, midiNoteNumber, (1.0f - perceivedBlendRatio) * velocityFactor);
+                stopVoice(voice, 1.0f, true);
+                startVoice(voice, sound, midiChannel, midiNoteNumber, (1.0f - perceivedBlendRatio) * velocityFactor);
             }
 
             lowerIntensity.currentVariationIndex = (lowerIntensity.currentVariationIndex + 1) % samplesSize;
@@ -73,12 +68,12 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
             auto& variation = higherIntensity.variations[higherIntensity.currentVariationIndex];
 
             auto& sound = variation.microphones[micId].sound;
-            auto& voice = variation.microphones[micId].voice;
+            auto voice = variation.microphones[micId].voice;
 
             if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
             {
-                stopVoice(voice.get(), 1.0f, true);
-                startVoice(voice.get(), sound.get(), midiChannel, midiNoteNumber, perceivedBlendRatio * velocityFactor);
+                stopVoice(voice, 1.0f, true);
+                startVoice(voice, sound, midiChannel, midiNoteNumber, perceivedBlendRatio * velocityFactor);
             }
 
             higherIntensity.currentVariationIndex = (higherIntensity.currentVariationIndex + 1) % samplesSize;
@@ -130,41 +125,51 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
         if (lowerIntensity.currentVariationIndex < samplesSize)
         {
             auto& variation = lowerIntensity.variations[lowerIntensity.currentVariationIndex];
-            
+
             for (auto& microphone : variation.microphones)
             {
                 auto& sound = microphone.second.sound;
-                auto& voice = microphone.second.voice;
-                
+                PluginSynthesiserVoice* voice = microphone.second.voice;
+
                 if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
                 {
-                    stopVoice(voice.get(), 1.0f, true);
-                    startVoice(voice.get(), sound.get(), midiChannel, midiNoteNumber, (1.0f - perceivedBlendRatio) * velocityFactor);
+                    stopVoice(voice, 1.0f, true);
+                    startVoice(voice, sound, midiChannel, midiNoteNumber, (1.0f - perceivedBlendRatio) * velocityFactor);
                 }
             }
-            
+
             lowerIntensity.currentVariationIndex = (lowerIntensity.currentVariationIndex + 1) % samplesSize;
         }
-        
+
         if (lowerIntensityIndex != higherIntensityIndex)
         {
             auto& higherIntensity = intensities[higherIntensityIndex];
             auto& variation = higherIntensity.variations[higherIntensity.currentVariationIndex];
-            
+
             for (auto& microphone : variation.microphones) {
                 auto& sound = microphone.second.sound;
-                auto& voice = microphone.second.voice;
-                
+                auto voice = microphone.second.voice;
+
                 if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
                 {
-                    stopVoice(voice.get(), 1.0f, true);
-                    startVoice(voice.get(), sound.get(), midiChannel, midiNoteNumber, perceivedBlendRatio * velocityFactor);
+                    stopVoice(voice, 1.0f, true);
+                    startVoice(voice, sound, midiChannel, midiNoteNumber, perceivedBlendRatio * velocityFactor);
                 }
             }
-            
+
             higherIntensity.currentVariationIndex = (higherIntensity.currentVariationIndex + 1) % samplesSize;
         }
     }
+}
+
+PluginSynthesiser::PluginSynthesiser()
+{
+    setNoteStealingEnabled(false);
+}
+
+PluginSynthesiser::~PluginSynthesiser()
+{
+    DBG("~PluginSynthesiser()");
 }
 
 void PluginSynthesiser::addSample(const std::string resourceName,
@@ -208,11 +213,10 @@ void PluginSynthesiser::addSample(const std::string resourceName,
         velocity.variations.emplace_back();
     }
     
-    auto microphone = Microphone(PluginSynthesiserSound::Ptr(sound),
-                                 std::make_shared<PluginSynthesiserVoice>(gainParameter, panParameter, phaseParameter)
-                                 );
+    PluginSynthesiserVoice* voice = new PluginSynthesiserVoice(gainParameter, panParameter, phaseParameter);
+    auto microphone = Microphone(sound, voice);
     
-    addVoice(microphone.voice.get());
+    addVoice(voice);
     velocity.variations[variationIndex].microphones.emplace(
         micId,
         std::move(microphone)

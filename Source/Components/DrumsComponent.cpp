@@ -56,7 +56,8 @@ DrumsComponent::DrumsComponent(
 DrumsComponent::~DrumsComponent()
 {
 	for (auto button : mMidiNoteButtons) {
-		button = nullptr;
+        button->removeListener(this);
+        button = nullptr;
 	}
 }
 

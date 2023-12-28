@@ -16,6 +16,7 @@ OutputsComponent::OutputsComponent(juce::AudioProcessorValueTreeState& apvts, st
 
 OutputsComponent::~OutputsComponent()
 {
+    DBG("~OutputsComponent()");
 }
 
 void OutputsComponent::paint(juce::Graphics&)

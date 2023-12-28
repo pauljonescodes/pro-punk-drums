@@ -12,9 +12,9 @@ public:
     void resized() override;
     
 private:
+    juce::OwnedArray<SamplesParametersComponent> mComponents;
     juce::Viewport viewport;
     juce::Component container;
-    juce::OwnedArray<SamplesParametersComponent> mComponents;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SamplesComponent)
 };

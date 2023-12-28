@@ -9,7 +9,7 @@ SamplesParametersComponent::SamplesParametersComponent(int midiNote, std::string
 {
     mLabel.reset(new juce::Label(std::to_string(midiNote) + "_label", generalmidi::midiNoteToNameMap.at(midiNote) + " " + micId));
     addAndMakeVisible(mLabel.get());
-
+    
     mNoteOnButton.reset(new juce::TextButton(std::to_string(midiNote) + " " + micId));
     mNoteOnButton->setComponentID(juce::String(midiNote));
     mNoteOnButton->addListener(this);
@@ -23,11 +23,11 @@ SamplesParametersComponent::SamplesParametersComponent(int midiNote, std::string
     auto& gainNormalizableRange = gainParameter->getNormalisableRange();
     mGainSlider->setRange(gainNormalizableRange.start, gainNormalizableRange.end, gainNormalizableRange.interval);
     mGainSlider->setValue(gainParameter->getValue());
-    mGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
-                                                                                             apvts,
-                                                                                             juce::String(gainParameterId),
-                                                                                             *mGainSlider
-                                                                                             );
+    mGainAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(
+                                                                                   apvts,
+                                                                                   juce::String(gainParameterId),
+                                                                                   *mGainSlider
+                                                                                   ));
     
     auto panParameterId = PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::panId});
     auto* panParameter = apvts.getParameter(panParameterId);
@@ -36,28 +36,38 @@ SamplesParametersComponent::SamplesParametersComponent(int midiNote, std::string
     auto& panNormalizableRange = panParameter->getNormalisableRange();
     mPanSlider->setRange(panNormalizableRange.start, panNormalizableRange.end, panNormalizableRange.interval);
     mPanSlider->setValue(panParameter->getValue());
-    mPanAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
-                                                                                            apvts,
-                                                                                            juce::String(panParameterId),
-                                                                                            *mPanSlider
-                                                                                            );
+    mPanAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(
+                                                                                  apvts,
+                                                                                  juce::String(panParameterId),
+                                                                                  *mPanSlider
+                                                                                  ));
     
     auto phaseParameterId = PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::phaseId });
     auto* phaseParameter = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter(phaseParameterId));
     mInvertPhaseToggleButton.reset(new juce::ToggleButton(strings::invertPhase));
     addAndMakeVisible(mInvertPhaseToggleButton.get());
     mInvertPhaseToggleButton->setToggleState(phaseParameter->get(), juce::dontSendNotification);
-    mInvertPhaseAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
-                                                                                                    apvts,
-                                                                                                    phaseParameterId,
-                                                                                                    *mInvertPhaseToggleButton
-                                                                                                    );
+    mInvertPhaseAttachment.reset(new juce::AudioProcessorValueTreeState::ButtonAttachment(
+                                                                                          apvts,
+                                                                                          phaseParameterId,
+                                                                                          *mInvertPhaseToggleButton
+                                                                                          ));
 }
 
 SamplesParametersComponent::~SamplesParametersComponent()
 {
-    mGainSlider = nullptr;
-    mInvertPhaseToggleButton = nullptr;
+    mNoteOnButton->removeListener(this);
+    
+    mGainAttachment.reset();
+    mPanAttachment.reset();
+    mInvertPhaseAttachment.reset();
+
+    // Now it's safe to reset the sliders and buttons
+    mGainSlider.reset();
+    mPanSlider.reset();
+    mInvertPhaseToggleButton.reset();
+    mNoteOnButton.reset();
+    mLabel.reset();
 }
 
 void SamplesParametersComponent::paint(juce::Graphics& g)
@@ -70,17 +80,17 @@ void SamplesParametersComponent::resized()
     int padding = 10;
     int toggleSize = 75;
     int buttonWidth = 75;
-    int labelHeight = 15; 
-
-    auto area = getLocalBounds().reduced(padding); 
-
+    int labelHeight = 15;
+    
+    auto area = getLocalBounds().reduced(padding);
+    
     mLabel->setBounds(area.removeFromTop(labelHeight));
-
+    
     mInvertPhaseToggleButton->setBounds(area.removeFromLeft(toggleSize).reduced(0, padding));
     mPanSlider->setBounds(area.removeFromLeft(toggleSize).reduced(0, padding));
-
+    
     auto buttonArea = area.removeFromRight(buttonWidth).reduced(padding, padding);
-
+    
     mGainSlider->setBounds(area);
     mNoteOnButton->setBounds(buttonArea);
 }
@@ -89,7 +99,7 @@ void SamplesParametersComponent::buttonClicked(juce::Button* button)
 {
     const juce::String componentID = button->getComponentID();
     int midiNoteValue = componentID.getIntValue();
-
+    
     if (mOnDrumMidiButtonClicked.has_value()) {
         mOnDrumMidiButtonClicked.value()(midiNoteValue, 0.75f, mMicId);
     }

@@ -24,12 +24,12 @@ private:
 
     std::unique_ptr<PresetComponent> mPresetComponent;
 
-    std::unique_ptr<juce::TextButton> mMidiFileButton;
-    std::unique_ptr <juce::Slider> mVelocitySlider;
-    std::unique_ptr <juce::Label> mVelocityLabel;
-    std::unique_ptr <juce::FileChooser> mFileChooser;
-    std::unique_ptr <juce::ToggleButton> mMultiOutToggleButton;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mMultiOutAttachment;
+    std::unique_ptr<juce::TextButton> mMidiFileButton;
+    std::unique_ptr<juce::Slider> mVelocitySlider;
+    std::unique_ptr<juce::Label> mVelocityLabel;
+    std::unique_ptr<juce::FileChooser> mFileChooser;
+    std::unique_ptr<juce::ToggleButton> mMultiOutToggleButton;
 
     void buttonClicked(juce::Button* button) override;
     

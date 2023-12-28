@@ -27,6 +27,7 @@ mMidiRootNote(midiNoteForNormalPitch)
 
 PluginSynthesiserSound::~PluginSynthesiserSound()
 {
+    DBG("~PluginSynthesiserSound()");
 }
 
 bool PluginSynthesiserSound::appliesToNote(int midiNoteNumber)

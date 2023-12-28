@@ -13,7 +13,9 @@ PluginSynthesiserVoice::PluginSynthesiserVoice(
     mInvertPhaseParameter(phaseParameter)
 { }
 
-PluginSynthesiserVoice::~PluginSynthesiserVoice() {}
+PluginSynthesiserVoice::~PluginSynthesiserVoice() {
+    DBG("~PluginSynthesiserVoice()");
+}
 
 bool PluginSynthesiserVoice::canPlaySound(juce::SynthesiserSound* sound)
 {
@@ -38,7 +40,7 @@ void PluginSynthesiserVoice::startNote(int midiNoteNumber, float velocity, juce:
     }
 }
 
-void PluginSynthesiserVoice::stopNote(float /*velocity*/, bool allowTailOff)
+void PluginSynthesiserVoice::stopNote(float velocity, bool allowTailOff)
 {
     if (allowTailOff)
     {

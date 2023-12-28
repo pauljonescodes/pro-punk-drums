@@ -350,7 +350,7 @@ void PluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 	juce::dsp::ProcessSpec spec;
 	spec.sampleRate = getSampleRate();
 	spec.maximumBlockSize = samplesPerBlock; // Example block size
-	spec.numChannels = 2; // Stereo
+	spec.numChannels = getTotalNumOutputChannels(); // Stereo
 
 	for (const auto& synthesiser : mSynthesiserPtrVector)
 	{
