@@ -589,11 +589,11 @@ void PluginAudioProcessor::parameterChanged(const juce::String& parameterID, flo
 		const float lowShelfGain = mParameterValueTreeState->getParameterAsValue(lowShelfGainId).getValue();
 
 		if (std::strcmp(parameterID.toRawUTF8(), lowShelfFrequencyId.c_str()) == 0) {
-			*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, newValue, lowShelfQuality, lowShelfGain);
+			*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, newValue, std::max(lowShelfQuality, parameters::qualityMinimumValue), std::max(lowShelfGain, parameters::eqFilterGainMinimumValue));
 		} else if (std::strcmp(parameterID.toRawUTF8(), lowShelfQualityId.c_str()) == 0) {
-			*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, lowShelfCenterFrequency, newValue, lowShelfGain);
+			*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, lowShelfCenterFrequency, std::max(lowShelfQuality, newValue), std::max(lowShelfGain, parameters::eqFilterGainMinimumValue));
 		} else if (std::strcmp(parameterID.toRawUTF8(), lowShelfGainId.c_str()) == 0) {
-			*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, lowShelfCenterFrequency, lowShelfQuality, newValue);
+			*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, lowShelfCenterFrequency, std::max(lowShelfQuality, parameters::qualityMinimumValue), std::max(newValue, parameters::eqFilterGainMinimumValue));
 		}
 
 		const auto peakFilterCenterFrequencyId = PluginUtils::joinId({ channelId, parameters::peakFilterEqualizationTypeId, parameters::frequencyId });
@@ -606,11 +606,11 @@ void PluginAudioProcessor::parameterChanged(const juce::String& parameterID, flo
 		const float peakFilterGain = mParameterValueTreeState->getParameterAsValue(peakFilterGainId).getValue();
 		
 		if (std::strcmp(parameterID.toRawUTF8(), peakFilterCenterFrequencyId.c_str()) == 0) {
-			*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, newValue, peakFilterQuality, peakFilterGain);
+			*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, newValue, std::max(peakFilterQuality, parameters::qualityMinimumValue), std::max(peakFilterGain, parameters::eqFilterGainMinimumValue));
 		} else if (std::strcmp(parameterID.toRawUTF8(), peakFilterQualityId.c_str()) == 0) {
-			*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, peakFilterCenterFrequency, newValue, peakFilterGain);
+			*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, peakFilterCenterFrequency, std::max(newValue, parameters::qualityMinimumValue), std::max(peakFilterGain, parameters::eqFilterGainMinimumValue));
 		} else if (std::strcmp(parameterID.toRawUTF8(), peakFilterGainId.c_str()) == 0) {
-			*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, peakFilterCenterFrequency, peakFilterQuality, newValue);
+			*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, peakFilterCenterFrequency, std::max(peakFilterQuality, parameters::qualityMinimumValue), std::max(newValue, parameters::eqFilterGainMinimumValue));
 		}
 
 		const auto highShelfFrequencyId = PluginUtils::joinId({ channelId, parameters::highShelfEqualizationTypeId, parameters::frequencyId });
@@ -623,11 +623,11 @@ void PluginAudioProcessor::parameterChanged(const juce::String& parameterID, flo
 		const float highShelfGain = mParameterValueTreeState->getParameterAsValue(highShelfGainId).getValue();
 
 		if (std::strcmp(parameterID.toRawUTF8(), highShelfFrequencyId.c_str()) == 0) {
-			*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(sampleRate, newValue, highShelfQuality, highShelfGain);
+			*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(sampleRate, newValue, std::max(highShelfQuality, parameters::qualityMinimumValue), std::max(highShelfGain, parameters::eqFilterGainMinimumValue));
 		} else if (std::strcmp(parameterID.toRawUTF8(), highShelfQualityId.c_str()) == 0) {
-			*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(sampleRate, highShelfCenterFrequency, newValue, highShelfGain);
+			*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(sampleRate, highShelfCenterFrequency, std::max(newValue, parameters::qualityMinimumValue), std::max(highShelfGain, parameters::eqFilterGainMinimumValue));
 		} else if (std::strcmp(parameterID.toRawUTF8(), highShelfGainId.c_str()) == 0) {
-			*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(sampleRate, highShelfCenterFrequency, highShelfQuality, newValue);
+			*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(sampleRate, highShelfCenterFrequency, std::max(highShelfQuality, parameters::qualityMinimumValue), std::max(newValue, parameters::eqFilterGainMinimumValue));
 		}
 
 		const auto& channelGain = mChannelGains[channelIndex];

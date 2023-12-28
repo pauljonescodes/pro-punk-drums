@@ -57,7 +57,8 @@ namespace parameters {
 	static constexpr float frequencyIntervalValue = 1.0f;
 	static const juce::NormalisableRange<float> frequencyNormalizableRange = juce::NormalisableRange<float>(frequencyMinimumValue, frequencyMaximumValue, frequencyIntervalValue);
 
-	static const juce::NormalisableRange<float> eqFilterGainNormalizableRange = juce::NormalisableRange<float>(0.001f, 12.0f, 0.001f);
+	static constexpr float eqFilterGainMinimumValue = 0.001f;
+	static const juce::NormalisableRange<float> eqFilterGainNormalizableRange = juce::NormalisableRange<float>(0.001f, 12.0f, eqFilterGainMinimumValue);
 	static constexpr float eqFilterGainDefaultValue = 1.0f;
 
 	static const std::string lowShelfEqualizationTypeId = "low shelf";

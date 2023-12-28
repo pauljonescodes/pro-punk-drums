@@ -55,10 +55,17 @@ DrumsComponent::DrumsComponent(
 
 DrumsComponent::~DrumsComponent()
 {
-	for (auto button : mMidiNoteButtons) {
-        button->removeListener(this);
-        button = nullptr;
-	}
+	mMultiOutAttachment.reset();
+
+	mMidiNoteButtons.clear(); 
+
+	mMultiOutToggleButton.reset();
+	mMidiFileButton.reset();
+	mVelocitySlider.reset();
+	mVelocityLabel.reset();
+	mFileChooser.reset();
+
+	mPresetComponent.reset();
 }
 
 
