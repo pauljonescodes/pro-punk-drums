@@ -23,13 +23,15 @@ public:
 	void savePreset(const juce::String& presetName);
 	void deletePreset(const juce::String& presetName);
 	void loadPreset(const juce::String& presetName);
+	void loadPresetAt(int index);
 	int loadNextPreset();
 	int loadPreviousPreset();
 	juce::StringArray getAllPresets() const;
 	juce::String getCurrentPreset() const;
+	int getCurrentPresetIndex() const;
 private:
 	void valueTreeRedirected(juce::ValueTree& treeWhichHasBeenChanged) override;
 
-	juce::AudioProcessorValueTreeState& valueTreeState;
-	juce::Value currentPreset;
+	juce::AudioProcessorValueTreeState& mValueTreeState;
+	juce::Value mCurrentPreset;
 };

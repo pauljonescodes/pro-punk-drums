@@ -20,7 +20,7 @@ const juce::String PluginPresetManager::extension{ "preset" };
 const juce::String PluginPresetManager::presetNameProperty{ "presetName" };
 
 PluginPresetManager::PluginPresetManager(juce::AudioProcessorValueTreeState& apvts) :
-	valueTreeState(apvts)
+	mValueTreeState(apvts)
 {
 	// Create a default Preset Directory, if it doesn't exist
 	if (!defaultDirectory.exists())
@@ -33,8 +33,8 @@ PluginPresetManager::PluginPresetManager(juce::AudioProcessorValueTreeState& apv
 		}
 	}
 
-	valueTreeState.state.addListener(this);
-	currentPreset.referTo(valueTreeState.state.getPropertyAsValue(presetNameProperty, nullptr));
+	mValueTreeState.state.addListener(this);
+	mCurrentPreset.referTo(mValueTreeState.state.getPropertyAsValue(presetNameProperty, nullptr));
 }
 
 void PluginPresetManager::savePreset(const juce::String& presetName)
@@ -42,8 +42,8 @@ void PluginPresetManager::savePreset(const juce::String& presetName)
 	if (presetName.isEmpty())
 		return;
 
-	currentPreset.setValue(presetName);
-	const auto xml = valueTreeState.copyState().createXml();
+	mCurrentPreset.setValue(presetName);
+	const auto xml = mValueTreeState.copyState().createXml();
 	const auto presetFile = defaultDirectory.getChildFile(presetName + "." + extension);
 	if (!xml->writeTo(presetFile))
 	{
@@ -70,7 +70,7 @@ void PluginPresetManager::deletePreset(const juce::String& presetName)
 		jassertfalse;
 		return;
 	}
-	currentPreset.setValue("");
+	mCurrentPreset.setValue("");
 }
 
 void PluginPresetManager::loadPreset(const juce::String& presetName)
@@ -89,9 +89,14 @@ void PluginPresetManager::loadPreset(const juce::String& presetName)
 	juce::XmlDocument xmlDocument{ presetFile };
 	const auto valueTreeToLoad = juce::ValueTree::fromXml(*xmlDocument.getDocumentElement());
 
-	valueTreeState.replaceState(valueTreeToLoad);
-	currentPreset.setValue(presetName);
+	mValueTreeState.replaceState(valueTreeToLoad);
+	mCurrentPreset.setValue(presetName);
+}
 
+void PluginPresetManager::loadPresetAt(int index)
+{
+	const auto allPresets = getAllPresets();
+	loadPreset(allPresets.getReference(index));
 }
 
 int PluginPresetManager::loadNextPreset()
@@ -99,7 +104,7 @@ int PluginPresetManager::loadNextPreset()
 	const auto allPresets = getAllPresets();
 	if (allPresets.isEmpty())
 		return -1;
-	const auto currentIndex = allPresets.indexOf(currentPreset.toString());
+	const auto currentIndex = allPresets.indexOf(mCurrentPreset.toString());
 	const auto nextIndex = currentIndex + 1 > (allPresets.size() - 1) ? 0 : currentIndex + 1;
 	loadPreset(allPresets.getReference(nextIndex));
 	return nextIndex;
@@ -110,7 +115,7 @@ int PluginPresetManager::loadPreviousPreset()
 	const auto allPresets = getAllPresets();
 	if (allPresets.isEmpty())
 		return -1;
-	const auto currentIndex = allPresets.indexOf(currentPreset.toString());
+	const auto currentIndex = allPresets.indexOf(mCurrentPreset.toString());
 	const auto previousIndex = currentIndex - 1 < 0 ? allPresets.size() - 1 : currentIndex - 1;
 	loadPreset(allPresets.getReference(previousIndex));
 	return previousIndex;
@@ -119,21 +124,27 @@ int PluginPresetManager::loadPreviousPreset()
 juce::StringArray PluginPresetManager::getAllPresets() const
 {
 	juce::StringArray presets;
-	const auto fileArray = defaultDirectory.findChildFiles(
-		juce::File::TypesOfFileToFind::findFiles, false, "*." + extension);
+	const auto fileArray = defaultDirectory.findChildFiles(juce::File::TypesOfFileToFind::findFiles, false, "*." + extension);
 	for (const auto& file : fileArray)
 	{
 		presets.add(file.getFileNameWithoutExtension());
 	}
+
 	return presets;
 }
 
 juce::String PluginPresetManager::getCurrentPreset() const
 {
-	return currentPreset.toString();
+	return mCurrentPreset.toString();
+}
+
+int PluginPresetManager::getCurrentPresetIndex() const
+{
+	const auto allPresets = getAllPresets();
+	return allPresets.indexOf(mCurrentPreset.toString());
 }
 
 void PluginPresetManager::valueTreeRedirected(juce::ValueTree& treeWhichHasBeenChanged)
 {
-	currentPreset.referTo(treeWhichHasBeenChanged.getPropertyAsValue(presetNameProperty, nullptr));
+ 	mCurrentPreset.referTo(treeWhichHasBeenChanged.getPropertyAsValue(presetNameProperty, nullptr));
 }

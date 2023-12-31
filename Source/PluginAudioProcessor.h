@@ -52,9 +52,9 @@ public:
 	PluginPresetManager& getPresetManager();
 private:
 
-	std::unique_ptr<juce::AudioFormatManager> mAudioFormatManager;
-	std::unique_ptr<PluginPresetManager> mPresetManager;
-	std::unique_ptr<juce::AudioProcessorValueTreeState> mParameterValueTreeState;
+	std::unique_ptr<juce::AudioFormatManager> mAudioFormatManagerPtr;
+	std::unique_ptr<PluginPresetManager> mPresetManagerPtr;
+	std::unique_ptr<juce::AudioProcessorValueTreeState> mParameterValueTreeStatePtr;
 
 	std::vector<std::unique_ptr<PluginSynthesiser>> mSynthesiserPtrVector; // 6 synths
 	std::vector<std::unique_ptr<juce::AudioBuffer<float>>> mInternalBufferPtrVector; 
