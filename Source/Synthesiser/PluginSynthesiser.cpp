@@ -24,29 +24,24 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
         }
 
         auto& intensities = instrument.velocities;
-        float position = velocity * (intensities.size() - 1);
 
-        int lowerIntensityIndex = static_cast<int>(position);
+        int intensityIndex = static_cast<int>(floor(velocity * intensities.size()));
+        intensityIndex = std::min(intensityIndex, (int)intensities.size() - 1);
 
-        if (lowerIntensityIndex >= intensities.size())
-        {
-            lowerIntensityIndex = 0;
-        }
-
-        auto& lowerIntensity = intensities[lowerIntensityIndex];
+        auto& lowerIntensity = intensities[intensityIndex];
         auto samplesSize = lowerIntensity.variations.size();
 
         if (lowerIntensity.currentVariationIndex < samplesSize)
         {
             auto& variation = lowerIntensity.variations[lowerIntensity.currentVariationIndex];
 
-            auto& sound = variation.microphones[micId].sound;
-            auto voice = variation.microphones[micId].voice;
+            auto& sound = variation.microphones.at(micId).sound;
+            PluginSynthesiserVoice* voice = variation.microphones.at(micId).voice;
 
             if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
             {
                 stopVoice(voice, 1.0f, true);
-                startVoice(voice, sound, midiChannel, midiNoteNumber, 1.0f);
+                startVoice(voice, sound, midiChannel, midiNoteNumber, velocityToGain(velocity));
             }
 
             lowerIntensity.currentVariationIndex = (lowerIntensity.currentVariationIndex + 1) % samplesSize;
@@ -92,8 +87,7 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
                 if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
                 {
                     stopVoice(voice, 1.0f, true);
-                    auto vtg = velocityToGain(velocity);
-                    startVoice(voice, sound, midiChannel, midiNoteNumber, vtg);
+                    startVoice(voice, sound, midiChannel, midiNoteNumber, velocityToGain(velocity));
                 }
             }
 
@@ -102,7 +96,8 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
     }
 }
 
-float PluginSynthesiser::velocityToGain(float x) {
+float PluginSynthesiser::velocityToGain(float x) 
+{
     if (x <= 0.05)
     {
         return 0.9 * (x / 0.05);
