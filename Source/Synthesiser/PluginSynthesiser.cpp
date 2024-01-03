@@ -27,21 +27,11 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
         float position = velocity * (intensities.size() - 1);
 
         int lowerIntensityIndex = static_cast<int>(position);
-        int higherIntensityIndex = lowerIntensityIndex + 1;
 
         if (lowerIntensityIndex >= intensities.size())
         {
             lowerIntensityIndex = 0;
         }
-
-        if (higherIntensityIndex >= intensities.size() || velocity == 0)
-        {
-            higherIntensityIndex = lowerIntensityIndex;
-        }
-
-        float blendRatio = position - lowerIntensityIndex;
-        float perceivedBlendRatio = lowerIntensityIndex != higherIntensityIndex ? std::pow(blendRatio, 0.25) : 0.0f;
-        float velocityFactor = std::sqrt(velocity);
 
         auto& lowerIntensity = intensities[lowerIntensityIndex];
         auto samplesSize = lowerIntensity.variations.size();
@@ -56,27 +46,10 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
             if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
             {
                 stopVoice(voice, 1.0f, true);
-                startVoice(voice, sound, midiChannel, midiNoteNumber, (1.0f - perceivedBlendRatio) * velocityFactor);
+                startVoice(voice, sound, midiChannel, midiNoteNumber, 1.0f);
             }
 
             lowerIntensity.currentVariationIndex = (lowerIntensity.currentVariationIndex + 1) % samplesSize;
-        }
-
-        if (lowerIntensityIndex != higherIntensityIndex)
-        {
-            auto& higherIntensity = intensities[higherIntensityIndex];
-            auto& variation = higherIntensity.variations[higherIntensity.currentVariationIndex];
-
-            auto& sound = variation.microphones[micId].sound;
-            auto voice = variation.microphones[micId].voice;
-
-            if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
-            {
-                stopVoice(voice, 1.0f, true);
-                startVoice(voice, sound, midiChannel, midiNoteNumber, perceivedBlendRatio * velocityFactor);
-            }
-
-            higherIntensity.currentVariationIndex = (higherIntensity.currentVariationIndex + 1) % samplesSize;
         }
     }
 }
@@ -100,26 +73,11 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
         }
         
         auto& intensities = instrument.velocities;
-        float position = velocity * (intensities.size() - 1);
         
-        int lowerIntensityIndex = static_cast<int>(position);
-        int higherIntensityIndex = lowerIntensityIndex + 1;
+        int intensityIndex = static_cast<int>(floor(velocity * intensities.size()));
+        intensityIndex = std::min(intensityIndex, (int)intensities.size() - 1);
         
-        if (lowerIntensityIndex >= intensities.size())
-        {
-            lowerIntensityIndex = 0;
-        }
-        
-        if (higherIntensityIndex >= intensities.size() || velocity == 0)
-        {
-            higherIntensityIndex = lowerIntensityIndex;
-        }
-        
-        float blendRatio = position - lowerIntensityIndex;
-        float perceivedBlendRatio = lowerIntensityIndex != higherIntensityIndex ? std::pow(blendRatio, 0.25) : 0.0f;
-        float velocityFactor = std::sqrt(velocity);
-        
-        auto& lowerIntensity = intensities[lowerIntensityIndex];
+        auto& lowerIntensity = intensities[intensityIndex];
         auto samplesSize = lowerIntensity.variations.size();
         
         if (lowerIntensity.currentVariationIndex < samplesSize)
@@ -134,31 +92,28 @@ void PluginSynthesiser::noteOn(const int midiChannel, const int midiNoteNumber, 
                 if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
                 {
                     stopVoice(voice, 1.0f, true);
-                    startVoice(voice, sound, midiChannel, midiNoteNumber, (1.0f - perceivedBlendRatio) * velocityFactor);
+                    auto vtg = velocityToGain(velocity);
+                    startVoice(voice, sound, midiChannel, midiNoteNumber, vtg);
                 }
             }
 
             lowerIntensity.currentVariationIndex = (lowerIntensity.currentVariationIndex + 1) % samplesSize;
         }
+    }
+}
 
-        if (lowerIntensityIndex != higherIntensityIndex)
-        {
-            auto& higherIntensity = intensities[higherIntensityIndex];
-            auto& variation = higherIntensity.variations[higherIntensity.currentVariationIndex];
-
-            for (auto& microphone : variation.microphones) {
-                auto& sound = microphone.second.sound;
-                auto voice = microphone.second.voice;
-
-                if (sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
-                {
-                    stopVoice(voice, 1.0f, true);
-                    startVoice(voice, sound, midiChannel, midiNoteNumber, perceivedBlendRatio * velocityFactor);
-                }
-            }
-
-            higherIntensity.currentVariationIndex = (higherIntensity.currentVariationIndex + 1) % samplesSize;
-        }
+float PluginSynthesiser::velocityToGain(float x) {
+    if (x <= 0.05)
+    {
+        return 0.9 * (x / 0.05);
+    }
+    else if (x > 0.05 && x < 0.95)
+    {
+        return 0.95;
+    }
+    else
+    {
+        return 0.95 + (x - 0.95);
     }
 }
 

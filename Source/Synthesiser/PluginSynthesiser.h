@@ -67,4 +67,7 @@ protected:
     };
     
     std::map<int, Instrument> mMidiNoteToInstruments;
+
+private:
+    float velocityToGain(float x);
 };

@@ -5,7 +5,6 @@
 class PluginSynthesiserSound : public juce::SynthesiserSound
 {
 public:
-    
     PluginSynthesiserSound(const juce::String& name,
                            juce::AudioFormatReader& source,
                            const juce::BigInteger& midiNotes,
@@ -14,7 +13,6 @@ public:
                            double releaseTimeSecs,
                            double maxSampleLengthSeconds);
     
-    /** Destructor. */
     ~PluginSynthesiserSound() override;
     
     const juce::String& getName() const noexcept { return mName; }
