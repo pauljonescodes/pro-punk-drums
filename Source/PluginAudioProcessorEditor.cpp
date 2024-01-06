@@ -25,9 +25,6 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor(PluginAudioProcessor& p)
 	mDrumsComponent->mOnDrumMidiButtonClicked = ([this](int midiNote, float midiVelocity) -> void {
 		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity);
 		});
-	mDrumsComponent->mOnMidiFileChoser = ([this](juce::File midiFile) -> void {
-		mAudioProcessor.loadAndPlayMidiFile(midiFile);
-		});
 	mTabbedComponent->addTab(strings::drums, juce::Colours::lightgrey, mDrumsComponent.get(), true);
 
 	mSamplesComponent.reset(new SamplesComponent(mAudioProcessor.getMidiNotesVector(), apvts, ([this](int midiNote, float midiVelocity, std::string micId) -> void {

@@ -13,8 +13,14 @@ namespace parameters {
 	static const std::string compressionId = "compression";
 
 	static const std::string gainId = "gain";
-	static const juce::NormalisableRange<float> gainNormalizableRange = juce::NormalisableRange<float>(-64.0, 12.0f, 0.01f);
+	static constexpr float gainMinimumValue = -128.0f;
+	static constexpr float gainMaximumValue = 24.0f;
+	static constexpr float gainIntervalValue = 0.01f;
 	static constexpr float gainDefaultValue = 0.0f;
+	static const juce::NormalisableRange<float> gainNormalizableRange = juce::NormalisableRange<float>(
+		gainMinimumValue,
+		gainMaximumValue,
+		gainIntervalValue);
 
 	static const std::string thresholdId = "threshold";
 	static constexpr float thresholdMinimumValue = -64.0f;
@@ -25,8 +31,8 @@ namespace parameters {
 
 	static const std::string ratioId = "ratio";
 	static constexpr float ratioMinimumValue = 1.0f;
-	static constexpr float ratioMaximumValue = 100.0f;
-	static constexpr float ratioIntervalValue = 1.0f;
+	static constexpr float ratioMaximumValue = 16.0f;
+	static constexpr float ratioIntervalValue = 0.1f;
 	static const juce::NormalisableRange<float> ratioNormalizableRange = juce::NormalisableRange<float>(ratioMinimumValue, ratioMaximumValue, ratioIntervalValue);
 	static constexpr float ratioDefaultValue = 1.0f;
 
@@ -45,11 +51,14 @@ namespace parameters {
 	static constexpr float releaseDefaultValue = 0.0f;
 
 	static const std::string qualityId = "quality";
-	static constexpr float qualityDefaultValue = 1.1f;
-	static constexpr float qualityMinimumValue = 0.1f;
+	static constexpr float qualityDefaultValue = 1.0f;
+	static constexpr float qualityMinimumValue = 0.001f;
 	static constexpr float qualityMaximumValue = 10.f;
-	static constexpr float qualityIntervalValue = 0.01f;
-	static const juce::NormalisableRange<float> qualityNormalizableRange = juce::NormalisableRange<float>(qualityMinimumValue, qualityMaximumValue, qualityIntervalValue);
+	static constexpr float qualityIntervalValue = 0.001f;
+	static const juce::NormalisableRange<float> qualityNormalizableRange = juce::NormalisableRange<float>(
+		qualityMinimumValue,
+		qualityMaximumValue,
+		qualityIntervalValue);
 
 	static const std::string frequencyId = "frequency";
 	static constexpr float frequencyMinimumValue = 15.0f;
@@ -57,9 +66,15 @@ namespace parameters {
 	static constexpr float frequencyIntervalValue = 1.0f;
 	static const juce::NormalisableRange<float> frequencyNormalizableRange = juce::NormalisableRange<float>(frequencyMinimumValue, frequencyMaximumValue, frequencyIntervalValue);
 
-	static constexpr float eqFilterGainMinimumValue = 0.001f;
-	static const juce::NormalisableRange<float> eqFilterGainNormalizableRange = juce::NormalisableRange<float>(0.001f, 12.0f, eqFilterGainMinimumValue);
-	static constexpr float eqFilterGainDefaultValue = 1.0f;
+	static constexpr float eqGainMinimumValue = 0.0f;
+	static constexpr float peakFilterGainMinimumValue = 0.0001f;
+	static constexpr float eqGainMaximumValue = 24.0f;
+	static constexpr float eqGainInterval = 0.0001;
+	static constexpr float eqGainDefaultValue = 1.0f;
+	static const juce::NormalisableRange<float> eqGainNormalizableRange = juce::NormalisableRange<float>(
+		eqGainMinimumValue,
+		eqGainMaximumValue,
+		eqGainInterval);
 
 	static const std::string lowShelfEqualizationTypeId = "low shelf";
 	static constexpr float lowShelfFrequencyDefaultValue = 20.0f;
@@ -80,5 +95,11 @@ namespace parameters {
 		{highShelfEqualizationTypeId,highShelfFrequencyDefaultValue},
 		{peakFilterEqualizationTypeId,peakFilterFrequencyDefaultValue},
 		{lowShelfEqualizationTypeId,lowShelfFrequencyDefaultValue}
+	};
+
+	static const std::map<std::string, juce::NormalisableRange<float>> equalizationTypeIdToGainNormalizableRange = {
+	{highShelfEqualizationTypeId,gainNormalizableRange},
+	{peakFilterEqualizationTypeId,eqGainNormalizableRange},
+	{lowShelfEqualizationTypeId,gainNormalizableRange}
 	};
 }

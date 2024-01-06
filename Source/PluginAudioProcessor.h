@@ -47,8 +47,6 @@ public:
 	std::vector<int> getMidiNotesVector();
 	juce::AudioProcessorValueTreeState& getParameterValueTreeState() const;
 
-	void loadAndPlayMidiFile(const juce::File& midiFile);
-
 	PluginPresetManager& getPresetManager();
 private:
 
@@ -67,9 +65,6 @@ private:
 		juce::dsp::IIR::Coefficients<float>>> mPeakFilters;
 	std::vector<juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>,
 		juce::dsp::IIR::Coefficients<float>>> mHighShelfFilters;
-
-	std::vector<std::pair<double, juce::MidiMessage>> mScheduledMidiEvents;
-	long long mCurrentSamplePosition = 0;
 
 	juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 

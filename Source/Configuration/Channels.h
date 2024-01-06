@@ -14,14 +14,6 @@ namespace channels {
 
 	static constexpr int size = 7;
 
-	static const std::string kickName = "Kick";
-	static const std::string snareName = "Snare";
-	static const std::string tomsName = "Toms";
-	static const std::string hiHatName = "Hi-hat";
-	static const std::string cymbalsName = "Cymbals";
-	static const std::string percussionName = "Percussion";
-	static const std::string outputName = "Output";
-
 	static const std::string kickId = "kick";
 	static const std::string snareId = "snare";
 	static const std::string tomsId = "toms";
@@ -38,16 +30,6 @@ namespace channels {
 		{ channels::cymbalsIndex, channels::cymbalsId },
 		{ channels::percussionIndex, channels::percussionId },
 		{ channels::outputIndex, channels::outputId },
-	};
-
-	static const std::map<int, std::string> channelIndexToNameMap = {
-		{ channels::kickIndex, channels::kickName },
-		{ channels::snareIndex, channels::snareName },
-		{ channels::tomsIndex, channels::tomsName },
-		{ channels::hiHatIndex, channels::hiHatName },
-		{ channels::cymbalsIndex, channels::cymbalsName },
-		{ channels::percussionIndex, channels::percussionName },
-		{ channels::outputIndex, channels::outputName },
 	};
 
 	static const std::map<int, int> channelIndexToMainGeneralMidiNote = {

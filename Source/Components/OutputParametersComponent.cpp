@@ -10,20 +10,11 @@ OutputParametersComponent::OutputParametersComponent(int channelIndex, juce::Aud
     const auto& channelId = channels::channelIndexToIdMap.at(channelIndex);
     const auto channelMidi = channels::channelIndexToMainGeneralMidiNote.at(channelIndex);
     
-    mNoteOnButton.reset(new juce::TextButton(std::to_string(channelMidi) + " " + channels::channelIndexToNameMap.at(channelIndex)));
+    mNoteOnButton.reset(new juce::TextButton(std::to_string(channelMidi) + " " + PluginUtils::toTitleCase(channels::channelIndexToIdMap.at(channelIndex))));
     mNoteOnButton->setComponentID(juce::String(channelMidi));
     mNoteOnButton->addListener(this);
     mMidiNoteValue = channelMidi;
     addAndMakeVisible(mNoteOnButton.get());
-    
-    
-    mCompressionOnToggleButton.reset(new juce::ToggleButton(strings::compressor));
-    mCompressionOnAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
-                                                                                                      apvts,
-                                                                                                      PluginUtils::joinId({ channelId, parameters::compressionId, parameters::onId }),
-                                                                                                      *mCompressionOnToggleButton
-                                                                                                      );
-    addAndMakeVisible(mCompressionOnToggleButton.get());
     
     mLowShelfOnToggleButton.reset(new juce::ToggleButton(strings::lowShelf));
     mLowShelfOnAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
@@ -230,7 +221,6 @@ OutputParametersComponent::OutputParametersComponent(int channelIndex, juce::Aud
 
 OutputParametersComponent::~OutputParametersComponent()
 {
-    mCompressionOnAttachment.reset();
     mThresholdAttachment.reset();
     mRatioAttachment.reset();
     mAttackAttachment.reset();
@@ -250,7 +240,6 @@ OutputParametersComponent::~OutputParametersComponent()
     mChannelGainAttachment.reset();
     
     // Then, reset all components
-    mCompressionOnToggleButton.reset();
     mThresholdSlider.reset();
     mThresholdLabel.reset();
     mRatioSlider.reset();
@@ -325,7 +314,6 @@ void OutputParametersComponent::resized()
     row4.items.add(juce::FlexItem(*mHighShelfQualitySlider).withWidth(rowWidth).withHeight(rowHeight));
     row4.items.add(juce::FlexItem(*mHighShelfGainSlider).withWidth(rowWidth).withHeight(rowHeight));
     
-    row5.items.add(juce::FlexItem(*mCompressionOnToggleButton).withWidth(rowWidth).withHeight(rowHeight));
     row5.items.add(juce::FlexItem(*mThresholdSlider).withWidth(rowWidth).withHeight(rowHeight));
     row5.items.add(juce::FlexItem(*mAttackSlider).withWidth(rowWidth).withHeight(rowHeight));
     row5.items.add(juce::FlexItem(*mRatioSlider).withWidth(rowWidth).withHeight(rowHeight));

@@ -20,9 +20,6 @@ private:
 
 	juce::AudioProcessorValueTreeState& mApvts;
 
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mCompressionOnAttachment;
-	std::unique_ptr<juce::ToggleButton> mCompressionOnToggleButton;
-	
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mThresholdAttachment;
 	std::unique_ptr<juce::Slider> mThresholdSlider;
 	std::unique_ptr<juce::Label> mThresholdLabel;

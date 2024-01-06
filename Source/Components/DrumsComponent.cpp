@@ -31,15 +31,6 @@ DrumsComponent::DrumsComponent(
 		button->addListener(this);
 	}
 
-	mMidiFileButton = std::make_unique <juce::TextButton>("MIDI");
-	mMidiFileButton->setComponentID(juce::String("midi_file"));
-	addAndMakeVisible(mMidiFileButton.get());
-	mMidiFileButton->addListener(this);
-
-	mFileChooser = std::make_unique<juce::FileChooser>("Please select the midi you want to load...",
-		juce::File::getSpecialLocation(juce::File::userDesktopDirectory),
-		"*.mid");
-
 	auto* multiOutParameter = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter(parameters::multiOutId));
 	mMultiOutToggleButton.reset(new juce::ToggleButton(strings::multiOut));
 	addAndMakeVisible(mMultiOutToggleButton.get());
@@ -60,10 +51,8 @@ DrumsComponent::~DrumsComponent()
 	mMidiNoteButtons.clear(); 
 
 	mMultiOutToggleButton.reset();
-	mMidiFileButton.reset();
 	mVelocitySlider.reset();
 	mVelocityLabel.reset();
-	mFileChooser.reset();
 
 	mPresetComponent.reset();
 }
@@ -84,7 +73,6 @@ void DrumsComponent::resized()
 	sampleControls.removeFromTop(50);
 	sampleControls.setHeight(50);
 
-	mMidiFileButton->setBounds(sampleControls.removeFromRight(localBounds.proportionOfWidth(0.1)));
 	mMultiOutToggleButton->setBounds(sampleControls.removeFromLeft(localBounds.proportionOfWidth(0.1)));
 	mVelocitySlider->setBounds(sampleControls.withTrimmedLeft(localBounds.proportionOfWidth(0.1)));
 
@@ -107,25 +95,11 @@ void DrumsComponent::resized()
 void DrumsComponent::buttonClicked(juce::Button* button)
 {
 	const juce::String componentID = button->getComponentID();
+	int midiNoteValue = componentID.getIntValue();
+	float velocity = mVelocitySlider->getValue() / 127.0f;
 
-	if (mMidiFileButton->getComponentID() == componentID) {
-		auto folderChooserFlags = juce::FileBrowserComponent::openMode;
-		mFileChooser->launchAsync(folderChooserFlags, [this](const juce::FileChooser& chooser)
-			{
-				juce::File midiFile(chooser.getResult());
-		if (mOnMidiFileChoser.has_value()) {
-			mOnMidiFileChoser.value()(midiFile);
-		}
-
-			});
-	}
-	else {
-		int midiNoteValue = componentID.getIntValue();
-		float velocity = mVelocitySlider->getValue() / 127.0f;
-
-		if (mOnDrumMidiButtonClicked.has_value()) {
-			mOnDrumMidiButtonClicked.value()(midiNoteValue, velocity);
-		}
+	if (mOnDrumMidiButtonClicked.has_value()) {
+		mOnDrumMidiButtonClicked.value()(midiNoteValue, velocity);
 	}
 }
 
