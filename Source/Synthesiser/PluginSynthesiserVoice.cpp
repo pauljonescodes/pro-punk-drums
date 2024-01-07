@@ -26,6 +26,9 @@ void PluginSynthesiserVoice::startNote(int midiNoteNumber, float velocity, juce:
 {
     if (auto* sound = dynamic_cast<const PluginSynthesiserSound*> (s))
     {
+        mPitchRatio = std::pow(2.0, (midiNoteNumber - sound->mMidiRootNote) / 12.0)
+            * sound->mSourceSampleRate / getSampleRate();
+
         mSourceSamplePosition = 0.0;
         
         mVelocityGain = velocity;
@@ -103,7 +106,7 @@ void PluginSynthesiserVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuf
                 *outL++ += (l + r) * 0.5f;
             }
             
-            mSourceSamplePosition += 1.0f;
+            mSourceSamplePosition += mPitchRatio;
             
             if (mSourceSamplePosition > playingSound->mLength)
             {

@@ -25,6 +25,7 @@ private:
     juce::RangedAudioParameter& mPanParameter;
     juce::AudioParameterBool& mInvertPhaseParameter;
     
+    double mPitchRatio = 0;
     float mVelocityGain = 0;
     double mSourceSamplePosition = 0;
     juce::ADSR mAdsr;

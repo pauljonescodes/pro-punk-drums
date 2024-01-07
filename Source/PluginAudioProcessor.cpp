@@ -38,13 +38,13 @@ PluginAudioProcessor::PluginAudioProcessor()
 
 	mPresetManagerPtr = std::make_unique<PluginPresetManager>(*mParameterValueTreeStatePtr.get());
 
-	for (int channelIndex = 1; channelIndex < channels::size; channelIndex++)
-	{
-		mSynthesiserPtrVector.push_back(std::make_unique<PluginSynthesiser>());
-		mInternalBufferPtrVector.push_back(std::make_unique<juce::AudioBuffer<float>>(2, 1024));
-	}
-
 	for (int channelIndex = 0; channelIndex < channels::size; channelIndex++) {
+		if (channelIndex != 0)
+		{
+			mSynthesiserPtrVector.push_back(std::make_unique<PluginSynthesiser>());
+			mInternalBufferPtrVector.push_back(std::make_unique<juce::AudioBuffer<float>>(2, 1024));
+		}
+
 		mCompressors.push_back(std::make_unique<juce::dsp::Compressor<float>>());
 		mChannelGains.push_back(std::make_unique<juce::dsp::Gain<float>>());
 		mLowShelfFilters.emplace_back();
@@ -399,7 +399,7 @@ void PluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 	DBG("prepareToPlay");
 
 	juce::dsp::ProcessSpec spec;
-	spec.sampleRate = getSampleRate();
+	spec.sampleRate = sampleRate;
 	spec.maximumBlockSize = samplesPerBlock; // Example block size
 	spec.numChannels = getTotalNumOutputChannels(); // Stereo
 
