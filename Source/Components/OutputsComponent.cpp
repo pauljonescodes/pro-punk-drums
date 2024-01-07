@@ -6,7 +6,7 @@ OutputsComponent::OutputsComponent(juce::AudioProcessorValueTreeState& apvts, st
     addAndMakeVisible(viewport);
     viewport.setViewedComponent(&container, false);
 
-    for (int channelIndex = 0; channelIndex < channels::size; channelIndex++) {
+    for (int channelIndex = 0; channelIndex < Channels::size; channelIndex++) {
         auto* component = new OutputParametersComponent(channelIndex, apvts);
         component->mOnDrumMidiButtonClicked = onDrumMidiButtonClicked;
         mComponents.add(component);

@@ -9,8 +9,7 @@ class DrumsComponent : public juce::Component, public juce::Button::Listener
 public:
     DrumsComponent(
         const std::vector<int> midiNotesVector, 
-        juce::AudioProcessorValueTreeState& apvts,  
-        PluginPresetManager& presetManager);
+        juce::AudioProcessorValueTreeState& apvts);
     ~DrumsComponent() override;
     
     void paint(juce::Graphics&) override;
@@ -19,9 +18,7 @@ public:
     std::optional<std::function<void(int, float)>> mOnDrumMidiButtonClicked;
     
 private:
-    juce::OwnedArray<juce::TextButton> mMidiNoteButtons;
-
-    std::unique_ptr<PresetComponent> mPresetComponent;
+    juce::OwnedArray<juce::TextButton> mMidiNoteButtonsOwnedArray;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mMultiOutAttachment;
     std::unique_ptr<juce::Slider> mVelocitySlider;

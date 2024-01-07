@@ -11,32 +11,34 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor(PluginAudioProcessor& p)
 {
 	auto& apvts = mAudioProcessor.getParameterValueTreeState();
 
-	mTabbedComponent = std::make_unique<juce::TabbedComponent>(juce::TabbedButtonBar::Orientation::TabsAtTop);
+	mTabbedComponentPtr = std::make_unique<juce::TabbedComponent>(juce::TabbedButtonBar::Orientation::TabsAtTop);
+
+	mPresetComponentPtr.reset(new PresetComponent(mAudioProcessor.getPresetManager()));
+	addAndMakeVisible(*mPresetComponentPtr);
 
 	setSize(750, 750);
 	setResizable(true, true);
 
-	addAndMakeVisible(mTabbedComponent.get());
+	addAndMakeVisible(mTabbedComponentPtr.get());
 
-	mDrumsComponent.reset(new DrumsComponent(
+	mDrumsComponentPtr.reset(new DrumsComponent(
 		mAudioProcessor.getMidiNotesVector(), 
-		apvts, 
-		mAudioProcessor.getPresetManager()));
-	mDrumsComponent->mOnDrumMidiButtonClicked = ([this](int midiNote, float midiVelocity) -> void {
+		apvts));
+	mDrumsComponentPtr->mOnDrumMidiButtonClicked = ([this](int midiNote, float midiVelocity) -> void {
 		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity);
 		});
-	mTabbedComponent->addTab(strings::drums, juce::Colours::lightgrey, mDrumsComponent.get(), true);
+	mTabbedComponentPtr->addTab(Strings::drums, juce::Colours::lightgrey, mDrumsComponentPtr.get(), true);
 
-	mSamplesComponent.reset(new SamplesComponent(mAudioProcessor.getMidiNotesVector(), apvts, ([this](int midiNote, float midiVelocity, std::string micId) -> void {
+	mSamplesComponentPtr.reset(new SamplesComponent(mAudioProcessor.getMidiNotesVector(), apvts, ([this](int midiNote, float midiVelocity, std::string micId) -> void {
 		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity, micId);
 		})));
 
-	mOutputsComponent.reset(new OutputsComponent(apvts, ([this](int midiNote, float midiVelocity) -> void {
+	mOutputsComponentPtr.reset(new OutputsComponent(apvts, ([this](int midiNote, float midiVelocity) -> void {
 		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity);
 		})));
 
-	mTabbedComponent->addTab(strings::samples, juce::Colours::lightgrey, mSamplesComponent.get(), true);
-	mTabbedComponent->addTab(strings::outputs, juce::Colours::lightgrey, mOutputsComponent.get(), true);
+	mTabbedComponentPtr->addTab(Strings::samples, juce::Colours::lightgrey, mSamplesComponentPtr.get(), true);
+	mTabbedComponentPtr->addTab(Strings::outputs, juce::Colours::lightgrey, mOutputsComponentPtr.get(), true);
 }
 
 PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
@@ -50,5 +52,9 @@ void PluginAudioProcessorEditor::paint(juce::Graphics& g)
 
 void PluginAudioProcessorEditor::resized()
 {
-	mTabbedComponent->setBounds(getLocalBounds());
+	auto localBounds = getLocalBounds();
+
+	mPresetComponentPtr->setBounds(localBounds.removeFromTop(50));
+
+	mTabbedComponentPtr->setBounds(localBounds);
 }

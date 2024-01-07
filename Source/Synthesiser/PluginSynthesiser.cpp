@@ -143,7 +143,7 @@ void PluginSynthesiser::addSample(const std::string resourceName,
     auto memoryInputStream = std::make_unique<juce::MemoryInputStream>(sourceData, dataSizeInBytes, false);
     juce::AudioFormatReader* reader = audioFormatManager.createReaderFor(std::move(memoryInputStream));
     
-    double maxSampleLengthSeconds = dataSizeInBytes / (samples::bitRate * (samples::bitDepth / 8.0));
+    double maxSampleLengthSeconds = dataSizeInBytes / (Samples::bitRate * (Samples::bitDepth / 8.0));
     PluginSynthesiserSound* sound = new PluginSynthesiserSound(juce::String(resourceName), *reader, range, midiNote, 0.0, 0.0, maxSampleLengthSeconds);
     
     addSound(sound);

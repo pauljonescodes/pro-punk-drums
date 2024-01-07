@@ -9,9 +9,9 @@ SamplesComponent::SamplesComponent(const std::vector<int> midiNotesVector, juce:
     addAndMakeVisible(viewport);
     viewport.setViewedComponent(&container, false);
     
-    for (const auto& pair : PluginUtils::getUniqueMidiNoteMicCombinations()) {
+    for (const auto& pair : AudioParameters::getUniqueMidiNoteMicCombinations()) {
         int midiNote = pair.first;
-        std::string midiName = generalmidi::midiNoteToNameMap.at(midiNote);
+        std::string midiName = GeneralMidiPercussion::midiNoteToNameMap.at(midiNote);
         const std::set<std::string>& micIds = pair.second;
         
         for (const std::string& micId : micIds) {
@@ -36,7 +36,7 @@ void SamplesComponent::paint(juce::Graphics& g)
 void SamplesComponent::resized()
 {
     viewport.setBounds(getLocalBounds());
-    int heightPerComponent = 100;
+    int heightPerComponent = 125;
     int totalHeight = heightPerComponent * mComponents.size();
     
     container.setBounds(0, 0, viewport.getWidth(), totalHeight);

@@ -15,18 +15,15 @@ public:
 private:
     std::string mMicId;
     
-    std::unique_ptr <juce::Label> mLabel;
+    std::unique_ptr <juce::GroupComponent> mGroupComponentPtr;
     
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mGainAttachment;
-    std::unique_ptr<juce::Slider> mGainSlider;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mGainAttachmentPtr, mPanAttachmentPtr;
+    std::unique_ptr<juce::Slider> mRatioSliderPtr, mPanSliderPtr;
     
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mPanAttachment;
-    std::unique_ptr<juce::Slider> mPanSlider;
-    
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mInvertPhaseAttachment;
-    std::unique_ptr <juce::ToggleButton> mInvertPhaseToggleButton;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mInvertPhaseAttachmentPtr;
+    std::unique_ptr<juce::ToggleButton> mInvertPhaseToggleButtonPtr;
 
-    std::unique_ptr <juce::TextButton> mNoteOnButton;
+    std::unique_ptr<juce::TextButton> mNoteOnButtonPtr;
     
     juce::AudioProcessorValueTreeState& mApvts;
 

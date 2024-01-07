@@ -968,6 +968,10 @@
               file="Source/Synthesiser/PluginSynthesiser.h"/>
       </GROUP>
       <GROUP id="{91AD8FAC-EF24-BE9E-B417-D983B88C88CF}" name="Components">
+        <FILE id="FufRHL" name="CompressionWithGainComponent.h" compile="0"
+              resource="0" file="Source/Components/CompressionWithGainComponent.h"/>
+        <FILE id="sIt7UB" name="TitledFrequencyQualityGainComponent.h" compile="0"
+              resource="0" file="Source/Components/TitledFrequencyQualityGainComponent.h"/>
         <FILE id="syuRor" name="OutputsComponent.cpp" compile="1" resource="0"
               file="Source/Components/OutputsComponent.cpp"/>
         <FILE id="c3DS10" name="OutputsComponent.h" compile="0" resource="0"

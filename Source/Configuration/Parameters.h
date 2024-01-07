@@ -1,80 +1,140 @@
 #pragma once
 
 #include <string>
+#include "../PluginUtils.h"
+#include "GeneralMidi.h"
+#include <juce_audio_utils/juce_audio_utils.h>
+#include <juce_core/juce_core.h>
 
-namespace parameters {
-	static const std::string multiOutId = "multi-out";
-	static const std::string phaseId = "phase";
+namespace AudioParameters 
+{
+	// https://www.desmos.com/calculator/qkc6naksy5
+	static inline juce::NormalisableRange<float> makeLogarithmicRange(float rangeStart, float rangeEnd, float intervalValue, float exponent = 6.0f)
+	{
+		juce::NormalisableRange<float> normalisableRange = {
+			rangeStart, rangeEnd,
+			// In all the following, "start" and "end" describe the unnormalized range
+			// for example 0 to 15 or 0 to 100.
+			[=](float start, float end, float normalised) {
+				return start + (std::exp2(normalised * exponent) - 1) * (end - start) / (std::exp2(exponent) - 1);
+			},
+			[=](float start, float end, float unnormalised) {
+				return std::log2(((unnormalised - start) / (end - start) * (std::exp2(exponent) - 1)) + 1) / exponent;
+			}
+		};
+		normalisableRange.interval = intervalValue;
+		return normalisableRange;
+	}
 
-	static const std::string panId = "pan";
+	static inline juce::NormalisableRange<float> makeDecibelRange(float rangeStart, float rangeEnd, float rangeInterval)
+	{
+		jassert(rangeStart < rangeEnd);  // Ensuring the start is less than the end.
+		juce::NormalisableRange<float> range = {
+			rangeStart,
+			rangeEnd,  // Directly using rangeEnd as the max dB value
+
+			// convertFrom0to1
+			[=](float min, float max, float normalizedGain) {
+				return normalizedGain * (max - min) + min;  // Linear mapping from normalized to dB
+			},
+
+			// convertTo0to1
+			[=](float min, float max, float dB) {
+				return (dB - min) / (max - min);  // Linear mapping from dB to normalized
+			}
+		};
+		range.interval = rangeInterval;  // Setting the interval for the range
+		return range;
+	}
+
+	static const std::string multiOutComponentId = "multi-out";
+	static const std::string phaseComponentId = "phase";
+
+	static const std::string panComponentId = "pan";
 	static const juce::NormalisableRange<float> panNormalizableRange = juce::NormalisableRange<float>(-1.0f, 1.0f, 0.01f);
 
-	static const std::string onId = "on";
-	static const std::string compressionId = "compression";
+	static const std::string onComponentId = "on";
+	static const std::string compressionComponentId = "compression";
 
-	static const std::string gainId = "gain";
-	static constexpr float gainMinimumValue = -128.0f;
-	static constexpr float gainMaximumValue = 24.0f;
-	static constexpr float gainIntervalValue = 0.01f;
-	static constexpr float gainDefaultValue = 0.0f;
-	static const juce::NormalisableRange<float> gainNormalizableRange = juce::NormalisableRange<float>(
-		gainMinimumValue,
-		gainMaximumValue,
-		gainIntervalValue);
+	static const std::string gainComponentId = "gain";
+	static constexpr float gainDecibelsMinimumValue = -64.0f;
+	static constexpr float gainDeciblesMaximumValue = 8.0f;
+	static constexpr float gainDeciblesIntervalValue = 0.01f;
+	static constexpr float gainDeciblesDefaultValue = 0.0f;
+	static const juce::NormalisableRange<float> gainNormalizableRange = makeDecibelRange(
+		gainDecibelsMinimumValue,
+		gainDeciblesMaximumValue,
+		gainDeciblesIntervalValue);
 
-	static const std::string thresholdId = "threshold";
+	static const std::string thresholdComponentId = "threshold";
 	static constexpr float thresholdMinimumValue = -64.0f;
 	static constexpr float thresholdMaximumValue = 0.0f;
 	static constexpr float thresholdIntervalValue = 0.01f;
-	static const juce::NormalisableRange<float> thresholdNormalizableRange = juce::NormalisableRange<float>(thresholdMinimumValue, thresholdMaximumValue, thresholdIntervalValue);
+	static const juce::NormalisableRange<float> thresholdNormalizableRange =
+		makeDecibelRange(
+			thresholdMinimumValue,
+			thresholdMaximumValue,
+			thresholdIntervalValue);
 	static constexpr float thresholdDefaultValue = 0.0f;
 
-	static const std::string ratioId = "ratio";
+	static const std::string ratioComponentId = "ratio";
 	static constexpr float ratioMinimumValue = 1.0f;
-	static constexpr float ratioMaximumValue = 16.0f;
+	static constexpr float ratioMaximumValue = 32.0f;
 	static constexpr float ratioIntervalValue = 0.1f;
-	static const juce::NormalisableRange<float> ratioNormalizableRange = juce::NormalisableRange<float>(ratioMinimumValue, ratioMaximumValue, ratioIntervalValue);
+	static const juce::NormalisableRange<float> ratioNormalizableRange =
+		juce::NormalisableRange<float>(
+			ratioMinimumValue,
+			ratioMaximumValue,
+			ratioIntervalValue);
 	static constexpr float ratioDefaultValue = 1.0f;
 
 	static const std::string attackId = "attack";
 	static constexpr float attackMinimumValue = 0.0f;
 	static constexpr float attackMaximumValue = 1000.0f;
 	static constexpr float attackIntervalValue = 1.0f;
-	static const juce::NormalisableRange<float> attackNormalizableRange = juce::NormalisableRange<float>(attackMinimumValue, attackMaximumValue, attackIntervalValue);
+	static const juce::NormalisableRange<float> attackNormalizableRange =
+		juce::NormalisableRange<float>(
+			attackMinimumValue,
+			attackMaximumValue,
+			attackIntervalValue);
 	static constexpr float attackDefaultValue = 0.0f;
 
-	static const std::string releaseId = "release";
+	static const std::string releaseComponentId = "release";
 	static constexpr float releaseMinimumValue = 0.0f;
 	static constexpr float releaseMaximumValue = 1000.0f;
 	static constexpr float releaseIntervalValue = 1.0f;
-	static const juce::NormalisableRange<float> releaseNormalizableRange = juce::NormalisableRange<float>(releaseMinimumValue, releaseMaximumValue, releaseIntervalValue);
+	static const juce::NormalisableRange<float> releaseNormalizableRange =
+		juce::NormalisableRange<float>(
+			releaseMinimumValue,
+			releaseMaximumValue,
+			releaseIntervalValue);
 	static constexpr float releaseDefaultValue = 0.0f;
 
-	static const std::string qualityId = "quality";
+	static const std::string qualityComponentId = "quality";
 	static constexpr float qualityDefaultValue = 1.0f;
 	static constexpr float qualityMinimumValue = 0.001f;
 	static constexpr float qualityMaximumValue = 10.f;
 	static constexpr float qualityIntervalValue = 0.001f;
-	static const juce::NormalisableRange<float> qualityNormalizableRange = juce::NormalisableRange<float>(
-		qualityMinimumValue,
-		qualityMaximumValue,
-		qualityIntervalValue);
+	static const juce::NormalisableRange<float> qualityNormalizableRange = 
+		makeLogarithmicRange(qualityMinimumValue, qualityMaximumValue, qualityIntervalValue);
 
-	static const std::string frequencyId = "frequency";
+	static const std::string frequencyComponentId = "frequency";
 	static constexpr float frequencyMinimumValue = 15.0f;
 	static constexpr float frequencyMaximumValue = 20000.0f;
 	static constexpr float frequencyIntervalValue = 1.0f;
-	static const juce::NormalisableRange<float> frequencyNormalizableRange = juce::NormalisableRange<float>(frequencyMinimumValue, frequencyMaximumValue, frequencyIntervalValue);
+	static const juce::NormalisableRange<float> frequencyNormalizableRange =
+		makeLogarithmicRange(frequencyMinimumValue, frequencyMaximumValue, frequencyIntervalValue);
 
-	static constexpr float eqGainMinimumValue = 0.0f;
-	static constexpr float peakFilterGainMinimumValue = 0.0001f;
-	static constexpr float eqGainMaximumValue = 24.0f;
-	static constexpr float eqGainInterval = 0.0001;
-	static constexpr float eqGainDefaultValue = 1.0f;
-	static const juce::NormalisableRange<float> eqGainNormalizableRange = juce::NormalisableRange<float>(
-		eqGainMinimumValue,
-		eqGainMaximumValue,
-		eqGainInterval);
+	static constexpr float gainMinimumValue = 0.0f;
+	static constexpr float peakFilterGainMinimumValue = 0.001f;
+	static constexpr float gainMaximumValue = 24.0f;
+	static constexpr float gainInterval = 0.001;
+	static constexpr float gainDefaultValue = 1.0f;
+	static const juce::NormalisableRange<float> eqGainNormalizableRange =
+		makeLogarithmicRange(
+			gainMinimumValue,
+			gainMaximumValue,
+			gainInterval);
 
 	static const std::string lowShelfEqualizationTypeId = "low shelf";
 	static constexpr float lowShelfFrequencyDefaultValue = 20.0f;
@@ -102,4 +162,89 @@ namespace parameters {
 	{peakFilterEqualizationTypeId,eqGainNormalizableRange},
 	{lowShelfEqualizationTypeId,gainNormalizableRange}
 	};
+
+	inline std::map<int, std::set<std::string>> getUniqueMidiNoteMicCombinations()
+	{
+		std::map<int, std::set<std::string>> uniqueMidiNoteMicCombinations;
+
+		for (int resourceIndex = 0; resourceIndex < BinaryData::namedResourceListSize; resourceIndex++)
+		{
+			std::string namedResource = BinaryData::namedResourceList[resourceIndex];
+			std::string micId, midiName, generalMidiSnakeCaseName = "";
+			int midiNote = -1;
+
+			for (auto midiNameIndex = 0; midiNameIndex < GeneralMidiPercussion::midiNamesVector.size(); midiNameIndex++)
+			{
+				midiName = GeneralMidiPercussion::midiNamesVector.at(midiNameIndex);
+				generalMidiSnakeCaseName = PluginUtils::toSnakeCase(midiName);
+
+				std::string cleanedNamedResource = namedResource.substr(0, namedResource.size() - 4);
+				size_t pos = cleanedNamedResource.find(generalMidiSnakeCaseName);
+				if (pos == 0)
+				{
+					std::string resourceMetadata = cleanedNamedResource.substr(pos + generalMidiSnakeCaseName.length());
+
+					std::istringstream iss(resourceMetadata);
+					std::vector<std::string> parts;
+					std::string part;
+
+					while (std::getline(iss, part, '_')) {
+						if (!part.empty()) {
+							parts.push_back(part);
+						}
+					}
+
+					switch (parts.size()) {
+					case 0:
+						midiNote = GeneralMidiPercussion::midiNameToNoteMap.at(midiName);
+						break;
+					case 1:
+						midiNote = GeneralMidiPercussion::midiNameToNoteMap.at(midiName);
+						if (!PluginUtils::isNumeric(parts[0]))
+						{
+							micId = parts[0];
+						}
+						break;
+					case 2:
+						if (PluginUtils::isNumeric(parts[0]) && PluginUtils::isNumeric(parts[1]))
+						{
+							midiNote = GeneralMidiPercussion::midiNameToNoteMap.at(midiName);
+						}
+						else
+						{
+							midiNote = GeneralMidiPercussion::midiNameToNoteMap.at(midiName);
+							micId = parts[1];
+						}
+						break;
+					case 3:
+						if (PluginUtils::isNumeric(parts[0]) && PluginUtils::isNumeric(parts[1]))
+						{
+							midiNote = GeneralMidiPercussion::midiNameToNoteMap.at(midiName);
+							micId = parts[2];
+						}
+						else
+						{
+							midiNameIndex = (int)GeneralMidiPercussion::midiNamesVector.size() + 1;
+						}
+						break;
+					default:
+						midiNameIndex = (int)GeneralMidiPercussion::midiNamesVector.size() + 1;
+						break;
+					}
+				}
+			}
+
+			if (midiNote != -1)
+			{
+				uniqueMidiNoteMicCombinations[midiNote].insert(micId);
+			}
+		}
+
+		return uniqueMidiNoteMicCombinations;
+	}
+
+
+
+	
+
 }

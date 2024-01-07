@@ -7,67 +7,61 @@
 SamplesParametersComponent::SamplesParametersComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState& apvts)
 : mMicId(micId), mApvts(apvts)
 {
-    mLabel.reset(new juce::Label(std::to_string(midiNote) + "_label", generalmidi::midiNoteToNameMap.at(midiNote) + " " + micId));
-    addAndMakeVisible(mLabel.get());
+    mGroupComponentPtr.reset(new juce::GroupComponent(std::to_string(midiNote) + "_label", GeneralMidiPercussion::midiNoteToNameMap.at(midiNote) + " " + PluginUtils::toTitleCase(micId)));
+    addAndMakeVisible(mGroupComponentPtr.get());
     
-    mNoteOnButton.reset(new juce::TextButton(std::to_string(midiNote) + " " + micId));
-    mNoteOnButton->setComponentID(juce::String(midiNote));
-    mNoteOnButton->addListener(this);
-    addAndMakeVisible(mNoteOnButton.get());
+    mNoteOnButtonPtr.reset(new juce::TextButton(std::to_string(midiNote) + " " + micId));
+    mNoteOnButtonPtr->setComponentID(juce::String(midiNote));
+    mNoteOnButtonPtr->addListener(this);
+    addAndMakeVisible(mNoteOnButtonPtr.get());
     
     // Initialize gain slider and label
-    auto gainParameterId = PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::gainId });
-    auto* gainParameter = apvts.getParameter(gainParameterId);
-    mGainSlider.reset(new juce::Slider("Gain Slider"));
-    addAndMakeVisible(mGainSlider.get());
-    auto& gainNormalizableRange = gainParameter->getNormalisableRange();
-    mGainSlider->setRange(gainNormalizableRange.start, gainNormalizableRange.end, gainNormalizableRange.interval);
-    mGainSlider->setValue(gainParameter->getValue());
-    mGainAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(
+    auto gainParameterId = PluginUtils::joinAndSnakeCase({ std::to_string(midiNote), micId, AudioParameters::gainComponentId });
+    mRatioSliderPtr.reset(new juce::Slider(PluginUtils::toTitleCase(gainParameterId)));
+    mRatioSliderPtr->setScrollWheelEnabled(false);
+    mRatioSliderPtr->setTextValueSuffix(Strings::db);
+    addAndMakeVisible(mRatioSliderPtr.get());
+    mGainAttachmentPtr.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(
                                                                                    apvts,
                                                                                    juce::String(gainParameterId),
-                                                                                   *mGainSlider
+                                                                                   *mRatioSliderPtr
                                                                                    ));
     
-    auto panParameterId = PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::panId});
-    auto* panParameter = apvts.getParameter(panParameterId);
-    mPanSlider.reset(new juce::Slider(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::NoTextBox));
-    addAndMakeVisible(mPanSlider.get());
-    auto& panNormalizableRange = panParameter->getNormalisableRange();
-    mPanSlider->setRange(panNormalizableRange.start, panNormalizableRange.end, panNormalizableRange.interval);
-    mPanSlider->setValue(panParameter->getValue());
-    mPanAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(
+    auto panParameterId = PluginUtils::joinAndSnakeCase({ std::to_string(midiNote), micId, AudioParameters::panComponentId});
+    mPanSliderPtr.reset(new juce::Slider(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow));
+    mPanSliderPtr->setScrollWheelEnabled(false);
+    mPanSliderPtr->setTextValueSuffix(" " + Strings::pan);
+    addAndMakeVisible(mPanSliderPtr.get());
+    mPanAttachmentPtr.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(
                                                                                   apvts,
                                                                                   juce::String(panParameterId),
-                                                                                  *mPanSlider
+                                                                                  *mPanSliderPtr
                                                                                   ));
     
-    auto phaseParameterId = PluginUtils::joinId({ std::to_string(midiNote), micId, parameters::phaseId });
-    auto* phaseParameter = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter(phaseParameterId));
-    mInvertPhaseToggleButton.reset(new juce::ToggleButton(strings::invertPhase));
-    addAndMakeVisible(mInvertPhaseToggleButton.get());
-    mInvertPhaseToggleButton->setToggleState(phaseParameter->get(), juce::dontSendNotification);
-    mInvertPhaseAttachment.reset(new juce::AudioProcessorValueTreeState::ButtonAttachment(
+    auto phaseParameterId = PluginUtils::joinAndSnakeCase({ std::to_string(midiNote), micId, AudioParameters::phaseComponentId });
+    mInvertPhaseToggleButtonPtr.reset(new juce::ToggleButton(Strings::invertPhase));
+    addAndMakeVisible(mInvertPhaseToggleButtonPtr.get());
+    mInvertPhaseAttachmentPtr.reset(new juce::AudioProcessorValueTreeState::ButtonAttachment(
                                                                                           apvts,
                                                                                           phaseParameterId,
-                                                                                          *mInvertPhaseToggleButton
+                                                                                          *mInvertPhaseToggleButtonPtr
                                                                                           ));
 }
 
 SamplesParametersComponent::~SamplesParametersComponent()
 {
-    mNoteOnButton->removeListener(this);
+    mNoteOnButtonPtr->removeListener(this);
     
-    mGainAttachment.reset();
-    mPanAttachment.reset();
-    mInvertPhaseAttachment.reset();
+    mGainAttachmentPtr.reset();
+    mPanAttachmentPtr.reset();
+    mInvertPhaseAttachmentPtr.reset();
 
     // Now it's safe to reset the sliders and buttons
-    mGainSlider.reset();
-    mPanSlider.reset();
-    mInvertPhaseToggleButton.reset();
-    mNoteOnButton.reset();
-    mLabel.reset();
+    mRatioSliderPtr.reset();
+    mPanSliderPtr.reset();
+    mInvertPhaseToggleButtonPtr.reset();
+    mNoteOnButtonPtr.reset();
+    mGroupComponentPtr.reset();
 }
 
 void SamplesParametersComponent::paint(juce::Graphics& g)
@@ -78,21 +72,20 @@ void SamplesParametersComponent::paint(juce::Graphics& g)
 void SamplesParametersComponent::resized()
 {
     int padding = 10;
-    int toggleSize = 75;
-    int buttonWidth = 75;
+    int toggleSize = 100;
     int labelHeight = 15;
     
     auto area = getLocalBounds().reduced(padding);
     
-    mLabel->setBounds(area.removeFromTop(labelHeight));
+    mGroupComponentPtr->setBounds(getLocalBounds());
     
-    mInvertPhaseToggleButton->setBounds(area.removeFromLeft(toggleSize).reduced(0, padding));
-    mPanSlider->setBounds(area.removeFromLeft(toggleSize).reduced(0, padding));
+    mInvertPhaseToggleButtonPtr->setBounds(area.removeFromLeft(toggleSize).reduced(padding));
+    mPanSliderPtr->setBounds(area.removeFromLeft(toggleSize).reduced(padding));
     
-    auto buttonArea = area.removeFromRight(buttonWidth).reduced(padding, padding);
+    auto buttonArea = area.removeFromRight(area.getHeight()).reduced(padding);
     
-    mGainSlider->setBounds(area);
-    mNoteOnButton->setBounds(buttonArea);
+    mRatioSliderPtr->setBounds(area);
+    mNoteOnButtonPtr->setBounds(buttonArea);
 }
 
 void SamplesParametersComponent::buttonClicked(juce::Button* button)

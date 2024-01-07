@@ -2,356 +2,353 @@
 #include <vector>
 #include <unordered_map>
 
-namespace generalmidi
+namespace GeneralMidiPercussion
 {
-	namespace midinotes {
-		static constexpr int notApplicable = -1;
-		static constexpr int acousticBassDrum = 35;
-		static constexpr int bassDrum1 = 36;
-		static constexpr int sideStick = 37;
-		static constexpr int acousticSnare = 38;
-		static constexpr int handClap = 39;
-		static constexpr int electricSnare = 40;
-		static constexpr int lowFloorTom = 41;
-		static constexpr int closedHiHat = 42;
-		static constexpr int highFloorTom = 43;
-		static constexpr int pedalHiHat = 44;
-		static constexpr int lowTom = 45;
-		static constexpr int openHiHat = 46;
-		static constexpr int lowMidTom = 47;
-		static constexpr int hiMidTom = 48;
-		static constexpr int crashCymbal1 = 49;
-		static constexpr int highTom = 50;
-		static constexpr int rideCymbal1 = 51;
-		static constexpr int chineseCymbal = 52;
-		static constexpr int rideBell = 53;
-		static constexpr int tambourine = 54;
-		static constexpr int splashCymbal = 55;
-		static constexpr int cowbell = 56;
-		static constexpr int crashCymbal2 = 57;
-		static constexpr int vibraslap = 58;
-		static constexpr int rideCymbal2 = 59;
-		static constexpr int hiBongo = 60;
-		static constexpr int lowBongo = 61;
-		static constexpr int muteHiConga = 62;
-		static constexpr int openHiConga = 63;
-		static constexpr int lowConga = 64;
-		static constexpr int highTimbale = 65;
-		static constexpr int lowTimbale = 66;
-		static constexpr int highAgog = 67;
-		static constexpr int lowAgog = 68;
-		static constexpr int cabas = 69;
-		static constexpr int maraca = 70;
-		static constexpr int shortWhistle = 71;
-		static constexpr int longWhistle = 72;
-		static constexpr int shortGuir = 73;
-		static constexpr int longGuir = 74;
-		static constexpr int clave = 75;
-		static constexpr int hiWoodBlock = 76;
-		static constexpr int lowWoodBlock = 77;
-		static constexpr int muteCuica = 78;
-		static constexpr int openCuica = 79;
-		static constexpr int muteTriangle = 80;
-		static constexpr int openTriangle = 81;
-	}
+	static constexpr int notApplicable = -1;
+	static constexpr int acousticBassDrumNote = 35;
+	static constexpr int bassDrum1Note = 36;
+	static constexpr int sideStickNote = 37;
+	static constexpr int acousticSnareNote = 38;
+	static constexpr int handClapNote = 39;
+	static constexpr int electricSnareNote = 40;
+	static constexpr int lowFloorTomNote = 41;
+	static constexpr int closedHiHatNote = 42;
+	static constexpr int highFloorTomNote = 43;
+	static constexpr int pedalHiHatNote = 44;
+	static constexpr int lowTomNote = 45;
+	static constexpr int openHiHatNote = 46;
+	static constexpr int lowMidTomNote = 47;
+	static constexpr int hiMidTomNote = 48;
+	static constexpr int crashCymbal1Note = 49;
+	static constexpr int highTomNote = 50;
+	static constexpr int rideCymbal1Note = 51;
+	static constexpr int chineseCymbalNote = 52;
+	static constexpr int rideBellNote = 53;
+	static constexpr int tambourineNote = 54;
+	static constexpr int splashCymbalNote = 55;
+	static constexpr int cowbellNote = 56;
+	static constexpr int crashCymbal2Note = 57;
+	static constexpr int vibraslapNote = 58;
+	static constexpr int rideCymbal2Note = 59;
+	static constexpr int hiBongoNote = 60;
+	static constexpr int lowBongoNote = 61;
+	static constexpr int muteHiCongaNote = 62;
+	static constexpr int openHiCongaNote = 63;
+	static constexpr int lowCongaNote = 64;
+	static constexpr int highTimbaleNote = 65;
+	static constexpr int lowTimbaleNote = 66;
+	static constexpr int highAgogNote = 67;
+	static constexpr int lowAgogNote = 68;
+	static constexpr int cabasNote = 69;
+	static constexpr int maracaNote = 70;
+	static constexpr int shortWhistleNote = 71;
+	static constexpr int longWhistleNote = 72;
+	static constexpr int shortGuirNote = 73;
+	static constexpr int longGuirNote = 74;
+	static constexpr int claveNote = 75;
+	static constexpr int hiWoodBlockNote = 76;
+	static constexpr int lowWoodBlockNote = 77;
+	static constexpr int muteCuicaNote = 78;
+	static constexpr int openCuicaNote = 79;
+	static constexpr int muteTriangleNote = 80;
+	static constexpr int openTriangleNote = 81;
+
+	static const std::string acousticBassDrumName = "Acoustic Bass Drum";
+	static const std::string bassDrum1Name = "Bass Drum 1";
+	static const std::string sideStickName = "Side Stick";
+	static const std::string acousticSnareName = "Acoustic Snare";
+	static const std::string handClapName = "Hand Clap";
+	static const std::string electricSnareName = "Electric Snare";
+	static const std::string lowFloorTomName = "Low Floor Tom";
+	static const std::string closedHiHatName = "Closed Hi-Hat";
+	static const std::string highFloorTomName = "High Floor Tom";
+	static const std::string pedalHiHatName = "Pedal Hi-Hat";
+	static const std::string lowTomName = "Low Tom";
+	static const std::string openHiHatName = "Open Hi-Hat";
+	static const std::string lowMidTomName = "Low-Mid Tom";
+	static const std::string hiMidTomName = "Hi Mid Tom";
+	static const std::string crashCymbal1Name = "Crash Cymbal 1";
+	static const std::string highTomName = "High Tom";
+	static const std::string rideCymbal1Name = "Ride Cymbal 1";
+	static const std::string chineseCymbalName = "Chinese Cymbal";
+	static const std::string rideBellName = "Ride Bell";
+	static const std::string tambourineName = "Tambourine";
+	static const std::string splashCymbalName = "Splash Cymbal";
+	static const std::string cowbellName = "Cowbell";
+	static const std::string crashCymbal2Name = "Crash Cymbal 2";
+	static const std::string vibraslapName = "Vibraslap";
+	static const std::string rideCymbal2Name = "Ride Cymbal 2";
+	static const std::string hiBongoName = "Hi Bongo";
+	static const std::string lowBongoName = "Low Bongo";
+	static const std::string muteHiCongaName = "Mute Hi Conga";
+	static const std::string openHiCongaName = "Open Hi Conga";
+	static const std::string lowCongaName = "Low Conga";
+	static const std::string highTimbaleName = "High Timbale";
+	static const std::string lowTimbaleName = "Low Timbale";
+	static const std::string highAgogName = "High Agog";
+	static const std::string lowAgogName = "Low Agog";
+	static const std::string cabasName = "Cabas";
+	static const std::string maracaName = "Maraca";
+	static const std::string shortWhistleName = "Short Whistle";
+	static const std::string longWhistleName = "Long Whistle";
+	static const std::string shortGuirName = "Short Guir";
+	static const std::string longGuirName = "Long Guir";
+	static const std::string claveName = "Clave";
+	static const std::string hiWoodBlockName = "Hi Wood Block";
+	static const std::string lowWoodBlockName = "Low Wood Block";
+	static const std::string muteCuicaName = "Mute Cuica";
+	static const std::string openCuicaName = "Open Cuica";
+	static const std::string muteTriangleName = "Mute Triangle";
+	static const std::string openTriangleName = "Open Triangle";
+
 
 	static const std::vector<int> midiNotesVector = {
-		midinotes::acousticBassDrum,
-		midinotes::bassDrum1,
-		midinotes::sideStick,
-		midinotes::acousticSnare,
-		midinotes::handClap,
-		midinotes::electricSnare,
-		midinotes::lowFloorTom,
-		midinotes::closedHiHat,
-		midinotes::highFloorTom,
-		midinotes::pedalHiHat,
-		midinotes::lowTom,
-		midinotes::openHiHat,
-		midinotes::lowMidTom,
-		midinotes::hiMidTom,
-		midinotes::crashCymbal1,
-		midinotes::highTom,
-		midinotes::rideCymbal1,
-		midinotes::chineseCymbal,
-		midinotes::rideBell,
-		midinotes::tambourine,
-		midinotes::splashCymbal,
-		midinotes::cowbell,
-		midinotes::crashCymbal2,
-		midinotes::vibraslap,
-		midinotes::rideCymbal2,
-		midinotes::hiBongo,
-		midinotes::lowBongo,
-		midinotes::muteHiConga,
-		midinotes::openHiConga,
-		midinotes::lowConga,
-		midinotes::highTimbale,
-		midinotes::lowTimbale,
-		midinotes::highAgog,
-		midinotes::lowAgog,
-		midinotes::cabas,
-		midinotes::maraca,
-		midinotes::shortWhistle,
-		midinotes::longWhistle,
-		midinotes::shortGuir,
-		midinotes::longGuir,
-		midinotes::clave,
-		midinotes::hiWoodBlock,
-		midinotes::lowWoodBlock,
-		midinotes::muteCuica,
-		midinotes::openCuica,
-		midinotes::muteTriangle,
-		midinotes::openTriangle
+		acousticBassDrumNote,
+		bassDrum1Note,
+		sideStickNote,
+		acousticSnareNote,
+		handClapNote,
+		electricSnareNote,
+		lowFloorTomNote,
+		closedHiHatNote,
+		highFloorTomNote,
+		pedalHiHatNote,
+		lowTomNote,
+		openHiHatNote,
+		lowMidTomNote,
+		hiMidTomNote,
+		crashCymbal1Note,
+		highTomNote,
+		rideCymbal1Note,
+		chineseCymbalNote,
+		rideBellNote,
+		tambourineNote,
+		splashCymbalNote,
+		cowbellNote,
+		crashCymbal2Note,
+		vibraslapNote,
+		rideCymbal2Note,
+		hiBongoNote,
+		lowBongoNote,
+		muteHiCongaNote,
+		openHiCongaNote,
+		lowCongaNote,
+		highTimbaleNote,
+		lowTimbaleNote,
+		highAgogNote,
+		lowAgogNote,
+		cabasNote,
+		maracaNote,
+		shortWhistleNote,
+		longWhistleNote,
+		shortGuirNote,
+		longGuirNote,
+		claveNote,
+		hiWoodBlockNote,
+		lowWoodBlockNote,
+		muteCuicaNote,
+		openCuicaNote,
+		muteTriangleNote,
+		openTriangleNote
 	};
 
-	namespace names {
-		static const std::string acousticBassDrum = "Acoustic Bass Drum";
-		static const std::string bassDrum1 = "Bass Drum 1";
-		static const std::string sideStick = "Side Stick";
-		static const std::string acousticSnare = "Acoustic Snare";
-		static const std::string handClap = "Hand Clap";
-		static const std::string electricSnare = "Electric Snare";
-		static const std::string lowFloorTom = "Low Floor Tom";
-		static const std::string closedHiHat = "Closed Hi-Hat";
-		static const std::string highFloorTom = "High Floor Tom";
-		static const std::string pedalHiHat = "Pedal Hi-Hat";
-		static const std::string lowTom = "Low Tom";
-		static const std::string openHiHat = "Open Hi-Hat";
-		static const std::string lowMidTom = "Low-Mid Tom";
-		static const std::string hiMidTom = "Hi Mid Tom";
-		static const std::string crashCymbal1 = "Crash Cymbal 1";
-		static const std::string highTom = "High Tom";
-		static const std::string rideCymbal1 = "Ride Cymbal 1";
-		static const std::string chineseCymbal = "Chinese Cymbal";
-		static const std::string rideBell = "Ride Bell";
-		static const std::string tambourine = "Tambourine";
-		static const std::string splashCymbal = "Splash Cymbal";
-		static const std::string cowbell = "Cowbell";
-		static const std::string crashCymbal2 = "Crash Cymbal 2";
-		static const std::string vibraslap = "Vibraslap";
-		static const std::string rideCymbal2 = "Ride Cymbal 2";
-		static const std::string hiBongo = "Hi Bongo";
-		static const std::string lowBongo = "Low Bongo";
-		static const std::string muteHiConga = "Mute Hi Conga";
-		static const std::string openHiConga = "Open Hi Conga";
-		static const std::string lowConga = "Low Conga";
-		static const std::string highTimbale = "High Timbale";
-		static const std::string lowTimbale = "Low Timbale";
-		static const std::string highAgog = "High Agog";
-		static const std::string lowAgog = "Low Agog";
-		static const std::string cabas = "Cabas";
-		static const std::string maraca = "Maraca";
-		static const std::string shortWhistle = "Short Whistle";
-		static const std::string longWhistle = "Long Whistle";
-		static const std::string shortGuir = "Short Guir";
-		static const std::string longGuir = "Long Guir";
-		static const std::string clave = "Clave";
-		static const std::string hiWoodBlock = "Hi Wood Block";
-		static const std::string lowWoodBlock = "Low Wood Block";
-		static const std::string muteCuica = "Mute Cuica";
-		static const std::string openCuica = "Open Cuica";
-		static const std::string muteTriangle = "Mute Triangle";
-		static const std::string openTriangle = "Open Triangle";
-	}
-
 	static const std::vector<std::string> midiNamesVector = {
-		names::acousticBassDrum,
-		names::bassDrum1,
-		names::sideStick,
-		names::acousticSnare,
-		names::handClap,
-		names::electricSnare,
-		names::lowFloorTom,
-		names::closedHiHat,
-		names::highFloorTom,
-		names::pedalHiHat,
-		names::lowTom,
-		names::openHiHat,
-		names::lowMidTom,
-		names::hiMidTom,
-		names::crashCymbal1,
-		names::highTom,
-		names::rideCymbal1,
-		names::chineseCymbal,
-		names::rideBell,
-		names::tambourine,
-		names::splashCymbal,
-		names::cowbell,
-		names::crashCymbal2,
-		names::vibraslap,
-		names::rideCymbal2,
-		names::hiBongo,
-		names::lowBongo,
-		names::muteHiConga,
-		names::openHiConga,
-		names::lowConga,
-		names::highTimbale,
-		names::lowTimbale,
-		names::highAgog,
-		names::lowAgog,
-		names::cabas,
-		names::maraca,
-		names::shortWhistle,
-		names::longWhistle,
-		names::shortGuir,
-		names::longGuir,
-		names::clave,
-		names::hiWoodBlock,
-		names::lowWoodBlock,
-		names::muteCuica,
-		names::openCuica,
-		names::muteTriangle,
-		names::openTriangle
+		acousticBassDrumName,
+		bassDrum1Name,
+		sideStickName,
+		acousticSnareName,
+		handClapName,
+		electricSnareName,
+		lowFloorTomName,
+		closedHiHatName,
+		highFloorTomName,
+		pedalHiHatName,
+		lowTomName,
+		openHiHatName,
+		lowMidTomName,
+		hiMidTomName,
+		crashCymbal1Name,
+		highTomName,
+		rideCymbal1Name,
+		chineseCymbalName,
+		rideBellName,
+		tambourineName,
+		splashCymbalName,
+		cowbellName,
+		crashCymbal2Name,
+		vibraslapName,
+		rideCymbal2Name,
+		hiBongoName,
+		lowBongoName,
+		muteHiCongaName,
+		openHiCongaName,
+		lowCongaName,
+		highTimbaleName,
+		lowTimbaleName,
+		highAgogName,
+		lowAgogName,
+		cabasName,
+		maracaName,
+		shortWhistleName,
+		longWhistleName,
+		shortGuirName,
+		longGuirName,
+		claveName,
+		hiWoodBlockName,
+		lowWoodBlockName,
+		muteCuicaName,
+		openCuicaName,
+		muteTriangleName,
+		openTriangleName
 	};
 
 	static const std::unordered_map<int, std::string> midiNoteToNameMap = {
-		{midinotes::acousticBassDrum, names::acousticBassDrum},
-		{midinotes::bassDrum1, names::bassDrum1},
-		{midinotes::sideStick, names::sideStick},
-		{midinotes::acousticSnare, names::acousticSnare},
-		{midinotes::handClap, names::handClap},
-		{midinotes::electricSnare, names::electricSnare},
-		{midinotes::lowFloorTom, names::lowFloorTom},
-		{midinotes::closedHiHat, names::closedHiHat},
-		{midinotes::highFloorTom, names::highFloorTom},
-		{midinotes::pedalHiHat, names::pedalHiHat},
-		{midinotes::lowTom, names::lowTom},
-		{midinotes::openHiHat, names::openHiHat},
-		{midinotes::lowMidTom, names::lowMidTom},
-		{midinotes::hiMidTom, names::hiMidTom},
-		{midinotes::crashCymbal1, names::crashCymbal1},
-		{midinotes::highTom, names::highTom},
-		{midinotes::rideCymbal1, names::rideCymbal1},
-		{midinotes::chineseCymbal, names::chineseCymbal},
-		{midinotes::rideBell, names::rideBell},
-		{midinotes::tambourine, names::tambourine},
-		{midinotes::splashCymbal, names::splashCymbal},
-		{midinotes::cowbell, names::cowbell},
-		{midinotes::crashCymbal2, names::crashCymbal2},
-		{midinotes::vibraslap, names::vibraslap},
-		{midinotes::rideCymbal2, names::rideCymbal2},
-		{midinotes::hiBongo, names::hiBongo},
-		{midinotes::lowBongo, names::lowBongo},
-		{midinotes::muteHiConga, names::muteHiConga},
-		{midinotes::openHiConga, names::openHiConga},
-		{midinotes::lowConga, names::lowConga},
-		{midinotes::highTimbale, names::highTimbale},
-		{midinotes::lowTimbale, names::lowTimbale},
-		{midinotes::highAgog, names::highAgog},
-		{midinotes::lowAgog, names::lowAgog},
-		{midinotes::cabas, names::cabas},
-		{midinotes::maraca, names::maraca},
-		{midinotes::shortWhistle, names::shortWhistle},
-		{midinotes::longWhistle, names::longWhistle},
-		{midinotes::shortGuir, names::shortGuir},
-		{midinotes::longGuir, names::longGuir},
-		{midinotes::clave, names::clave},
-		{midinotes::hiWoodBlock, names::hiWoodBlock},
-		{midinotes::lowWoodBlock, names::lowWoodBlock},
-		{midinotes::muteCuica, names::muteCuica},
-		{midinotes::openCuica, names::openCuica},
-		{midinotes::muteTriangle, names::muteTriangle},
-		{midinotes::openTriangle, names::openTriangle}
+		{acousticBassDrumNote, acousticBassDrumName},
+		{bassDrum1Note, bassDrum1Name},
+		{sideStickNote, sideStickName},
+		{acousticSnareNote, acousticSnareName},
+		{handClapNote, handClapName},
+		{electricSnareNote, electricSnareName},
+		{lowFloorTomNote, lowFloorTomName},
+		{closedHiHatNote, closedHiHatName},
+		{highFloorTomNote, highFloorTomName},
+		{pedalHiHatNote, pedalHiHatName},
+		{lowTomNote, lowTomName},
+		{openHiHatNote, openHiHatName},
+		{lowMidTomNote, lowMidTomName},
+		{hiMidTomNote, hiMidTomName},
+		{crashCymbal1Note, crashCymbal1Name},
+		{highTomNote, highTomName},
+		{rideCymbal1Note, rideCymbal1Name},
+		{chineseCymbalNote, chineseCymbalName},
+		{rideBellNote, rideBellName},
+		{tambourineNote, tambourineName},
+		{splashCymbalNote, splashCymbalName},
+		{cowbellNote, cowbellName},
+		{crashCymbal2Note, crashCymbal2Name},
+		{vibraslapNote, vibraslapName},
+		{rideCymbal2Note, rideCymbal2Name},
+		{hiBongoNote, hiBongoName},
+		{lowBongoNote, lowBongoName},
+		{muteHiCongaNote, muteHiCongaName},
+		{openHiCongaNote, openHiCongaName},
+		{lowCongaNote, lowCongaName},
+		{highTimbaleNote, highTimbaleName},
+		{lowTimbaleNote, lowTimbaleName},
+		{highAgogNote, highAgogName},
+		{lowAgogNote, lowAgogName},
+		{cabasNote, cabasName},
+		{maracaNote, maracaName},
+		{shortWhistleNote, shortWhistleName},
+		{longWhistleNote, longWhistleName},
+		{shortGuirNote, shortGuirName},
+		{longGuirNote, longGuirName},
+		{claveNote, claveName},
+		{hiWoodBlockNote, hiWoodBlockName},
+		{lowWoodBlockNote, lowWoodBlockName},
+		{muteCuicaNote, muteCuicaName},
+		{openCuicaNote, openCuicaName},
+		{muteTriangleNote, muteTriangleName},
+		{openTriangleNote, openTriangleName}
 	};
 
 	static const std::unordered_map<std::string, int> midiNameToNoteMap = {
-		{names::acousticBassDrum, midinotes::acousticBassDrum},
-		{names::bassDrum1, midinotes::bassDrum1},
-		{names::sideStick, midinotes::sideStick},
-		{names::acousticSnare, midinotes::acousticSnare},
-		{names::handClap, midinotes::handClap},
-		{names::electricSnare, midinotes::electricSnare},
-		{names::lowFloorTom, midinotes::lowFloorTom},
-		{names::closedHiHat, midinotes::closedHiHat},
-		{names::highFloorTom, midinotes::highFloorTom},
-		{names::pedalHiHat, midinotes::pedalHiHat},
-		{names::lowTom, midinotes::lowTom},
-		{names::openHiHat, midinotes::openHiHat},
-		{names::lowMidTom, midinotes::lowMidTom},
-		{names::hiMidTom, midinotes::hiMidTom},
-		{names::crashCymbal1, midinotes::crashCymbal1},
-		{names::highTom, midinotes::highTom},
-		{names::rideCymbal1, midinotes::rideCymbal1},
-		{names::chineseCymbal, midinotes::chineseCymbal},
-		{names::rideBell, midinotes::rideBell},
-		{names::tambourine, midinotes::tambourine},
-		{names::splashCymbal, midinotes::splashCymbal},
-		{names::cowbell, midinotes::cowbell},
-		{names::crashCymbal2, midinotes::crashCymbal2},
-		{names::vibraslap, midinotes::vibraslap},
-		{names::rideCymbal2, midinotes::rideCymbal2},
-		{names::hiBongo, midinotes::hiBongo},
-		{names::lowBongo, midinotes::lowBongo},
-		{names::muteHiConga, midinotes::muteHiConga},
-		{names::openHiConga, midinotes::openHiConga},
-		{names::lowConga, midinotes::lowConga},
-		{names::highTimbale, midinotes::highTimbale},
-		{names::lowTimbale, midinotes::lowTimbale},
-		{names::highAgog, midinotes::highAgog},
-		{names::lowAgog, midinotes::lowAgog},
-		{names::cabas, midinotes::cabas},
-		{names::maraca, midinotes::maraca},
-		{names::shortWhistle, midinotes::shortWhistle},
-		{names::longWhistle, midinotes::longWhistle},
-		{names::shortGuir, midinotes::shortGuir},
-		{names::longGuir, midinotes::longGuir},
-		{names::clave, midinotes::clave},
-		{names::hiWoodBlock, midinotes::hiWoodBlock},
-		{names::lowWoodBlock, midinotes::lowWoodBlock},
-		{names::muteCuica, midinotes::muteCuica},
-		{names::openCuica, midinotes::openCuica},
-		{names::muteTriangle, midinotes::muteTriangle},
-		{names::openTriangle, midinotes::openTriangle}
+		{acousticBassDrumName, acousticBassDrumNote},
+		{bassDrum1Name, bassDrum1Note},
+		{sideStickName, sideStickNote},
+		{acousticSnareName, acousticSnareNote},
+		{handClapName, handClapNote},
+		{electricSnareName, electricSnareNote},
+		{lowFloorTomName, lowFloorTomNote},
+		{closedHiHatName, closedHiHatNote},
+		{highFloorTomName, highFloorTomNote},
+		{pedalHiHatName, pedalHiHatNote},
+		{lowTomName, lowTomNote},
+		{openHiHatName, openHiHatNote},
+		{lowMidTomName, lowMidTomNote},
+		{hiMidTomName, hiMidTomNote},
+		{crashCymbal1Name, crashCymbal1Note},
+		{highTomName, highTomNote},
+		{rideCymbal1Name, rideCymbal1Note},
+		{chineseCymbalName, chineseCymbalNote},
+		{rideBellName, rideBellNote},
+		{tambourineName, tambourineNote},
+		{splashCymbalName, splashCymbalNote},
+		{cowbellName, cowbellNote},
+		{crashCymbal2Name, crashCymbal2Note},
+		{vibraslapName, vibraslapNote},
+		{rideCymbal2Name, rideCymbal2Note},
+		{hiBongoName, hiBongoNote},
+		{lowBongoName, lowBongoNote},
+		{muteHiCongaName, muteHiCongaNote},
+		{openHiCongaName, openHiCongaNote},
+		{lowCongaName, lowCongaNote},
+		{highTimbaleName, highTimbaleNote},
+		{lowTimbaleName, lowTimbaleNote},
+		{highAgogName, highAgogNote},
+		{lowAgogName, lowAgogNote},
+		{cabasName, cabasNote},
+		{maracaName, maracaNote},
+		{shortWhistleName, shortWhistleNote},
+		{longWhistleName, longWhistleNote},
+		{shortGuirName, shortGuirNote},
+		{longGuirName, longGuirNote},
+		{claveName, claveNote},
+		{hiWoodBlockName, hiWoodBlockNote},
+		{lowWoodBlockName, lowWoodBlockNote},
+		{muteCuicaName, muteCuicaNote},
+		{openCuicaName, openCuicaNote},
+		{muteTriangleName, muteTriangleNote},
+		{openTriangleName, openTriangleNote}
 	};
 
 	static const std::unordered_map<int, std::vector<int>> midiNoteToStopNotesMap = {
-		{midinotes::acousticBassDrum, {}},
-		{midinotes::bassDrum1, {}},
-		{midinotes::sideStick, {}},
-		{midinotes::acousticSnare, {}},
-		{midinotes::handClap, {}},
-		{midinotes::electricSnare, {}},
-		{midinotes::lowFloorTom, {}},
-		{midinotes::closedHiHat, {midinotes::openHiHat}},
-		{midinotes::highFloorTom, {}},
-		{midinotes::pedalHiHat, {midinotes::openHiHat}},
-		{midinotes::lowTom, {}},
-		{midinotes::openHiHat, {}},
-		{midinotes::lowMidTom, {}},
-		{midinotes::hiMidTom, {}},
-		{midinotes::crashCymbal1, {}},
-		{midinotes::highTom, {}},
-		{midinotes::rideCymbal1, {}},
-		{midinotes::chineseCymbal, {}},
-		{midinotes::rideBell, {}},
-		{midinotes::tambourine, {}},
-		{midinotes::splashCymbal, {}},
-		{midinotes::cowbell, {}},
-		{midinotes::crashCymbal2, {}},
-		{midinotes::vibraslap, {}},
-		{midinotes::rideCymbal2, {}},
-		{midinotes::hiBongo, {}},
-		{midinotes::lowBongo, {}},
-		{midinotes::muteHiConga, {}},
-		{midinotes::openHiConga, {}},
-		{midinotes::lowConga, {}},
-		{midinotes::highTimbale, {}},
-		{midinotes::lowTimbale, {}},
-		{midinotes::highAgog, {}},
-		{midinotes::lowAgog, {}},
-		{midinotes::cabas, {}},
-		{midinotes::maraca, {}},
-		{midinotes::shortWhistle, {}},
-		{midinotes::longWhistle, {}},
-		{midinotes::shortGuir, {}},
-		{midinotes::longGuir, {}},
-		{midinotes::clave, {}},
-		{midinotes::hiWoodBlock, {}},
-		{midinotes::lowWoodBlock, {}},
-		{midinotes::muteCuica, {}},
-		{midinotes::openCuica, {}},
-		{midinotes::muteTriangle, {midinotes::openTriangle}},
-		{midinotes::openTriangle, {midinotes::muteTriangle}}
+		{acousticBassDrumNote, {}},
+		{bassDrum1Note, {}},
+		{sideStickNote, {}},
+		{acousticSnareNote, {}},
+		{handClapNote, {}},
+		{electricSnareNote, {}},
+		{lowFloorTomNote, {}},
+		{closedHiHatNote, {openHiHatNote}},
+		{highFloorTomNote, {}},
+		{pedalHiHatNote, {openHiHatNote}},
+		{lowTomNote, {}},
+		{openHiHatNote, {}},
+		{lowMidTomNote, {}},
+		{hiMidTomNote, {}},
+		{crashCymbal1Note, {}},
+		{highTomNote, {}},
+		{rideCymbal1Note, {}},
+		{chineseCymbalNote, {}},
+		{rideBellNote, {}},
+		{tambourineNote, {}},
+		{splashCymbalNote, {}},
+		{cowbellNote, {}},
+		{crashCymbal2Note, {}},
+		{vibraslapNote, {}},
+		{rideCymbal2Note, {}},
+		{hiBongoNote, {}},
+		{lowBongoNote, {}},
+		{muteHiCongaNote, {}},
+		{openHiCongaNote, {}},
+		{lowCongaNote, {}},
+		{highTimbaleNote, {}},
+		{lowTimbaleNote, {}},
+		{highAgogNote, {}},
+		{lowAgogNote, {}},
+		{cabasNote, {}},
+		{maracaNote, {}},
+		{shortWhistleNote, {}},
+		{longWhistleNote, {}},
+		{shortGuirNote, {}},
+		{longGuirNote, {}},
+		{claveNote, {}},
+		{hiWoodBlockNote, {}},
+		{lowWoodBlockNote, {}},
+		{muteCuicaNote, {}},
+		{openCuicaNote, {}},
+		{muteTriangleNote, {openTriangleNote}},
+		{openTriangleNote, {muteTriangleNote}}
 	};
 }

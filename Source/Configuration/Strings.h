@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace strings {
+namespace Strings {
 	static const std::string velocity = "Velocity";
 	static const std::string invertPhase = "Invert Phase";
 	static const std::string multiOut = "Multi-Out";
@@ -11,6 +11,10 @@ namespace strings {
 	static const std::string compressor = "Compressor";
 	static const std::string lowShelf = "Low shelf";
 	static const std::string highShelf = "High shelf";
+	static const std::string hz = "Hz";
+	static const std::string ms = "ms";
+	static const std::string db = "dB";
+	static const std::string pan = "pan";
 	static const std::string midPeak = "Mid peak";
 	static const std::string frequency = "Frequency";
 	static const std::string quality = "Quality";
