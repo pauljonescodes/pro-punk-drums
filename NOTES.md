@@ -15,7 +15,7 @@ Toms -7
 for (const auto& midiNote : generalmidi::midiNotesVector)
 	{
 		std::string generalMidiName = generalmidi::midiNoteToNameMap.at(midiNote);
-		std::string generalMidiSnakeCaseName = PluginUtils::toSnakeCase(generalMidiName);
+		std::string generalMidiSnakeCaseName = toSnakeCase(generalMidiName);
 
 		for (int velocityIndex = midi::minimumVelocity; velocityIndex <= midi::maximumVelocity; velocityIndex++)
 		{

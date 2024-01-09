@@ -9,17 +9,19 @@ namespace Channels {
 	static constexpr int tomsChannelIndex = 2;
 	static constexpr int hiHatChannelIndex = 3;
 	static constexpr int cymbalsChannelIndex = 4;
-	static constexpr int percussionChannelIndex = 5;
-	static constexpr int outputChannelIndex = 6;
+	static constexpr int otherChannelIndex = 5;
+	static constexpr int roomChannelIndex = 6;
+	static constexpr int outputChannelIndex = 7;
 
-	static constexpr int size = 7;
+	static constexpr int size = 8;
 
 	static const std::string kickId = "kick";
 	static const std::string snareId = "snare";
 	static const std::string tomsId = "toms";
 	static const std::string hiHatId = "hi_hat";
 	static const std::string cymbalsId = "cymbals";
-	static const std::string percussionId = "perc";
+	static const std::string otherId = "other";
+	static const std::string roomId = "room";
 	static const std::string outputId = "output";
 
 	static const std::map<int, std::string> channelIndexToIdMap = {
@@ -28,17 +30,19 @@ namespace Channels {
 		{ tomsChannelIndex, tomsId },
 		{ hiHatChannelIndex, hiHatId },
 		{ cymbalsChannelIndex, cymbalsId },
-		{ percussionChannelIndex, percussionId },
+		{ otherChannelIndex, otherId },
+		{ roomChannelIndex, roomId },
 		{ outputChannelIndex, outputId },
 	};
 
-	static const std::map<int, int> channelIndexToMainGeneralMidiNote = {
+	static const std::map<int, int> channelIndexToGeneralMidiPerccussionNote = {
 		{ kickChannelIndex, GeneralMidiPercussion::bassDrum1Note },
 		{ snareChannelIndex, GeneralMidiPercussion::acousticSnareNote },
 		{ tomsChannelIndex, GeneralMidiPercussion::highTomNote },
 		{ hiHatChannelIndex, GeneralMidiPercussion::closedHiHatNote},
 		{ cymbalsChannelIndex, GeneralMidiPercussion::crashCymbal2Note },
-		{ percussionChannelIndex, GeneralMidiPercussion::tambourineNote },
+		{ otherChannelIndex, GeneralMidiPercussion::tambourineNote },
+		{ roomChannelIndex, GeneralMidiPercussion::notApplicable },
 		{ outputChannelIndex, GeneralMidiPercussion::notApplicable },
 	};
 
@@ -47,7 +51,7 @@ namespace Channels {
 		{GeneralMidiPercussion::bassDrum1Note, kickChannelIndex},
 		{GeneralMidiPercussion::sideStickNote, snareChannelIndex},
 		{GeneralMidiPercussion::acousticSnareNote, snareChannelIndex},
-		{GeneralMidiPercussion::handClapNote, percussionChannelIndex},
+		{GeneralMidiPercussion::handClapNote, otherChannelIndex},
 		{GeneralMidiPercussion::electricSnareNote, snareChannelIndex},
 		{GeneralMidiPercussion::lowFloorTomNote, tomsChannelIndex},
 		{GeneralMidiPercussion::closedHiHatNote, hiHatChannelIndex},
@@ -62,33 +66,33 @@ namespace Channels {
 		{GeneralMidiPercussion::rideCymbal1Note, cymbalsChannelIndex},
 		{GeneralMidiPercussion::chineseCymbalNote, cymbalsChannelIndex},
 		{GeneralMidiPercussion::rideBellNote, cymbalsChannelIndex},
-		{GeneralMidiPercussion::tambourineNote, percussionChannelIndex},
+		{GeneralMidiPercussion::tambourineNote, otherChannelIndex},
 		{GeneralMidiPercussion::splashCymbalNote, cymbalsChannelIndex},
-		{GeneralMidiPercussion::cowbellNote, percussionChannelIndex},
+		{GeneralMidiPercussion::cowbellNote, otherChannelIndex},
 		{GeneralMidiPercussion::crashCymbal2Note, cymbalsChannelIndex},
-		{GeneralMidiPercussion::vibraslapNote, percussionChannelIndex},
+		{GeneralMidiPercussion::vibraslapNote, otherChannelIndex},
 		{GeneralMidiPercussion::rideCymbal2Note, cymbalsChannelIndex},
-		{GeneralMidiPercussion::hiBongoNote, percussionChannelIndex},
-		{GeneralMidiPercussion::lowBongoNote, percussionChannelIndex},
-		{GeneralMidiPercussion::muteHiCongaNote, percussionChannelIndex},
-		{GeneralMidiPercussion::openHiCongaNote, percussionChannelIndex},
-		{GeneralMidiPercussion::lowCongaNote, percussionChannelIndex},
-		{GeneralMidiPercussion::highTimbaleNote, percussionChannelIndex},
-		{GeneralMidiPercussion::lowTimbaleNote, percussionChannelIndex},
-		{GeneralMidiPercussion::highAgogNote, percussionChannelIndex},
-		{GeneralMidiPercussion::lowAgogNote, percussionChannelIndex},
-		{GeneralMidiPercussion::cabasNote, percussionChannelIndex},
-		{GeneralMidiPercussion::maracaNote, percussionChannelIndex},
-		{GeneralMidiPercussion::shortWhistleNote, percussionChannelIndex},
-		{GeneralMidiPercussion::longWhistleNote, percussionChannelIndex},
-		{GeneralMidiPercussion::shortGuirNote, percussionChannelIndex},
-		{GeneralMidiPercussion::longGuirNote, percussionChannelIndex},
-		{GeneralMidiPercussion::claveNote, percussionChannelIndex},
-		{GeneralMidiPercussion::hiWoodBlockNote, percussionChannelIndex},
-		{GeneralMidiPercussion::lowWoodBlockNote, percussionChannelIndex},
-		{GeneralMidiPercussion::muteCuicaNote, percussionChannelIndex},
-		{GeneralMidiPercussion::openCuicaNote, percussionChannelIndex},
-		{GeneralMidiPercussion::muteTriangleNote, percussionChannelIndex},
-		{GeneralMidiPercussion::openTriangleNote, percussionChannelIndex}
+		{GeneralMidiPercussion::hiBongoNote, otherChannelIndex},
+		{GeneralMidiPercussion::lowBongoNote, otherChannelIndex},
+		{GeneralMidiPercussion::muteHiCongaNote, otherChannelIndex},
+		{GeneralMidiPercussion::openHiCongaNote, otherChannelIndex},
+		{GeneralMidiPercussion::lowCongaNote, otherChannelIndex},
+		{GeneralMidiPercussion::highTimbaleNote, otherChannelIndex},
+		{GeneralMidiPercussion::lowTimbaleNote, otherChannelIndex},
+		{GeneralMidiPercussion::highAgogNote, otherChannelIndex},
+		{GeneralMidiPercussion::lowAgogNote, otherChannelIndex},
+		{GeneralMidiPercussion::cabasNote, otherChannelIndex},
+		{GeneralMidiPercussion::maracaNote, otherChannelIndex},
+		{GeneralMidiPercussion::shortWhistleNote, otherChannelIndex},
+		{GeneralMidiPercussion::longWhistleNote, otherChannelIndex},
+		{GeneralMidiPercussion::shortGuirNote, otherChannelIndex},
+		{GeneralMidiPercussion::longGuirNote, otherChannelIndex},
+		{GeneralMidiPercussion::claveNote, otherChannelIndex},
+		{GeneralMidiPercussion::hiWoodBlockNote, otherChannelIndex},
+		{GeneralMidiPercussion::lowWoodBlockNote, otherChannelIndex},
+		{GeneralMidiPercussion::muteCuicaNote, otherChannelIndex},
+		{GeneralMidiPercussion::openCuicaNote, otherChannelIndex},
+		{GeneralMidiPercussion::muteTriangleNote, otherChannelIndex},
+		{GeneralMidiPercussion::openTriangleNote, otherChannelIndex}
 	};
 }

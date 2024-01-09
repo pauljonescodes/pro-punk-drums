@@ -21,18 +21,20 @@ public:
         const std::string ratioParameterId,
         const std::string releaseParameterId,
         const std::string gainParameterId,
+        const std::string dryWetParameterId,
         const std::string thresholdTitle = "Threshold",
         const std::string attackTitle = "Attack",
         const std::string ratioTitle = "Ratio",
         const std::string releaseTitle = "Release",
         const std::string gainTitle = "Gain",
+        const std::string dryWetTitle = "Blend",
         const std::string dbSuffix = "dB",
         const std::string msSuffix = "ms")
     {
         mGroupComponentPtr.reset(new juce::GroupComponent(title, title));
         addAndMakeVisible(mGroupComponentPtr.get());
 
-        mThresholdSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalDrag, juce::Slider::TextBoxBelow));
+        mThresholdSliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
         mThresholdSliderPtr->setTitle(thresholdTitle);
         mThresholdSliderPtr->setTextValueSuffix(dbSuffix);
         mThresholdSliderPtr->setScrollWheelEnabled(false);
@@ -48,7 +50,7 @@ public:
         mThresholdLabelPtr->attachToComponent(mThresholdSliderPtr.get(), false);
         addAndMakeVisible(mThresholdLabelPtr.get());
 
-        mAttackSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow));
+        mAttackSliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
         mAttackSliderPtr->setScrollWheelEnabled(false);
         mAttackSliderPtr->setTextValueSuffix(msSuffix);
         mAttackAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
@@ -62,7 +64,7 @@ public:
         mAttackLabelPtr->attachToComponent(mAttackSliderPtr.get(), false);
         addAndMakeVisible(mAttackLabelPtr.get());
 
-        mRatioSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalDrag, juce::Slider::TextBoxBelow));
+        mRatioSliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
         mRatioSliderPtr->setScrollWheelEnabled(false);
         mRatioSliderPtr->setTitle(ratioTitle);
         mAttackAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
@@ -76,7 +78,7 @@ public:
         mRatioLabelPtr->attachToComponent(mRatioSliderPtr.get(), false);
         addAndMakeVisible(mRatioLabelPtr.get());
 
-        mReleaseSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalDrag, juce::Slider::TextBoxBelow));
+        mReleaseSliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
         mReleaseSliderPtr->setScrollWheelEnabled(false);
         mReleaseSliderPtr->setTitle(releaseTitle);
         mReleaseAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
@@ -90,7 +92,7 @@ public:
         mReleaseLabelPtr->attachToComponent(mReleaseSliderPtr.get(), false);
         addAndMakeVisible(mReleaseLabelPtr.get());
 
-        mGainSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalDrag, juce::Slider::TextBoxBelow));
+        mGainSliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
         mGainSliderPtr->setScrollWheelEnabled(false);
         mGainSliderPtr->setTitle(gainTitle);
         mGainAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
@@ -103,6 +105,20 @@ public:
         mGainLabelPtr->setText(gainTitle, juce::dontSendNotification);
         mGainLabelPtr->attachToComponent(mGainSliderPtr.get(), false);
         addAndMakeVisible(mGainLabelPtr.get());
+
+        mDryWetSliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
+        mDryWetSliderPtr->setScrollWheelEnabled(false);
+        mDryWetSliderPtr->setTitle(gainTitle);
+        mDryWetAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+            apvts,
+            dryWetParameterId,
+            *mDryWetSliderPtr);
+        addAndMakeVisible(mDryWetSliderPtr.get());
+
+        mDryWetLabelPtr.reset(new juce::Label());
+        mDryWetLabelPtr->setText(dryWetTitle, juce::dontSendNotification);
+        mDryWetLabelPtr->attachToComponent(mDryWetSliderPtr.get(), false);
+        addAndMakeVisible(mDryWetLabelPtr.get());
     }
 
     ~CompressionWithGainComponent()
@@ -112,18 +128,21 @@ public:
         mRatioAttachmentPtr.reset();
         mReleaseAttachmentPtr.reset();
         mGainAttachmentPtr.reset();
+        mDryWetAttachmentPtr.reset();
 
         mThresholdSliderPtr.reset();
         mAttackSliderPtr.reset();
         mRatioSliderPtr.reset();
         mReleaseSliderPtr.reset();
         mGainSliderPtr.reset();
+        mDryWetSliderPtr.reset();
 
         mThresholdLabelPtr.reset();
         mAttackLabelPtr.reset();
         mRatioLabelPtr.reset();
         mReleaseLabelPtr.reset();
         mGainLabelPtr.reset();
+        mDryWetLabelPtr.reset();
 
         mGroupComponentPtr.reset();
     }
@@ -134,20 +153,34 @@ public:
 
         mGroupComponentPtr->setBounds(bounds);
 
-        juce::FlexBox flexBox;
-        flexBox.flexDirection = juce::FlexBox::Direction::row;
-        flexBox.flexWrap = juce::FlexBox::Wrap::noWrap;
-        flexBox.justifyContent = juce::FlexBox::JustifyContent::center;
-        flexBox.alignItems = juce::FlexBox::AlignItems::stretch;
-        flexBox.alignContent = juce::FlexBox::AlignContent::stretch;
+        // Split the bounds into two for the two columns
+        auto colBounds = bounds.removeFromLeft(bounds.getWidth() / 2);
 
-        flexBox.items.add(juce::FlexItem(*mThresholdSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
-        flexBox.items.add(juce::FlexItem(*mAttackSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
-        flexBox.items.add(juce::FlexItem(*mRatioSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
-        flexBox.items.add(juce::FlexItem(*mReleaseSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
-        flexBox.items.add(juce::FlexItem(*mGainSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
+        juce::FlexBox col1FlexBox;
+        col1FlexBox.flexDirection = juce::FlexBox::Direction::column;
+        col1FlexBox.flexWrap = juce::FlexBox::Wrap::noWrap;
+        col1FlexBox.justifyContent = juce::FlexBox::JustifyContent::center;
+        col1FlexBox.alignItems = juce::FlexBox::AlignItems::stretch;
+        col1FlexBox.alignContent = juce::FlexBox::AlignContent::stretch;
 
-        flexBox.performLayout(bounds);
+        col1FlexBox.items.add(juce::FlexItem(*mThresholdSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
+        col1FlexBox.items.add(juce::FlexItem(*mRatioSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
+        col1FlexBox.items.add(juce::FlexItem(*mGainSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
+
+        col1FlexBox.performLayout(colBounds);
+
+        juce::FlexBox col2FlexBox;
+        col2FlexBox.flexDirection = juce::FlexBox::Direction::column;
+        col2FlexBox.flexWrap = juce::FlexBox::Wrap::noWrap;
+        col2FlexBox.justifyContent = juce::FlexBox::JustifyContent::center;
+        col2FlexBox.alignItems = juce::FlexBox::AlignItems::stretch;
+        col2FlexBox.alignContent = juce::FlexBox::AlignContent::stretch;
+
+        col2FlexBox.items.add(juce::FlexItem(*mAttackSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
+        col2FlexBox.items.add(juce::FlexItem(*mReleaseSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
+        col2FlexBox.items.add(juce::FlexItem(*mDryWetSliderPtr).withFlex(1).withMargin(juce::FlexItem::Margin(36, 0, 12, 12)));
+
+        col2FlexBox.performLayout(bounds);
     }
 
 private:
@@ -159,19 +192,22 @@ private:
         mAttackLabelPtr, 
         mRatioLabelPtr, 
         mReleaseLabelPtr, 
-        mGainLabelPtr;
+        mGainLabelPtr,
+        mDryWetLabelPtr;
    
-    std::unique_ptr<juce::Slider> 
-        mThresholdSliderPtr, 
-        mAttackSliderPtr, 
-        mRatioSliderPtr, 
-        mReleaseSliderPtr, 
-        mGainSliderPtr;
+    std::unique_ptr<juce::Slider>
+        mThresholdSliderPtr,
+        mAttackSliderPtr,
+        mRatioSliderPtr,
+        mReleaseSliderPtr,
+        mGainSliderPtr,
+        mDryWetSliderPtr;
     
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> 
-        mThresholdAttachmentPtr, 
-        mAttackAttachmentPtr, 
-        mRatioAttachmentPtr, 
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>
+        mThresholdAttachmentPtr,
+        mAttackAttachmentPtr,
+        mRatioAttachmentPtr,
         mReleaseAttachmentPtr,
-        mGainAttachmentPtr;
+        mGainAttachmentPtr,
+        mDryWetAttachmentPtr;
 };

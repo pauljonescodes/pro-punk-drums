@@ -32,14 +32,14 @@ public:
 
 	void resized() override
 	{
-		const auto localBounds = getLocalBounds();
-		auto bounds = localBounds;
+		const auto container = getLocalBounds().reduced(4);
+		auto bounds = container;
 
-		saveButton.setBounds(bounds.removeFromLeft(localBounds.proportionOfWidth(0.2f)));
-		previousPresetButton.setBounds(bounds.removeFromLeft(localBounds.proportionOfWidth(0.1f)));
-		presetList.setBounds(bounds.removeFromLeft(localBounds.proportionOfWidth(0.4f)));
-		nextPresetButton.setBounds(bounds.removeFromLeft(localBounds.proportionOfWidth(0.1f)));
-		deleteButton.setBounds(bounds.removeFromLeft(localBounds.proportionOfWidth(0.2f)));
+		saveButton.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.2f)).reduced(4));
+		previousPresetButton.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.1f)).reduced(4));
+		presetList.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.4f)).reduced(4));
+		nextPresetButton.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.1f)).reduced(4));
+		deleteButton.setBounds(bounds.reduced(4));
 	}
 private:
 	void buttonClicked(juce::Button* button) override

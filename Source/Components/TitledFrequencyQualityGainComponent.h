@@ -28,8 +28,7 @@ public:
         mGroupComponentPtr.reset(new juce::GroupComponent(title, title));
         addAndMakeVisible(mGroupComponentPtr.get());
 
-        mFrequencySliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalDrag, juce::Slider::TextBoxBelow));
-        mFrequencySliderPtr->setTitle(frequencyTitle);
+        mFrequencySliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
         mFrequencySliderPtr->setTextValueSuffix(hzSuffix);
         mFrequencySliderPtr->setScrollWheelEnabled(false);
         mFrequencyAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
@@ -44,7 +43,7 @@ public:
         mFrequencyLabelPtr->attachToComponent(mFrequencySliderPtr.get(), false);
         addAndMakeVisible(mFrequencyLabelPtr.get());
 
-        mQualitySliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow));
+        mQualitySliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
         mQualitySliderPtr->setScrollWheelEnabled(false);
         mQualityAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
             apvts,
@@ -57,10 +56,9 @@ public:
         mQualityLabelPtr->attachToComponent(mQualitySliderPtr.get(), false);
         addAndMakeVisible(mQualityLabelPtr.get());
 
-        mGainSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalDrag, juce::Slider::TextBoxBelow));
+        mGainSliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
         mGainSliderPtr->setScrollWheelEnabled(false);
-        mGainSliderPtr->setTitle(frequencyTitle);
-        mQualityAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+        mGainAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
             apvts,
             gainParameterId,
             *mGainSliderPtr);

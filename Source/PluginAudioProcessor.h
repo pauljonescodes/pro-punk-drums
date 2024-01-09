@@ -52,11 +52,21 @@ private:
 
 	std::unique_ptr<juce::AudioFormatManager> mAudioFormatManagerPtr;
 	std::unique_ptr<PluginPresetManager> mPresetManagerPtr;
-	std::unique_ptr<juce::AudioProcessorValueTreeState> mParameterValueTreeStatePtr;
+	std::unique_ptr<juce::AudioProcessorValueTreeState> mAudioProcessorValueTreeStatePtr;
 
 	std::vector<std::unique_ptr<PluginSynthesiser>> mSynthesiserPtrVector; // 6 synths
-	std::vector<std::unique_ptr<juce::AudioBuffer<float>>> mInternalBufferPtrVector; 
-	std::vector<std::unique_ptr<juce::dsp::Compressor<float>>> mCompressors; // 7 comps
+	std::vector<std::unique_ptr<juce::AudioBuffer<float>>> mSynthesiserBufferPtrVector; 
+	
+	std::vector<std::unique_ptr<juce::dsp::Gain<float>>> mReverbGains; // 6 revs
+	std::vector<std::unique_ptr<juce::dsp::Reverb>> mReverbs;
+	std::vector<std::unique_ptr<juce::AudioBuffer<float>>> mReverbBufferPtrVector;
+
+	std::unique_ptr<juce::AudioBuffer<float>> mRoomBufferPtr;
+
+	std::vector<std::unique_ptr<juce::dsp::Compressor<float>>> mCompressors; // 8 comps
+	std::vector<std::unique_ptr<juce::dsp::Gain<float>>> mCompressorGains;
+	std::vector<std::unique_ptr<juce::dsp::DryWetMixer<float>>> mCompressorDryWetMixers;
+
 	std::vector<std::unique_ptr<juce::dsp::Gain<float>>> mChannelGains;
 
 	std::vector<juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>,

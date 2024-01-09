@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="Q0tYTq" name="ProPunkDrums" projectType="audioplug" useAppConfig="0"
+<JUCERPROJECT id="Q0tYTq" name="Pro Punk Drums" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
               bundleIdentifier="com.propunkstudio.drums" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
-              pluginName="ProPunkDrums" pluginManufacturer="Pro Punk DSP" aaxIdentifier="com.proppunkdsp.drums"
-              version="0.0.2" companyName="Pro Punk DSP" companyCopyright="2023"
-              companyEmail="paul@propunkstudio.com" companyWebsite="www.propunkstudio.com">
-  <MAINGROUP id="eIDGb1" name="ProPunkDrums">
+              pluginName="Pro Punk Drums" pluginManufacturer="Pro Punk DSP"
+              aaxIdentifier="com.proppunkdsp.drums" version="0.0.2" companyName="Pro Punk DSP"
+              companyCopyright="2023" companyEmail="paul@propunkstudio.com"
+              companyWebsite="www.propunkstudio.com">
+  <MAINGROUP id="eIDGb1" name="Pro Punk Drums">
     <GROUP id="{95755CA2-B0D0-D393-296E-7490F1BAFDDB}" name="Assets">
       <GROUP id="{BDC2527B-255C-6B2B-A38B-8BBA1DA4D972}" name="35 Acoustic Bass Drum">
         <GROUP id="{E03FD2A6-2F9B-8CFF-999D-39D4181C8F44}" name="Hard">
@@ -943,7 +944,6 @@
             file="Source/PluginPresetManager.cpp"/>
       <FILE id="dnlCeq" name="PluginPresetManager.h" compile="0" resource="0"
             file="Source/PluginPresetManager.h"/>
-      <FILE id="fM2KyD" name="PluginUtils.cpp" compile="1" resource="0" file="Source/PluginUtils.cpp"/>
       <FILE id="n15p7U" name="PluginUtils.h" compile="0" resource="0" file="Source/PluginUtils.h"/>
       <FILE id="BVxg3g" name="PluginAudioProcessor.cpp" compile="1" resource="0"
             file="Source/PluginAudioProcessor.cpp"/>
@@ -968,32 +968,22 @@
               file="Source/Synthesiser/PluginSynthesiser.h"/>
       </GROUP>
       <GROUP id="{91AD8FAC-EF24-BE9E-B417-D983B88C88CF}" name="Components">
+        <FILE id="CE4lDw" name="ReverbComponent.h" compile="0" resource="0"
+              file="Source/Components/ReverbComponent.h"/>
         <FILE id="FufRHL" name="CompressionWithGainComponent.h" compile="0"
               resource="0" file="Source/Components/CompressionWithGainComponent.h"/>
         <FILE id="sIt7UB" name="TitledFrequencyQualityGainComponent.h" compile="0"
               resource="0" file="Source/Components/TitledFrequencyQualityGainComponent.h"/>
-        <FILE id="syuRor" name="OutputsComponent.cpp" compile="1" resource="0"
-              file="Source/Components/OutputsComponent.cpp"/>
         <FILE id="c3DS10" name="OutputsComponent.h" compile="0" resource="0"
               file="Source/Components/OutputsComponent.h"/>
-        <FILE id="SSq1xN" name="DrumsComponent.cpp" compile="1" resource="0"
-              file="Source/Components/DrumsComponent.cpp"/>
         <FILE id="YGVArC" name="DrumsComponent.h" compile="0" resource="0"
               file="Source/Components/DrumsComponent.h"/>
-        <FILE id="xX5IaA" name="OutputParametersComponent.cpp" compile="1"
-              resource="0" file="Source/Components/OutputParametersComponent.cpp"/>
         <FILE id="olxVh6" name="OutputParametersComponent.h" compile="0" resource="0"
               file="Source/Components/OutputParametersComponent.h"/>
-        <FILE id="iNvWKh" name="PresetComponent.cpp" compile="1" resource="0"
-              file="Source/Components/PresetComponent.cpp"/>
         <FILE id="xWHbwc" name="PresetComponent.h" compile="0" resource="0"
               file="Source/Components/PresetComponent.h"/>
-        <FILE id="hBVOOR" name="SamplesComponent.cpp" compile="1" resource="0"
-              file="Source/Components/SamplesComponent.cpp"/>
         <FILE id="eHKljJ" name="SamplesComponent.h" compile="0" resource="0"
               file="Source/Components/SamplesComponent.h"/>
-        <FILE id="eDXIcm" name="SampleParametersComponent.cpp" compile="1"
-              resource="0" file="Source/Components/SampleParametersComponent.cpp"/>
         <FILE id="EsGN7P" name="SampleParametersComponent.h" compile="0" resource="0"
               file="Source/Components/SampleParametersComponent.h"/>
       </GROUP>

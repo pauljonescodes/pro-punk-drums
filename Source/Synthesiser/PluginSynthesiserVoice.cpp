@@ -83,14 +83,14 @@ void PluginSynthesiserVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuf
             auto envelopeValue = mAdsr.getNextSample();
             
             float panValue = mPanParameter.getValue();
-            float panNormalisedValue = AudioParameters::panNormalizableRange.convertFrom0to1(panValue);
+            float panNormalisedValue = AudioParameters::panNormalisableRange.convertFrom0to1(panValue);
             float panLeft = panNormalisedValue <= 0.0f ? 1.0f : 1.0f - panNormalisedValue;
             float panRight = panNormalisedValue >= 0.0f ? 1.0f : 1.0f + panNormalisedValue;
             
             float phaseMultiplier = mInvertPhaseParameter.get() ? -1 : 1;
 
             float normalizedGainValue = mGainParameter.getValue(); // Get the normalized value
-            float gainDecibelValue = AudioParameters::gainNormalizableRange.convertFrom0to1(normalizedGainValue);
+            float gainDecibelValue = AudioParameters::gainNormalisableRange.convertFrom0to1(normalizedGainValue);
             float gainFactor = std::pow(10.0f, gainDecibelValue / 20.0f);
             
             l *= panLeft * envelopeValue * gainFactor * mVelocityGain * phaseMultiplier;

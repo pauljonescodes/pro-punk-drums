@@ -6,14 +6,13 @@
 #include "Components/DrumsComponent.h"
 #include "Components/SamplesComponent.h"
 #include "Components/OutputsComponent.h"
+#include "Components/ReverbComponent.h"
 
 class PluginAudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
     PluginAudioProcessorEditor(PluginAudioProcessor&);
-    ~PluginAudioProcessorEditor() override;
-    
-    
+    ~PluginAudioProcessorEditor() override;    
     void paint(juce::Graphics&) override;
     void resized() override;
 private:
@@ -24,7 +23,9 @@ private:
     std::unique_ptr<DrumsComponent> mDrumsComponentPtr;
     std::unique_ptr<SamplesComponent> mSamplesComponentPtr;
     std::unique_ptr<OutputsComponent> mOutputsComponentPtr;
-    juce::OwnedArray<juce::TextButton> mMidiNoteButtonsOwnedArray;
+    std::unique_ptr<ReverbComponent> mReverbComponentPtr;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> mMultiOutAttachment;
+    std::unique_ptr<juce::ToggleButton> mMultiOutToggleButton;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginAudioProcessorEditor)
 };

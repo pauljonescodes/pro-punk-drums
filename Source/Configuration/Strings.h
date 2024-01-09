@@ -23,4 +23,7 @@ namespace Strings {
 	static const std::string ratio = "Ratio";
 	static const std::string attack = "Attack";
 	static const std::string release = "Release";
+	static const std::string reverb = "Reverb";
+	static const std::string room = "Room";
+	static const std::string roomSend = "Room";
 }
