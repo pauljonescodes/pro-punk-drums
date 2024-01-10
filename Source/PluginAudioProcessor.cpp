@@ -39,7 +39,7 @@ PluginAudioProcessor::PluginAudioProcessor()
 	mPresetManagerPtr = std::make_unique<PluginPresetManager>(*mAudioProcessorValueTreeStatePtr.get());
 
 	for (int channelIndex = 0; channelIndex < Channels::size; channelIndex++) {
-		if (channelIndex != Channels::outputChannelIndex || channelIndex != Channels::roomChannelIndex)
+		if (channelIndex != Channels::outputChannelIndex && channelIndex != Channels::roomChannelIndex)
 		{
 			mSynthesiserPtrVector.push_back(std::make_unique<PluginSynthesiser>());
 			mSynthesiserBufferPtrVector.push_back(std::make_unique<juce::AudioBuffer<float>>(2, 1024));
@@ -309,7 +309,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginAudioProcessor::create
 		layout.add(std::make_unique<juce::AudioParameterFloat>(
 			juce::ParameterID{ compressionGainId, 1 },
 			stringToTitleCase(compressionGainId),
-			AudioParameters::gainNormalisableRange,
+			AudioParameters::linearGainNormalisableRange,
 			AudioParameters::gainDefaultValue));
 
 		const auto compressionDryWetId = stringsJoinAndSnakeCase({
@@ -353,7 +353,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginAudioProcessor::create
 			layout.add(std::make_unique<juce::AudioParameterFloat>(
 				juce::ParameterID{ eqGainId, 1 },
 				stringToTitleCase(eqGainId),
-				AudioParameters::eqGainNormalisableRange,
+				AudioParameters::linearGainNormalisableRange,
 				AudioParameters::gainDefaultValue));
 		}
 
@@ -473,7 +473,7 @@ void PluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 		const auto channelIndex = channel.first;
 		const auto& channelId = channel.second;
 
-		if (channelIndex != Channels::outputChannelIndex || channelIndex != Channels::roomChannelIndex)
+		if (channelIndex != Channels::outputChannelIndex && channelIndex != Channels::roomChannelIndex)
 		{
 			mSynthesiserPtrVector[channelIndex]->setCurrentPlaybackSampleRate(sampleRate);
 			mReverbBufferPtrVector[channelIndex]->setSize(2, samplesPerBlock);
@@ -722,6 +722,13 @@ void PluginAudioProcessor::parameterChanged(const juce::String& parameterId, flo
 {
 	DBG("parameterChanged " + parameterId.toStdString() + " " + std::to_string(newValue));
 
+	const auto tLowShelfQualityId = stringsJoinAndSnakeCase({ "kick", AudioParameters::lowShelfEqualizationTypeId, AudioParameters::qualityComponentId });
+	const float tLowShelfQuality = mAudioProcessorValueTreeStatePtr->getParameterAsValue(tLowShelfQualityId).getValue();
+	const float tLowQuialit2 = mLowShelfFilters[0].state.getObject()->coefficients[0];
+	const float tLowQuialit4 = mLowShelfFilters[0].state.getObject()->coefficients[1];
+	const float tLowQuialit5 = mLowShelfFilters[0].state.getObject()->coefficients[2];
+	DBG("testing" + std::to_string(tLowShelfQuality) + " " + std::to_string(tLowQuialit4));
+	
 	auto sampleRate = getSampleRate();
 
 	if (std::strcmp(parameterId.toRawUTF8(), AudioParameters::roomSizeComponentId.c_str()) == 0)
@@ -776,40 +783,52 @@ void PluginAudioProcessor::parameterChanged(const juce::String& parameterId, flo
 
 		const auto& compressor = mCompressors[channelIndex];
 
-		const auto compressionGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::compressionComponentId, AudioParameters::gainComponentId });
-		if (std::strcmp(parameterId.toRawUTF8(), compressionGainId.c_str()) == 0) 
 		{
-			mCompressorGains[channelIndex]->setGainDecibels(newValue);
+			const auto compressionGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::compressionComponentId, AudioParameters::gainComponentId });
+			if (std::strcmp(parameterId.toRawUTF8(), compressionGainId.c_str()) == 0)
+			{
+				mCompressorGains[channelIndex]->setGainDecibels(newValue);
+			}
 		}
 
-		const auto compressionDryWetId = stringsJoinAndSnakeCase({ channelId, AudioParameters::compressionComponentId, AudioParameters::dryWetComponentId });
-		if (std::strcmp(parameterId.toRawUTF8(), compressionDryWetId.c_str()) == 0)
 		{
-			mCompressorDryWetMixers[channelIndex]->setWetMixProportion(newValue);
+			const auto compressionDryWetId = stringsJoinAndSnakeCase({ channelId, AudioParameters::compressionComponentId, AudioParameters::dryWetComponentId });
+			if (std::strcmp(parameterId.toRawUTF8(), compressionDryWetId.c_str()) == 0)
+			{
+				mCompressorDryWetMixers[channelIndex]->setWetMixProportion(newValue);
+			}
 		}
 
-		const auto compressionThresholdId = stringsJoinAndSnakeCase({ channelId, AudioParameters::thresholdComponentId });
-		if (std::strcmp(parameterId.toRawUTF8(), compressionThresholdId.c_str()) == 0) 
 		{
-			compressor->setThreshold(newValue);
+			const auto compressionThresholdId = stringsJoinAndSnakeCase({ channelId, AudioParameters::thresholdComponentId });
+			if (std::strcmp(parameterId.toRawUTF8(), compressionThresholdId.c_str()) == 0)
+			{
+				compressor->setThreshold(newValue);
+			}
 		}
 
-		const auto compressionRatioId = stringsJoinAndSnakeCase({ channelId, AudioParameters::ratioComponentId });
-		if (std::strcmp(parameterId.toRawUTF8(), compressionRatioId.c_str()) == 0) 
 		{
-			compressor->setRatio(newValue);
+			const auto compressionRatioId = stringsJoinAndSnakeCase({ channelId, AudioParameters::ratioComponentId });
+			if (std::strcmp(parameterId.toRawUTF8(), compressionRatioId.c_str()) == 0)
+			{
+				compressor->setRatio(newValue);
+			}
 		}
 
-		const auto compressionAttackId = stringsJoinAndSnakeCase({ channelId, AudioParameters::attackId });
-		if (std::strcmp(parameterId.toRawUTF8(), compressionAttackId.c_str()) == 0) 
 		{
-			compressor->setAttack(newValue);
+			const auto compressionAttackId = stringsJoinAndSnakeCase({ channelId, AudioParameters::attackId });
+			if (std::strcmp(parameterId.toRawUTF8(), compressionAttackId.c_str()) == 0)
+			{
+				compressor->setAttack(newValue);
+			}
 		}
 
-		const auto compressionReleaseId = stringsJoinAndSnakeCase({ channelId, AudioParameters::releaseComponentId });
-		if (std::strcmp(parameterId.toRawUTF8(), compressionReleaseId.c_str()) == 0) 
 		{
-			compressor->setRelease(newValue);
+			const auto compressionReleaseId = stringsJoinAndSnakeCase({ channelId, AudioParameters::releaseComponentId });
+			if (std::strcmp(parameterId.toRawUTF8(), compressionReleaseId.c_str()) == 0)
+			{
+				compressor->setRelease(newValue);
+			}
 		}
 
 		const auto reberbGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::reverbComponentId, AudioParameters::gainComponentId });
@@ -818,118 +837,167 @@ void PluginAudioProcessor::parameterChanged(const juce::String& parameterId, flo
 			mReverbGains[channelIndex]->setGainDecibels(newValue);
 		}
 
-		const auto lowShelfFrequencyId = stringsJoinAndSnakeCase({ channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::frequencyComponentId });
-		const float lowShelfCenterFrequency = mAudioProcessorValueTreeStatePtr->getParameterAsValue(lowShelfFrequencyId).getValue();
-
-		const auto lowShelfQualityId = stringsJoinAndSnakeCase({ channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::qualityComponentId });
-		const float lowShelfQuality = mAudioProcessorValueTreeStatePtr->getParameterAsValue(lowShelfQualityId).getValue();
-
-		const auto lowShelfGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::gainComponentId });
-		const float lowShelfGain = mAudioProcessorValueTreeStatePtr->getParameterAsValue(lowShelfGainId).getValue();
-
-		if (std::strcmp(parameterId.toRawUTF8(), lowShelfFrequencyId.c_str()) == 0) 
 		{
-			*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(
-				sampleRate,
-				std::max(AudioParameters::frequencyMinimumValue, newValue),
-				std::max(AudioParameters::qualityMinimumValue, lowShelfQuality),
-				std::max(AudioParameters::gainDecibelsMinimumValue, lowShelfGain));
-		}
-		else if (std::strcmp(parameterId.toRawUTF8(), lowShelfQualityId.c_str()) == 0) 
-		{
-			*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(
-				sampleRate,
-				std::max(AudioParameters::frequencyMinimumValue, lowShelfCenterFrequency),
-				std::max(AudioParameters::qualityMinimumValue, newValue),
-				std::max(AudioParameters::gainDecibelsMinimumValue, lowShelfGain));
-		}
-		else if (std::strcmp(parameterId.toRawUTF8(), lowShelfGainId.c_str()) == 0) 
-		{
-			*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(
-				sampleRate,
-				std::max(AudioParameters::frequencyMinimumValue, lowShelfCenterFrequency),
-				std::max(AudioParameters::qualityMinimumValue, lowShelfQuality),
-				std::max(AudioParameters::gainDecibelsMinimumValue, newValue));
-		}
+			const auto lowShelfFrequencyId = stringsJoinAndSnakeCase({ channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::frequencyComponentId });
+			float lowShelfFrequency = mAudioProcessorValueTreeStatePtr->getParameterAsValue(lowShelfFrequencyId).getValue();
 
-		const auto peakFilterCenterFrequencyId = stringsJoinAndSnakeCase({ channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::frequencyComponentId });
-		const float peakFilterCenterFrequency = mAudioProcessorValueTreeStatePtr->getParameterAsValue(peakFilterCenterFrequencyId).getValue();
+			const auto lowShelfQualityId = stringsJoinAndSnakeCase({ channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::qualityComponentId });
+			float lowShelfQuality = mAudioProcessorValueTreeStatePtr->getParameterAsValue(lowShelfQualityId).getValue();
 
-		const auto peakFilterQualityId = stringsJoinAndSnakeCase({ channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::qualityComponentId });
-		const float peakFilterQuality = mAudioProcessorValueTreeStatePtr->getParameterAsValue(peakFilterQualityId).getValue();
+			const auto lowShelfGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::gainComponentId });
+			float lowShelfGain = mAudioProcessorValueTreeStatePtr->getParameterAsValue(lowShelfGainId).getValue();
 
-		const auto peakFilterGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::gainComponentId });
-		const float peakFilterGain = mAudioProcessorValueTreeStatePtr->getParameterAsValue(peakFilterGainId).getValue();
+			if (lowShelfFrequency == 0)
+			{
+				lowShelfFrequency = AudioParameters::lowShelfFrequencyDefaultValue;
+			}
+			if (lowShelfQuality == 0)
+			{
+				lowShelfQuality = AudioParameters::qualityDefaultValue;
+			}
+			if (lowShelfGain == 0)
+			{
+				lowShelfGain = AudioParameters::gainDefaultValue;
+			}
 
-		if (std::strcmp(parameterId.toRawUTF8(), peakFilterCenterFrequencyId.c_str()) == 0) 
-		{
-			*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(
-				sampleRate,
-				std::max(AudioParameters::frequencyMinimumValue, newValue),
-				std::max(AudioParameters::qualityMinimumValue, peakFilterQuality),
-				std::max(AudioParameters::peakFilterGainMinimumValue, peakFilterGain));
-		}
-		else if (std::strcmp(parameterId.toRawUTF8(), peakFilterQualityId.c_str()) == 0) 
-		{
-			*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(
-				sampleRate,
-				std::max(AudioParameters::frequencyMinimumValue, peakFilterCenterFrequency),
-				std::max(AudioParameters::qualityMinimumValue, newValue),
-				std::max(AudioParameters::peakFilterGainMinimumValue, peakFilterGain));
-		}
-		else if (std::strcmp(parameterId.toRawUTF8(), peakFilterGainId.c_str()) == 0) 
-		{
-			*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(
-				sampleRate,
-				std::max(AudioParameters::frequencyMinimumValue, peakFilterCenterFrequency),
-				std::max(AudioParameters::qualityMinimumValue, peakFilterQuality),
-				std::max(AudioParameters::peakFilterGainMinimumValue, newValue));
+			if (std::strcmp(parameterId.toRawUTF8(), lowShelfFrequencyId.c_str()) == 0)
+			{
+				*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(
+					sampleRate,
+					newValue,
+					lowShelfQuality,
+					lowShelfGain);
+			}
+			else if (std::strcmp(parameterId.toRawUTF8(), lowShelfQualityId.c_str()) == 0)
+			{
+				*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(
+					sampleRate,
+					lowShelfFrequency,
+					newValue,
+					lowShelfGain);
+			}
+			else if (std::strcmp(parameterId.toRawUTF8(), lowShelfGainId.c_str()) == 0)
+			{
+				*mLowShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(
+					sampleRate,
+					lowShelfFrequency,
+					lowShelfQuality,
+					newValue);
+			}
 		}
 
-		const auto highShelfFrequencyId = stringsJoinAndSnakeCase({ channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::frequencyComponentId });
-		const float highShelfCenterFrequency = mAudioProcessorValueTreeStatePtr->getParameterAsValue(highShelfFrequencyId).getValue();
-
-		const auto highShelfQualityId = stringsJoinAndSnakeCase({ channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::qualityComponentId });
-		const float highShelfQuality = mAudioProcessorValueTreeStatePtr->getParameterAsValue(highShelfQualityId).getValue();
-
-		const auto highShelfGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::gainComponentId });
-		const float highShelfGain = mAudioProcessorValueTreeStatePtr->getParameterAsValue(highShelfGainId).getValue();
-
-		if (std::strcmp(parameterId.toRawUTF8(), highShelfFrequencyId.c_str()) == 0) 
 		{
-			*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(
-				sampleRate,
-				std::max(AudioParameters::frequencyMinimumValue, newValue),
-				std::max(AudioParameters::qualityMinimumValue, highShelfQuality),
-				std::max(AudioParameters::gainMinimumValue, highShelfGain));
+			const auto peakFilterCenterFrequencyId = stringsJoinAndSnakeCase({ channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::frequencyComponentId });
+			float peakFilterFrequency = mAudioProcessorValueTreeStatePtr->getParameterAsValue(peakFilterCenterFrequencyId).getValue();
+
+			const auto peakFilterQualityId = stringsJoinAndSnakeCase({ channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::qualityComponentId });
+			float peakFilterQuality = mAudioProcessorValueTreeStatePtr->getParameterAsValue(peakFilterQualityId).getValue();
+
+			const auto peakFilterGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::gainComponentId });
+			float peakFilterGain = mAudioProcessorValueTreeStatePtr->getParameterAsValue(peakFilterGainId).getValue();
+
+			if (peakFilterFrequency == 0)
+			{
+				peakFilterFrequency = AudioParameters::peakFilterFrequencyDefaultValue;
+			}
+			if (peakFilterQuality == 0)
+			{
+				peakFilterQuality = AudioParameters::qualityDefaultValue;
+			}
+			if (peakFilterGain == 0)
+			{
+				peakFilterGain = AudioParameters::gainDefaultValue;
+			}
+
+			if (std::strcmp(parameterId.toRawUTF8(), peakFilterCenterFrequencyId.c_str()) == 0)
+			{
+				*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(
+					sampleRate,
+					newValue,
+					peakFilterQuality,
+					peakFilterGain);
+			}
+			else if (std::strcmp(parameterId.toRawUTF8(), peakFilterQualityId.c_str()) == 0)
+			{
+				*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(
+					sampleRate,
+					peakFilterFrequency,
+					newValue,
+					peakFilterGain);
+			}
+			else if (std::strcmp(parameterId.toRawUTF8(), peakFilterGainId.c_str()) == 0)
+			{
+				*mPeakFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(
+					sampleRate,
+					peakFilterFrequency,
+					peakFilterQuality,
+					newValue);
+			}
 		}
-		else if (std::strcmp(parameterId.toRawUTF8(), highShelfQualityId.c_str()) == 0) 
+
 		{
-			*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(
-				sampleRate,
-				std::max(AudioParameters::frequencyMinimumValue, highShelfCenterFrequency),
-				std::max(AudioParameters::qualityMinimumValue, newValue),
-				std::max(AudioParameters::gainMinimumValue, highShelfGain));
-		}
-		else if (std::strcmp(parameterId.toRawUTF8(), highShelfGainId.c_str()) == 0) 
-		{
-			*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(
-				sampleRate,
-				std::max(AudioParameters::frequencyMinimumValue, highShelfCenterFrequency),
-				std::max(AudioParameters::qualityMinimumValue, highShelfQuality),
-				std::max(AudioParameters::gainMinimumValue, newValue));
+			const auto highShelfFrequencyId = stringsJoinAndSnakeCase({ channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::frequencyComponentId });
+			float highShelfFrequency = mAudioProcessorValueTreeStatePtr->getParameterAsValue(highShelfFrequencyId).getValue();
+
+			const auto highShelfQualityId = stringsJoinAndSnakeCase({ channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::qualityComponentId });
+			float highShelfQuality = mAudioProcessorValueTreeStatePtr->getParameterAsValue(highShelfQualityId).getValue();
+
+			const auto highShelfGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::gainComponentId });
+			float highShelfGain = mAudioProcessorValueTreeStatePtr->getParameterAsValue(highShelfGainId).getValue();
+
+			if (highShelfFrequency == 0)
+			{
+				highShelfFrequency = AudioParameters::highShelfFrequencyDefaultValue;
+			}
+			if (highShelfQuality == 0)
+			{
+				highShelfQuality = AudioParameters::qualityDefaultValue;
+			}
+			if (highShelfGain == 0)
+			{
+				highShelfGain = AudioParameters::gainDefaultValue;
+			}
+
+			if (std::strcmp(parameterId.toRawUTF8(), highShelfFrequencyId.c_str()) == 0)
+			{
+				*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(
+					sampleRate,
+					newValue,
+					highShelfQuality,
+					highShelfGain);
+			}
+			else if (std::strcmp(parameterId.toRawUTF8(), highShelfQualityId.c_str()) == 0)
+			{
+				*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(
+					sampleRate,
+					highShelfFrequency,
+					newValue,
+					highShelfGain);
+			}
+			else if (std::strcmp(parameterId.toRawUTF8(), highShelfGainId.c_str()) == 0)
+			{
+				*mHighShelfFilters[channelIndex].state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(
+					sampleRate,
+					highShelfFrequency,
+					highShelfQuality,
+					newValue);
+			}
 		}
 
-		const auto compressorGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::compressionComponentId, AudioParameters::gainComponentId });
-		if (std::strcmp(parameterId.toRawUTF8(), compressorGainId.c_str()) == 0) 
 		{
-			mCompressorGains[channelIndex]->setGainDecibels(newValue);
+			const auto compressorGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::compressionComponentId, AudioParameters::gainComponentId });
+			if (std::strcmp(parameterId.toRawUTF8(), compressorGainId.c_str()) == 0)
+			{
+				mCompressorGains[channelIndex]->setGainDecibels(newValue);
+			}
 		}
 
-		const auto channelGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::gainComponentId });
-		if (std::strcmp(parameterId.toRawUTF8(), channelGainId.c_str()) == 0)
 		{
-			mChannelGains[channelIndex]->setGainDecibels(newValue);
+			const auto channelGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::gainComponentId });
+			if (std::strcmp(parameterId.toRawUTF8(), channelGainId.c_str()) == 0)
+			{
+				mChannelGains[channelIndex]->setGainDecibels(newValue);
+			}
 		}
 	}
 }

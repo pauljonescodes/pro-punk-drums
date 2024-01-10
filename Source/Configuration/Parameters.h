@@ -91,7 +91,7 @@ namespace AudioParameters
 	static const std::string attackId = "attack";
 	static constexpr float attackMinimumValue = 0.0f;
 	static constexpr float attackMaximumValue = 1000.0f;
-	static constexpr float attackIntervalValue = 1.0f;
+	static constexpr float attackIntervalValue = 0.01f;
 	static const juce::NormalisableRange<float> attackNormalisableRange =
 		juce::NormalisableRange<float>(
 			attackMinimumValue,
@@ -100,9 +100,9 @@ namespace AudioParameters
 	static constexpr float attackDefaultValue = 0.0f;
 
 	static const std::string releaseComponentId = "release";
-	static constexpr float releaseMinimumValue = 0.0f;
+	static constexpr float releaseMinimumValue = 1.0f;
 	static constexpr float releaseMaximumValue = 1000.0f;
-	static constexpr float releaseIntervalValue = 1.0f;
+	static constexpr float releaseIntervalValue = 0.01f;
 	static const juce::NormalisableRange<float> releaseNormalisableRange =
 		juce::NormalisableRange<float>(
 			releaseMinimumValue,
@@ -130,7 +130,7 @@ namespace AudioParameters
 	static constexpr float gainMaximumValue = 24.0f;
 	static constexpr float gainInterval = 0.001;
 	static constexpr float gainDefaultValue = 1.0f;
-	static const juce::NormalisableRange<float> eqGainNormalisableRange =
+	static const juce::NormalisableRange<float> linearGainNormalisableRange =
 		makeLogarithmicRange(
 			gainMinimumValue,
 			gainMaximumValue,
@@ -159,7 +159,7 @@ namespace AudioParameters
 
 	static const std::map<std::string, juce::NormalisableRange<float>> equalizationTypeIdToGainNormalisableRange = {
 	{highShelfEqualizationTypeId,gainNormalisableRange},
-	{peakFilterEqualizationTypeId,eqGainNormalisableRange},
+	{peakFilterEqualizationTypeId,linearGainNormalisableRange},
 	{lowShelfEqualizationTypeId,gainNormalisableRange}
 	};
 

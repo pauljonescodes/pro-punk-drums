@@ -67,7 +67,7 @@ public:
         mRatioSliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
         mRatioSliderPtr->setScrollWheelEnabled(false);
         mRatioSliderPtr->setTitle(ratioTitle);
-        mAttackAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+        mRatioAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
             apvts,
             ratioParameterId,
             *mRatioSliderPtr);
@@ -81,6 +81,7 @@ public:
         mReleaseSliderPtr.reset(new juce::Slider(juce::Slider::RotaryVerticalDrag, juce::Slider::TextBoxBelow));
         mReleaseSliderPtr->setScrollWheelEnabled(false);
         mReleaseSliderPtr->setTitle(releaseTitle);
+        mReleaseSliderPtr->setTextValueSuffix(msSuffix);
         mReleaseAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
             apvts,
             releaseParameterId,
