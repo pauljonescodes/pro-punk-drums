@@ -10,9 +10,9 @@
 class OutputParametersComponent : public juce::Component
 {
 public:
-	OutputParametersComponent(juce::AudioProcessorValueTreeState& apvts) : mApvts(apvts) {};
+	OutputParametersComponent(juce::AudioProcessorValueTreeState &apvts) : mApvts(apvts){};
 
-	void paint(juce::Graphics& g) override
+	void paint(juce::Graphics &g) override
 	{
 		g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 	};
@@ -21,44 +21,44 @@ public:
 	{
 		removeAllChildren();
 
-		const auto& channelId = Channels::channelIndexToIdMap.at(channelIndex);
-		const auto& channelName = stringToTitleCase(channelId);
+		const auto &channelId = Channels::channelIndexToIdMap.at(channelIndex);
+		const auto &channelName = stringToTitleCase(channelId);
 		const auto channelMidi = Channels::channelIndexToGeneralMidiPerccussionNote.at(channelIndex);
 
 		{
-			const auto& lowShelfFrequencyId = stringsJoinAndSnakeCase({ channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::frequencyComponentId });
-			const auto& lowShelfQualityId = stringsJoinAndSnakeCase({ channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::qualityComponentId });
-			const auto& lowShelfGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::gainComponentId });
+			const auto &lowShelfFrequencyId = stringsJoinAndSnakeCase({channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::frequencyComponentId});
+			const auto &lowShelfQualityId = stringsJoinAndSnakeCase({channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::qualityComponentId});
+			const auto &lowShelfGainId = stringsJoinAndSnakeCase({channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::gainComponentId});
 
 			mLowShelfComponentPtr.reset(new TitledFrequencyQualityGainComponent(Strings::lowShelf, mApvts, lowShelfFrequencyId, lowShelfQualityId, lowShelfGainId));
 			addAndMakeVisible(mLowShelfComponentPtr.get());
 		}
 
 		{
-			const auto& midPeakFrequencyId = stringsJoinAndSnakeCase({ channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::frequencyComponentId });
-			const auto& midPeakQualityId = stringsJoinAndSnakeCase({ channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::qualityComponentId });
-			const auto& midPeakGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::gainComponentId });
+			const auto &midPeakFrequencyId = stringsJoinAndSnakeCase({channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::frequencyComponentId});
+			const auto &midPeakQualityId = stringsJoinAndSnakeCase({channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::qualityComponentId});
+			const auto &midPeakGainId = stringsJoinAndSnakeCase({channelId, AudioParameters::peakFilterEqualizationTypeId, AudioParameters::gainComponentId});
 
 			mMidPeakComponentPtr.reset(new TitledFrequencyQualityGainComponent(Strings::midPeak, mApvts, midPeakFrequencyId, midPeakQualityId, midPeakGainId));
 			addAndMakeVisible(mMidPeakComponentPtr.get());
 		}
 
 		{
-			const auto& highShelfFrequencyId = stringsJoinAndSnakeCase({ channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::frequencyComponentId });
-			const auto& highShelfQualityId = stringsJoinAndSnakeCase({ channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::qualityComponentId });
-			const auto& highShelfGainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::gainComponentId });
+			const auto &highShelfFrequencyId = stringsJoinAndSnakeCase({channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::frequencyComponentId});
+			const auto &highShelfQualityId = stringsJoinAndSnakeCase({channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::qualityComponentId});
+			const auto &highShelfGainId = stringsJoinAndSnakeCase({channelId, AudioParameters::highShelfEqualizationTypeId, AudioParameters::gainComponentId});
 
 			mHighShelfComponentPtr.reset(new TitledFrequencyQualityGainComponent(Strings::highShelf, mApvts, highShelfFrequencyId, highShelfQualityId, highShelfGainId));
 			addAndMakeVisible(mHighShelfComponentPtr.get());
 		}
 
 		{
-			const auto& thresholdId = stringsJoinAndSnakeCase({ channelId, AudioParameters::thresholdComponentId });
-			const auto& ratioId = stringsJoinAndSnakeCase({ channelId, AudioParameters::ratioComponentId });
-			const auto& attackId = stringsJoinAndSnakeCase({ channelId, AudioParameters::attackId });
-			const auto& releaseId = stringsJoinAndSnakeCase({ channelId, AudioParameters::releaseComponentId });
-			const auto& gainId = stringsJoinAndSnakeCase({ channelId, AudioParameters::compressionComponentId, AudioParameters::gainComponentId });
-			const auto& dryWetId = stringsJoinAndSnakeCase({ channelId, AudioParameters::compressionComponentId, AudioParameters::dryWetComponentId });
+			const auto &thresholdId = stringsJoinAndSnakeCase({channelId, AudioParameters::thresholdComponentId});
+			const auto &ratioId = stringsJoinAndSnakeCase({channelId, AudioParameters::ratioComponentId});
+			const auto &attackId = stringsJoinAndSnakeCase({channelId, AudioParameters::attackId});
+			const auto &releaseId = stringsJoinAndSnakeCase({channelId, AudioParameters::releaseComponentId});
+			const auto &gainId = stringsJoinAndSnakeCase({channelId, AudioParameters::compressionComponentId, AudioParameters::gainComponentId});
+			const auto &dryWetId = stringsJoinAndSnakeCase({channelId, AudioParameters::compressionComponentId, AudioParameters::dryWetComponentId});
 
 			mCompressionWithGainComponent.reset(new CompressionWithGainComponent(Strings::compressor, mApvts, thresholdId, attackId, ratioId, releaseId, gainId, dryWetId));
 			addAndMakeVisible(mCompressionWithGainComponent.get());
@@ -70,7 +70,7 @@ public:
 	void resized() override
 	{
 		auto bounds = getLocalBounds();
-		int componentWidth = bounds.getHeight() / 3; 
+		int componentWidth = bounds.getHeight() / 3;
 
 		juce::FlexBox flexBoxColumns;
 		flexBoxColumns.flexDirection = juce::FlexBox::Direction::column;
@@ -89,7 +89,7 @@ public:
 		flexBoxColumns.items.add(juce::FlexItem(*mLowShelfComponentPtr).withFlex(1));
 		flexBoxColumns.items.add(juce::FlexItem(*mMidPeakComponentPtr).withFlex(1));
 		flexBoxColumns.items.add(juce::FlexItem(*mHighShelfComponentPtr).withFlex(1));
-		
+
 		flexBoxRows.items.add(juce::FlexItem(flexBoxColumns).withFlex(3));
 		flexBoxRows.items.add(juce::FlexItem(*mCompressionWithGainComponent).withFlex(2));
 
@@ -98,8 +98,7 @@ public:
 	};
 
 private:
-
-	juce::AudioProcessorValueTreeState& mApvts;
+	juce::AudioProcessorValueTreeState &mApvts;
 	std::unique_ptr<CompressionWithGainComponent> mCompressionWithGainComponent;
 	std::unique_ptr<TitledFrequencyQualityGainComponent> mLowShelfComponentPtr;
 	std::unique_ptr<TitledFrequencyQualityGainComponent> mMidPeakComponentPtr;
