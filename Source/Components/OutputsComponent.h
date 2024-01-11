@@ -81,28 +81,26 @@ public:
         mMidiNoteValue = channelMidi;
         addAndMakeVisible(mNoteOnButtonPtr.get());
 
-        mChannelOutputGainSliderPtr.reset();
-        mChannelOutputGainSliderLabelPtr.reset();
+        const auto channelOutputGainParameterId = stringsJoinAndSnakeCase({ channelId, AudioParameters::gainComponentId });
+
+        mChannelOutputGainSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow));
+        mChannelOutputGainSliderPtr->setScrollWheelEnabled(false);
+        mChannelOutputGainAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+            mApvts,
+            channelOutputGainParameterId,
+            *mChannelOutputGainSliderPtr);
+        addAndMakeVisible(mChannelOutputGainSliderPtr.get());
+
+        mChannelOutputGainSliderLabelPtr.reset(new juce::Label());
+        mChannelOutputGainSliderLabelPtr->setText(Strings::gain, juce::dontSendNotification);
+        mChannelOutputGainSliderLabelPtr->attachToComponent(mChannelOutputGainSliderPtr.get(), false);
+        addAndMakeVisible(mChannelOutputGainSliderLabelPtr.get());
+
         mChannelReverbGainSliderPtr.reset();
         mChannelReverbGainSliderLabelPtr.reset();
 
         if (channelIndex != Channels::roomChannelIndex && channelIndex != Channels::outputChannelIndex)
         {
-            const auto channelOutputGainParameterId = stringsJoinAndSnakeCase({ channelId, AudioParameters::gainComponentId });
-
-            mChannelOutputGainSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow));
-            mChannelOutputGainSliderPtr->setScrollWheelEnabled(false);
-            mChannelOutputGainAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
-                mApvts,
-                channelOutputGainParameterId,
-                *mChannelOutputGainSliderPtr);
-            addAndMakeVisible(mChannelOutputGainSliderPtr.get());
-
-            mChannelOutputGainSliderLabelPtr.reset(new juce::Label());
-            mChannelOutputGainSliderLabelPtr->setText(Strings::gain, juce::dontSendNotification);
-            mChannelOutputGainSliderLabelPtr->attachToComponent(mChannelOutputGainSliderPtr.get(), false);
-            addAndMakeVisible(mChannelOutputGainSliderLabelPtr.get());
-
             const auto channelReverbGainParameterId = stringsJoinAndSnakeCase({channelId, AudioParameters::reverbComponentId, AudioParameters::gainComponentId});
             mChannelReverbGainSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow));
             mChannelReverbGainSliderPtr->setScrollWheelEnabled(false);

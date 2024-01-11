@@ -480,11 +480,6 @@ void PluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 
 	mRoomBufferPtr->setSize(2, samplesPerBlock);
 
-	if (!mAudioProcessorValueTreeStatePtr->getParameterAsValue(AudioParameters::changedComponentId).getValue())
-	{
-		mPresetManagerPtr->loadPreset("Default");
-	}
-
 	for (const auto &channel : Channels::channelIndexToIdMap)
 	{
 		const auto channelIndex = channel.first;

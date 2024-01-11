@@ -1023,8 +1023,8 @@
   <EXPORTFORMATS>
     <VS2022 targetFolder="Builds/VisualStudio2022">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="ProPunkDrums DEBUG" generateManifest="1"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="ProPunkDrums"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Pro Punk Drums DEBUG" generateManifest="1"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Pro Punk Drums"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../../modules"/>
