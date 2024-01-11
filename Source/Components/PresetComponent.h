@@ -6,7 +6,7 @@
 class PresetComponent : public juce::Component, juce::Button::Listener, juce::ComboBox::Listener
 {
 public:
-	PresetComponent(PluginPresetManager& pm) : presetManager(pm)
+	PresetComponent(PluginPresetManager &pm) : presetManager(pm)
 	{
 		configureButton(saveButton, "Save");
 		configureButton(deleteButton, "Delete");
@@ -41,22 +41,21 @@ public:
 		nextPresetButton.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.1f)).reduced(4));
 		deleteButton.setBounds(bounds.reduced(4));
 	}
+
 private:
-	void buttonClicked(juce::Button* button) override
+	void buttonClicked(juce::Button *button) override
 	{
 		if (button == &saveButton)
 		{
 			fileChooser = std::make_unique<juce::FileChooser>(
 				"Please enter the name of the preset to save",
 				PluginPresetManager::defaultDirectory,
-				"*." + PluginPresetManager::extension
-				);
-			fileChooser->launchAsync(juce::FileBrowserComponent::saveMode, [&](const juce::FileChooser& chooser)
-				{
+				"*." + PluginPresetManager::extension);
+			fileChooser->launchAsync(juce::FileBrowserComponent::saveMode, [&](const juce::FileChooser &chooser)
+									 {
 					const auto resultFile = chooser.getResult();
 			presetManager.savePreset(resultFile.getFileNameWithoutExtension());
-			loadPresetList();
-				});
+			loadPresetList(); });
 		}
 		if (button == &previousPresetButton)
 		{
@@ -74,7 +73,7 @@ private:
 			loadPresetList();
 		}
 	}
-	void comboBoxChanged(juce::ComboBox* comboBoxThatHasChanged) override
+	void comboBoxChanged(juce::ComboBox *comboBoxThatHasChanged) override
 	{
 		if (comboBoxThatHasChanged == &presetList)
 		{
@@ -82,7 +81,7 @@ private:
 		}
 	}
 
-	void configureButton(juce::Button& button, const juce::String& buttonText)
+	void configureButton(juce::Button &button, const juce::String &buttonText)
 	{
 		button.setButtonText(buttonText);
 		button.setMouseCursor(juce::MouseCursor::PointingHandCursor);
@@ -99,7 +98,7 @@ private:
 		presetList.setSelectedItemIndex(allPresets.indexOf(currentPreset), juce::dontSendNotification);
 	}
 
-	PluginPresetManager& presetManager;
+	PluginPresetManager &presetManager;
 	juce::TextButton saveButton, deleteButton, previousPresetButton, nextPresetButton;
 	juce::ComboBox presetList;
 	std::unique_ptr<juce::FileChooser> fileChooser;

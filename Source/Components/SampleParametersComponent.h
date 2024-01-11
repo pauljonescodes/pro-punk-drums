@@ -8,7 +8,7 @@
 class SamplesParametersComponent : public juce::Component, public juce::Button::Listener
 {
 public:
-	SamplesParametersComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState& apvts)
+	SamplesParametersComponent(int midiNote, std::string micId, juce::AudioProcessorValueTreeState &apvts)
 		: mMicId(micId), mApvts(apvts)
 	{
 		mGroupComponentPtr.reset(new juce::GroupComponent(std::to_string(midiNote) + "_label", GeneralMidiPercussion::midiNoteToNameMap.at(midiNote) + " " + stringToTitleCase(micId)));
@@ -20,7 +20,7 @@ public:
 		addAndMakeVisible(mNoteOnButtonPtr.get());
 
 		// Initialize gain slider and label
-		auto gainParameterId = stringsJoinAndSnakeCase({ std::to_string(midiNote), micId, AudioParameters::gainComponentId });
+		auto gainParameterId = stringsJoinAndSnakeCase({std::to_string(midiNote), micId, AudioParameters::gainComponentId});
 		mRatioSliderPtr.reset(new juce::Slider(stringToTitleCase(gainParameterId)));
 		mRatioSliderPtr->setScrollWheelEnabled(false);
 		mRatioSliderPtr->setTextValueSuffix(Strings::db);
@@ -28,10 +28,9 @@ public:
 		mGainAttachmentPtr.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(
 			apvts,
 			juce::String(gainParameterId),
-			*mRatioSliderPtr
-		));
+			*mRatioSliderPtr));
 
-		auto panParameterId = stringsJoinAndSnakeCase({ std::to_string(midiNote), micId, AudioParameters::panComponentId });
+		auto panParameterId = stringsJoinAndSnakeCase({std::to_string(midiNote), micId, AudioParameters::panComponentId});
 		mPanSliderPtr.reset(new juce::Slider(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow));
 		mPanSliderPtr->setScrollWheelEnabled(false);
 		mPanSliderPtr->setTextValueSuffix(" " + Strings::pan);
@@ -39,17 +38,15 @@ public:
 		mPanAttachmentPtr.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(
 			apvts,
 			juce::String(panParameterId),
-			*mPanSliderPtr
-		));
+			*mPanSliderPtr));
 
-		auto phaseParameterId = stringsJoinAndSnakeCase({ std::to_string(midiNote), micId, AudioParameters::phaseComponentId });
+		auto phaseParameterId = stringsJoinAndSnakeCase({std::to_string(midiNote), micId, AudioParameters::phaseComponentId});
 		mInvertPhaseToggleButtonPtr.reset(new juce::ToggleButton(Strings::invertPhase));
 		addAndMakeVisible(mInvertPhaseToggleButtonPtr.get());
 		mInvertPhaseAttachmentPtr.reset(new juce::AudioProcessorValueTreeState::ButtonAttachment(
 			apvts,
 			phaseParameterId,
-			*mInvertPhaseToggleButtonPtr
-		));
+			*mInvertPhaseToggleButtonPtr));
 	}
 
 	~SamplesParametersComponent() override
@@ -87,7 +84,7 @@ public:
 		mNoteOnButtonPtr->setBounds(buttonArea);
 	};
 
-	void paint(juce::Graphics& g) override
+	void paint(juce::Graphics &g) override
 	{
 		g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 	}
@@ -97,7 +94,7 @@ public:
 private:
 	std::string mMicId;
 
-	std::unique_ptr <juce::GroupComponent> mGroupComponentPtr;
+	std::unique_ptr<juce::GroupComponent> mGroupComponentPtr;
 
 	std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mGainAttachmentPtr, mPanAttachmentPtr;
 	std::unique_ptr<juce::Slider> mRatioSliderPtr, mPanSliderPtr;
@@ -107,14 +104,15 @@ private:
 
 	std::unique_ptr<juce::TextButton> mNoteOnButtonPtr;
 
-	juce::AudioProcessorValueTreeState& mApvts;
+	juce::AudioProcessorValueTreeState &mApvts;
 
-	void buttonClicked(juce::Button* button) override
+	void buttonClicked(juce::Button *button) override
 	{
 		const juce::String componentID = button->getComponentID();
 		int midiNoteValue = componentID.getIntValue();
 
-		if (mOnDrumMidiButtonClicked.has_value()) {
+		if (mOnDrumMidiButtonClicked.has_value())
+		{
 			mOnDrumMidiButtonClicked.value()(midiNoteValue, 0.75f, mMicId);
 		}
 	};

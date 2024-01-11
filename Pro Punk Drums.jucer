@@ -9,6 +9,8 @@
               companyWebsite="www.propunkstudio.com">
   <MAINGROUP id="eIDGb1" name="Pro Punk Drums">
     <GROUP id="{95755CA2-B0D0-D393-296E-7490F1BAFDDB}" name="Assets">
+      <FILE id="VRCeZ3" name="SpecialElite-Regular.ttf" compile="0" resource="1"
+            file="../../../Users/paulm/Downloads/SpecialElite-Regular.ttf"/>
       <GROUP id="{BDC2527B-255C-6B2B-A38B-8BBA1DA4D972}" name="35 Acoustic Bass Drum">
         <GROUP id="{E03FD2A6-2F9B-8CFF-999D-39D4181C8F44}" name="Hard">
           <FILE id="CzeevQ" name="acoustic_bass_drum_3_1_in.wav" compile="0"
@@ -940,6 +942,10 @@
       </GROUP>
     </GROUP>
     <GROUP id="{4F269486-30C8-FFDF-A864-4F5F2C1A2354}" name="Source">
+      <FILE id="pNT9tY" name="PluginLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/PluginLookAndFeel.cpp"/>
+      <FILE id="zYSwqZ" name="PluginLookAndFeel.h" compile="0" resource="0"
+            file="Source/PluginLookAndFeel.h"/>
       <FILE id="ZkpecM" name="PluginPresetManager.cpp" compile="1" resource="0"
             file="Source/PluginPresetManager.cpp"/>
       <FILE id="dnlCeq" name="PluginPresetManager.h" compile="0" resource="0"

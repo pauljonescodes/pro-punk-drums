@@ -10,17 +10,14 @@
 
 #include "PluginPresetManager.h"
 
+const juce::File PluginPresetManager::defaultDirectory{juce::File::getSpecialLocation(
+														   juce::File::SpecialLocationType::commonDocumentsDirectory)
+														   .getChildFile(ProjectInfo::companyName)
+														   .getChildFile(ProjectInfo::projectName)};
+const juce::String PluginPresetManager::extension{"preset"};
+const juce::String PluginPresetManager::presetNameProperty{"presetName"};
 
-const juce::File PluginPresetManager::defaultDirectory{ juce::File::getSpecialLocation(
-	juce::File::SpecialLocationType::commonDocumentsDirectory)
-		.getChildFile(ProjectInfo::companyName)
-		.getChildFile(ProjectInfo::projectName)
-};
-const juce::String PluginPresetManager::extension{ "preset" };
-const juce::String PluginPresetManager::presetNameProperty{ "presetName" };
-
-PluginPresetManager::PluginPresetManager(juce::AudioProcessorValueTreeState& apvts) :
-	mValueTreeState(apvts)
+PluginPresetManager::PluginPresetManager(juce::AudioProcessorValueTreeState &apvts) : mValueTreeState(apvts)
 {
 	// Create a default Preset Directory, if it doesn't exist
 	if (!defaultDirectory.exists())
@@ -37,7 +34,7 @@ PluginPresetManager::PluginPresetManager(juce::AudioProcessorValueTreeState& apv
 	mCurrentPreset.referTo(mValueTreeState.state.getPropertyAsValue(presetNameProperty, nullptr));
 }
 
-void PluginPresetManager::savePreset(const juce::String& presetName)
+void PluginPresetManager::savePreset(const juce::String &presetName)
 {
 	if (presetName.isEmpty())
 		return;
@@ -52,7 +49,7 @@ void PluginPresetManager::savePreset(const juce::String& presetName)
 	}
 }
 
-void PluginPresetManager::deletePreset(const juce::String& presetName)
+void PluginPresetManager::deletePreset(const juce::String &presetName)
 {
 	if (presetName.isEmpty())
 		return;
@@ -73,7 +70,7 @@ void PluginPresetManager::deletePreset(const juce::String& presetName)
 	mCurrentPreset.setValue("");
 }
 
-void PluginPresetManager::loadPreset(const juce::String& presetName)
+void PluginPresetManager::loadPreset(const juce::String &presetName)
 {
 	if (presetName.isEmpty())
 		return;
@@ -86,7 +83,7 @@ void PluginPresetManager::loadPreset(const juce::String& presetName)
 		return;
 	}
 	// presetFile (XML) -> (ValueTree)
-	juce::XmlDocument xmlDocument{ presetFile };
+	juce::XmlDocument xmlDocument{presetFile};
 	const auto valueTreeToLoad = juce::ValueTree::fromXml(*xmlDocument.getDocumentElement());
 
 	mValueTreeState.replaceState(valueTreeToLoad);
@@ -96,7 +93,10 @@ void PluginPresetManager::loadPreset(const juce::String& presetName)
 void PluginPresetManager::loadPresetAt(int index)
 {
 	const auto allPresets = getAllPresets();
-	loadPreset(allPresets.getReference(index));
+	if (index >= 0 && index < allPresets.size())
+	{
+		loadPreset(allPresets.getReference(index));
+	}
 }
 
 int PluginPresetManager::loadNextPreset()
@@ -125,7 +125,7 @@ juce::StringArray PluginPresetManager::getAllPresets() const
 {
 	juce::StringArray presets;
 	const auto fileArray = defaultDirectory.findChildFiles(juce::File::TypesOfFileToFind::findFiles, false, "*." + extension);
-	for (const auto& file : fileArray)
+	for (const auto &file : fileArray)
 	{
 		presets.add(file.getFileNameWithoutExtension());
 	}
@@ -144,7 +144,7 @@ int PluginPresetManager::getCurrentPresetIndex() const
 	return allPresets.indexOf(mCurrentPreset.toString());
 }
 
-void PluginPresetManager::valueTreeRedirected(juce::ValueTree& treeWhichHasBeenChanged)
+void PluginPresetManager::valueTreeRedirected(juce::ValueTree &treeWhichHasBeenChanged)
 {
- 	mCurrentPreset.referTo(treeWhichHasBeenChanged.getPropertyAsValue(presetNameProperty, nullptr));
+	mCurrentPreset.referTo(treeWhichHasBeenChanged.getPropertyAsValue(presetNameProperty, nullptr));
 }

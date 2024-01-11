@@ -5,9 +5,8 @@
 class OutputsComponent : public juce::Component, private juce::ComboBox::Listener, public juce::Button::Listener, private juce::Timer
 {
 public:
-    OutputsComponent(juce::AudioProcessorValueTreeState& apvts, std::function<void(int, float)> onDrumMidiButtonClicked) :
-        mOnDrumMidiButtonClicked(onDrumMidiButtonClicked),
-        mApvts(apvts)
+    OutputsComponent(juce::AudioProcessorValueTreeState &apvts, std::function<void(int, float)> onDrumMidiButtonClicked) : mOnDrumMidiButtonClicked(onDrumMidiButtonClicked),
+                                                                                                                           mApvts(apvts)
     {
         mOutputParametersComponent.reset(new OutputParametersComponent(apvts));
         addAndMakeVisible(mOutputParametersComponent.get());
@@ -15,7 +14,7 @@ public:
         mChannelSelector.reset(new juce::ComboBox());
         addAndMakeVisible(mChannelSelector.get());
 
-        for (const auto& channel : Channels::channelIndexToIdMap)
+        for (const auto &channel : Channels::channelIndexToIdMap)
         {
             mChannelSelector->addItem(stringToTitleCase(channel.second), channel.first + 1); // 0 is no selection
         }
@@ -23,37 +22,45 @@ public:
         mChannelSelector->addListener(this);
         mChannelSelector->setSelectedItemIndex(0);
 
+        mChannelSelectorLabelPtr.reset(new juce::Label());
+        mChannelSelectorLabelPtr->setText(Strings::selectChannel, juce::dontSendNotification);
+        addAndMakeVisible(*mChannelSelectorLabelPtr);
     };
 
     void resized() override
     {
         auto bounds = getLocalBounds();
+
         auto topArea = bounds.removeFromTop(144);
+
+        topArea.removeFromRight(12);
+
+        if (mChannelOutputGainSliderPtr != nullptr)
+        {
+            mChannelOutputGainSliderPtr->setBounds(topArea.removeFromRight(96).reduced(0, 24));
+        }
+
+        topArea.removeFromRight(12);
 
         if (mChannelReverbGainSliderPtr != nullptr)
         {
-            topArea.removeFromRight(12);
-            mChannelReverbGainSliderPtr->setBounds(topArea.removeFromRight(64).reduced(0, 24));
-        }
-       
-        if (mChannelOutputGainSliderPtr != nullptr)
-        {
-            topArea.removeFromRight(12);
-            mChannelOutputGainSliderPtr->setBounds(topArea.removeFromRight(64).reduced(0, 24));
+            mChannelReverbGainSliderPtr->setBounds(topArea.removeFromRight(96).reduced(0, 24));
         }
 
-        mChannelSelector->setBounds(topArea.reduced(12, 48));
+        mChannelSelectorLabelPtr->setBounds(topArea.removeFromTop(72).reduced(12, 0));
+
+        mChannelSelector->setBounds(topArea.removeFromTop(48).reduced(12, 0));
         mOutputParametersComponent->setBounds(bounds);
     };
 
-    void paint(juce::Graphics& g) override
+    void paint(juce::Graphics &g) override
     {
         g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
     };
 
-    void comboBoxChanged(juce::ComboBox* comboBoxThatHasChanged) override
+    void comboBoxChanged(juce::ComboBox *comboBoxThatHasChanged) override
     {
-        if (comboBoxThatHasChanged == mChannelSelector.get()) 
+        if (comboBoxThatHasChanged == mChannelSelector.get())
         {
             setChannelIndex(mChannelSelector->getSelectedItemIndex());
         }
@@ -64,8 +71,8 @@ public:
         mChannelOutputGainAttachmentPtr.reset();
         mChannelReverbGainAttachmentPtr.reset();
 
-        const auto& channelId = Channels::channelIndexToIdMap.at(channelIndex);
-        const auto& channelName = stringToTitleCase(channelId);
+        const auto &channelId = Channels::channelIndexToIdMap.at(channelIndex);
+        const auto &channelName = stringToTitleCase(channelId);
         const auto channelMidi = Channels::channelIndexToGeneralMidiPerccussionNote.at(channelIndex);
 
         mOutputParametersComponent->setChannelIndex(channelIndex);
@@ -76,7 +83,7 @@ public:
         mMidiNoteValue = channelMidi;
         addAndMakeVisible(mNoteOnButtonPtr.get());
 
-        const auto channelOutputGainParameterId = stringsJoinAndSnakeCase({ channelId, AudioParameters::gainComponentId });
+        const auto channelOutputGainParameterId = stringsJoinAndSnakeCase({channelId, AudioParameters::gainComponentId});
 
         mChannelOutputGainSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow));
         mChannelOutputGainSliderPtr->setScrollWheelEnabled(false);
@@ -94,10 +101,9 @@ public:
         mChannelReverbGainSliderPtr.reset();
         mChannelReverbGainSliderLabelPtr.reset();
 
-        if (channelIndex != Channels::roomChannelIndex && channelIndex != Channels::outputChannelIndex)
+        if (channelIndex != Channels::roomChannelIndex)
         {
             const auto channelReverbGainParameterId = stringsJoinAndSnakeCase({ channelId, AudioParameters::reverbComponentId, AudioParameters::gainComponentId });
-
             mChannelReverbGainSliderPtr.reset(new juce::Slider(juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow));
             mChannelReverbGainSliderPtr->setScrollWheelEnabled(false);
             mChannelReverbGainAttachmentPtr = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
@@ -116,10 +122,10 @@ public:
     }
 
 private:
-    juce::AudioProcessorValueTreeState& mApvts;
+    juce::AudioProcessorValueTreeState &mApvts;
 
     std::unique_ptr<OutputParametersComponent> mOutputParametersComponent;
-    
+
     std::unique_ptr<juce::ComboBox> mChannelSelector;
     std::unique_ptr<juce::Label> mChannelSelectorLabelPtr;
 
@@ -138,7 +144,7 @@ private:
 
     std::optional<std::function<void(int, float)>> mOnDrumMidiButtonClicked;
 
-    void buttonClicked(juce::Button* button) override
+    void buttonClicked(juce::Button *button) override
     {
         mIsPlaying = !mIsPlaying;
 

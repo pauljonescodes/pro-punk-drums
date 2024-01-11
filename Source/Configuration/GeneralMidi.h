@@ -101,7 +101,6 @@ namespace GeneralMidiPercussion
 	static const std::string muteTriangleName = "Mute Triangle";
 	static const std::string openTriangleName = "Open Triangle";
 
-
 	static const std::vector<int> midiNotesVector = {
 		acousticBassDrumNote,
 		bassDrum1Note,
@@ -149,8 +148,7 @@ namespace GeneralMidiPercussion
 		muteCuicaNote,
 		openCuicaNote,
 		muteTriangleNote,
-		openTriangleNote
-	};
+		openTriangleNote};
 
 	static const std::vector<std::string> midiNamesVector = {
 		acousticBassDrumName,
@@ -199,8 +197,7 @@ namespace GeneralMidiPercussion
 		muteCuicaName,
 		openCuicaName,
 		muteTriangleName,
-		openTriangleName
-	};
+		openTriangleName};
 
 	static const std::unordered_map<int, std::string> midiNoteToNameMap = {
 		{acousticBassDrumNote, acousticBassDrumName},
@@ -249,8 +246,7 @@ namespace GeneralMidiPercussion
 		{muteCuicaNote, muteCuicaName},
 		{openCuicaNote, openCuicaName},
 		{muteTriangleNote, muteTriangleName},
-		{openTriangleNote, openTriangleName}
-	};
+		{openTriangleNote, openTriangleName}};
 
 	static const std::unordered_map<std::string, int> midiNameToNoteMap = {
 		{acousticBassDrumName, acousticBassDrumNote},
@@ -299,8 +295,7 @@ namespace GeneralMidiPercussion
 		{muteCuicaName, muteCuicaNote},
 		{openCuicaName, openCuicaNote},
 		{muteTriangleName, muteTriangleNote},
-		{openTriangleName, openTriangleNote}
-	};
+		{openTriangleName, openTriangleNote}};
 
 	static const std::unordered_map<int, std::vector<int>> midiNoteToStopNotesMap = {
 		{acousticBassDrumNote, {}},
@@ -349,6 +344,5 @@ namespace GeneralMidiPercussion
 		{muteCuicaNote, {}},
 		{openCuicaNote, {}},
 		{muteTriangleNote, {openTriangleNote}},
-		{openTriangleNote, {muteTriangleNote}}
-	};
+		{openTriangleNote, {muteTriangleNote}}};
 }

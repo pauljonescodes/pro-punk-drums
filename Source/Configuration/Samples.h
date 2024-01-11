@@ -3,7 +3,8 @@
 #include <vector>
 #include <map>
 
-namespace Samples {
+namespace Samples
+{
 	static constexpr int bitRate = 44100;
 	static constexpr int bitDepth = 24;
 

@@ -11,13 +11,14 @@
 #pragma once
 #include <JuceHeader.h>
 
-class TitledFrequencyQualityGainComponent : public juce::Component {
+class TitledFrequencyQualityGainComponent : public juce::Component
+{
 public:
     TitledFrequencyQualityGainComponent(
         const std::string title,
-        juce::AudioProcessorValueTreeState& apvts, 
+        juce::AudioProcessorValueTreeState &apvts,
         const std::string frequencyParameterId,
-        const std::string qualityParameterId, 
+        const std::string qualityParameterId,
         const std::string gainParameterId,
         const std::string frequencyTitle = "Frequency",
         const std::string qualityTitle = "Q",
@@ -113,4 +114,3 @@ private:
     std::unique_ptr<juce::Slider> mFrequencySliderPtr, mQualitySliderPtr, mGainSliderPtr;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mFrequencyAttachmentPtr, mQualityAttachmentPtr, mGainAttachmentPtr;
 };
-    

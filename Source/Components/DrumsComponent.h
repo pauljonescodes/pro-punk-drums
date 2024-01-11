@@ -25,7 +25,7 @@ public:
 
 		for (int note : midiNotesVector)
 		{
-			juce::TextButton* button = new juce::TextButton(GeneralMidiPercussion::midiNoteToNameMap.at(note) + "\n" + juce::String(note).toStdString() + " " + juce::MidiMessage::getMidiNoteName(note, true, true, 4).toStdString());
+			juce::TextButton *button = new juce::TextButton(GeneralMidiPercussion::midiNoteToNameMap.at(note) + "\n" + juce::String(note).toStdString() + " " + juce::MidiMessage::getMidiNoteName(note, true, true, 4).toStdString());
 			button->setComponentID(juce::String(note));
 			mMidiNoteButtonsOwnedArray.add(button);
 			addAndMakeVisible(button);
@@ -34,26 +34,26 @@ public:
 
 		resized();
 	};
-    
-	void paint(juce::Graphics& g) override
+
+	void paint(juce::Graphics &g) override
 	{
 		g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 	};
 
-    void resized() override 
+	void resized() override
 	{
 		const auto localBounds = getLocalBounds();
 		auto sampleControls = localBounds;
 
-		auto sampleControlHeight = 50;
+		auto sampleControlHeight = 0; // 50;
 
-		sampleControls.setHeight(sampleControlHeight);
+		// sampleControls.setHeight(sampleControlHeight);
 
-		mVelocitySlider->setBounds(sampleControls.withTrimmedLeft(localBounds.proportionOfWidth(0.1)));
+		// mVelocitySlider->setBounds(sampleControls.withTrimmedLeft(localBounds.proportionOfWidth(0.1)));
 
 		// Layout for the MIDI note buttons
-		int numRows = std::max(1, (localBounds.getHeight()) / 125);
-		int numCols = std::max(1, localBounds.getWidth() / 125);
+		int numRows = std::max(1, (localBounds.getHeight()) / 128);
+		int numCols = std::max(1, localBounds.getWidth() / 128);
 		int buttonWidth = localBounds.getWidth() / numCols;
 		int buttonHeight = (localBounds.getHeight() - sampleControlHeight) / numRows;
 
@@ -64,26 +64,26 @@ public:
 			mMidiNoteButtonsOwnedArray[i]->setBounds(col * buttonWidth, row * buttonHeight + sampleControlHeight, buttonWidth, buttonHeight);
 		}
 	};
-    
-    std::optional<std::function<void(int, float)>> mOnDrumMidiButtonClicked;
-    
+
+	std::optional<std::function<void(int, float)>> mOnDrumMidiButtonClicked;
+
 private:
-    juce::OwnedArray<juce::TextButton> mMidiNoteButtonsOwnedArray;
+	juce::OwnedArray<juce::TextButton> mMidiNoteButtonsOwnedArray;
 
-    std::unique_ptr<juce::Slider> mVelocitySlider;
-    std::unique_ptr<juce::Label> mVelocityLabel;
+	std::unique_ptr<juce::Slider> mVelocitySlider;
+	std::unique_ptr<juce::Label> mVelocityLabel;
 
-    void buttonClicked(juce::Button* button) override 
+	void buttonClicked(juce::Button *button) override
 	{
 		const juce::String componentID = button->getComponentID();
 		int midiNoteValue = componentID.getIntValue();
 		float velocity = mVelocitySlider->getValue() / 127.0f;
 
-		if (mOnDrumMidiButtonClicked.has_value()) {
+		if (mOnDrumMidiButtonClicked.has_value())
+		{
 			mOnDrumMidiButtonClicked.value()(midiNoteValue, velocity);
 		}
 	};
-    
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DrumsComponent)
-    
+
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DrumsComponent)
 };

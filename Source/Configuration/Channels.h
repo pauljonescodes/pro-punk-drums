@@ -3,7 +3,8 @@
 #include "GeneralMidi.h"
 #include <string>
 
-namespace Channels {
+namespace Channels
+{
 	static constexpr int kickChannelIndex = 0;
 	static constexpr int snareChannelIndex = 1;
 	static constexpr int tomsChannelIndex = 2;
@@ -25,25 +26,25 @@ namespace Channels {
 	static const std::string outputId = "output";
 
 	static const std::map<int, std::string> channelIndexToIdMap = {
-		{ kickChannelIndex, kickId },
-		{ snareChannelIndex, snareId },
-		{ tomsChannelIndex, tomsId },
-		{ hiHatChannelIndex, hiHatId },
-		{ cymbalsChannelIndex, cymbalsId },
-		{ otherChannelIndex, otherId },
-		{ roomChannelIndex, roomId },
-		{ outputChannelIndex, outputId },
+		{kickChannelIndex, kickId},
+		{snareChannelIndex, snareId},
+		{tomsChannelIndex, tomsId},
+		{hiHatChannelIndex, hiHatId},
+		{cymbalsChannelIndex, cymbalsId},
+		{otherChannelIndex, otherId},
+		{roomChannelIndex, roomId},
+		{outputChannelIndex, outputId},
 	};
 
 	static const std::map<int, int> channelIndexToGeneralMidiPerccussionNote = {
-		{ kickChannelIndex, GeneralMidiPercussion::bassDrum1Note },
-		{ snareChannelIndex, GeneralMidiPercussion::acousticSnareNote },
-		{ tomsChannelIndex, GeneralMidiPercussion::highTomNote },
-		{ hiHatChannelIndex, GeneralMidiPercussion::closedHiHatNote},
-		{ cymbalsChannelIndex, GeneralMidiPercussion::crashCymbal2Note },
-		{ otherChannelIndex, GeneralMidiPercussion::tambourineNote },
-		{ roomChannelIndex, GeneralMidiPercussion::notApplicable },
-		{ outputChannelIndex, GeneralMidiPercussion::notApplicable },
+		{kickChannelIndex, GeneralMidiPercussion::bassDrum1Note},
+		{snareChannelIndex, GeneralMidiPercussion::acousticSnareNote},
+		{tomsChannelIndex, GeneralMidiPercussion::highTomNote},
+		{hiHatChannelIndex, GeneralMidiPercussion::closedHiHatNote},
+		{cymbalsChannelIndex, GeneralMidiPercussion::crashCymbal2Note},
+		{otherChannelIndex, GeneralMidiPercussion::tambourineNote},
+		{roomChannelIndex, GeneralMidiPercussion::notApplicable},
+		{outputChannelIndex, GeneralMidiPercussion::notApplicable},
 	};
 
 	static const std::map<int, int> generalMidiNoteToChannelIndex = {
@@ -93,6 +94,5 @@ namespace Channels {
 		{GeneralMidiPercussion::muteCuicaNote, otherChannelIndex},
 		{GeneralMidiPercussion::openCuicaNote, otherChannelIndex},
 		{GeneralMidiPercussion::muteTriangleNote, otherChannelIndex},
-		{GeneralMidiPercussion::openTriangleNote, otherChannelIndex}
-	};
+		{GeneralMidiPercussion::openTriangleNote, otherChannelIndex}};
 }

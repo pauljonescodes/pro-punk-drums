@@ -5,22 +5,22 @@
 class PluginSynthesiserSound : public juce::SynthesiserSound
 {
 public:
-    PluginSynthesiserSound(const juce::String& name,
-                           juce::AudioFormatReader& source,
-                           const juce::BigInteger& midiNotes,
+    PluginSynthesiserSound(const juce::String &name,
+                           juce::AudioFormatReader &source,
+                           const juce::BigInteger &midiNotes,
                            int midiNoteForNormalPitch,
                            double attackTimeSecs,
                            double releaseTimeSecs,
                            double maxSampleLengthSeconds);
-    
+
     ~PluginSynthesiserSound() override;
-    
-    const juce::String& getName() const noexcept { return mName; }
-    juce::AudioBuffer<float>* getAudioData() const noexcept { return mData.get(); }
+
+    const juce::String &getName() const noexcept { return mName; }
+    juce::AudioBuffer<float> *getAudioData() const noexcept { return mData.get(); }
     void setEnvelopeParameters(juce::ADSR::Parameters parametersToUse) { mAdsrParameters = parametersToUse; }
     bool appliesToNote(int midiNoteNumber) override;
     bool appliesToChannel(int midiChannel) override;
-    
+
     double mSourceSampleRate;
     int mLength = 0;
     std::unique_ptr<juce::AudioBuffer<float>> mData;
@@ -28,6 +28,6 @@ public:
     juce::String mName;
     juce::BigInteger mMidiNotes;
     int mMidiRootNote = 0;
-    
+
     JUCE_LEAK_DETECTOR(PluginSynthesiserSound)
 };

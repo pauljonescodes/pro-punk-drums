@@ -6,7 +6,7 @@
 #include <juce_audio_utils/juce_audio_utils.h>
 #include <juce_core/juce_core.h>
 
-namespace AudioParameters 
+namespace AudioParameters
 {
 	// https://www.desmos.com/calculator/qkc6naksy5
 	static inline juce::NormalisableRange<float> makeLogarithmicRange(float rangeStart, float rangeEnd, float intervalValue, float exponent = 6.0f)
@@ -15,38 +15,41 @@ namespace AudioParameters
 			rangeStart, rangeEnd,
 			// In all the following, "start" and "end" describe the unnormalized range
 			// for example 0 to 15 or 0 to 100.
-			[=](float start, float end, float normalised) {
+			[=](float start, float end, float normalised)
+			{
 				return start + (std::exp2(normalised * exponent) - 1) * (end - start) / (std::exp2(exponent) - 1);
 			},
-			[=](float start, float end, float unnormalised) {
+			[=](float start, float end, float unnormalised)
+			{
 				return std::log2(((unnormalised - start) / (end - start) * (std::exp2(exponent) - 1)) + 1) / exponent;
-			}
-		};
+			}};
 		normalisableRange.interval = intervalValue;
 		return normalisableRange;
 	}
 
 	static inline juce::NormalisableRange<float> makeDecibelRange(float rangeStart, float rangeEnd, float rangeInterval)
 	{
-		//jassert(rangeStart < rangeEnd);  // Ensuring the start is less than the end.
+		// jassert(rangeStart < rangeEnd);  // Ensuring the start is less than the end.
 		juce::NormalisableRange<float> range = {
 			rangeStart,
-			rangeEnd,  // Directly using rangeEnd as the max dB value
+			rangeEnd, // Directly using rangeEnd as the max dB value
 
 			// convertFrom0to1
-			[=](float min, float max, float normalizedGain) {
-				return normalizedGain * (max - min) + min;  // Linear mapping from normalized to dB
+			[=](float min, float max, float normalizedGain)
+			{
+				return normalizedGain * (max - min) + min; // Linear mapping from normalized to dB
 			},
 
 			// convertTo0to1
-			[=](float min, float max, float dB) {
-				return (dB - min) / (max - min);  // Linear mapping from dB to normalized
-			}
-		};
-		range.interval = rangeInterval;  // Setting the interval for the range
+			[=](float min, float max, float dB)
+			{
+				return (dB - min) / (max - min); // Linear mapping from dB to normalized
+			}};
+		range.interval = rangeInterval; // Setting the interval for the range
 		return range;
 	}
 
+	static const std::string changedComponentId = "changed";
 	static const std::string multiOutComponentId = "multi-out";
 	static const std::string phaseComponentId = "phase";
 
@@ -58,10 +61,10 @@ namespace AudioParameters
 
 	static const std::string gainComponentId = "gain";
 	static constexpr float gainDecibelsMinimumValue = -64.0f;
-	static constexpr float gainDeciblesMaximumValue = 8.0f;
+	static constexpr float gainDeciblesMaximumValue = 24.0f;
 	static constexpr float gainDeciblesIntervalValue = 0.01f;
 	static constexpr float gainDeciblesDefaultValue = 0.0f;
-	static const juce::NormalisableRange<float> gainNormalisableRange = makeDecibelRange(
+	static const juce::NormalisableRange<float> decibelGainNormalisableRange = makeDecibelRange(
 		gainDecibelsMinimumValue,
 		gainDeciblesMaximumValue,
 		gainDeciblesIntervalValue);
@@ -101,7 +104,7 @@ namespace AudioParameters
 
 	static const std::string releaseComponentId = "release";
 	static constexpr float releaseMinimumValue = 1.0f;
-	static constexpr float releaseMaximumValue = 1000.0f;
+	static constexpr float releaseMaximumValue = 3000.0f;
 	static constexpr float releaseIntervalValue = 0.01f;
 	static const juce::NormalisableRange<float> releaseNormalisableRange =
 		juce::NormalisableRange<float>(
@@ -115,7 +118,7 @@ namespace AudioParameters
 	static constexpr float qualityMinimumValue = 0.001f;
 	static constexpr float qualityMaximumValue = 10.f;
 	static constexpr float qualityIntervalValue = 0.001f;
-	static const juce::NormalisableRange<float> qualityNormalisableRange = 
+	static const juce::NormalisableRange<float> qualityNormalisableRange =
 		makeLogarithmicRange(qualityMinimumValue, qualityMaximumValue, qualityIntervalValue);
 
 	static const std::string frequencyComponentId = "frequency";
@@ -152,16 +155,14 @@ namespace AudioParameters
 	};
 
 	static const std::map<std::string, float> equalizationTypeIdToDefaultFrequencyMap = {
-		{highShelfEqualizationTypeId,highShelfFrequencyDefaultValue},
-		{peakFilterEqualizationTypeId,peakFilterFrequencyDefaultValue},
-		{lowShelfEqualizationTypeId,lowShelfFrequencyDefaultValue}
-	};
+		{highShelfEqualizationTypeId, highShelfFrequencyDefaultValue},
+		{peakFilterEqualizationTypeId, peakFilterFrequencyDefaultValue},
+		{lowShelfEqualizationTypeId, lowShelfFrequencyDefaultValue}};
 
 	static const std::map<std::string, juce::NormalisableRange<float>> equalizationTypeIdToGainNormalisableRange = {
-	{highShelfEqualizationTypeId,gainNormalisableRange},
-	{peakFilterEqualizationTypeId,linearGainNormalisableRange},
-	{lowShelfEqualizationTypeId,gainNormalisableRange}
-	};
+		{highShelfEqualizationTypeId, decibelGainNormalisableRange},
+		{peakFilterEqualizationTypeId, linearGainNormalisableRange},
+		{lowShelfEqualizationTypeId, decibelGainNormalisableRange}};
 
 	static const std::string reverbComponentId = "reverb";
 
@@ -184,9 +185,9 @@ namespace AudioParameters
 	static constexpr float dampingIntervalValue = 0.01f;
 	static const juce::NormalisableRange<float> dampingNormalisableRange =
 		juce::NormalisableRange<float>(
-		 dampingMinimumValue,
-		 dampingMaximumValue,
-		 dampingIntervalValue);
+			dampingMinimumValue,
+			dampingMaximumValue,
+			dampingIntervalValue);
 	static constexpr float dampingDefaultValue = 0.5f;
 
 	static const std::string widthComponentId = "width";
@@ -207,7 +208,7 @@ namespace AudioParameters
 	static constexpr float dryWetIntervalValue = 0.001f;
 	static constexpr float allWetDefaultValue = 1.0f;
 	static constexpr float allDryDefaultValue = 0.0f;
-	static const juce::NormalisableRange<float> dryWetNormalisableRange = 
+	static const juce::NormalisableRange<float> dryWetNormalisableRange =
 		juce::NormalisableRange<float>(
 			dryWetMinimumValue,
 			dryWetMaximumValue,
@@ -238,13 +239,16 @@ namespace AudioParameters
 					std::vector<std::string> parts;
 					std::string part;
 
-					while (std::getline(iss, part, '_')) {
-						if (!part.empty()) {
+					while (std::getline(iss, part, '_'))
+					{
+						if (!part.empty())
+						{
 							parts.push_back(part);
 						}
 					}
 
-					switch (parts.size()) {
+					switch (parts.size())
+					{
 					case 0:
 						midiNote = GeneralMidiPercussion::midiNameToNoteMap.at(midiName);
 						break;

@@ -10,20 +10,22 @@ class SamplesComponent : public juce::Component
 public:
     SamplesComponent(
         const std::vector<int> midiNotesVector,
-        juce::AudioProcessorValueTreeState& apvts,
+        juce::AudioProcessorValueTreeState &apvts,
         std::function<void(int, float, std::string)> onDrumMidiButtonClicked)
     {
         addAndMakeVisible(mViewport);
         mViewport.setViewedComponent(&mContainer, false);
         mViewport.setScrollBarsShown(true, false, true, false);
 
-        for (const auto& pair : AudioParameters::getUniqueMidiNoteMicCombinations()) {
+        for (const auto &pair : AudioParameters::getUniqueMidiNoteMicCombinations())
+        {
             int midiNote = pair.first;
             std::string midiName = GeneralMidiPercussion::midiNoteToNameMap.at(midiNote);
-            const std::set<std::string>& micIds = pair.second;
+            const std::set<std::string> &micIds = pair.second;
 
-            for (const std::string& micId : micIds) {
-                auto* component = new SamplesParametersComponent(midiNote, micId, apvts);
+            for (const std::string &micId : micIds)
+            {
+                auto *component = new SamplesParametersComponent(midiNote, micId, apvts);
                 component->mOnDrumMidiButtonClicked = onDrumMidiButtonClicked;
                 mComponents.add(component);
                 mContainer.addAndMakeVisible(component);
@@ -41,17 +43,17 @@ public:
         mContainer.setBounds(0, 0, mViewport.getMaximumVisibleWidth() - 8, totalHeight);
 
         auto area = mContainer.getLocalBounds();
-        for (auto* component : mComponents)
+        for (auto *component : mComponents)
         {
             component->setBounds(area.removeFromTop(heightPerComponent).reduced(0, 12));
         }
     };
 
-    void paint(juce::Graphics& g) override
+    void paint(juce::Graphics &g) override
     {
         g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
     };
-    
+
 private:
     juce::OwnedArray<SamplesParametersComponent> mComponents;
     juce::Viewport mViewport;

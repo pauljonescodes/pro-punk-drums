@@ -6,45 +6,48 @@
 #include <random>
 #include "Configuration/Strings.h"
 
-PluginAudioProcessorEditor::PluginAudioProcessorEditor(PluginAudioProcessor& p)
+PluginAudioProcessorEditor::PluginAudioProcessorEditor(PluginAudioProcessor &p)
 	: AudioProcessorEditor(&p), mAudioProcessor(p)
 {
-	auto& apvts = mAudioProcessor.getParameterValueTreeState();
+	static juce::Typeface::Ptr customTypeface = juce::Typeface::createSystemTypefaceFor(
+		BinaryData::SpecialEliteRegular_ttf,
+		BinaryData::SpecialEliteRegular_ttfSize);
 
-	auto* multiOutParameter = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter(AudioParameters::multiOutComponentId));
+	juce::LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypeface(customTypeface);
+	setLookAndFeel(&mLookAndFeel);
+
+	auto &apvts = mAudioProcessor.getParameterValueTreeState();
+
+	auto *multiOutParameter = dynamic_cast<juce::AudioParameterBool *>(apvts.getParameter(AudioParameters::multiOutComponentId));
 	mMultiOutToggleButton.reset(new juce::ToggleButton(Strings::multiOut));
 	addAndMakeVisible(mMultiOutToggleButton.get());
-	
+
 	mMultiOutToggleButton->setToggleState(multiOutParameter->get(), juce::dontSendNotification);
 	mMultiOutAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(
 		apvts,
 		AudioParameters::multiOutComponentId,
-		*mMultiOutToggleButton
-		);
+		*mMultiOutToggleButton);
 
 	mTabbedComponentPtr = std::make_unique<juce::TabbedComponent>(juce::TabbedButtonBar::Orientation::TabsAtTop);
 
 	mPresetComponentPtr.reset(new PresetComponent(mAudioProcessor.getPresetManager()));
 	addAndMakeVisible(*mPresetComponentPtr);
 
-	setSize(750, 750);
+	setSize(642, 700);
 	setResizable(true, true);
 
 	addAndMakeVisible(mTabbedComponentPtr.get());
 
 	mDrumsComponentPtr.reset(new DrumsComponent(mAudioProcessor.getMidiNotesVector()));
-	mDrumsComponentPtr->mOnDrumMidiButtonClicked = ([this](int midiNote, float midiVelocity) -> void {
-		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity);
-		});
+	mDrumsComponentPtr->mOnDrumMidiButtonClicked = ([this](int midiNote, float midiVelocity) -> void
+													{ mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity); });
 	mTabbedComponentPtr->addTab(Strings::drums, juce::Colours::lightgrey, mDrumsComponentPtr.get(), true);
 
-	mSamplesComponentPtr.reset(new SamplesComponent(mAudioProcessor.getMidiNotesVector(), apvts, ([this](int midiNote, float midiVelocity, std::string micId) -> void {
-		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity, micId);
-		})));
+	mSamplesComponentPtr.reset(new SamplesComponent(mAudioProcessor.getMidiNotesVector(), apvts, ([this](int midiNote, float midiVelocity, std::string micId) -> void
+																								  { mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity, micId); })));
 
-	mOutputsComponentPtr.reset(new OutputsComponent(apvts, ([this](int midiNote, float midiVelocity) -> void {
-		mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity);
-		})));
+	mOutputsComponentPtr.reset(new OutputsComponent(apvts, ([this](int midiNote, float midiVelocity) -> void
+															{ mAudioProcessor.noteOnSynthesisers(midiNote, midiVelocity); })));
 
 	mReverbComponentPtr.reset(new ReverbComponent(
 		apvts,
@@ -62,7 +65,7 @@ PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
 	mMultiOutAttachment.reset();
 }
 
-void PluginAudioProcessorEditor::paint(juce::Graphics& g)
+void PluginAudioProcessorEditor::paint(juce::Graphics &g)
 {
 	g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 }
@@ -73,8 +76,8 @@ void PluginAudioProcessorEditor::resized()
 
 	auto topAreaBounds = localBounds.removeFromTop(64).reduced(4);
 
-	mMultiOutToggleButton->setBounds(topAreaBounds.removeFromRight(82));
+	mMultiOutToggleButton->setBounds(topAreaBounds.removeFromRight(112));
 	mPresetComponentPtr->setBounds(topAreaBounds);
-	
+
 	mTabbedComponentPtr->setBounds(localBounds);
 }

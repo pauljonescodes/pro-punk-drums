@@ -11,11 +11,12 @@
 #pragma once
 #include <JuceHeader.h>
 
-class CompressionWithGainComponent : public juce::Component {
+class CompressionWithGainComponent : public juce::Component
+{
 public:
     CompressionWithGainComponent(
         const std::string title,
-        juce::AudioProcessorValueTreeState& apvts,
+        juce::AudioProcessorValueTreeState &apvts,
         const std::string thresholdParameterId,
         const std::string attackParameterId,
         const std::string ratioParameterId,
@@ -185,17 +186,17 @@ public:
     }
 
 private:
-    std::unique_ptr<juce::GroupComponent> 
+    std::unique_ptr<juce::GroupComponent>
         mGroupComponentPtr;
-    
-    std::unique_ptr<juce::Label> 
-        mThresholdLabelPtr, 
-        mAttackLabelPtr, 
-        mRatioLabelPtr, 
-        mReleaseLabelPtr, 
+
+    std::unique_ptr<juce::Label>
+        mThresholdLabelPtr,
+        mAttackLabelPtr,
+        mRatioLabelPtr,
+        mReleaseLabelPtr,
         mGainLabelPtr,
         mDryWetLabelPtr;
-   
+
     std::unique_ptr<juce::Slider>
         mThresholdSliderPtr,
         mAttackSliderPtr,
@@ -203,7 +204,7 @@ private:
         mReleaseSliderPtr,
         mGainSliderPtr,
         mDryWetSliderPtr;
-    
+
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>
         mThresholdAttachmentPtr,
         mAttackAttachmentPtr,

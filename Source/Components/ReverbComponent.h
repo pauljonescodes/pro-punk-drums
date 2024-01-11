@@ -12,10 +12,11 @@
 #include <string>
 #include "JuceHeader.h"
 
-class ReverbComponent : public juce::Component {
+class ReverbComponent : public juce::Component
+{
 public:
     ReverbComponent(
-        juce::AudioProcessorValueTreeState& apvts,
+        juce::AudioProcessorValueTreeState &apvts,
         const std::string roomSizeParameterId,
         const std::string dampingParameterId,
         const std::string widthParameterId,
@@ -99,7 +100,7 @@ public:
         flexBox.performLayout(bounds);
     }
 
-    void paint(juce::Graphics& g) override
+    void paint(juce::Graphics &g) override
     {
         g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
     }

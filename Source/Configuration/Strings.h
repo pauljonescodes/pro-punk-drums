@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 
-namespace Strings {
+namespace Strings
+{
 	static const std::string velocity = "Velocity";
 	static const std::string invertPhase = "Invert Phase";
 	static const std::string multiOut = "Multi-Out";
@@ -19,11 +20,13 @@ namespace Strings {
 	static const std::string frequency = "Frequency";
 	static const std::string quality = "Quality";
 	static const std::string gain = "Gain";
+	static const std::string outputGain = "Output Gain";
 	static const std::string threshold = "Threshold";
 	static const std::string ratio = "Ratio";
 	static const std::string attack = "Attack";
 	static const std::string release = "Release";
 	static const std::string reverb = "Reverb";
 	static const std::string room = "Room";
-	static const std::string roomSend = "Room";
+	static const std::string roomSend = "Room Send";
+	static const std::string selectChannel = "Select channel";
 }
