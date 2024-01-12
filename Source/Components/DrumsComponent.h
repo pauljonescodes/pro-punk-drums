@@ -43,7 +43,7 @@ public:
 	void resized() override
 	{
 		const auto localBounds = getLocalBounds();
-		auto sampleControls = localBounds;
+		// auto sampleControls = localBounds;
 
 		auto sampleControlHeight = 0; // 50;
 

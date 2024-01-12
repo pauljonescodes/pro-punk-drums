@@ -22,8 +22,6 @@ public:
 		removeAllChildren();
 
 		const auto &channelId = Channels::channelIndexToIdMap.at(channelIndex);
-		const auto &channelName = stringToTitleCase(channelId);
-		const auto channelMidi = Channels::channelIndexToGeneralMidiPerccussionNote.at(channelIndex);
 
 		{
 			const auto &lowShelfFrequencyId = stringsJoinAndSnakeCase({channelId, AudioParameters::lowShelfEqualizationTypeId, AudioParameters::frequencyComponentId});
@@ -70,7 +68,6 @@ public:
 	void resized() override
 	{
 		auto bounds = getLocalBounds();
-		int componentWidth = bounds.getHeight() / 3;
 
 		juce::FlexBox flexBoxColumns;
 		flexBoxColumns.flexDirection = juce::FlexBox::Direction::column;

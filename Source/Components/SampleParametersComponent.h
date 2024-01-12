@@ -69,7 +69,6 @@ public:
 	{
 		int padding = 10;
 		int toggleSize = 100;
-		int labelHeight = 15;
 
 		auto area = getLocalBounds().reduced(padding);
 

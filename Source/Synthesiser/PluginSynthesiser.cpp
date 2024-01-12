@@ -120,7 +120,6 @@ PluginSynthesiser::PluginSynthesiser()
 
 PluginSynthesiser::~PluginSynthesiser()
 {
-    DBG("~PluginSynthesiser()");
 }
 
 void PluginSynthesiser::addSample(const std::string resourceName,

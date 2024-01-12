@@ -26,7 +26,6 @@ PluginSynthesiserSound::PluginSynthesiserSound(const juce::String &soundName,
 
 PluginSynthesiserSound::~PluginSynthesiserSound()
 {
-    DBG("~PluginSynthesiserSound()");
 }
 
 bool PluginSynthesiserSound::appliesToNote(int midiNoteNumber)

@@ -14,7 +14,6 @@ PluginSynthesiserVoice::PluginSynthesiserVoice(
 
 PluginSynthesiserVoice::~PluginSynthesiserVoice()
 {
-    DBG("~PluginSynthesiserVoice()");
 }
 
 bool PluginSynthesiserVoice::canPlaySound(juce::SynthesiserSound *sound)

@@ -5,8 +5,8 @@
 class OutputsComponent : public juce::Component, private juce::ComboBox::Listener, public juce::Button::Listener, private juce::Timer
 {
 public:
-    OutputsComponent(juce::AudioProcessorValueTreeState &apvts, std::function<void(int, float)> onDrumMidiButtonClicked) : mOnDrumMidiButtonClicked(onDrumMidiButtonClicked),
-                                                                                                                           mApvts(apvts)
+    OutputsComponent(juce::AudioProcessorValueTreeState &apvts, std::function<void(int, float)> onDrumMidiButtonClicked) : mApvts(apvts),
+    mOnDrumMidiButtonClicked(onDrumMidiButtonClicked)
     {
         mOutputParametersComponent.reset(new OutputParametersComponent(apvts));
         addAndMakeVisible(mOutputParametersComponent.get());
@@ -70,7 +70,6 @@ public:
         mChannelReverbGainAttachmentPtr.reset();
 
         const auto &channelId = Channels::channelIndexToIdMap.at(channelIndex);
-        const auto &channelName = stringToTitleCase(channelId);
         const auto channelMidi = Channels::channelIndexToGeneralMidiPerccussionNote.at(channelIndex);
 
         mOutputParametersComponent->setChannelIndex(channelIndex);

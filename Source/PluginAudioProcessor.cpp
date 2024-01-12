@@ -28,8 +28,8 @@ PluginAudioProcessor::PluginAudioProcessor()
 		.withOutput(stringToTitleCase(Channels::roomId), juce::AudioChannelSet::stereo(), true)
 #endif
 	),
-	mAudioProcessorValueTreeStatePtr(std::make_unique<juce::AudioProcessorValueTreeState>(*this, nullptr, juce::Identifier("plugin_params"), createParameterLayout())),
-	mAudioFormatManagerPtr(std::make_unique<juce::AudioFormatManager>()),
+mAudioFormatManagerPtr(std::make_unique<juce::AudioFormatManager>()),
+mAudioProcessorValueTreeStatePtr(std::make_unique<juce::AudioProcessorValueTreeState>(*this, nullptr, juce::Identifier("plugin_params"), createParameterLayout())),
 	mRoomBufferPtr(std::make_unique<juce::AudioBuffer<float>>(2, 1024))
 #endif
 {
@@ -451,25 +451,21 @@ double PluginAudioProcessor::getTailLengthSeconds() const
 int PluginAudioProcessor::getNumPrograms()
 {
 	const auto numPrograms = mPresetManagerPtr->getAllPresets().size();
-	DBG("getNumPrograms " + numPrograms);
 	return numPrograms;
 }
 
 int PluginAudioProcessor::getCurrentProgram()
 {
-	DBG("getCurrentProgram " + 0);
 	return mPresetManagerPtr->getCurrentPresetIndex();
 }
 
 void PluginAudioProcessor::setCurrentProgram(int index)
 {
-	DBG("setCurrentProgram " + index);
 	mPresetManagerPtr->loadPresetAt(index);
 }
 
 const juce::String PluginAudioProcessor::getProgramName(int index)
 {
-	DBG("getProgramName " + index);
 	return mPresetManagerPtr->getAllPresets()[index];
 }
 
@@ -479,8 +475,6 @@ void PluginAudioProcessor::changeProgramName(int index, const juce::String& newN
 
 void PluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-	DBG("prepareToPlay");
-
 	juce::dsp::ProcessSpec spec;
 	spec.sampleRate = sampleRate;
 	spec.maximumBlockSize = samplesPerBlock;		// Example block size
@@ -628,6 +622,7 @@ void PluginAudioProcessor::processBlock(juce::AudioBuffer<float>& outputBuffer, 
 	juce::ScopedNoDenormals noDenormals;
 	auto totalNumInputChannels = getTotalNumInputChannels();
 	auto totalNumOutputChannels = getTotalNumOutputChannels();
+    auto outputBufferNumSamples = outputBuffer.getNumSamples();
 
 	for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
 	{
@@ -642,17 +637,16 @@ void PluginAudioProcessor::processBlock(juce::AudioBuffer<float>& outputBuffer, 
 	for (const auto& channel : Channels::channelIndexToIdMap)
 	{
 		const auto channelIndex = channel.first;
-		const auto& channelId = channel.second;
 
 		if (channelIndex == Channels::outputChannelIndex || channelIndex == Channels::roomChannelIndex)
 		{
-			break;
+            continue;
 		}
 
 		auto& synthesiser = mSynthesiserPtrVector[channelIndex];
 		auto& internalBufferPtr = mSynthesiserBufferPtrVector[channelIndex];
 		internalBufferPtr->clear();
-		synthesiser->renderNextBlock(*internalBufferPtr, midiMessages, 0, internalBufferPtr->getNumSamples());
+		synthesiser->renderNextBlock(*internalBufferPtr, midiMessages, 0, outputBufferNumSamples);
 
 		// Reverb
 
@@ -661,7 +655,7 @@ void PluginAudioProcessor::processBlock(juce::AudioBuffer<float>& outputBuffer, 
 		reverbBufferPtr->copyFrom(0, 0, internalBufferPtr->getReadPointer(0), internalBufferPtr->getNumSamples());
 		reverbBufferPtr->copyFrom(1, 0, internalBufferPtr->getReadPointer(1), internalBufferPtr->getNumSamples());
 
-		juce::dsp::AudioBlock<float> reverbBufferBlock(*reverbBufferPtr);
+		juce::dsp::AudioBlock<float> reverbBufferBlock(reverbBufferPtr->getArrayOfWritePointers(), 2, outputBufferNumSamples);
 		juce::dsp::ProcessContextReplacing<float> reverbBufferContext(reverbBufferBlock);
 
 		mReverbGains[channelIndex]->process(reverbBufferContext);
@@ -680,7 +674,7 @@ void PluginAudioProcessor::processBlock(juce::AudioBuffer<float>& outputBuffer, 
 
 		// EQ/comp
 
-		juce::dsp::AudioBlock<float> internalBufferBlock(*internalBufferPtr);
+		juce::dsp::AudioBlock<float> internalBufferBlock(internalBufferPtr->getArrayOfWritePointers(), 2, outputBufferNumSamples);
 		juce::dsp::ProcessContextReplacing<float> internalBufferContext(internalBufferBlock);
 
 		mCompressorDryWetMixers[channelIndex]->pushDrySamples(internalBufferBlock);
@@ -708,7 +702,7 @@ void PluginAudioProcessor::processBlock(juce::AudioBuffer<float>& outputBuffer, 
 			internalBufferPtr->getNumSamples());
 	}
 
-	juce::dsp::AudioBlock<float> roomBlock(*mRoomBufferPtr);
+	juce::dsp::AudioBlock<float> roomBlock(mRoomBufferPtr->getArrayOfWritePointers(), 2, outputBufferNumSamples);
 	juce::dsp::ProcessContextReplacing<float> roomContext(roomBlock);
 
 	mCompressorDryWetMixers[Channels::roomChannelIndex]->pushDrySamples(roomBlock);
@@ -750,14 +744,7 @@ void PluginAudioProcessor::processBlock(juce::AudioBuffer<float>& outputBuffer, 
 
 void PluginAudioProcessor::parameterChanged(const juce::String& parameterId, float newValue)
 {
-	DBG("parameterChanged " + parameterId.toStdString() + " " + std::to_string(newValue));
-
 	const auto tLowShelfQualityId = stringsJoinAndSnakeCase({ "kick", AudioParameters::lowShelfEqualizationTypeId, AudioParameters::qualityComponentId });
-	const float tLowShelfQuality = mAudioProcessorValueTreeStatePtr->getParameterAsValue(tLowShelfQualityId).getValue();
-	const float tLowQuialit2 = mLowShelfFilters[0].state.getObject()->coefficients[0];
-	const float tLowQuialit4 = mLowShelfFilters[0].state.getObject()->coefficients[1];
-	const float tLowQuialit5 = mLowShelfFilters[0].state.getObject()->coefficients[2];
-	DBG("testing" + std::to_string(tLowShelfQuality) + " " + std::to_string(tLowQuialit4));
 
 	auto sampleRate = getSampleRate();
 
