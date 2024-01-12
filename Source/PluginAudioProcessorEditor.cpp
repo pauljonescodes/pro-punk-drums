@@ -33,7 +33,8 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor(PluginAudioProcessor &p)
 	mPresetComponentPtr.reset(new PresetComponent(mAudioProcessor.getPresetManager()));
 	addAndMakeVisible(*mPresetComponentPtr);
 
-	setSize(642, 700);
+	setSize(642, 699);
+	setResizeLimits(497, 600, 9999, 9999);
 	setResizable(true, true);
 
 	addAndMakeVisible(mTabbedComponentPtr.get());

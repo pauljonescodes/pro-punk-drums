@@ -178,7 +178,7 @@ std::vector<int> PluginSynthesiser::getMidiNotesVector()
     std::vector<int> keys;
     for (const auto &pair : mMidiNoteToInstruments)
     {
-        keys.push_back(pair.first); // Collect the keys
+        keys.push_back(pair.first);
     }
     return keys;
 }

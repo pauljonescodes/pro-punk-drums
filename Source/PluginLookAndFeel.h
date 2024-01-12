@@ -35,6 +35,8 @@ public:
 		});
 
 		setColour(juce::TabbedComponent::outlineColourId, darkestGrey);
+		setColour(juce::GroupComponent::outlineColourId, darkerGrey);
+		setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::black);
 	}
 
 	void drawRotarySlider(juce::Graphics &, int x, int y, int width, int height,

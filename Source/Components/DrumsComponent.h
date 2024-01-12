@@ -52,8 +52,8 @@ public:
 		// mVelocitySlider->setBounds(sampleControls.withTrimmedLeft(localBounds.proportionOfWidth(0.1)));
 
 		// Layout for the MIDI note buttons
-		int numRows = std::max(1, (localBounds.getHeight()) / 128);
-		int numCols = std::max(1, localBounds.getWidth() / 128);
+		int numRows = 4; //std::max(1, (localBounds.getHeight()) / 128);
+		int numCols = 5; //std::max(1, localBounds.getWidth() / 128);
 		int buttonWidth = localBounds.getWidth() / numCols;
 		int buttonHeight = (localBounds.getHeight() - sampleControlHeight) / numRows;
 
