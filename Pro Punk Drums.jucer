@@ -4,7 +4,7 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
               bundleIdentifier="com.propunkstudio.drums" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginName="Pro Punk Drums" pluginManufacturer="Pro Punk DSP"
-              aaxIdentifier="com.proppunkdsp.drums" version="0.0.2" companyName="Pro Punk DSP"
+              aaxIdentifier="com.proppunkdsp.drums" version="1.0.0" companyName="Pro Punk DSP"
               companyCopyright="2023" companyEmail="paul@propunkstudio.com"
               companyWebsite="www.propunkstudio.com" pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3">
   <MAINGROUP id="eIDGb1" name="Pro Punk Drums">
