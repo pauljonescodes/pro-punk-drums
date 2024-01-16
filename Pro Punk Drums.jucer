@@ -6,7 +6,7 @@
               pluginName="Pro Punk Drums" pluginManufacturer="Pro Punk DSP"
               aaxIdentifier="com.proppunkdsp.drums" version="0.0.2" companyName="Pro Punk DSP"
               companyCopyright="2023" companyEmail="paul@propunkstudio.com"
-              companyWebsite="www.propunkstudio.com" pluginFormats="buildAAX,buildAU,buildVST3">
+              companyWebsite="www.propunkstudio.com" pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3">
   <MAINGROUP id="eIDGb1" name="Pro Punk Drums">
     <GROUP id="{95755CA2-B0D0-D393-296E-7490F1BAFDDB}" name="Assets">
       <GROUP id="{BDC2527B-255C-6B2B-A38B-8BBA1DA4D972}" name="35 Acoustic Bass Drum">
