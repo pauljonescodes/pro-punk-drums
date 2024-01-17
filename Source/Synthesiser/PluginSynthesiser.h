@@ -75,4 +75,5 @@ protected:
 
 private:
     float velocityToGain(float x);
+    int midiNoteForInput(int midiNoteNumber);
 };

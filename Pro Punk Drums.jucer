@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="Q0tYTq" name="Pro Punk Drums" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="0" jucerFormatVersion="1"
               bundleIdentifier="com.propunkstudio.drums" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginName="Pro Punk Drums" pluginManufacturer="Pro Punk DSP"
-              aaxIdentifier="com.proppunkdsp.drums" version="1.0.0" companyName="Pro Punk DSP"
+              aaxIdentifier="com.proppunkdsp.drums" version="1.0.1" companyName="Pro Punk DSP"
               companyCopyright="2023" companyEmail="paul@propunkstudio.com"
               companyWebsite="www.propunkstudio.com" pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3">
   <MAINGROUP id="eIDGb1" name="Pro Punk Drums">
@@ -75,74 +75,6 @@
                 resource="1" file="Assets/35 Acoustic Bass Drum/Soft/acoustic_bass_drum_1_5_in.wav"/>
           <FILE id="dbUxbt" name="acoustic_bass_drum_1_5_out.wav" compile="0"
                 resource="1" file="Assets/35 Acoustic Bass Drum/Soft/acoustic_bass_drum_1_5_out.wav"/>
-        </GROUP>
-      </GROUP>
-      <GROUP id="{B4171908-B391-5D6F-F153-9B8A98C258C0}" name="36 Bass Drum 1">
-        <GROUP id="{A9E4CC7B-AE9F-F5CA-1D55-4A45173FAFCA}" name="Hard">
-          <FILE id="YZ2e3r" name="bass_drum_1_3_1_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Hard/bass_drum_1_3_1_in.wav"/>
-          <FILE id="BBQGmB" name="bass_drum_1_3_1_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Hard/bass_drum_1_3_1_out.wav"/>
-          <FILE id="kZHf78" name="bass_drum_1_3_2_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Hard/bass_drum_1_3_2_in.wav"/>
-          <FILE id="dRdE5u" name="bass_drum_1_3_2_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Hard/bass_drum_1_3_2_out.wav"/>
-          <FILE id="buNu9X" name="bass_drum_1_3_3_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Hard/bass_drum_1_3_3_in.wav"/>
-          <FILE id="U5ECQP" name="bass_drum_1_3_3_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Hard/bass_drum_1_3_3_out.wav"/>
-          <FILE id="yUSW8f" name="bass_drum_1_3_4_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Hard/bass_drum_1_3_4_in.wav"/>
-          <FILE id="CtL8Gi" name="bass_drum_1_3_4_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Hard/bass_drum_1_3_4_out.wav"/>
-          <FILE id="DQKwX9" name="bass_drum_1_3_5_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Hard/bass_drum_1_3_5_in.wav"/>
-          <FILE id="KObjyP" name="bass_drum_1_3_5_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Hard/bass_drum_1_3_5_out.wav"/>
-        </GROUP>
-        <GROUP id="{879D2942-C4DA-A38F-6DBF-B1A4360B89FB}" name="Medium">
-          <FILE id="OkAFww" name="bass_drum_1_2_1_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Medium/bass_drum_1_2_1_in.wav"/>
-          <FILE id="XIoOp5" name="bass_drum_1_2_1_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Medium/bass_drum_1_2_1_out.wav"/>
-          <FILE id="vZ8xHB" name="bass_drum_1_2_2_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Medium/bass_drum_1_2_2_in.wav"/>
-          <FILE id="Q9GeHZ" name="bass_drum_1_2_2_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Medium/bass_drum_1_2_2_out.wav"/>
-          <FILE id="ZMhd99" name="bass_drum_1_2_3_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Medium/bass_drum_1_2_3_in.wav"/>
-          <FILE id="Bb9vnk" name="bass_drum_1_2_3_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Medium/bass_drum_1_2_3_out.wav"/>
-          <FILE id="YkHRm0" name="bass_drum_1_2_4_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Medium/bass_drum_1_2_4_in.wav"/>
-          <FILE id="VxE8hS" name="bass_drum_1_2_4_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Medium/bass_drum_1_2_4_out.wav"/>
-          <FILE id="KlNG5t" name="bass_drum_1_2_5_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Medium/bass_drum_1_2_5_in.wav"/>
-          <FILE id="r5F8ti" name="bass_drum_1_2_5_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Medium/bass_drum_1_2_5_out.wav"/>
-        </GROUP>
-        <GROUP id="{D1F6DD54-75D4-A823-A204-0759C67C4614}" name="Soft">
-          <FILE id="tjOkzy" name="bass_drum_1_1_1_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Soft/bass_drum_1_1_1_in.wav"/>
-          <FILE id="K3g1QI" name="bass_drum_1_1_1_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Soft/bass_drum_1_1_1_out.wav"/>
-          <FILE id="wMOA9w" name="bass_drum_1_1_2_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Soft/bass_drum_1_1_2_in.wav"/>
-          <FILE id="MPJDum" name="bass_drum_1_1_2_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Soft/bass_drum_1_1_2_out.wav"/>
-          <FILE id="aCm6k9" name="bass_drum_1_1_3_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Soft/bass_drum_1_1_3_in.wav"/>
-          <FILE id="O2oZEz" name="bass_drum_1_1_3_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Soft/bass_drum_1_1_3_out.wav"/>
-          <FILE id="Mx0dS7" name="bass_drum_1_1_4_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Soft/bass_drum_1_1_4_in.wav"/>
-          <FILE id="muO3H8" name="bass_drum_1_1_4_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Soft/bass_drum_1_1_4_out.wav"/>
-          <FILE id="pugn7D" name="bass_drum_1_1_5_in.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Soft/bass_drum_1_1_5_in.wav"/>
-          <FILE id="YiCovT" name="bass_drum_1_1_5_out.wav" compile="0" resource="1"
-                file="Assets/36 Bass Drum 1/Soft/bass_drum_1_1_5_out.wav"/>
         </GROUP>
       </GROUP>
       <GROUP id="{A6A5201B-655F-69F9-921D-65CF6D5B4CA4}" name="37 Side Stick">
@@ -257,74 +189,6 @@
         <FILE id="QTfK1z" name="hand_clap_3.wav" compile="0" resource="1" file="Assets/39 Hand Clap/hand_clap_3.wav"/>
         <FILE id="PNmBNb" name="hand_clap_4.wav" compile="0" resource="1" file="Assets/39 Hand Clap/hand_clap_4.wav"/>
         <FILE id="bwbjtY" name="hand_clap_5.wav" compile="0" resource="1" file="Assets/39 Hand Clap/hand_clap_5.wav"/>
-      </GROUP>
-      <GROUP id="{DA5FFB32-32B5-8EAB-962B-B141586B4E23}" name="40 Electric Snare">
-        <GROUP id="{05BB4078-B7A6-63FA-2F46-285F60538128}" name="Hard">
-          <FILE id="lKKygr" name="electric_snare_3_1_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Hard/electric_snare_3_1_bottom.wav"/>
-          <FILE id="wuY6C8" name="electric_snare_3_1_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Hard/electric_snare_3_1_top.wav"/>
-          <FILE id="WUU0qQ" name="electric_snare_3_2_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Hard/electric_snare_3_2_bottom.wav"/>
-          <FILE id="C0v4wf" name="electric_snare_3_2_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Hard/electric_snare_3_2_top.wav"/>
-          <FILE id="Xpg311" name="electric_snare_3_3_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Hard/electric_snare_3_3_bottom.wav"/>
-          <FILE id="QYZMhI" name="electric_snare_3_3_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Hard/electric_snare_3_3_top.wav"/>
-          <FILE id="ZjaiNI" name="electric_snare_3_4_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Hard/electric_snare_3_4_bottom.wav"/>
-          <FILE id="gkzByJ" name="electric_snare_3_4_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Hard/electric_snare_3_4_top.wav"/>
-          <FILE id="aU2KyB" name="electric_snare_3_5_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Hard/electric_snare_3_5_bottom.wav"/>
-          <FILE id="VzLZct" name="electric_snare_3_5_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Hard/electric_snare_3_5_top.wav"/>
-        </GROUP>
-        <GROUP id="{1B425841-AE25-ABB8-6069-FAAD18C8A39A}" name="Medium">
-          <FILE id="IeSSsl" name="electric_snare_2_1_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Medium/electric_snare_2_1_bottom.wav"/>
-          <FILE id="gCaVdT" name="electric_snare_2_1_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Medium/electric_snare_2_1_top.wav"/>
-          <FILE id="mqTFKp" name="electric_snare_2_2_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Medium/electric_snare_2_2_bottom.wav"/>
-          <FILE id="Yuso4l" name="electric_snare_2_2_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Medium/electric_snare_2_2_top.wav"/>
-          <FILE id="QmOSkP" name="electric_snare_2_3_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Medium/electric_snare_2_3_bottom.wav"/>
-          <FILE id="G1Rxoe" name="electric_snare_2_3_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Medium/electric_snare_2_3_top.wav"/>
-          <FILE id="bOW6s7" name="electric_snare_2_4_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Medium/electric_snare_2_4_bottom.wav"/>
-          <FILE id="QfgJR0" name="electric_snare_2_4_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Medium/electric_snare_2_4_top.wav"/>
-          <FILE id="AX3R3i" name="electric_snare_2_5_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Medium/electric_snare_2_5_bottom.wav"/>
-          <FILE id="g5LNje" name="electric_snare_2_5_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Medium/electric_snare_2_5_top.wav"/>
-        </GROUP>
-        <GROUP id="{68777C61-1CFB-A758-DC97-F06FE2020A61}" name="Soft">
-          <FILE id="tsjuV0" name="electric_snare_1_1_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Soft/electric_snare_1_1_bottom.wav"/>
-          <FILE id="An43Yg" name="electric_snare_1_1_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Soft/electric_snare_1_1_top.wav"/>
-          <FILE id="mbRYRw" name="electric_snare_1_2_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Soft/electric_snare_1_2_bottom.wav"/>
-          <FILE id="IRGWKw" name="electric_snare_1_2_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Soft/electric_snare_1_2_top.wav"/>
-          <FILE id="M3th3z" name="electric_snare_1_3_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Soft/electric_snare_1_3_bottom.wav"/>
-          <FILE id="THX7b5" name="electric_snare_1_3_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Soft/electric_snare_1_3_top.wav"/>
-          <FILE id="HJPiIy" name="electric_snare_1_4_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Soft/electric_snare_1_4_bottom.wav"/>
-          <FILE id="FeEQsR" name="electric_snare_1_4_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Soft/electric_snare_1_4_top.wav"/>
-          <FILE id="KYGAFM" name="electric_snare_1_5_bottom.wav" compile="0"
-                resource="1" file="Assets/40 Electric Snare/Soft/electric_snare_1_5_bottom.wav"/>
-          <FILE id="KMsHGc" name="electric_snare_1_5_top.wav" compile="0" resource="1"
-                file="Assets/40 Electric Snare/Soft/electric_snare_1_5_top.wav"/>
-        </GROUP>
       </GROUP>
       <GROUP id="{2E62E8C8-F456-72CA-CBEF-12CD1372BD31}" name="42 Closed Hi-Hat">
         <GROUP id="{F1C595A8-CA87-F077-B1BE-F6CC2667E053}" name="Tight Edge">
