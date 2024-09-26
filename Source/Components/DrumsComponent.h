@@ -1,5 +1,6 @@
 #pragma once
 
+#include <optional>
 #include <JuceHeader.h>
 #include "PresetComponent.h"
 #include "../PluginPresetManager.h"

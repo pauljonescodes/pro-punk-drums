@@ -6,7 +6,8 @@
               pluginName="Pro Punk Drums" pluginManufacturer="Pro Punk DSP"
               aaxIdentifier="com.proppunkdsp.drums" version="1.0.1" companyName="Pro Punk DSP"
               companyCopyright="2023" companyEmail="paul@propunkstudio.com"
-              companyWebsite="www.propunkstudio.com" pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3">
+              companyWebsite="www.propunkstudio.com" pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3"
+              cppLanguageStandard="17">
   <MAINGROUP id="eIDGb1" name="Pro Punk Drums">
     <GROUP id="{95755CA2-B0D0-D393-296E-7490F1BAFDDB}" name="Assets">
       <GROUP id="{BDC2527B-255C-6B2B-A38B-8BBA1DA4D972}" name="35 Acoustic Bass Drum">
@@ -927,5 +928,26 @@
         <MODULEPATH id="juce_dsp" path="../../modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Pro Punk Drums DEBUG"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../juce"/>
+        <MODULEPATH id="juce_audio_devices" path="../../juce"/>
+        <MODULEPATH id="juce_audio_formats" path="../../juce"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../juce"/>
+        <MODULEPATH id="juce_audio_processors" path="../../juce"/>
+        <MODULEPATH id="juce_audio_utils" path="../../juce"/>
+        <MODULEPATH id="juce_core" path="../../juce"/>
+        <MODULEPATH id="juce_data_structures" path="../../juce"/>
+        <MODULEPATH id="juce_dsp" path="../../juce"/>
+        <MODULEPATH id="juce_events" path="../../juce"/>
+        <MODULEPATH id="juce_graphics" path="../../juce"/>
+        <MODULEPATH id="juce_gui_basics" path="../../juce"/>
+        <MODULEPATH id="juce_gui_extra" path="../../juce"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
   </EXPORTFORMATS>
 </JUCERPROJECT>
