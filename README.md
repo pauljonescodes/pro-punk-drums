@@ -19,3 +19,4 @@ Pro Punk Drums can be easily integrated into your DAW of choice. Follow these st
 2. **Extract the files** to your DAW's designated plugin folder. *(macOS installers perform this automatically)*
 3. **Rescan your plugins** within the DAW to detect Pro Punk Drums.
 4. **Load the plugin** onto a new or existing track and start creating.
+5. **For Linux**: Place Default.preset in `${commonApplicationDataDirectory}/Pro Punk DSP/Pro Punk Drums`, which on Ubuntu is `/opt/`
